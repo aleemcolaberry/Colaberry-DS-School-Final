@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Event · Eventbrite Kit" description="Eventbrite main image at exactly 2160×1080 (2:1) — photo-forward + text-led options, plus a setup checklist. Export each option to PNG." -->
+<helmet>
+<script src="./ds-base.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.13/dist/html-to-image.js"></script>
+<script>
+(function(){
+  function dl(btn){
+    var node=document.querySelector(btn.getAttribute('data-export'));
+    if(!node||!window.htmlToImage){return;}
+    var pr=parseFloat(btn.getAttribute('data-pixelratio')||'2');
+    var name=btn.getAttribute('data-filename')||'colaberry';
+    var label=btn.textContent; btn.textContent='Rendering…';
+    window.htmlToImage.toPng(node,{pixelRatio:pr,cacheBust:true}).then(function(url){
+      var a=document.createElement('a');a.download=name+'.png';a.href=url;a.click();btn.textContent=label;
+    }).catch(function(err){btn.textContent='Retry';console.error(err);});
+  }
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-export]');if(b){e.preventDefault();dl(b);}});
+})();
+</script>
+</helmet>
+<div id="cb-eb" style="font-family:var(--font-body);background:var(--surface-subtle);min-height:100vh;padding:40px 24px;color:var(--text-body)">
+  <div style="max-width:1100px;margin:0 auto">
+    <p style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent, var(--blue-500));margin:0 0 4px">Eventbrite main image · 2160 × 1080 · 2:1</p>
+    <h1 style="font-family:var(--font-display);font-weight:800;font-size:30px;letter-spacing:-.02em;color:var(--text-strong);margin:0 0 28px">Event listing image kit</h1>
+
+    <!-- OPTION A — photo-forward -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin:0 0 12px">
+      <span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted)">Option A · photo-forward</span>
+      <button data-export="#ebA" data-filename="colaberry-eventbrite-photo" data-pixelratio="2" style="cursor:pointer;font-family:var(--font-body);font-weight:600;font-size:13px;color:#fff;background:var(--accent, var(--blue-500));border:none;border-radius:var(--radius-pill);padding:9px 18px">Download PNG</button>
+    </div>
+    <div style="width:1080px;max-width:100%;margin-bottom:36px;box-shadow:var(--shadow-lg);border-radius:var(--radius-md);overflow:hidden">
+      <div id="ebA" style="width:1080px;height:540px;position:relative;background:var(--neutral-900);overflow:hidden;font-family:var(--font-body)">
+        <div style="position:absolute;inset:0;background-color:var(--blue-800);background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 24px,transparent 24px 48px);display:grid;place-items:center"><span style="font-family:var(--font-mono);font-size:13px;color:rgba(255,255,255,.5);border:1px dashed rgba(255,255,255,.3);padding:8px 16px;border-radius:var(--radius-pill)">Replace with event photo (2160×1080)</span></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,17,19,.92) 0%,rgba(13,17,19,.72) 42%,transparent 72%)"></div>
+        <div style="position:absolute;left:0;top:0;bottom:0;width:62%;display:flex;flex-direction:column;justify-content:center;padding:0 56px;color:#fff">
+          <img src="../../assets/logo/colaberry-horizontal-white.png" alt="Colaberry" style="height:30px;align-self:flex-start;margin-bottom:24px">
+          <span style="align-self:flex-start;background:var(--accent, var(--blue-500));color:#fff;font-family:var(--font-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:7px 15px;border-radius:var(--radius-pill);margin-bottom:18px">Free webinar</span>
+          <h2 style="font-family:var(--font-display);font-weight:800;font-size:46px;line-height:1.04;letter-spacing:-.025em;margin:0;text-wrap:balance">Build a Data-Driven Organization</h2>
+          <p style="font-size:18px;color:rgba(255,255,255,.85);margin:16px 0 0">Thursday, July 9 · 11:00 AM CST · Online</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPTION B — text-led -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin:0 0 12px">
+      <span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted)">Option B · text-led</span>
+      <button data-export="#ebB" data-filename="colaberry-eventbrite-text" data-pixelratio="2" style="cursor:pointer;font-family:var(--font-body);font-weight:600;font-size:13px;color:#fff;background:var(--accent, var(--blue-500));border:none;border-radius:var(--radius-pill);padding:9px 18px">Download PNG</button>
+    </div>
+    <div style="width:1080px;max-width:100%;margin-bottom:40px;box-shadow:var(--shadow-lg);border-radius:var(--radius-md);overflow:hidden">
+      <div id="ebB" style="width:1080px;height:540px;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--blue-600),var(--blue-900));font-family:var(--font-body);color:#fff">
+        <div style="position:absolute;top:-140px;right:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--accent, var(--cyan-500)) 40%,transparent),transparent 70%)"></div>
+        <div style="position:relative;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:52px 56px;text-align:center;align-items:center">
+          <img src="../../assets/logo/colaberry-horizontal-white.png" alt="Colaberry" style="height:30px">
+          <div>
+            <span style="display:inline-block;background:rgba(255,255,255,.16);font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;padding:7px 16px;border-radius:var(--radius-pill);margin-bottom:20px">Live webinar · Free</span>
+            <h2 style="font-family:var(--font-display);font-weight:800;font-size:54px;line-height:1.02;letter-spacing:-.025em;margin:0;max-width:18ch;text-wrap:balance">Build a Data-Driven Organization</h2>
+          </div>
+          <div style="display:flex;gap:36px;font-size:17px;color:rgba(255,255,255,.9)"><span style="display:inline-flex;align-items:center;gap:9px"><span class="cb-i"><i class="ri-calendar-event-line"></i></span>July 9, 11:00 AM CST</span><span style="display:inline-flex;align-items:center;gap:9px"><span class="cb-i"><i class="ri-global-line"></i></span>colaberry.com/events</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHECKLIST -->
+    <div style="background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:28px 32px;max-width:1080px">
+      <h3 style="font-family:var(--font-display);font-weight:800;font-size:var(--fs-h3);color:var(--text-strong);margin:0 0 16px;letter-spacing:-.01em">Eventbrite setup checklist</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 32px">
+        <span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--text-body)"><span class="cb-i" style="color:var(--status-success);flex:none"><i class="ri-checkbox-circle-line"></i></span>Main image exactly <b style="color:var(--text-strong)">2160 × 1080 px</b> (2:1), under 10 MB, JPG or PNG.</span>
+        <span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--text-body)"><span class="cb-i" style="color:var(--status-success);flex:none"><i class="ri-checkbox-circle-line"></i></span>Keep key text in the <b style="color:var(--text-strong)">left/center safe zone</b> — Eventbrite crops edges on some views.</span>
+        <span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--text-body)"><span class="cb-i" style="color:var(--status-success);flex:none"><i class="ri-checkbox-circle-line"></i></span>Use the <b style="color:var(--text-strong)">white logo</b> on photo/teal; keep clear space around it.</span>
+        <span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--text-body)"><span class="cb-i" style="color:var(--status-success);flex:none"><i class="ri-checkbox-circle-line"></i></span>Repeat <b style="color:var(--text-strong)">date, time &amp; format</b> in the Eventbrite fields, not just the image.</span>
+        <span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--text-body)"><span class="cb-i" style="color:var(--status-success);flex:none"><i class="ri-checkbox-circle-line"></i></span>Photo-forward converts for in-person; text-led for webinars.</span>
+        <span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--text-body)"><span class="cb-i" style="color:var(--status-success);flex:none"><i class="ri-checkbox-circle-line"></i></span>Check legibility at <b style="color:var(--text-strong)">thumbnail size</b> before publishing.</span>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 1160, &quot;height&quot;: 760 },
+  &quot;accent&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#357895&quot;, &quot;options&quot;: [&quot;#357895&quot;, &quot;#00C4CC&quot;, &quot;#1F4556&quot;], &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Theme&quot; }
+}">
+class Component extends DCLogic {
+  _apply() { const el = document.getElementById('cb-eb'); if (el) el.style.setProperty('--accent', (this.props && this.props.accent) || '#357895'); }
+  componentDidMount() { this._apply(); }
+  componentDidUpdate() { this._apply(); }
+  renderVals() {
+    const p = this.props || {};
+    return { accent: p.accent ?? '#357895' };
+  }
+}
+</script>
+</body>
+</html>

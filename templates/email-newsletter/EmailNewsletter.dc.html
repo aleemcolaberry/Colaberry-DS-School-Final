@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Email · Email Newsletter" description="600px email-safe newsletter — Colaberry insights digest with hero, sections, and CTA." -->
+<helmet>
+<script src="./ds-base.js"></script>
+</helmet>
+<div style="background:var(--surface-subtle);min-height:100vh;padding:32px 16px;font-family:var(--font-body)">
+  <div style="max-width:600px;margin:0 auto;background:var(--surface-card);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md)">
+
+    <div style="padding:22px 32px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:space-between">
+      <img src="../../assets/logo/colaberry-horizontal.png" alt="Colaberry" style="height:26px">
+      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Insights · Issue 14</span>
+    </div>
+
+    <div style="background:linear-gradient(150deg,var(--blue-600),var(--blue-900));color:#fff;padding:40px 32px">
+      <span style="font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;opacity:.85">This month at Colaberry</span>
+      <h1 style="font-family:var(--font-display);font-weight:800;font-size:32px;line-height:1.06;letter-spacing:-.02em;margin:12px 0 14px;color:#fff;text-wrap:balance">Building data-driven teams that last.</h1>
+      <p style="font-size:16px;line-height:1.55;opacity:.92;margin:0 0 22px">Practical guidance on data strategy, talent, and training — from the consultants helping organizations turn data into an asset.</p>
+      <a href="#" style="display:inline-block;background:#fff;color:var(--blue-600);font-weight:700;font-size:15px;padding:13px 26px;border-radius:var(--radius-pill);text-decoration:none">Read the latest &rarr;</a>
+    </div>
+
+    <div style="padding:34px 32px">
+      <h2 style="font-family:var(--font-display);font-weight:800;font-size:21px;color:var(--text-strong);margin:0 0 10px;letter-spacing:-.01em">In this issue</h2>
+      <p style="font-size:15px;line-height:1.65;color:var(--text-body);margin:0 0 24px">From hiring data talent to upskilling your team — what's working for data-driven organizations right now.</p>
+
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--border-subtle)">
+        <span class="cb-icon-tile" style="--tile:38px;background:var(--blue-500)"><span class="cb-i"><i class="ri-team-line"></i></span></span>
+        <div><b style="color:var(--text-strong);font-size:15px">Hiring data talent that sticks</b><p style="margin:2px 0 0;font-size:13.5px;color:var(--text-muted);line-height:1.5">How role-matched staffing beats resume volume.</p></div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--border-subtle)">
+        <span class="cb-icon-tile" style="--tile:38px;background:var(--cyan-600)"><span class="cb-i"><i class="ri-node-tree"></i></span></span>
+        <div><b style="color:var(--text-strong);font-size:15px">A practical data fabric roadmap</b><p style="margin:2px 0 0;font-size:13.5px;color:var(--text-muted);line-height:1.5">From scattered sources to a single source of truth.</p></div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle)">
+        <span class="cb-icon-tile" style="--tile:38px;background:var(--blue-500)"><span class="cb-i"><i class="ri-graduation-cap-line"></i></span></span>
+        <div><b style="color:var(--text-strong);font-size:15px">Upskilling, the TWC-approved way</b><p style="margin:2px 0 0;font-size:13.5px;color:var(--text-muted);line-height:1.5">Bridge the data skills gap across your workforce.</p></div>
+      </div>
+
+      <div style="background:var(--surface-blue-subtle);border-radius:var(--radius-lg);padding:22px 24px;margin:26px 0">
+        <p style="font-family:var(--font-display);font-weight:700;font-size:17px;line-height:1.4;color:var(--text-strong);margin:0 0 10px">"Colaberry gave us the talent and the roadmap to make data a company-wide asset."</p>
+        <span style="font-size:13px;color:var(--text-muted)">— Northwind Financial, data &amp; analytics</span>
+      </div>
+
+      <div style="text-align:center;margin-top:6px">
+        <a href="#" style="display:inline-block;background:var(--blue-500);color:#fff;font-weight:700;font-size:15px;padding:14px 30px;border-radius:var(--radius-pill);text-decoration:none">Talk to our team</a>
+        <p style="font-size:12.5px;color:var(--text-subtle);margin:14px 0 0">Monthly insights on data strategy, talent &amp; training</p>
+      </div>
+    </div>
+
+    <div style="background:var(--neutral-900);color:var(--neutral-300);padding:26px 32px;text-align:center">
+      <img src="../../assets/logo/colaberry-horizontal-white.png" alt="Colaberry" style="height:22px;margin-bottom:12px">
+      <p style="font-size:12px;line-height:1.6;color:var(--neutral-400);margin:0 0 10px">Colaberry · Data Consultancy &amp; Talent Solutions<br>Plano, TX · colaberry.com</p>
+      <p style="font-size:11px;color:var(--neutral-500);margin:0">You're receiving Colaberry Insights. <a href="#" style="color:var(--neutral-300)">Unsubscribe</a></p>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

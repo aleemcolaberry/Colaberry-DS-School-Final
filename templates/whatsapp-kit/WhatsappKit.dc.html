@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="WhatsApp · Batch Kit" description="WhatsApp group kit — group display picture, pinned welcome, announcement, session reminder & a status asset. Each exports to PNG at its true size." -->
+<helmet>
+<script src="./ds-base.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.13/dist/html-to-image.js"></script>
+<script>
+(function(){
+  function dl(btn){
+    var node=document.querySelector(btn.getAttribute('data-export'));
+    if(!node||!window.htmlToImage){return;}
+    var pr=parseFloat(btn.getAttribute('data-pixelratio')||'2');
+    var name=btn.getAttribute('data-filename')||'colaberry';
+    var label=btn.textContent; btn.textContent='…';
+    window.htmlToImage.toPng(node,{pixelRatio:pr,cacheBust:true}).then(function(url){
+      var a=document.createElement('a');a.download=name+'.png';a.href=url;a.click();btn.textContent=label;
+    }).catch(function(err){btn.textContent='Retry';console.error(err);});
+  }
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-export]');if(b){e.preventDefault();dl(b);}});
+})();
+</script>
+</helmet>
+<div id="cb-wa" style="font-family:var(--font-body);background:var(--surface-subtle);min-height:100vh;padding:40px 28px;color:var(--text-body)">
+  <div style="max-width:1180px;margin:0 auto">
+    <p style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent, var(--blue-500));margin:0 0 4px">WhatsApp batch kit</p>
+    <h1 style="font-family:var(--font-display);font-weight:800;font-size:30px;letter-spacing:-.02em;color:var(--text-strong);margin:0 0 6px">Everything for a cohort group</h1>
+    <p style="font-size:15px;color:var(--text-muted);margin:0 0 30px">Display picture, pinned welcome, announcements &amp; reminders — on-brand and chat-ready.</p>
+
+    <div style="display:flex;flex-wrap:wrap;gap:34px;align-items:flex-start">
+
+      <!-- GROUP DP (round-safe) 640x640 -->
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:14px"><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">Group DP · 640×640</span><button data-export="#waDP" data-filename="colaberry-whatsapp-dp-640" data-pixelratio="2" style="cursor:pointer;font-weight:600;font-size:12px;color:#fff;background:var(--accent, var(--blue-500));border:none;border-radius:var(--radius-pill);padding:6px 13px">PNG</button></div>
+        <div id="waDP" style="width:320px;height:320px;background:linear-gradient(150deg,var(--blue-600),var(--blue-900));display:grid;place-items:center;box-sizing:border-box;border-radius:14px;box-shadow:var(--shadow-lg);overflow:hidden;position:relative">
+          <div style="position:absolute;width:280px;height:280px;border-radius:50%;border:1px dashed rgba(255,255,255,.25)"></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;color:#fff">
+            <img src="../../assets/logo/colaberry-mark-white.png" alt="Colaberry" style="height:64px">
+            <div style="font-family:var(--font-display);font-weight:800;font-size:19px;letter-spacing:-.01em">Data Analytics</div>
+            <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.8">Spring 2026 Cohort</div>
+          </div>
+        </div>
+        <span style="font-size:11px;color:var(--text-subtle);max-width:320px">Keep content inside the dashed circle — WhatsApp crops DPs round.</span>
+      </div>
+
+      <!-- WELCOME (pinned) 1080x1080 -->
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:14px"><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">Pinned welcome · 1080×1080</span><button data-export="#waWel" data-filename="colaberry-whatsapp-welcome" data-pixelratio="3" style="cursor:pointer;font-weight:600;font-size:12px;color:#fff;background:var(--accent, var(--blue-500));border:none;border-radius:var(--radius-pill);padding:6px 13px">PNG</button></div>
+        <div id="waWel" style="width:360px;height:360px;background:var(--surface-card);border:1px solid var(--border-subtle);display:flex;flex-direction:column;justify-content:space-between;padding:30px;box-sizing:border-box;border-radius:14px;box-shadow:var(--shadow-lg);overflow:hidden">
+          <img src="../../assets/logo/colaberry-horizontal.png" alt="Colaberry" style="height:24px;align-self:flex-start">
+          <div><span style="display:inline-block;background:var(--surface-brand-subtle);color:var(--accent, var(--blue-700));font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:var(--radius-pill);margin-bottom:12px">Welcome</span><h2 style="font-family:var(--font-display);font-weight:800;font-size:30px;line-height:1.05;letter-spacing:-.02em;color:var(--text-strong);margin:0 0 10px;text-wrap:balance">Welcome to the cohort! 🎓</h2><p style="font-size:14px;color:var(--text-muted);line-height:1.55;margin:0">Classes are Tue/Thu, 6–8 PM CST. Check the pinned message for your links, syllabus, and mentor hours.</p></div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:var(--accent, var(--blue-500))">training.colaberry.com</div>
+        </div>
+      </div>
+
+      <!-- ANNOUNCEMENT 1080x1080 -->
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:14px"><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">Announcement · 1080×1080</span><button data-export="#waAnn" data-filename="colaberry-whatsapp-announcement" data-pixelratio="3" style="cursor:pointer;font-weight:600;font-size:12px;color:#fff;background:var(--accent, var(--blue-500));border:none;border-radius:var(--radius-pill);padding:6px 13px">PNG</button></div>
+        <div id="waAnn" style="width:360px;height:360px;background:linear-gradient(135deg,var(--blue-600),var(--blue-900));color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:30px;box-sizing:border-box;border-radius:14px;box-shadow:var(--shadow-lg);overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px"><span class="cb-icon-tile" style="--tile:38px;background:rgba(255,255,255,.16)"><span class="cb-i"><i class="ri-megaphone-line"></i></span></span><span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.85">Announcement</span></div>
+          <h2 style="font-family:var(--font-display);font-weight:800;font-size:30px;line-height:1.05;letter-spacing:-.02em;margin:0;text-wrap:balance">Guest workshop: dashboards that get hired.</h2>
+          <p style="font-size:14px;opacity:.9;margin:0">Saturday, May 3 · 10 AM CST · live on Zoom. Recording shared after.</p>
+        </div>
+      </div>
+
+      <!-- SESSION REMINDER 1080x1080 -->
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:14px"><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">Session reminder · 1080×1080</span><button data-export="#waRem" data-filename="colaberry-whatsapp-reminder" data-pixelratio="3" style="cursor:pointer;font-weight:600;font-size:12px;color:#fff;background:var(--accent, var(--blue-500));border:none;border-radius:var(--radius-pill);padding:6px 13px">PNG</button></div>
+        <div id="waRem" style="width:360px;height:360px;background:var(--surface-card);border:1px solid var(--border-subtle);border-left:6px solid var(--accent, var(--blue-500));display:flex;flex-direction:column;justify-content:space-between;padding:30px;box-sizing:border-box;border-radius:14px;box-shadow:var(--shadow-lg);overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;color:var(--accent, var(--blue-600))"><span class="cb-i" style="font-size:24px"><i class="ri-alarm-line"></i></span><span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase">Reminder</span></div>
+          <div><h2 style="font-family:var(--font-display);font-weight:800;font-size:28px;line-height:1.06;letter-spacing:-.02em;color:var(--text-strong);margin:0 0 8px">Class tonight at 6 PM CST</h2><p style="font-size:14px;color:var(--text-muted);line-height:1.55;margin:0">Topic: SQL joins &amp; aggregation. Bring your week-2 dataset. Link in the pinned message.</p></div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text-body)"><img src="../../assets/logo/colaberry-mark.png" alt="" style="height:22px">See you there!</div>
+        </div>
+      </div>
+
+      <!-- STATUS 1080x1920 -->
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:14px"><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">Status · 1080×1920</span><button data-export="#waSt" data-filename="colaberry-whatsapp-status" data-pixelratio="4" style="cursor:pointer;font-weight:600;font-size:12px;color:#fff;background:var(--accent, var(--blue-500));border:none;border-radius:var(--radius-pill);padding:6px 13px">PNG</button></div>
+        <div id="waSt" style="width:270px;height:480px;background:linear-gradient(165deg,var(--blue-700),var(--blue-900));color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:30px 26px;box-sizing:border-box;border-radius:14px;box-shadow:var(--shadow-lg);overflow:hidden">
+          <img src="../../assets/logo/colaberry-horizontal-white.png" alt="Colaberry" style="height:22px;align-self:flex-start">
+          <div><span style="display:inline-block;background:var(--accent, var(--cyan-600));font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:var(--radius-pill);margin-bottom:16px">Now enrolling</span><h2 style="font-family:var(--font-display);font-weight:800;font-size:34px;line-height:1.02;letter-spacing:-.025em;margin:0;text-wrap:balance">Your data career starts here.</h2><p style="font-size:14px;opacity:.9;margin:14px 0 0">12 weeks · live online · 1:1 mentorship. No degree required.</p></div>
+          <div style="text-align:center;background:#fff;color:var(--blue-800);font-weight:700;font-size:15px;padding:13px;border-radius:var(--radius-pill)">Apply now ↑</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 1180, &quot;height&quot;: 560 },
+  &quot;accent&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#357895&quot;, &quot;options&quot;: [&quot;#357895&quot;, &quot;#00C4CC&quot;, &quot;#1F4556&quot;], &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Theme&quot; }
+}">
+class Component extends DCLogic {
+  _apply() { const el = document.getElementById('cb-wa'); if (el) el.style.setProperty('--accent', (this.props && this.props.accent) || '#357895'); }
+  componentDidMount() { this._apply(); }
+  componentDidUpdate() { this._apply(); }
+  renderVals() {
+    const p = this.props || {};
+    return { accent: p.accent ?? '#357895' };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Colaberry Insight — Turn data into decisions</title>
+<meta name="description" content="Colaberry Insight is the analytics workspace for data-driven teams. Track engagements, talent, and outcomes in one place.">
+<link rel="icon" href="../assets/logo/export/favicon-32.png">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <header class="app-header">
+    <div class="app-header__in">
+      <a class="app-logo" href="index.html"><img src="../assets/logo/colaberry-horizontal.png" alt="Colaberry"></a>
+      <nav class="app-nav">
+        <a href="index.html" aria-current="page">Product</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#stats">Customers</a>
+        <a href="dashboard.html">Live demo</a>
+      </nav>
+      <div class="app-header__actions" id="header-actions"></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="app-wrap">
+      <div class="hero">
+        <div>
+          <span class="eyebrow cb-anim-fade-up">Analytics workspace</span>
+          <h1 class="cb-anim-fade-up" style="--cb-delay:60ms">Turn your data into decisions.</h1>
+          <p class="lead cb-anim-fade-up" style="--cb-delay:120ms">Colaberry Insight brings engagements, talent, and outcomes into one analytics workspace — so data-driven teams see what's working and act on it.</p>
+          <div class="hero__cta cb-anim-fade-up" style="--cb-delay:180ms" id="hero-cta"></div>
+        </div>
+        <div class="hero__panel cb-anim-scale" style="--cb-delay:160ms">
+          <div style="position:relative">
+            <div style="font-family:var(--font-display);font-weight:800;font-size:54px;line-height:1;letter-spacing:-.02em">94%</div>
+            <div style="font-size:15px;color:rgba(255,255,255,.82);margin-top:6px">of teams hit their data goals faster</div>
+          </div>
+          <div class="panel-row">
+            <div class="panel-cell"><div class="cb-i" style="color:var(--cyan-300);font-size:20px;margin-bottom:6px"><i class="ri-line-chart-line"></i></div><div class="n">+38%</div><div class="l">Reporting speed</div></div>
+            <div class="panel-cell"><div class="cb-i" style="color:var(--cyan-300);font-size:20px;margin-bottom:6px"><i class="ri-team-line"></i></div><div class="n">5k+</div><div class="l">Talent placed</div></div>
+            <div class="panel-cell"><div class="cb-i" style="color:var(--cyan-300);font-size:20px;margin-bottom:6px"><i class="ri-database-2-line"></i></div><div class="n">120M</div><div class="l">Rows analyzed</div></div>
+            <div class="panel-cell"><div class="cb-i" style="color:var(--cyan-300);font-size:20px;margin-bottom:6px"><i class="ri-shield-check-line"></i></div><div class="n">SOC 2</div><div class="l">Compliant</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="app-section app-section--subtle" id="features">
+      <div class="app-wrap">
+        <div style="text-align:center;max-width:680px;margin:0 auto 44px">
+          <span class="eyebrow">What you get</span>
+          <h2 class="h-sec">One workspace for the whole data practice</h2>
+          <p class="sub-sec" style="margin-inline:auto">From live dashboards to talent pipelines, Insight keeps every team aligned around the same numbers.</p>
+        </div>
+        <div class="grid-3">
+          <a href="dashboard.html" class="feature cb-hover-lift cb-anim-fade-up" style="--cb-i:0">
+            <div class="tile-ic"><span class="cb-i"><i class="ri-dashboard-3-line"></i></span></div>
+            <h3>Live dashboards</h3>
+            <p>Real-time KPIs across engagements, revenue, and delivery — no spreadsheets, no stale exports.</p>
+          </a>
+          <a href="dashboard.html" class="feature cb-hover-lift cb-anim-fade-up" style="--cb-i:1">
+            <div class="tile-ic tile-ic--cyan"><span class="cb-i"><i class="ri-team-line"></i></span></div>
+            <h3>Talent pipeline</h3>
+            <p>Track placements, readiness, and utilization for every data specialist on your bench.</p>
+          </a>
+          <a href="dashboard.html" class="feature cb-hover-lift cb-anim-fade-up" style="--cb-i:2">
+            <div class="tile-ic"><span class="cb-i"><i class="ri-pie-chart-2-line"></i></span></div>
+            <h3>Outcome analytics</h3>
+            <p>Tie data work to business results with cohort, funnel, and retention reporting built in.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="app-section" id="stats">
+      <div class="app-wrap">
+        <div class="stat-band">
+          <div class="stat cb-anim-fade-up" style="--cb-i:0"><div class="n">5k+</div><div class="l">Careers launched</div></div>
+          <div class="stat cb-anim-fade-up" style="--cb-i:1"><div class="n">10+</div><div class="l">Industries served</div></div>
+          <div class="stat cb-anim-fade-up" style="--cb-i:2"><div class="n">94%</div><div class="l">Goal attainment</div></div>
+          <div class="stat cb-anim-fade-up" style="--cb-i:3"><div class="n">2012</div><div class="l">Trusted since</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-band">
+      <div class="cta-band__in">
+        <h2>Start seeing your data clearly.</h2>
+        <p>Create a free account and explore the live Insight dashboard with sample data in under a minute.</p>
+        <div id="cta-actions" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="app-footer__in">
+      <img src="../assets/logo/colaberry-horizontal-white.png" alt="Colaberry">
+      <div style="display:flex;gap:22px;flex-wrap:wrap">
+        <a href="index.html">Product</a><a href="login.html">Sign in</a><a href="register.html">Create account</a><a href="dashboard.html">Dashboard</a>
+      </div>
+      <span style="font-size:13px;color:var(--neutral-500)">© 2026 Colaberry, Inc.</span>
+    </div>
+  </footer>
+</div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="../_ds_bundle.js"></script>
+<script>
+(function(){
+  var DS = window.ColaberryDesignSystem_098454 || {};
+  var h = React.createElement;
+  function mount(id, el){ var n=document.getElementById(id); if(n&&el){ ReactDOM.createRoot(n).render(el); } }
+  if (DS.Button) {
+    var Button = DS.Button;
+    mount('header-actions', h(React.Fragment, null,
+      h('a', { href:'login.html', style:{textDecoration:'none'} }, h(Button, { variant:'ghost', size:'sm' }, 'Sign in')),
+      h('a', { href:'register.html', style:{textDecoration:'none'} }, h(Button, { size:'sm' }, 'Get started'))
+    ));
+    mount('hero-cta', h(React.Fragment, null,
+      h('a', { href:'register.html', style:{textDecoration:'none'} }, h(Button, { size:'lg' }, 'Create free account')),
+      h('a', { href:'dashboard.html', style:{textDecoration:'none'} }, h(Button, { variant:'outline', size:'lg' }, 'View live demo'))
+    ));
+    mount('cta-actions', h(React.Fragment, null,
+      h('a', { href:'register.html', style:{textDecoration:'none'} }, h(Button, { tone:'green', size:'lg' }, 'Get started free')),
+      h('a', { href:'login.html', style:{textDecoration:'none'} }, h(Button, { variant:'outline', size:'lg' }, 'Sign in'))
+    ));
+  }
+})();
+</script>
+</body>
+</html>

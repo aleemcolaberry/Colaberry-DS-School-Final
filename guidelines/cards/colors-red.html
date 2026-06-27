@@ -1,0 +1,29 @@
+<!-- @dsCard group="Colors" viewport="700x140" name="Cyan ramp" subtitle="Accent / energy color — 50 to 900" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body { margin: 0; padding: 22px 24px; background: var(--surface-page); }
+  .ramp { display: grid; grid-template-columns: repeat(10, 1fr); border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-subtle); }
+  .step { height: 84px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-family: var(--font-mono); font-size: 11px; }
+  .label { display: grid; grid-template-columns: repeat(10, 1fr); margin-top: 8px; }
+  .label span { text-align: center; font-family: var(--font-body); font-size: 11px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+  <div class="ramp">
+    <div class="step" style="background:var(--cyan-50)">50</div>
+    <div class="step" style="background:var(--cyan-100)">100</div>
+    <div class="step" style="background:var(--cyan-200)">200</div>
+    <div class="step" style="background:var(--cyan-300)">300</div>
+    <div class="step" style="background:var(--cyan-400)">400</div>
+    <div class="step" style="background:var(--cyan-500)">500</div>
+    <div class="step" style="background:var(--cyan-600); color:#fff">600</div>
+    <div class="step" style="background:var(--cyan-700); color:#fff">700</div>
+    <div class="step" style="background:var(--cyan-800); color:#fff">800</div>
+    <div class="step" style="background:var(--cyan-900); color:#fff">900</div>
+  </div>
+</body>
+</html>
