@@ -6,7 +6,7 @@ const CSS = `
 .cb-pag button:hover:not(:disabled):not(.is-current) { background: var(--surface-sunken); border-color: var(--border-strong); }
 .cb-pag button:active:not(:disabled) { transform: translateY(1px); }
 .cb-pag button:focus-visible { outline: none; box-shadow: var(--focus-ring); }
-.cb-pag button.is-current { background: var(--brand-primary); border-color: var(--brand-primary); color: #fff; }
+.cb-pag button.is-current { background: var(--red-500); border-color: var(--red-500); color: #fff; }
 .cb-pag button:disabled { opacity: .4; cursor: not-allowed; }
 .cb-pag__ellipsis { min-width: 24px; text-align: center; color: var(--text-subtle); }
 `;
@@ -19,7 +19,7 @@ function inject() {
 function range(start, end) { const a = []; for (let i = start; i <= end; i++) a.push(i); return a; }
 
 /**
- * Page navigation with prev/next and truncated number pills (current = teal).
+ * Page navigation with prev/next and truncated number pills (current = cherry).
  */
 export function Pagination({ page = 1, total = 1, siblings = 1, onChange = () => {}, className = '', ...rest }) {
   inject();

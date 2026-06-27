@@ -15,8 +15,8 @@ const CSS = `
 .cb-card--hoverable:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
 .cb-card--flat { box-shadow: none; }
 .cb-card--elevated { box-shadow: var(--shadow-md); border-color: transparent; }
-.cb-card--accent { border-top: 4px solid var(--brand-primary); }
-.cb-card--accent-green { border-top: 4px solid var(--cyan-500); }
+.cb-card--accent { border-top: 4px solid var(--red-500); }
+.cb-card--accent-green { border-top: 4px solid var(--green-500); }
 .cb-card--accent-blue { border-top: 4px solid var(--blue-500); }
 .cb-card__media { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--surface-sunken); }
 .cb-card__body { padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); }

@@ -1,35 +1,34 @@
-/* Colaberry — shared parts: Logo, Header, Footer, helpers.
-   Data Consultancy & Talent Solutions Provider. Exposes to window. */
-const { Button: CBButton, Badge: CBBadge } = window.ColaberryDesignSystem_098454;
+/* Colaberry marketing site — shared parts: Logo, Header, Footer, helpers.
+   Exposes to window for the other script files. */
+const { Button: CBButton, Avatar: CBAvatar, Badge: CBBadge } = window.ColaberryDesignSystem_098454;
 
 /* React-safe Lucide icon. React owns the <span>; Lucide mutates only the
-   inner <i>→<svg>, so re-renders never touch the swapped node. */
+   inner <i>→<svg>, so re-renders never touch the swapped node. Size = font-size
+   (1em), color = currentColor — both driven by CSS/parent. */
 function I({ n, s, c, className = '', style }) {
   const st = { fontSize: s ? s + 'px' : undefined, color: c, ...style };
   return <span className={'cb-i ' + className} style={st} dangerouslySetInnerHTML={{ __html: `<i data-lucide="${n}"></i>` }} />;
 }
-function Icon({ name, size, style, ...rest }) { return <I n={name} s={size} style={style} {...rest} />; }
+// Back-compat alias
+function Icon({ name, size, style, ...rest }) {
+  return <I n={name} s={size} style={style} {...rest} />;
+}
 
-function Logo({ height = 30, variant = 'default' }) {
+function Logo({ height = 34, variant = 'default' }) {
   const src = variant === 'white'
-    ? '../../assets/logo/colaberry-horizontal-white.png?v=3'
-    : '../../assets/logo/colaberry-horizontal.png?v=3';
+    ? '../../assets/logo/colaberry-horizontal-white.png?v=2'
+    : '../../assets/logo/colaberry-horizontal.png';
   return <img src={src} alt="Colaberry" style={{ height, display: 'block' }} />;
 }
 
-const WHATWEDO = [
-  { label: 'Consulting & Staffing', icon: 'users', view: 'program' },
-  { label: 'Data Fabric Services', icon: 'share-2', view: 'program' },
-  { label: 'Managed Data Services', icon: 'database', view: 'program' },
-  { label: 'Enterprise Training', icon: 'graduation-cap', view: 'program' },
-];
-const RESOURCES = [
-  { label: 'Case Studies', icon: 'folder-open', view: 'home' },
-  { label: 'White Papers', icon: 'file-text', view: 'home' },
-  { label: 'Events', icon: 'calendar', view: 'home' },
+const NAV = [
+  { label: 'Programs', view: 'program' },
+  { label: 'Outcomes', view: 'home' },
+  { label: 'Scholarships', view: 'home' },
+  { label: 'About', view: 'home' },
 ];
 
-function Header({ go }) {
+function Header({ go, current }) {
   const [scrolled, setScrolled] = React.useState(false);
   React.useEffect(() => {
     const el = document.querySelector('.cbsite-scroll');
@@ -38,34 +37,18 @@ function Header({ go }) {
     target.addEventListener('scroll', onScroll);
     return () => target.removeEventListener('scroll', onScroll);
   }, []);
-  const toggleMode = () => {
-    const html = document.documentElement;
-    html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-  };
   return (
     <header className="cbsite-header" data-scrolled={scrolled}>
       <div className="cbsite-header__inner">
         <a className="cbsite-logo" onClick={() => go('home')}><Logo /></a>
         <nav className="cbsite-nav">
-          <div className="cbsite-nav__item">
-            <a className="cbsite-nav__link" onClick={() => go('program')}>What We Do <I n="chevron-down" s={14} /></a>
-            <div className="cbsite-menu">
-              {WHATWEDO.map((m, i) => <a key={i} onClick={() => go(m.view)}><I n={m.icon} s={16} />{m.label}</a>)}
-            </div>
-          </div>
-          <div className="cbsite-nav__item"><a className="cbsite-nav__link" onClick={() => go('home')}>Industries</a></div>
-          <div className="cbsite-nav__item">
-            <a className="cbsite-nav__link" onClick={() => go('home')}>Resources <I n="chevron-down" s={14} /></a>
-            <div className="cbsite-menu">
-              {RESOURCES.map((m, i) => <a key={i} onClick={() => go(m.view)}><I n={m.icon} s={16} />{m.label}</a>)}
-            </div>
-          </div>
-          <div className="cbsite-nav__item"><a className="cbsite-nav__link" onClick={() => go('home')}>About</a></div>
+          {NAV.map((n, i) => (
+            <a key={i} className="cbsite-nav__link" onClick={() => go(n.view)}>{n.label}</a>
+          ))}
         </nav>
         <div className="cbsite-header__actions">
-          <button className="cbsite-modetoggle" onClick={toggleMode} aria-label="Toggle color mode"><I n="sun-moon" s={18} /></button>
-          <a className="cbsite-phone" href="tel:+19729921024"><I n="phone" s={15} />(972) 992-1024</a>
-          <CBButton size="sm" onClick={() => go('enroll')}>Contact Us</CBButton>
+          <a className="cbsite-nav__link cbsite-nav__link--ghost" onClick={() => go('enroll')}>Sign in</a>
+          <CBButton size="sm" onClick={() => go('enroll')}>Apply now</CBButton>
         </div>
       </div>
     </header>
@@ -74,23 +57,19 @@ function Header({ go }) {
 
 function Footer({ go }) {
   const cols = [
-    { h: 'What We Do', items: ['Consulting & Staffing', 'Data Fabric Services', 'Managed Data Services', 'Enterprise Training', 'Career Training'] },
-    { h: 'Resources', items: ['Case Studies', 'White Papers', 'Projects', 'Events', 'Careers'] },
-    { h: 'Company', items: ['About Us', 'Awards & Recognition', 'Blog', 'Contact Us'] },
+    { h: 'Programs', items: ['Data Analytics', 'Data Science', 'Intro Seminar', 'Career Accelerator'] },
+    { h: 'School', items: ['About us', 'Outcomes', 'Mentors', 'Reviews'] },
+    { h: 'Support', items: ['Scholarships', 'Payment options', 'FAQ', 'Contact'] },
   ];
-  const social = ['linkedin', 'instagram', 'youtube', 'twitter', 'facebook'];
   return (
     <footer className="cbsite-footer">
       <div className="cbsite-footer__inner">
         <div className="cbsite-footer__brand">
-          <Logo variant="white" height={30} />
-          <p>Colaberry empowers individuals and organizations to reach their full potential by unlocking the power of data — turning data from an obstacle into an asset in today's technology-powered world.</p>
-          <div className="cbsite-footer__badges">
-            <span className="cbsite-footer__badge"><I n="award" s={15} />Inc. 5000</span>
-            <span className="cbsite-footer__badge"><I n="shield-check" s={15} />Microsoft Partner</span>
-          </div>
-          <div className="cbsite-footer__social">
-            {social.map((s, i) => <a key={i} aria-label={s}><Icon name={s} size={16} /></a>)}
+          <Logo variant="white" height={32} />
+          <p>Build amazing, local, diverse, and job-ready talent in Data Analytics &amp; Data Science. Since 2012.</p>
+          <div className="cbsite-footer__loc">
+            <span><Icon name="map-pin" size={15} /> Plano, TX</span>
+            <span><Icon name="map-pin" size={15} /> Boston, MA</span>
           </div>
         </div>
         <div className="cbsite-footer__cols">
@@ -103,8 +82,8 @@ function Footer({ go }) {
         </div>
       </div>
       <div className="cbsite-footer__bar">
-        <span>© 2026 Colaberry, Inc. · All rights reserved. · Plano, TX</span>
-        <span className="cbsite-footer__legal"><a onClick={() => go('home')}>Privacy</a><a onClick={() => go('home')}>Terms</a></span>
+        <span>© 2026 Colaberry, Inc. · Texas Workforce Commission approved</span>
+        <span className="cbsite-footer__legal"><a onClick={() => go('home')}>Privacy</a><a onClick={() => go('home')}>Terms</a><a onClick={() => go('home')}>Accreditation</a></span>
       </div>
     </footer>
   );

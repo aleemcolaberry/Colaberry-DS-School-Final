@@ -21,10 +21,10 @@
   .ds-nav { display: flex; flex-direction: column; gap: 2px; }
   .ds-nav a { font-size: 14px; color: var(--text-muted); text-decoration: none; padding: 8px 12px; border-radius: var(--radius-sm); display: flex; align-items: center; gap: 10px; }
   .ds-nav a:hover { background: var(--surface-sunken); color: var(--text-strong); }
-  .ds-nav a.active { background: var(--surface-brand-subtle); color: var(--blue-600); font-weight: var(--fw-medium); }
+  .ds-nav a.active { background: var(--surface-brand-subtle); color: var(--red-600); font-weight: var(--fw-medium); }
   .ds-nav a .cb-i { font-size: 16px; }
-  .ds-dl { margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; font-family: var(--font-body); font-size: 13px; font-weight: var(--fw-medium); color: var(--text-on-accent); background: var(--blue-500); padding: 11px 14px; border-radius: var(--radius-pill); box-shadow: var(--shadow-brand); transition: background var(--dur-fast) var(--ease-out); }
-  .ds-dl:hover { background: var(--blue-600); text-decoration: none; color: var(--text-on-accent); }
+  .ds-dl { margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; font-family: var(--font-body); font-size: 13px; font-weight: var(--fw-medium); color: var(--text-on-accent); background: var(--red-500); padding: 11px 14px; border-radius: var(--radius-pill); box-shadow: var(--shadow-brand); transition: background var(--dur-fast) var(--ease-out); }
+  .ds-dl:hover { background: var(--red-600); text-decoration: none; color: var(--text-on-accent); }
   .ds-dl .cb-i { font-size: 16px; }
   .ds-dl--alt { background: transparent; color: var(--text-strong); box-shadow: inset 0 0 0 1px var(--border-default); }
   .ds-dl--alt .cb-i { color: var(--blue-500); }
@@ -36,7 +36,7 @@
   /* Main */
   .ds-main { min-width: 0; }
   .ds-sec { padding: 72px 56px; border-bottom: 1px solid var(--border-subtle); max-width: 1080px; }
-  .ds-sec__eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: var(--ls-overline); text-transform: uppercase; color: var(--blue-500); margin: 0 0 10px; }
+  .ds-sec__eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: var(--ls-overline); text-transform: uppercase; color: var(--red-500); margin: 0 0 10px; }
   .ds-sec h2 { font-size: var(--fs-h2); margin: 0 0 14px; }
   .ds-sec__lead { font-size: var(--fs-body-lg); color: var(--text-muted); max-width: 60ch; margin: 0 0 36px; }
   .ds-h3 { font-size: var(--fs-h4); margin: 36px 0 16px; color: var(--text-strong); }
@@ -74,8 +74,8 @@
   .ds-flex.top { align-items: flex-start; }
   .ds-cell { display: flex; flex-direction: column; align-items: center; gap: 8px; }
   .ds-cell .v { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
-  .ds-bar { background: var(--blue-500); border-radius: 3px; }
-  .ds-rbox { width: 80px; height: 64px; background: var(--blue-100); border: 2px solid var(--blue-500); }
+  .ds-bar { background: var(--red-500); border-radius: 3px; }
+  .ds-rbox { width: 80px; height: 64px; background: var(--green-100); border: 2px solid var(--green-500); }
   .ds-shbox { width: 92px; height: 64px; background: var(--surface-card); border-radius: var(--radius-lg); }
 
   /* Components showcase */
@@ -89,7 +89,7 @@
   .ds-logo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .ds-logo-cell { border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 28px; display: grid; place-items: center; min-height: 120px; }
   .ds-logo-cell.dark { background: var(--neutral-900); }
-  .ds-logo-cell.red { background: var(--blue-500); }
+  .ds-logo-cell.red { background: var(--red-500); }
   .ds-logo-cell img { max-height: 56px; max-width: 100%; }
   .ds-dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .ds-rule { border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden; }
@@ -175,8 +175,8 @@
   .ds-doc { border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden; background: var(--surface-card); display: flex; flex-direction: column; min-width: 0; }
   .ds-doc__head { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--border-subtle); background: var(--surface-subtle); }
   .ds-doc__head span { font-family: var(--font-mono); font-size: 12px; color: var(--text-strong); font-weight: var(--fw-bold); }
-  .ds-doc__copy { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-size: 12px; font-weight: var(--fw-medium); color: var(--text-on-accent); background: var(--blue-500); border: none; border-radius: var(--radius-pill); padding: 5px 12px; cursor: pointer; transition: background var(--dur-fast) var(--ease-out); }
-  .ds-doc__copy:hover { background: var(--blue-600); }
+  .ds-doc__copy { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-size: 12px; font-weight: var(--fw-medium); color: var(--text-on-accent); background: var(--red-500); border: none; border-radius: var(--radius-pill); padding: 5px 12px; cursor: pointer; transition: background var(--dur-fast) var(--ease-out); }
+  .ds-doc__copy:hover { background: var(--red-600); }
   .ds-doc__copy:active { transform: translateY(1px); }
   .ds-doc__pre { margin: 0; padding: 14px 16px; max-height: 360px; overflow: auto; font-family: var(--font-mono); font-size: 12px; line-height: 1.6; color: var(--text-body); white-space: pre-wrap; word-break: break-word; }
   @media (max-width: 900px) { .ds-docs { grid-template-columns: 1fr; } }
@@ -204,13 +204,13 @@
   /* Motion */
   .ds-principles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 36px; }
   .ds-principle { border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 18px; background: var(--surface-card); }
-  .ds-principle .cb-i { font-size: 20px; color: var(--blue-500); }
+  .ds-principle .cb-i { font-size: 20px; color: var(--red-500); }
   .ds-principle h4 { margin: 12px 0 6px; font-size: var(--fs-body-sm); color: var(--text-strong); }
   .ds-principle p { margin: 0; font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
   .ds-motion-panel { border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 24px; background: var(--surface-card); }
   .ds-recipes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   .ds-recipe { border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 18px; background: var(--surface-card); }
-  .ds-recipe__tag { display: inline-block; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--blue-600); background: var(--surface-brand-subtle); padding: 3px 9px; border-radius: var(--radius-pill); margin-bottom: 12px; }
+  .ds-recipe__tag { display: inline-block; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--red-600); background: var(--surface-brand-subtle); padding: 3px 9px; border-radius: var(--radius-pill); margin-bottom: 12px; }
   .ds-recipe b { display: block; font-size: var(--fs-body); color: var(--text-strong); margin-bottom: 6px; }
   .ds-recipe p { margin: 0; font-size: 12.5px; color: var(--text-muted); line-height: 1.55; }
   .ds-recipe code { font-family: var(--font-mono); font-size: .92em; color: var(--text-body); }
@@ -220,14 +220,14 @@
   .ds-replay { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-body); font-size: 13px; font-weight: var(--fw-medium); color: var(--text-strong); background: var(--surface-sunken); border: 1px solid var(--border-default); border-radius: var(--radius-pill); padding: 7px 14px; cursor: pointer; transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
   .ds-replay:hover { background: var(--surface-page); border-color: var(--border-strong); }
   .ds-replay:active { transform: translateY(1px); }
-  .ds-replay .cb-i { font-size: 14px; color: var(--blue-500); }
+  .ds-replay .cb-i { font-size: 14px; color: var(--red-500); }
   .ds-track-row { display: grid; grid-template-columns: 132px 1fr; align-items: center; gap: 16px; margin-bottom: 14px; }
   .ds-track-row:last-child { margin-bottom: 0; }
   .ds-track-lbl { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
   .ds-track-lbl b { display: block; color: var(--text-strong); font-family: var(--font-body); font-size: 13px; margin-bottom: 2px; }
   .ds-track { position: relative; height: 34px; background: var(--surface-sunken); border-radius: var(--radius-pill); }
-  .ds-dot { position: absolute; top: 5px; left: 5px; width: 24px; height: 24px; border-radius: 50%; background: var(--blue-500); }
-  .ds-dot.g { background: var(--cyan-600); } .ds-dot.b { background: var(--blue-500); }
+  .ds-dot { position: absolute; top: 5px; left: 5px; width: 24px; height: 24px; border-radius: 50%; background: var(--red-500); }
+  .ds-dot.g { background: var(--green-600); } .ds-dot.b { background: var(--blue-500); }
   .ds-states { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .ds-state { border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 20px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; background: var(--surface-card); }
   .ds-state__cap { font-size: 12px; color: var(--text-muted); margin-top: auto; line-height: 1.45; }
@@ -292,7 +292,7 @@
   .cb-btn.link { background: transparent; color: var(--text-link); padding: 4px 6px; min-height: 0; } .cb-btn.link:hover { text-decoration: underline; }
   .cb-btn[disabled] { opacity: .45; cursor: not-allowed; }
   .cb-badge { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-weight: var(--fw-medium); font-size: var(--fs-caption); line-height: 1; padding: 5px 12px; border-radius: var(--radius-pill); background: var(--surface-sunken); color: var(--text-body); }
-  .cb-badge.solid { background: var(--blue-500); color: #fff; }
+  .cb-badge.solid { background: var(--red-500); color: #fff; }
   .cb-badge.red { background: var(--status-danger-bg); color: var(--red-700); }
   .cb-badge.green { background: var(--status-success-bg); color: var(--green-800); }
   .cb-badge.blue { background: var(--status-info-bg); color: var(--blue-700); }
@@ -315,14 +315,14 @@
   <aside class="ds-side">
     <div class="ds-side__logo">
       <img src="assets/logo/colaberry-horizontal.png" alt="Colaberry" id="sideLogo">
-      <div class="ds-side__sub">Design System · v2.0</div>
+      <div class="ds-side__sub">Design System · v1.0</div>
     </div>
     <nav class="ds-nav" id="dsNav">
       <a href="index.html"><span class="cb-i"><i data-lucide="sparkles"></i></span>Landing page</a>
       <a href="#overview"><span class="cb-i"><i data-lucide="home"></i></span>Overview</a>
       <a href="#principles"><span class="cb-i"><i data-lucide="compass"></i></span>Principles</a>
       <a href="#setup"><span class="cb-i"><i data-lucide="rocket"></i></span>Get Started</a>
-      <a href="#logo"><span class="cb-i"><i data-lucide="bike"></i></span>Logo</a>
+      <a href="#logo"><span class="cb-i"><i data-lucide="cherry"></i></span>Logo</a>
       <a href="#theme"><span class="cb-i"><i data-lucide="contrast"></i></span>Theme</a>
       <a href="#color"><span class="cb-i"><i data-lucide="palette"></i></span>Color</a>
       <a href="#type"><span class="cb-i"><i data-lucide="type"></i></span>Typography</a>
@@ -350,9 +350,9 @@
       <div class="ds-hero__band">
         <div class="ds-hero__logo"><img src="assets/logo/colaberry-horizontal.png" alt="Colaberry" id="heroLogo"></div>
         <h1>The Colaberry Design System</h1>
-        <p>The brand foundations, components and rules that power Colaberry — the data consultancy &amp; talent solutions provider helping organizations unlock the power of data since 2012. Clear, credible, and confident.</p>
+        <p>The brand foundations, components and rules that power Colaberry — the School of Data Science &amp; Analytics building job-ready talent since 2012. Warm, inclusive, and confident.</p>
         <div class="ds-meta">
-          <div><strong>2</strong>brand hues</div>
+          <div><strong>3</strong>brand hues</div>
           <div><strong>20</strong>components</div>
           <div><strong>245</strong>design tokens</div>
           <div><strong>WCAG 2.2</strong>audited</div>
@@ -367,12 +367,12 @@
       <p class="ds-sec__lead">Five beliefs that guide every decision in this system — the “why” behind the tokens and components. When a call is ambiguous, these break the tie.</p>
       <div class="ds-princ">
         <div class="ds-princ__card">
-          <span class="ds-princ__ic" style="background:var(--blue-500)"><span class="cb-i"><i data-lucide="heart-handshake"></i></span></span>
+          <span class="ds-princ__ic" style="background:var(--red-500)"><span class="cb-i"><i data-lucide="heart-handshake"></i></span></span>
           <h3>Inclusive by default</h3>
           <p>Built for every background and ability. Accessibility, plain language, and generous touch targets are requirements, not extras.</p>
         </div>
         <div class="ds-princ__card">
-          <span class="ds-princ__ic" style="background:var(--cyan-600)"><span class="cb-i"><i data-lucide="sprout"></i></span></span>
+          <span class="ds-princ__ic" style="background:var(--green-600)"><span class="cb-i"><i data-lucide="sprout"></i></span></span>
           <h3>Warm, not loud</h3>
           <p>Encouraging and human. Soft shapes, gentle motion, and friendly copy — confidence without hype or noise.</p>
         </div>
@@ -387,9 +387,9 @@
           <p>Semantic tokens and reusable components mean a marketer, a developer, and an AI agent all produce the same brand.</p>
         </div>
         <div class="ds-princ__card">
-          <span class="ds-princ__ic" style="background:var(--blue-600)"><span class="cb-i"><i data-lucide="anchor"></i></span></span>
+          <span class="ds-princ__ic" style="background:var(--red-600)"><span class="cb-i"><i data-lucide="anchor"></i></span></span>
           <h3>Consistent &amp; constant</h3>
-          <p>The teal primary never changes; foreground inverts with the background. Predictable rules make trustworthy products.</p>
+          <p>The cherry accent never changes; foreground inverts with the background. Predictable rules make trustworthy products.</p>
         </div>
       </div>
     </section>
@@ -405,7 +405,7 @@
         <!-- Claude chat -->
         <div class="ds-gs">
           <div class="ds-track__head">
-            <span class="ds-track__ic" style="background:var(--cyan-600)"><span class="cb-i"><i data-lucide="message-square"></i></span></span>
+            <span class="ds-track__ic" style="background:var(--green-600)"><span class="cb-i"><i data-lucide="message-square"></i></span></span>
             <div><h3>Claude chat</h3><div class="ds-track__tag">no install · anyone</div></div>
           </div>
           <div class="ds-track__body">
@@ -413,8 +413,8 @@
               <li><p><strong>Open this project in Claude</strong> — or download it and attach the folder to a new chat. (Teams can publish it as the <code>colaberry-design</code> skill so it's one click.)</p></li>
               <li><p><strong>Ask in plain English</strong>, always starting with the magic words:</p>
                 <div class="ds-code"><code><span class="c-mut">"Using the Colaberry design system,</span>
-<span class="c-mut">make a 16:9 slide for our</span>
-<span class="c-mut">consulting & staffing services."</span></code></div>
+<span class="c-mut">make a 16:9 slide that announces our</span>
+<span class="c-mut">Spring Data Analytics cohort."</span></code></div>
               </li>
               <li><p><strong>Preview, refine, download.</strong> Claude returns a live HTML artifact. Tweak it in plain words ("make the headline bigger", "use green") and export when it's right.</p></li>
             </ol>
@@ -466,12 +466,12 @@ python3 -m http.server 8000</code></div>
     <section class="ds-sec" id="logo">
       <p class="ds-sec__eyebrow">Brand</p>
       <h2>Logo</h2>
-      <p class="ds-sec__lead">A pair of wheels forms the “C” of Colaberry — a clean, geometric mark about momentum and forward motion. The wordmark is supplied as a single vector lockup in teal.</p>
+      <p class="ds-sec__lead">Two cherries on a shared stem form the “C” of Colaberry — a warm, organic mark about growth, pairs, and collaboration. The wordmark sets “olaberry” in Quicksand with a green-to-blue gradient.</p>
       <h3 class="ds-h3">Lockups &amp; mark</h3>
       <div class="ds-logo-grid">
         <div class="ds-logo-cell"><img src="assets/logo/colaberry-horizontal.png" alt="Default lockup"></div>
         <div class="ds-logo-cell dark"><img src="assets/logo/colaberry-horizontal-white.png?v=2" alt="White lockup"></div>
-        <div class="ds-logo-cell red"><img src="assets/logo/colaberry-horizontal-white.png?v=2" alt="On teal"></div>
+        <div class="ds-logo-cell red"><img src="assets/logo/colaberry-horizontal-white.png?v=2" alt="On cherry"></div>
         <div class="ds-logo-cell"><img src="assets/logo/colaberry-mark.png" alt="Mark" style="max-height:72px"></div>
         <div class="ds-logo-cell dark"><img src="assets/logo/colaberry-mark-white.png?v=2" alt="Mark white" style="max-height:72px"></div>
         <div class="ds-logo-cell"><img src="assets/logo/colaberry-app-icon.png" alt="App icon" style="max-height:84px"></div>
@@ -482,11 +482,11 @@ python3 -m http.server 8000</code></div>
     <section class="ds-sec" id="theme">
       <p class="ds-sec__eyebrow">Foundations</p>
       <h2>Theme handling</h2>
-      <p class="ds-sec__lead">Every color is a semantic token that re-points between light and dark. The rule: <strong>foreground inverts with the background; the teal primary stays constant.</strong> Toggle the theme in the sidebar to see it live.</p>
+      <p class="ds-sec__lead">Every color is a semantic token that re-points between light and dark. The rule: <strong>foreground inverts with the background; the cherry accent stays constant.</strong> Toggle the theme in the sidebar to see it live.</p>
       <div class="ds-grid3">
         <div class="ds-demo"><h4>Surface</h4><p style="margin:0;color:var(--text-muted);font-size:14px">var(--surface-page) flips from white to near-black; cards, borders and sunken fills follow.</p></div>
         <div class="ds-demo"><h4>Text</h4><p style="margin:0;color:var(--text-muted);font-size:14px">var(--text-strong) / --text-muted invert for contrast on either ground.</p></div>
-        <div class="ds-demo"><h4>Accent</h4><p style="margin:0;color:var(--text-muted);font-size:14px">var(--brand-accent) stays cyan in both themes; teal primary is the constant.</p></div>
+        <div class="ds-demo"><h4>Accent</h4><p style="margin:0;color:var(--text-muted);font-size:14px">var(--brand-accent) stays cherry red in both themes — the constant.</p></div>
       </div>
     </section>
 
@@ -494,16 +494,14 @@ python3 -m http.server 8000</code></div>
     <section class="ds-sec" id="color">
       <p class="ds-sec__eyebrow">Foundations</p>
       <h2>Color</h2>
-      <p class="ds-sec__lead">Teal and cyan over a cool neutral ramp. Click any swatch or token to copy it.</p>
+      <p class="ds-sec__lead">Cherry, Leaf and Berry over a neutral ramp. Click any swatch or token to copy it.</p>
 
-      <h3 class="ds-h3">Teal — primary</h3>
-      <div class="ds-ramp" data-ramp="blue"></div>
-      <h3 class="ds-h3">Cyan — accent</h3>
-      <div class="ds-ramp" data-ramp="cyan"></div>
-      <h3 class="ds-h3">Green — success (functional)</h3>
-      <div class="ds-ramp" data-ramp="green"></div>
-      <h3 class="ds-h3">Red — danger (functional)</h3>
+      <h3 class="ds-h3">Cherry Red — primary</h3>
       <div class="ds-ramp" data-ramp="red"></div>
+      <h3 class="ds-h3">Leaf Green — secondary</h3>
+      <div class="ds-ramp" data-ramp="green"></div>
+      <h3 class="ds-h3">Berry Blue — tertiary</h3>
+      <div class="ds-ramp" data-ramp="blue"></div>
       <h3 class="ds-h3">Neutrals</h3>
       <div class="ds-ramp neutral" data-ramp="neutral"></div>
 
@@ -529,14 +527,14 @@ python3 -m http.server 8000</code></div>
     <section class="ds-sec" id="type">
       <p class="ds-sec__eyebrow">Foundations</p>
       <h2>Typography</h2>
-      <p class="ds-sec__lead">Plus Jakarta Sans carries display and body; JetBrains Mono handles code &amp; data; the logo is a vector lockup.</p>
+      <p class="ds-sec__lead">Roboto carries display and body; Roboto Mono handles code &amp; data; Quicksand is reserved for the logotype.</p>
       <div>
-        <div class="ds-type-row"><span class="meta">H1 · 48 · 700</span><span class="spec" style="font-family:var(--font-display);font-weight:700;font-size:42px;letter-spacing:-.01em">Shaping the future of work</span></div>
-        <div class="ds-type-row"><span class="meta">H2 · 36 · 700</span><span class="spec" style="font-family:var(--font-display);font-weight:700;font-size:32px">Data, made an asset</span></div>
+        <div class="ds-type-row"><span class="meta">H1 · 48 · 700</span><span class="spec" style="font-family:var(--font-display);font-weight:700;font-size:42px;letter-spacing:-.01em">Future-proof your career</span></div>
+        <div class="ds-type-row"><span class="meta">H2 · 36 · 700</span><span class="spec" style="font-family:var(--font-display);font-weight:700;font-size:32px">Learn data, with people</span></div>
         <div class="ds-type-row"><span class="meta">H3 · 28 · 700</span><span class="spec" style="font-family:var(--font-display);font-weight:700;font-size:26px">Built on tenacity</span></div>
-        <div class="ds-type-row"><span class="meta">Body · 18 · 400</span><span class="spec" style="font-family:var(--font-body);font-size:18px;color:var(--text-body)">Colaberry helps organizations unlock the power of data, across every industry.</span></div>
-        <div class="ds-type-row"><span class="meta">Mono · 16 · 500</span><span class="spec" style="font-family:var(--font-mono);font-size:16px;color:var(--blue-600)">SELECT client, COUNT(*) FROM outcomes;</span></div>
-        <div class="ds-type-row"><span class="meta">Logotype</span><span class="spec" style="font-family:var(--font-logo);font-weight:600;font-size:34px;background:linear-gradient(90deg,var(--blue-600),var(--cyan-500));-webkit-background-clip:text;background-clip:text;color:transparent">Colaberry</span></div>
+        <div class="ds-type-row"><span class="meta">Body · 18 · 400</span><span class="spec" style="font-family:var(--font-body);font-size:18px;color:var(--text-body)">Colaberry nurtures an inclusive learning space for every background.</span></div>
+        <div class="ds-type-row"><span class="meta">Mono · 16 · 500</span><span class="spec" style="font-family:var(--font-mono);font-size:16px;color:var(--blue-600)">SELECT cohort, COUNT(*) FROM outcomes;</span></div>
+        <div class="ds-type-row"><span class="meta">Logotype</span><span class="spec" style="font-family:var(--font-logo);font-weight:600;font-size:34px;background:linear-gradient(90deg,var(--green-600),var(--blue-500));-webkit-background-clip:text;background-clip:text;color:transparent">Colaberry</span></div>
       </div>
     </section>
 
@@ -544,7 +542,7 @@ python3 -m http.server 8000</code></div>
     <section class="ds-sec" id="space">
       <p class="ds-sec__eyebrow">Foundations</p>
       <h2>Spacing &amp; Radius</h2>
-      <p class="ds-sec__lead">A 4px base grid and a rounded radius scale that echoes the circular mark.</p>
+      <p class="ds-sec__lead">A 4px base grid and a rounded radius scale that echoes the soft cherry mark.</p>
       <h3 class="ds-h3">Spacing</h3>
       <div class="ds-flex" id="spaceScale"></div>
       <h3 class="ds-h3">Radius</h3>
@@ -621,7 +619,7 @@ python3 -m http.server 8000</code></div>
         </div>
         <div class="ds-state">
           <div class="cb-field" style="margin:0;width:100%"><input class="cb-input" placeholder="Click to focus me"></div>
-          <p class="ds-state__cap"><b>Focus · input</b><br>Teal border + 3px cyan focus ring appears instantly.</p>
+          <p class="ds-state__cap"><b>Focus · input</b><br>Berry-blue border + 3px focus ring appears instantly.</p>
         </div>
         <div class="ds-state">
           <span class="ds-demo-link">Hover this link</span>
@@ -649,7 +647,7 @@ python3 -m http.server 8000</code></div>
           <tr><td>Hover — card (clickable)</td><td>Lifts 6px, shadow deepens (sm → lg)</td><td><code>220ms · ease-out</code></td></tr>
           <tr><td>Hover — link</td><td>Underline wipes in from the left</td><td><code>220ms · ease-out</code></td></tr>
           <tr><td>Press — button</td><td>Fill darkens again + translateY(1px)</td><td><code>140ms · ease-out</code></td></tr>
-          <tr><td>Focus — any control</td><td>3px cyan focus ring appears</td><td><code>instant</code></td></tr>
+          <tr><td>Focus — any control</td><td>3px berry-blue focus ring appears</td><td><code>instant</code></td></tr>
           <tr><td>Enter — content / overlay</td><td>Fade up 12–14px, stagger 70ms</td><td><code>360ms · ease-out</code></td></tr>
         </tbody>
       </table>
@@ -675,7 +673,7 @@ python3 -m http.server 8000</code></div>
     <section class="ds-sec" id="a11y">
       <p class="ds-sec__eyebrow">Foundations</p>
       <h2>Accessibility</h2>
-      <p class="ds-sec__lead">WCAG 2.2 contrast audit of core pairings. <strong>Cyan and light teal are accent / large-text colors</strong> — for body text use blue-600+, neutral-800, or dark text on a tint.</p>
+      <p class="ds-sec__lead">WCAG 2.2 contrast audit of core pairings. <strong>Cherry red and leaf green are accent / large-text colors</strong> — for body text use red-600+, green-700+, or dark text on a tint.</p>
       <table class="ds-table">
         <thead><tr><th>Pairing</th><th>Sample</th><th>Ratio</th><th>Verdict</th></tr></thead>
         <tbody id="a11yRows"></tbody>
@@ -696,7 +694,7 @@ python3 -m http.server 8000</code></div>
         <div class="ds-a11y-card">
           <h4><span class="cb-i"><i data-lucide="focus"></i></span>Focus</h4>
           <ul>
-            <li>A visible 3px cyan ring (<code>--focus-ring</code>) on every focusable element.</li>
+            <li>A visible 3px berry-blue ring (<code>--focus-ring</code>) on every focusable element.</li>
             <li>Shown on <code>:focus-visible</code> — keyboard users see it, mouse users aren't distracted.</li>
             <li>Focus is never removed without an equally clear replacement.</li>
           </ul>
@@ -728,11 +726,11 @@ python3 -m http.server 8000</code></div>
       <p class="ds-sec__lead">Protect the mark so it always reads as Colaberry.</p>
       <h3 class="ds-h3">Clear space &amp; minimum size</h3>
       <div class="ds-clearspace"><div class="ds-clearspace__box"><img src="assets/logo/colaberry-horizontal.png" alt="Clear space"></div></div>
-      <p style="font-size:13px;color:var(--text-muted);margin-top:10px">Keep clear space equal to the height of the mark on all sides. Minimum width: 120px (horizontal lockup) / 24px (mark).</p>
+      <p style="font-size:13px;color:var(--text-muted);margin-top:10px">Keep clear space equal to the height of the cherry mark on all sides. Minimum width: 120px (horizontal lockup) / 24px (mark).</p>
       <h3 class="ds-h3">Do &amp; Don't</h3>
       <div class="ds-dodont">
         <div class="ds-rule do"><div class="ds-rule__head"><span class="cb-i"><i data-lucide="check"></i></span>Do</div><ul><li>Use the full-color lockup on white or light surfaces.</li><li>Switch to the white lockup on photos, dark, or cherry backgrounds.</li><li>Keep the cherry red constant; invert only the wordmark/neutral.</li><li>Give the mark room — respect the clear space.</li></ul></div>
-        <div class="ds-rule dont"><div class="ds-rule__head"><span class="cb-i"><i data-lucide="x"></i></span>Don't</div><ul><li>Recolor the mark or apply gradients to it.</li><li>Stretch, rotate, or add shadows / outlines.</li><li>Set the wordmark in any font other than Quicksand.</li><li>Place the color mark on a low-contrast or busy background.</li></ul></div>
+        <div class="ds-rule dont"><div class="ds-rule__head"><span class="cb-i"><i data-lucide="x"></i></span>Don't</div><ul><li>Recolor the cherries or apply gradients to the mark.</li><li>Stretch, rotate, or add shadows / outlines.</li><li>Set the wordmark in any font other than Quicksand.</li><li>Place the color mark on a low-contrast or busy background.</li></ul></div>
       </div>
     </section>
 
@@ -767,7 +765,7 @@ python3 -m http.server 8000</code></div>
       <div class="ds-audience">
         <div class="ds-aud">
           <div class="ds-aud__head">
-            <span class="ds-aud__ic" style="background:var(--cyan-600)"><span class="cb-i"><i data-lucide="megaphone"></i></span></span>
+            <span class="ds-aud__ic" style="background:var(--green-600)"><span class="cb-i"><i data-lucide="megaphone"></i></span></span>
             <div><h3>Marketing / non-technical</h3><p class="ds-aud__sub">Describe it in plain English → get a downloadable file. No code.</p></div>
           </div>
           <div class="ds-prompt" data-copytext="Using the Colaberry design system, create a [social post / flyer / email header / slide] at [size] for [topic]. Headline: [your headline]. Add a [call-to-action] button and the logo. Keep it warm and on-brand, no emoji — and give me 3 options.">
@@ -804,8 +802,8 @@ python3 -m http.server 8000</code></div>
         <li><span class="cb-i"><i data-lucide="check"></i></span>Reference semantic tokens (<code>--surface-page</code>, <code>--text-strong</code>, <code>--brand-accent</code>) — never raw ramp values.</li>
         <li><span class="cb-i"><i data-lucide="check"></i></span>Set <code>data-theme="dark"</code> on <code>&lt;html&gt;</code> for dark mode; the accent stays constant.</li>
         <li><span class="cb-i"><i data-lucide="check"></i></span>Use the React primitives from the bundle (Button, Badge, Card, Input, Checkbox, Avatar).</li>
-        <li><span class="cb-i"><i data-lucide="check"></i></span>Use blue-600+ / neutral-800 for body text on white (see Accessibility).</li>
-        <li><span class="cb-i"><i data-lucide="check"></i></span>Plus Jakarta Sans / JetBrains Mono load from Google Fonts — self-host for production (see BRAND.md).</li>
+        <li><span class="cb-i"><i data-lucide="check"></i></span>Use red-600+/green-700+ for body text on white (see Accessibility).</li>
+        <li><span class="cb-i"><i data-lucide="check"></i></span>Roboto / Roboto Mono / Quicksand load from Google Fonts — self-host for production (see BRAND.md).</li>
         <li><span class="cb-i"><i data-lucide="check"></i></span>Standardize icons on Lucide (2px stroke) to match the soft brand shape language.</li>
       </ul>
 
@@ -831,10 +829,9 @@ const RAMPS = {
   red: ['50','100','200','300','400','500','600','700','800','900'],
   green: ['50','100','200','300','400','500','600','700','800','900'],
   blue: ['50','100','200','300','400','500','600','700','800','900'],
-  cyan: ['50','100','200','300','400','500','600','700','800','900'],
   neutral: ['0','50','100','200','300','400','500','600','700','800','900','950','1000'],
 };
-const LIGHT_STEPS = { red:['50','100','200','300'], green:['50','100','200','300','400','500'], blue:['50','100','200','300'], cyan:['50','100','200','300','400','500'], neutral:['0','50','100','200','300','400'] };
+const LIGHT_STEPS = { red:['50','100','200','300'], green:['50','100','200','300','400','500'], blue:['50','100','200','300'], neutral:['0','50','100','200','300','400'] };
 function hexOf(varName){ const t=document.createElement('div'); t.style.color='var('+varName+')'; document.body.appendChild(t); const c=getComputedStyle(t).color; t.remove(); const m=c.match(/\d+/g); if(!m) return ''; return '#'+m.slice(0,3).map(n=>(+n).toString(16).padStart(2,'0')).join('').toUpperCase(); }
 Object.entries(RAMPS).forEach(([fam,steps])=>{
   const el=document.querySelector('[data-ramp="'+fam+'"]'); if(!el) return;
@@ -871,10 +868,10 @@ const A11Y=[
   {fg:'--text-muted',bg:'#fff',label:'Muted / White',ratio:'5.3',v:'pass',txt:'Aa'},
   {fg:'--blue-600',bg:'#fff',label:'Link / White',ratio:'6.0',v:'pass',txt:'Aa'},
   {fg:'--green-700',bg:'#fff',label:'Green-700 / White',ratio:'4.3',v:'pass',txt:'Aa'},
-  {fg:'#fff',bg:'--cyan-600',label:'White / Cyan-600',ratio:'3.0',v:'large',txt:'Aa'},
-  {fg:'#fff',bg:'--blue-500',label:'White / Teal',ratio:'5.0',v:'pass',txt:'Aa'},
+  {fg:'#fff',bg:'--red-500',label:'White / Cherry',ratio:'3.9',v:'large',txt:'Aa'},
+  {fg:'#fff',bg:'--blue-500',label:'White / Berry',ratio:'5.0',v:'pass',txt:'Aa'},
   {fg:'#fff',bg:'--green-600',label:'White / Green-600',ratio:'3.0',v:'large',txt:'Aa'},
-  {fg:'--cyan-700',bg:'#fff',label:'Cyan-700 / White',ratio:'4.4',v:'large',txt:'Aa'},
+  {fg:'--red-500',bg:'#fff',label:'Cherry / White (text)',ratio:'3.9',v:'fail',txt:'Aa'},
   {fg:'#fff',bg:'--neutral-900',label:'White / Near-black',ratio:'17.9',v:'pass',txt:'Aa'},
 ];
 const VLAB={pass:'AA Pass',large:'AA Large',fail:'Body fail'};

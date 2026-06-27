@@ -1,4 +1,4 @@
-Labelled text input for forms — contact, search, sign-in.
+Labelled text input for forms — enrollment, contact, search.
 
 ```jsx
 <Input label="Full name" placeholder="Ada Lovelace" required />

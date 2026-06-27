@@ -11,10 +11,10 @@ const CSS = `
   margin-top: 1px;
 }
 .cb-check__box svg { width: 14px; height: 14px; opacity: 0; transform: scale(.6); transition: all var(--dur-fast) var(--ease-spring); }
-.cb-check input:checked + .cb-check__box { background: var(--brand-primary); border-color: var(--brand-primary); }
+.cb-check input:checked + .cb-check__box { background: var(--green-500); border-color: var(--green-500); }
 .cb-check input:checked + .cb-check__box svg { opacity: 1; transform: scale(1); }
 .cb-check input:focus-visible + .cb-check__box { box-shadow: var(--focus-ring); }
-.cb-check:hover .cb-check__box { border-color: var(--brand-primary); }
+.cb-check:hover .cb-check__box { border-color: var(--green-500); }
 .cb-check input:disabled + .cb-check__box { opacity: .45; }
 .cb-check--disabled { cursor: not-allowed; color: var(--text-subtle); }
 `;
@@ -29,7 +29,7 @@ function inject() {
 }
 
 /**
- * Checkbox with a teal checked state and a soft spring-in tick.
+ * Checkbox with a leaf-green checked state and a soft spring-in tick.
  */
 export function Checkbox({ label, disabled = false, className = '', children, ...rest }) {
   inject();

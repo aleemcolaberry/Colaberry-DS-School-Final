@@ -1,21 +1,21 @@
 /* ============================================================
    Colaberry — Typography tokens
-   Plus Jakarta Sans (display + body), JetBrains Mono (code/data).
-   The logo is a vector lockup, so no logotype font is loaded.
-   Scale: H1 48 / H2 36 / H3 28 / H4 22 / Body 18 / Caption 14.
+   Roboto (display + body), Roboto Mono (code/data),
+   Quicksand (logotype only). Scale anchored to the style guide:
+   H1 48 / H2 36 / H3 28 / H4 20 / Body 18 / Caption 14.
    ============================================================ */
 :root {
   /* Families */
-  --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-body:    'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
-  --font-logo:    var(--font-display); /* logo is a vector lockup; kept for back-compat */
+  --font-display: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body:    'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:    'Roboto Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-logo:    'Quicksand', 'Trebuchet MS', sans-serif;
 
   /* Weights */
   --fw-regular: 400; /* @kind font */
   --fw-medium:  500; /* @kind font */
   --fw-bold:    700; /* @kind font */
-  --fw-black:   800; /* @kind font */
+  --fw-black:   900; /* @kind font */
 
   /* Type scale (px) */
   --fs-display: 60px;  /* hero */

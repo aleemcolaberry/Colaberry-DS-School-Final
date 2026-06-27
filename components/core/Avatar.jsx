@@ -5,7 +5,7 @@ const CSS = `
   display: inline-flex; align-items: center; justify-content: center;
   border-radius: 50%; overflow: hidden; flex: none;
   font-family: var(--font-body); font-weight: var(--fw-bold); color: #fff;
-  background: var(--blue-500); user-select: none;
+  background: var(--green-500); user-select: none;
 }
 .cb-avatar { position: relative; }
 .cb-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background: inherit; }
@@ -15,13 +15,13 @@ const CSS = `
 .cb-avatar--md { width: 48px; height: 48px; font-size: 16px; }
 .cb-avatar--lg { width: 64px; height: 64px; font-size: 22px; }
 .cb-avatar--xl { width: 88px; height: 88px; font-size: 30px; }
-.cb-avatar--ring { box-shadow: 0 0 0 3px var(--surface-card), 0 0 0 5px var(--brand-primary); }
+.cb-avatar--ring { box-shadow: 0 0 0 3px var(--surface-card), 0 0 0 5px var(--red-500); }
 .cb-avatar-group { display: inline-flex; }
 .cb-avatar-group > .cb-avatar { box-shadow: 0 0 0 3px var(--surface-card); }
 .cb-avatar-group > .cb-avatar + .cb-avatar { margin-left: -12px; }
 `;
 
-const TONES = ['var(--blue-500)', 'var(--cyan-600)', 'var(--blue-700)', 'var(--blue-600)', 'var(--cyan-700)'];
+const TONES = ['var(--green-500)', 'var(--blue-500)', 'var(--red-500)', 'var(--green-600)', 'var(--blue-600)'];
 
 function inject() {
   if (typeof document === 'undefined') return;

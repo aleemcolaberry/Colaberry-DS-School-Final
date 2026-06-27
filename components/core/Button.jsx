@@ -24,10 +24,10 @@ const CSS = `
 }
 .cb-btn--sm { font-size: var(--fs-caption); min-height: 38px; padding: 0 16px; gap: 6px; }
 .cb-btn--lg { font-size: var(--fs-body); min-height: 56px; padding: 0 32px; }
-.cb-btn--green { --_bg: var(--action-green-bg); --_bg-hover: var(--action-green-bg-hover); --_bg-press: var(--cyan-800); --_fg: #fff; }
+.cb-btn--green { --_bg: var(--action-green-bg); --_bg-hover: var(--action-green-bg-hover); --_bg-press: var(--green-700); --_fg: #fff; }
 .cb-btn--blue { --_bg: var(--blue-500); --_bg-hover: var(--blue-600); --_bg-press: var(--blue-700); --_fg: #fff; }
 .cb-btn--primary { box-shadow: var(--shadow-brand); }
-.cb-btn--primary:hover { box-shadow: 0 12px 30px color-mix(in srgb, var(--blue-500) 34%, transparent); }
+.cb-btn--primary:hover { box-shadow: 0 12px 30px color-mix(in srgb, var(--red-500) 34%, transparent); }
 .cb-btn--outline {
   background: transparent; color: var(--text-strong);
   box-shadow: inset 0 0 0 var(--border-2) var(--border-strong);
@@ -52,8 +52,8 @@ function inject() {
 }
 
 /**
- * Colaberry primary button. Teal by default; supports accent (cyan) /
- * blue brand tones, outline/ghost/link variants, three sizes, and icons.
+ * Colaberry primary button. Cherry-red by default; supports green/blue
+ * brand tones, outline/ghost/link variants, three sizes, and icons.
  */
 export function Button({
   variant = 'primary',

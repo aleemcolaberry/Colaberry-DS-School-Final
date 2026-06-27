@@ -3,7 +3,7 @@
 **Make the best UI the easiest UI for an agent to generate.**
 
 A working design system that humans, developers, and AI coding agents can all read from — built
-end-to-end for **Colaberry, the data consultancy & talent solutions**. Not a static style guide, but a
+end-to-end for **Colaberry, the School of Data Science & Analytics**. Not a static style guide, but a
 running, branded system where every token, color, and component in the docs is the same code that
 ships to production.
 
@@ -17,6 +17,19 @@ ships to production.
 ![WCAG 2.2](https://img.shields.io/badge/WCAG-2.2_audited-77BB4A)
 ![Built with Claude](https://img.shields.io/badge/Built_with-Claude-D97757)
 ![License: MIT](https://img.shields.io/badge/License-MIT-FB2832)
+
+---
+
+## Quick start — pick your path
+
+| You are… | Do this |
+|---|---|
+| **Marketing / non-technical** | Open this project in Claude (or invoke the `colaberry-design` skill) and ask in plain English — *"Using the Colaberry design system, make a square Instagram post for our Spring cohort…"* You get a downloadable, on-brand HTML artifact. No code. |
+| **Developer** | Link `styles.css` (tokens + fonts) and `_ds_bundle.js` (components on `window.ColaberryDesignSystem_098454`). Reference **semantic tokens**, never raw hex. → [Using it in a project](#using-it-in-a-project) · [`IMPLEMENTATION.md`](IMPLEMENTATION.md) |
+| **Designer** | Open `design-system.html` (the living guide) + `BRAND.md`; reuse logos, colors, and type from `assets/`. |
+| **AI agent / Claude** | Start any prompt with *"Using the Colaberry design system, …"* — `SKILL.md` loads the rules so the output snaps to brand on the first try. |
+
+There's **no build step** — `npm start` (alias for `npx serve .`) serves the whole thing at `http://localhost:3000`.
 
 ---
 
@@ -46,11 +59,11 @@ Strategy, brand direction, and every design decision were **owned and directed b
 
 | # | Step | What happened |
 |---|---|---|
-| 1 | **Source brand** | Colaberry brand + logo art (bicycle mark, wordmark) |
+| 1 | **Source brand** | Colaberry School style guide + logo PNGs (cherry mark, wordmark) |
 | 2 | **Rebuilt the mark** | Traced the raster logo into clean art + a full favicon / app-icon / OG export set |
 | 3 | **Token foundation** | palette → neutral → semantic → typography → spacing → radius → motion → data-viz → breakpoints (245 tokens, light + dark) |
 | 4 | **Real components** | 20 React primitives wired to those tokens, each with `.d.ts` types + usage prompt |
-| 5 | **Applied the brand** | Teal `#357895` · Cyan `#00C4CC` · cool slate neutrals · Plus Jakarta Sans + JetBrains Mono |
+| 5 | **Applied the brand** | Cherry `#FB2832` · Leaf `#77BB4A` · Berry `#367895` · Roboto + Roboto Mono + Quicksand |
 | 6 | **Living docs + landing** | Scroll-spy docs site, WCAG audit, and an awwwards-style GSAP + Three.js landing page |
 | 7 | **Shipped** | MIT license, GitHub Pages workflow, hand-off + prompting guides |
 
@@ -64,8 +77,8 @@ token names map 1:1 to CSS variables.
 
 **2 · Code layer (developer-consumable)**
 - `styles.css` — single entry point; `@import`s the token + font layers.
-- `tokens/colors.css` — Teal / Cyan 10-step ramps + functional red/green + neutrals + semantic aliases + **data-viz palette** + dark theme.
-- `tokens/typography.css` — Plus Jakarta Sans / JetBrains Mono ramps, weights, line-heights.
+- `tokens/colors.css` — Cherry / Leaf / Berry 10-step ramps + neutrals + semantic aliases + **data-viz palette** + dark theme.
+- `tokens/typography.css` — Roboto / Roboto Mono / Quicksand ramps, weights, line-heights.
 - `tokens/spacing.css` — 4px grid, radius, shadow, motion, **breakpoints + 12-col grid**.
 - `tokens.json` — all 245 tokens (+ dark overrides) for Style Dictionary / Figma Tokens / Tailwind.
 - `components/core/*` — 20 primitives (`.jsx` + `.d.ts` + usage prompt + live card), bundled to `_ds_bundle.js`.
@@ -101,8 +114,8 @@ styles.css              Global entry point (@imports only)
 landing.css / landing.js  Landing-page styles + motion engine
 
 tokens/
-├── colors.css            Teal / Cyan ramps + functional status + neutrals + semantic + data-viz + dark theme
-├── typography.css        Plus Jakarta Sans + JetBrains Mono ramps
+├── colors.css            Cherry / Leaf / Berry ramps + neutrals + semantic + data-viz + dark theme
+├── typography.css        Roboto + Roboto Mono + Quicksand ramps
 ├── spacing.css           4px grid · radius · shadow · motion · breakpoints · layout grid
 ├── fonts.css             @font-face / font loading
 └── base.css              Element defaults built on the tokens
@@ -165,8 +178,40 @@ npm start            # → http://localhost:3000   (alias for: npx serve .)
 ```
 
 Reference **semantic tokens** (`var(--brand-accent)`, `var(--surface-page)`, `var(--text-strong)`),
-never raw hex. Set `data-theme="dark"` on `<html>` for dark mode — the teal accent stays constant.
+never raw hex. Set `data-theme="dark"` on `<html>` for dark mode — the cherry accent stays constant.
 Full steps (plain HTML, React/Vite/Next): [`IMPLEMENTATION.md`](IMPLEMENTATION.md).
+
+---
+
+## In production — a worked example
+
+The system isn't only for marketing artifacts; it drives real product UI. A recent example: the
+**course cards** in the Colaberry learning portal (the Anthropic / Skilljar "course wrapper").
+
+The starting point was a generic card with **broken information architecture** — three source badges
+stacked above the title, so metadata outranked the actual course, with card sizes that varied section
+to section. Rebuilt entirely on this system, it became a **bento** layout: a featured "Start here"
+course, compact supporting tiles, and a cherry path-summary anchor — assembled from `Card`, `Badge`,
+and `Button` with semantic tokens only, Roboto + Roboto Mono numerals, `--radius-xl`, and dark-mode
+support out of the box.
+
+| | Before | After |
+|---|---|---|
+| Tokens | hardcoded hex | semantic tokens only |
+| Information architecture | source badges above the title | content leads; source is a quiet kicker; grouped meta |
+| Layout | inconsistent card sizes | intentional bento hierarchy + responsive fallbacks (3 / 2 / 1 course) |
+| Accessibility | white-on-cherry 3.8:1 (fails AA) | text-bearing cherry moved `--red-500` → `--red-600` = 4.7:1 (AA) |
+| Dark mode | flat token inversion | lifted surfaces + border/glow elevation |
+
+**The method that drove it** — a repeatable, critique-led loop you can run on any page with this system:
+
+> **anchor** to the tokens + components → fix **information architecture** before pixels → choose a
+> **layout system** (uniform grid *or* bento — never ad-hoc) → **decide** → gate on **accessibility**
+> (contrast ratios + a heuristic pass) → **polish** the edges (dark mode, empty / long / 1-vs-many
+> states) → **approve** against the brand principles.
+
+> **Systemic note from that audit:** white text on the brand cherry `--red-500` is only 3.8:1. Use
+> `--red-600` / `--red-700` for text-bearing cherry surfaces; reserve `--red-500` for non-text accents.
 
 ---
 
@@ -174,10 +219,10 @@ Full steps (plain HTML, React/Vite/Next): [`IMPLEMENTATION.md`](IMPLEMENTATION.m
 
 | | |
 |---|---|
-| **Teal** `#357895` | Primary action / the constant |
-| **Cyan** `#00C4CC` | Accent / energy / highlight / focus |
-| **Neutrals** | Cool slate — `#CBD3D7`, `#404B51`, black |
-| **Type** | Plus Jakarta Sans (display + body) · JetBrains Mono (data) |
+| **Cherry Red** `#FB2832` | Primary action / the constant accent |
+| **Leaf Green** `#77BB4A` | Growth / secondary |
+| **Berry Blue** `#367895` | Trust / links / the wordmark |
+| **Type** | Roboto (display + body) · Roboto Mono (data) · Quicksand (logotype only) |
 | **Shape** | Rounded & friendly — pill buttons, 12–32px card radii, 4px grid |
 | **Voice** | Warm, inclusive, emoji-free; speak to "you"; lead with proof |
 
@@ -240,7 +285,8 @@ Pages with no build step. Full guide: [`DEPLOY.md`](DEPLOY.md).
 | What | License |
 |---|---|
 | Source code in this repo | **MIT** — see [`LICENSE`](LICENSE) |
-| Plus Jakarta Sans + JetBrains Mono fonts | SIL Open Font License 1.1 |
+| Roboto + Roboto Mono fonts | Apache License 2.0 |
+| Quicksand font | SIL Open Font License 1.1 |
 | Colaberry logo & brand assets | © Colaberry, Inc. — use outside Colaberry requires permission |
 
 ---

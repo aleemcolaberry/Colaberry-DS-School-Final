@@ -1,6 +1,6 @@
 ---
 name: colaberry-design
-description: Use this skill to generate well-branded interfaces and assets for Colaberry (a data consultancy & talent solutions provider — consulting, staffing, managed data services, and training), either for production or throwaway prototypes/mocks/etc. Contains essential design guidelines, colors, type, fonts, assets, and UI kit components for prototyping.
+description: Use this skill to generate well-branded interfaces and assets for Colaberry (the School of Data Science & Analytics), either for production or throwaway prototypes/mocks/etc. Contains essential design guidelines, colors, type, fonts, assets, and UI kit components for prototyping.
 user-invocable: true
 ---
 
@@ -16,10 +16,10 @@ from `assets/logo/`, and mirror the component styles. If working on production c
 read the rules here to become an expert in designing with this brand (load `styles.css` and the
 `_ds_bundle.js` React components via `window.ColaberryDesignSystem_098454`).
 
-Brand essentials: teal `#357895` (primary, constant), cyan `#00C4CC` (accent / energy); red & green
-are functional status hues only. Plus Jakarta Sans + JetBrains Mono type; the logo is a vector lockup;
-rounded/pill shapes; clear, inclusive, emoji-free voice; RemixIcon icons. Use blue-600+/neutral-800 for
-body text (see the accessibility audit in `design-system.html`).
+Brand essentials: cherry-red `#FB2832` (primary/accent, constant), leaf-green `#77BB4A`, berry-blue
+`#367895`; Roboto + Roboto Mono type, Quicksand for the logotype only; rounded/pill shapes; warm,
+inclusive, emoji-free voice; Lucide icons. Use red-600+/green-700+ for body text (see the accessibility
+audit in `design-system.html`).
 
 If the user invokes this skill without any other guidance, ask them what they want to build or design,
 ask some questions, and act as an expert designer who outputs HTML artifacts _or_ production code,

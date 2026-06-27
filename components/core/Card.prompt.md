@@ -1,11 +1,11 @@
-Rounded surface container for grouping content — service cards, stats, callouts.
+Rounded surface container for grouping content — program cards, stats, callouts.
 
 ```jsx
-<Card hoverable media="/assets/service.jpg">
-  <Badge tone="blue">Consulting</Badge>
-  <h3>Consulting &amp; Staffing</h3>
-  <p>Specialized data talent through expert recruitment.</p>
-  <Button>Contact us</Button>
+<Card hoverable media="/assets/course.jpg">
+  <Badge tone="blue">Data Analytics</Badge>
+  <h3>12-week Bootcamp</h3>
+  <p>Instructor-led, project-based, job-ready.</p>
+  <Button>Apply now</Button>
 </Card>
 
 <Card padded accent="green" elevation="md">…</Card>

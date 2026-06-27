@@ -1,4 +1,4 @@
-<!-- @dsCard group="Type" viewport="700x150" name="Wordmark" subtitle="The Colaberry wordmark is a vector lockup — never re-set it in a font" -->
+<!-- @dsCard group="Type" viewport="700x150" name="Logotype" subtitle="Quicksand SemiBold — reserved for the 'olaberry' wordmark only" -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,13 +6,15 @@
 <link rel="stylesheet" href="../../styles.css">
 <style>
   body { margin: 0; padding: 22px 28px; background: var(--surface-page); display:flex; align-items:center; gap:28px; }
-  .word img { height: 56px; display: block; }
-  .note { font-family: var(--font-body); font-size: 13px; color: var(--text-muted); max-width: 26ch; line-height: 1.5; }
+  .word { font-family: var(--font-logo); font-weight: 600; font-size: 56px; letter-spacing: -1px;
+    background: linear-gradient(90deg, var(--green-600), var(--blue-500) 70%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .note { font-family: var(--font-body); font-size: 13px; color: var(--text-muted); max-width: 24ch; line-height: 1.5; }
   .note strong { color: var(--text-strong); }
 </style>
 </head>
 <body>
-  <div class="word"><img src="../../assets/logo/colaberry-horizontal.png" alt="Colaberry wordmark"></div>
-  <div class="note"><strong>Vector lockup.</strong> Use the supplied logo files — never re-typeset the wordmark or recolor the mark.</div>
+  <div class="word">Colaberry</div>
+  <div class="note"><strong>Quicksand SemiBold.</strong> Logotype use only — never for headings or UI copy.</div>
 </body>
 </html>

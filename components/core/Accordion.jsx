@@ -6,7 +6,7 @@ const CSS = `
 .cb-acc__btn { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; background: none; border: none; cursor: pointer; font-family: var(--font-body); font-weight: var(--fw-bold); font-size: var(--fs-body); color: var(--text-strong); text-align: left; transition: background var(--dur-fast) var(--ease-out); }
 .cb-acc__btn:hover { background: var(--surface-sunken); }
 .cb-acc__btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
-.cb-acc__ic { flex: none; color: var(--brand-primary); transition: transform var(--dur-base) var(--ease-out); }
+.cb-acc__ic { flex: none; color: var(--red-500); transition: transform var(--dur-base) var(--ease-out); }
 .cb-acc__item[data-open="true"] .cb-acc__ic { transform: rotate(180deg); }
 .cb-acc__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--dur-base) var(--ease-out); }
 .cb-acc__item[data-open="true"] .cb-acc__panel { grid-template-rows: 1fr; }

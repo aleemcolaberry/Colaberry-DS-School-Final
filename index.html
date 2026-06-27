@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Colaberry Design System — One system, every experience</title>
-<meta name="description" content="Tokens, components, and guidelines for Colaberry — the data consultancy & talent solutions.">
+<meta name="description" content="Tokens, components, and guidelines for Colaberry — the School of Data Science & Analytics.">
 <link rel="icon" href="assets/logo/export/favicon-32.png">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="landing.css">
@@ -31,13 +31,13 @@
   <div class="hero__glow" id="heroGlow" aria-hidden="true"></div>
 
   <div class="hero__in">
-    <span class="hero__pill"><span class="dot"></span>Colaberry Design System · v2.0</span>
+    <span class="hero__pill"><span class="dot"></span>Colaberry Design System · v1.0</span>
     <h1 class="hero__h1">
       <span class="hl"><span class="hl__i">One system.</span></span>
       <span class="hl"><span class="hl__i">Every <span class="grad">Colaberry</span></span></span>
       <span class="hl"><span class="hl__i">experience<span class="cherry">.</span></span></span>
     </h1>
-    <p class="hero__sub">Tokens, components, and guidelines for the data consultancy & talent solutions — clear, accessible, and ready for production.</p>
+    <p class="hero__sub">Tokens, components, and guidelines for the School of Data Science &amp; Analytics — warm, accessible, and ready for production.</p>
     <div class="hero__cta">
       <a class="btn btn--primary" href="design-system.html">Explore the full system</a>
       <a class="btn btn--ghost" href="#components">Meet the components</a>
@@ -71,7 +71,7 @@
     <!-- Color -->
     <div class="bt bt--color c4 r3" id="colors">
       <p class="bt__k">Color</p>
-      <h3 class="bt__h">Two hues, one voice.</h3>
+      <h3 class="bt__h">Three hues, one voice.</h3>
       <div id="ramps"></div>
       <p class="lr-hint">Click any swatch to copy its hex.</p>
     </div>
@@ -84,7 +84,7 @@
       </div>
       <div>
         <div class="type-row"><span class="m">Black · 900</span><span class="s" style="font-weight:900;font-size:clamp(18px,2vw,26px)">Future-proof</span></div>
-        <div class="type-row"><span class="m">Regular</span><span class="s" style="font-family:var(--font-body);font-weight:400;font-size:15px;color:var(--text-body)">Plus Jakarta Sans carries the voice.</span></div>
+        <div class="type-row"><span class="m">Regular</span><span class="s" style="font-family:var(--font-body);font-weight:400;font-size:15px;color:var(--text-body)">Roboto carries the voice.</span></div>
         <div class="type-row"><span class="m">Mono</span><span class="s" style="font-family:var(--font-mono);font-weight:500;font-size:14px;color:var(--blue-600)">COUNT(*)</span></div>
       </div>
     </div>
@@ -98,7 +98,7 @@
     <div class="bt bt--dark c3 r2" data-theme="dark">
       <p class="bt__k">Theme</p>
       <h3 class="bt__h" style="font-size:clamp(20px,2.2vw,28px)">Dark mode, free.</h3>
-      <p class="bt__p">Set <code style="font-family:var(--font-mono);font-size:.9em;color:var(--cyan-400)">data-theme="dark"</code> — the teal accent stays constant.</p>
+      <p class="bt__p">Set <code style="font-family:var(--font-mono);font-size:.9em;color:var(--green-400)">data-theme="dark"</code> — the cherry accent stays constant.</p>
       <div class="mini">
         <div class="mini-card"><b>Data Analytics</b><span>12 weeks · Enrolling</span></div>
         <div class="mini-row">
@@ -163,18 +163,18 @@
         <label class="r-label" for="r-email">Email</label>
         <input class="r-input" id="r-email" type="email" placeholder="ada@email.com">
         <div class="row" style="margin-top:14px; align-items:center;">
-          <button class="r-switch" role="switch" aria-checked="true" aria-label="Email me Colaberry insights"></button>
-          <span style="font-size:13.5px;color:var(--text-body)">Email me Colaberry insights</span>
+          <button class="r-switch" role="switch" aria-checked="true" aria-label="Email me about new cohorts"></button>
+          <span style="font-size:13.5px;color:var(--text-body)">Email me about new cohorts</span>
         </div>
       </div>
       <div class="cmp-card c4">
         <h3>Data</h3>
         <table class="r-table">
-          <thead><tr><th>Engagement</th><th>Starts</th><th>Weeks</th><th>Status</th></tr></thead>
+          <thead><tr><th>Cohort</th><th>Starts</th><th>Weeks</th><th>Status</th></tr></thead>
           <tbody>
-            <tr><td>Analytics consulting</td><td>Apr 8</td><td>12</td><td><span class="r-badge r-badge--g"><span class="d"></span>Open</span></td></tr>
-            <tr><td>Data engineering</td><td>May 6</td><td>24</td><td><span class="r-badge r-badge--g"><span class="d"></span>Open</span></td></tr>
-            <tr><td>Discovery sprint</td><td>Mar 18</td><td>2</td><td><span class="r-badge r-badge--b">Waitlist</span></td></tr>
+            <tr><td>Data Analytics</td><td>Apr 8</td><td>12</td><td><span class="r-badge r-badge--g"><span class="d"></span>Open</span></td></tr>
+            <tr><td>Data Science</td><td>May 6</td><td>24</td><td><span class="r-badge r-badge--g"><span class="d"></span>Open</span></td></tr>
+            <tr><td>Intro Seminar</td><td>Mar 18</td><td>2</td><td><span class="r-badge r-badge--b">Waitlist</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -215,8 +215,8 @@
     <div class="ex-row ex-row--deck">
       <div class="ex-slide ex-slide--title">
         <div class="lg"><img src="assets/logo/colaberry-horizontal-white.png" alt="Colaberry"></div>
-        <h4>Shaping the future of work with data</h4>
-        <div class="meta"><span>Capabilities Overview</span><span>2026</span></div>
+        <h4>Future-proof your career in data &amp; AI</h4>
+        <div class="meta"><span>Investor Briefing</span><span>Q2 2026</span></div>
       </div>
       <div class="ex-slide ex-slide--data">
         <p class="sh">Graduate outcomes</p>
@@ -236,18 +236,18 @@
     <div class="ex-gh"><span class="ex-gh__n">B</span><span class="ex-gh__t">Social posts</span><span class="ex-gh__line"></span><span class="ex-gh__fmt">1:1 feed · 9:16 story</span></div>
     <div class="ex-row ex-row--social">
       <div class="ex-post ex-post--cherry">
-        <span class="tag">Now hiring</span>
+        <span class="tag">Now enrolling</span>
         <h4>Your data career starts here.</h4>
-        <span class="pill">View roles →</span>
+        <span class="pill">Apply now →</span>
       </div>
       <div class="ex-post ex-post--cream">
         <img class="lgm" src="assets/logo/colaberry-horizontal.png" alt="Colaberry">
-        <h4>Turn data<br>into an asset.</h4>
-        <span class="pill">Talk to us</span>
+        <h4>No degree.<br>No problem.</h4>
+        <span class="pill">Free info session</span>
       </div>
       <div class="ex-story">
-        <span class="tag">Free webinar</span>
-        <h4>Build a data-driven org.</h4>
+        <span class="tag">Spring cohort</span>
+        <h4>12 weeks to job-ready.</h4>
         <span class="pill">Swipe up</span>
       </div>
     </div>
@@ -274,12 +274,12 @@
       <div class="ex-frame">
         <div class="ex-bar"><i></i><i></i><i></i><span>pricing.html</span></div>
         <div class="ex-body">
-          <p class="ex-title">How we engage</p>
-          <p class="ex-sub">Consulting, staffing &amp; managed data services.</p>
+          <p class="ex-title">Two proven paths</p>
+          <p class="ex-sub">Pick a program; scholarships available for both.</p>
           <div class="ex-cards3">
-            <div class="ex-price"><b>Consulting</b><span class="p">Strategy</span><button class="r-btn r-btn--blue" style="width:100%">Learn</button></div>
-            <div class="ex-price feat"><b>Staffing</b><span class="p">Talent</span><button class="r-btn" style="width:100%">Learn</button></div>
-            <div class="ex-price"><b>Managed</b><span class="p">Services</span><button class="r-btn r-btn--green" style="width:100%">Learn</button></div>
+            <div class="ex-price"><b>Data Analytics</b><span class="p">$1,999</span><button class="r-btn r-btn--blue" style="width:100%">Choose</button></div>
+            <div class="ex-price feat"><b>+ Accelerator</b><span class="p">$12k</span><button class="r-btn" style="width:100%">Choose</button></div>
+            <div class="ex-price"><b>Data Science</b><span class="p">$4,500</span><button class="r-btn r-btn--green" style="width:100%">Choose</button></div>
           </div>
         </div>
       </div>
@@ -287,16 +287,16 @@
         <div class="ex-bar"><i></i><i></i><i></i><span>dashboard.html</span></div>
         <div class="ex-body">
           <p class="ex-title">This week</p>
-          <p class="ex-sub">Client engagement dashboard, light &amp; dark ready.</p>
+          <p class="ex-sub">Cohort dashboard, light &amp; dark ready.</p>
           <div class="ex-stats4">
-            <div class="ex-stat"><b>68%</b><span>Delivered</span></div>
-            <div class="ex-stat"><b>12</b><span>Tasks left</span></div>
-            <div class="ex-stat"><b>4.9</b><span>CSAT</span></div>
-            <div class="ex-stat"><b>Apr 30</b><span>Milestone</span></div>
+            <div class="ex-stat"><b>68%</b><span>Complete</span></div>
+            <div class="ex-stat"><b>12</b><span>Lessons left</span></div>
+            <div class="ex-stat"><b>4.9</b><span>Avg. score</span></div>
+            <div class="ex-stat"><b>Apr 30</b><span>Ends</span></div>
           </div>
           <div class="stack" style="display:flex;flex-direction:column;gap:12px">
-            <div><div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-muted);margin-bottom:6px"><span>Pipeline build</span><b style="color:var(--text-strong)">90%</b></div><div class="r-prog r-prog--g"><i data-val="90"></i></div></div>
-            <div><div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-muted);margin-bottom:6px"><span>Reporting</span><b style="color:var(--text-strong)">55%</b></div><div class="r-prog"><i data-val="55"></i></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-muted);margin-bottom:6px"><span>SQL fundamentals</span><b style="color:var(--text-strong)">90%</b></div><div class="r-prog r-prog--g"><i data-val="90"></i></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-muted);margin-bottom:6px"><span>Dashboards</span><b style="color:var(--text-strong)">55%</b></div><div class="r-prog"><i data-val="55"></i></div></div>
           </div>
         </div>
       </div>
@@ -312,29 +312,28 @@
           <img src="assets/logo/colaberry-horizontal.png" alt="Colaberry" style="height:20px">
           <div>
             <b style="display:block;font-family:var(--font-display);font-weight:900;font-size:15px;color:var(--text-strong);margin-bottom:6px">Get in touch</b>
-            <span style="font-size:11px;color:var(--text-muted);line-height:1.6">colaberry.com<br>Plano, TX</span>
+            <span style="font-size:11px;color:var(--text-muted);line-height:1.6">training.colaberry.com<br>Irving, TX</span>
           </div>
           <span style="font-size:9px;color:var(--text-subtle)">© 2026 Colaberry</span>
         </div>
         <div class="ex-broch__front">
           <img src="assets/logo/colaberry-horizontal-white.png" alt="Colaberry" style="height:20px">
-          <h4>Shaping the future of work</h4>
-          <span class="pill">Data Consultancy</span>
+          <h4>Future-proof your career in data &amp; AI</h4>
+          <span class="pill">Spring cohort</span>
         </div>
       </div>
       <div class="ex-broch ex-broch--inside">
         <div class="ex-broch__col">
           <b style="font-family:var(--font-display);font-weight:900;font-size:14px;color:var(--text-strong)">Why Colaberry</b>
-          <span class="ln"><i style="background:var(--cyan-500)"></i>Specialized data talent</span>
-          <span class="ln"><i style="background:var(--blue-500)"></i>Strategy &amp; roadmap</span>
-          <span class="ln"><i style="background:var(--blue-500)"></i>Managed delivery</span>
+          <span class="ln"><i style="background:var(--green-500)"></i>Instructor-led classes</span>
+          <span class="ln"><i style="background:var(--blue-500)"></i>1:1 mentorship</span>
+          <span class="ln"><i style="background:var(--red-500)"></i>A year of job support</span>
         </div>
         <div class="ex-broch__col">
-          <b style="font-family:var(--font-display);font-weight:900;font-size:14px;color:var(--text-strong)">Services</b>
-          <span class="prog" style="border-top-color:var(--blue-500)">Consulting &amp; Staffing</span>
-          <span class="prog" style="border-top-color:var(--cyan-500)">Data Fabric Services</span>
-          <span class="prog" style="border-top-color:var(--blue-500)">Managed Data Services</span>
-        </div>
+          <b style="font-family:var(--font-display);font-weight:900;font-size:14px;color:var(--text-strong)">Programs</b>
+          <span class="prog" style="border-top-color:var(--blue-500)">Data Analytics · 12 wks</span>
+          <span class="prog" style="border-top-color:var(--green-500)">Data Science · 24 wks</span>
+          <span class="prog" style="border-top-color:var(--red-500)">Career Accelerator</span>
         </div>
       </div>
     </div>
@@ -397,7 +396,7 @@
       <a href="design-system.html#handoff">Hand-off</a>
     </div>
   </div>
-  <div class="foot__bar"><div>© <span id="yr">2026</span> Colaberry, Inc. · Data Consultancy & Talent Solutions · Plano, TX</div></div>
+  <div class="foot__bar"><div>© <span id="yr">2026</span> Colaberry, Inc. · School of Data Science &amp; Analytics · Plano, TX &amp; Boston, MA</div></div>
 </footer>
 
 <div class="l-toast" id="ltoast" role="status" aria-live="polite"></div>

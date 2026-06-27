@@ -1,4 +1,4 @@
-Page navigation with prev/next and truncated number pills (current page = teal).
+Page navigation with prev/next and truncated number pills (current page = cherry).
 
 ```jsx
 const [page, setPage] = React.useState(1);

@@ -4,7 +4,7 @@ const CSS = `
 .cb-bc { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-family: var(--font-body); font-size: var(--fs-body-sm); }
 .cb-bc a, .cb-bc span { color: var(--text-muted); text-decoration: none; }
 .cb-bc a { transition: color var(--dur-fast) var(--ease-out); }
-.cb-bc a:hover { color: var(--brand-primary); }
+.cb-bc a:hover { color: var(--red-500); }
 .cb-bc__sep { color: var(--border-strong); display: inline-flex; }
 .cb-bc__cur { color: var(--text-strong); font-weight: var(--fw-medium); }
 `;

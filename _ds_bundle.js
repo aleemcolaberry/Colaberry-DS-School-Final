@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"ColaberryDesignSystem_098454","components":[{"name":"Accordion","sourcePath":"components/core/Accordion.jsx"},{"name":"Avatar","sourcePath":"components/core/Avatar.jsx"},{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Breadcrumb","sourcePath":"components/core/Breadcrumb.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"Card","sourcePath":"components/core/Card.jsx"},{"name":"Carousel","sourcePath":"components/core/Carousel.jsx"},{"name":"Checkbox","sourcePath":"components/core/Checkbox.jsx"},{"name":"Dialog","sourcePath":"components/core/Dialog.jsx"},{"name":"Drawer","sourcePath":"components/core/Drawer.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Pagination","sourcePath":"components/core/Pagination.jsx"},{"name":"Popover","sourcePath":"components/core/Popover.jsx"},{"name":"Progress","sourcePath":"components/core/Progress.jsx"},{"name":"Skeleton","sourcePath":"components/core/Skeleton.jsx"},{"name":"Switch","sourcePath":"components/core/Switch.jsx"},{"name":"Table","sourcePath":"components/core/Table.jsx"},{"name":"Textarea","sourcePath":"components/core/Textarea.jsx"},{"name":"Toast","sourcePath":"components/core/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/core/Tooltip.jsx"}],"sourceHashes":{"components/core/Accordion.jsx":"6b18a0af102c","components/core/Avatar.jsx":"3586b651d930","components/core/Badge.jsx":"ec6b5c6b3886","components/core/Breadcrumb.jsx":"d9c83e69a820","components/core/Button.jsx":"a5df305e19c8","components/core/Card.jsx":"16a29c2f30bd","components/core/Carousel.jsx":"32d39a3c7b97","components/core/Checkbox.jsx":"32ad9f64ef53","components/core/Dialog.jsx":"5546d1732c00","components/core/Drawer.jsx":"002789c5e7f2","components/core/Input.jsx":"b17416006ccf","components/core/Pagination.jsx":"a8adf0d7abf4","components/core/Popover.jsx":"be044b8cad02","components/core/Progress.jsx":"b8f2e45d800b","components/core/Skeleton.jsx":"a00339768789","components/core/Switch.jsx":"5bd304d89705","components/core/Table.jsx":"34bcefbe3e5d","components/core/Textarea.jsx":"53c7e464d1d5","components/core/Toast.jsx":"36e8321d1a9b","components/core/Tooltip.jsx":"98775fb02133","guidelines/showcase.jsx":"59f691ec1eaa","landing.js":"719adf286139","ui_kits/marketing-website/home.jsx":"8214c22e8cdb","ui_kits/marketing-website/parts.jsx":"e22b4336bbe4","ui_kits/marketing-website/program-enroll.jsx":"b5f7abc1308a"},"inlinedExternals":[],"unexposedExports":[]} */
+/* @ds-bundle: {"format":3,"namespace":"ColaberryDesignSystem_098454","components":[{"name":"Accordion","sourcePath":"components/core/Accordion.jsx"},{"name":"Avatar","sourcePath":"components/core/Avatar.jsx"},{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Breadcrumb","sourcePath":"components/core/Breadcrumb.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"Card","sourcePath":"components/core/Card.jsx"},{"name":"Carousel","sourcePath":"components/core/Carousel.jsx"},{"name":"Checkbox","sourcePath":"components/core/Checkbox.jsx"},{"name":"Dialog","sourcePath":"components/core/Dialog.jsx"},{"name":"Drawer","sourcePath":"components/core/Drawer.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Pagination","sourcePath":"components/core/Pagination.jsx"},{"name":"Popover","sourcePath":"components/core/Popover.jsx"},{"name":"Progress","sourcePath":"components/core/Progress.jsx"},{"name":"Skeleton","sourcePath":"components/core/Skeleton.jsx"},{"name":"Switch","sourcePath":"components/core/Switch.jsx"},{"name":"Table","sourcePath":"components/core/Table.jsx"},{"name":"Textarea","sourcePath":"components/core/Textarea.jsx"},{"name":"Toast","sourcePath":"components/core/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/core/Tooltip.jsx"}],"sourceHashes":{"components/core/Accordion.jsx":"7f723d50ccb3","components/core/Avatar.jsx":"31e44eba8cc0","components/core/Badge.jsx":"a7eaff5c66e0","components/core/Breadcrumb.jsx":"70a7c059b6dc","components/core/Button.jsx":"743bf8196d3a","components/core/Card.jsx":"9128695a6e3b","components/core/Carousel.jsx":"32d39a3c7b97","components/core/Checkbox.jsx":"1234fac38bde","components/core/Dialog.jsx":"5546d1732c00","components/core/Drawer.jsx":"002789c5e7f2","components/core/Input.jsx":"b17416006ccf","components/core/Pagination.jsx":"c83839504ef4","components/core/Popover.jsx":"be044b8cad02","components/core/Progress.jsx":"060ad916d79f","components/core/Skeleton.jsx":"a00339768789","components/core/Switch.jsx":"dda1b7f891e5","components/core/Table.jsx":"34bcefbe3e5d","components/core/Textarea.jsx":"53c7e464d1d5","components/core/Toast.jsx":"36e8321d1a9b","components/core/Tooltip.jsx":"98775fb02133","guidelines/showcase.jsx":"8016c46bb9e8","landing.js":"08a3fe63af52","ui_kits/marketing-website/home.jsx":"f2d0585b6567","ui_kits/marketing-website/parts.jsx":"15b3c98dd221","ui_kits/marketing-website/program-enroll.jsx":"c838acdc9ad0"},"inlinedExternals":[],"unexposedExports":[]} */
 
 (() => {
 
@@ -17,7 +17,7 @@ const CSS = `
 .cb-acc__btn { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; background: none; border: none; cursor: pointer; font-family: var(--font-body); font-weight: var(--fw-bold); font-size: var(--fs-body); color: var(--text-strong); text-align: left; transition: background var(--dur-fast) var(--ease-out); }
 .cb-acc__btn:hover { background: var(--surface-sunken); }
 .cb-acc__btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
-.cb-acc__ic { flex: none; color: var(--brand-primary); transition: transform var(--dur-base) var(--ease-out); }
+.cb-acc__ic { flex: none; color: var(--red-500); transition: transform var(--dur-base) var(--ease-out); }
 .cb-acc__item[data-open="true"] .cb-acc__ic { transform: rotate(180deg); }
 .cb-acc__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--dur-base) var(--ease-out); }
 .cb-acc__item[data-open="true"] .cb-acc__panel { grid-template-rows: 1fr; }
@@ -102,7 +102,7 @@ const CSS = `
   display: inline-flex; align-items: center; justify-content: center;
   border-radius: 50%; overflow: hidden; flex: none;
   font-family: var(--font-body); font-weight: var(--fw-bold); color: #fff;
-  background: var(--blue-500); user-select: none;
+  background: var(--green-500); user-select: none;
 }
 .cb-avatar { position: relative; }
 .cb-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background: inherit; }
@@ -112,12 +112,12 @@ const CSS = `
 .cb-avatar--md { width: 48px; height: 48px; font-size: 16px; }
 .cb-avatar--lg { width: 64px; height: 64px; font-size: 22px; }
 .cb-avatar--xl { width: 88px; height: 88px; font-size: 30px; }
-.cb-avatar--ring { box-shadow: 0 0 0 3px var(--surface-card), 0 0 0 5px var(--brand-primary); }
+.cb-avatar--ring { box-shadow: 0 0 0 3px var(--surface-card), 0 0 0 5px var(--red-500); }
 .cb-avatar-group { display: inline-flex; }
 .cb-avatar-group > .cb-avatar { box-shadow: 0 0 0 3px var(--surface-card); }
 .cb-avatar-group > .cb-avatar + .cb-avatar { margin-left: -12px; }
 `;
-const TONES = ['var(--blue-500)', 'var(--cyan-600)', 'var(--blue-700)', 'var(--blue-600)', 'var(--cyan-700)'];
+const TONES = ['var(--green-500)', 'var(--blue-500)', 'var(--red-500)', 'var(--green-600)', 'var(--blue-600)'];
 function inject() {
   if (typeof document === 'undefined') return;
   if (document.getElementById('cb-avatar-css')) return;
@@ -187,12 +187,11 @@ const CSS = `
   background: var(--surface-sunken); color: var(--text-body);
   white-space: nowrap;
 }
-.cb-badge--solid { background: var(--brand-primary); color: #fff; }
+.cb-badge--solid { background: var(--red-500); color: #fff; }
 .cb-badge--neutral { background: var(--surface-sunken); color: var(--text-body); }
 .cb-badge--red { background: var(--status-danger-bg); color: var(--red-700); }
 .cb-badge--green { background: var(--status-success-bg); color: var(--green-700); }
 .cb-badge--blue { background: var(--status-info-bg); color: var(--blue-700); }
-.cb-badge--cyan { background: var(--surface-accent-subtle); color: var(--cyan-800); }
 .cb-badge--warning { background: var(--status-warning-bg); color: var(--amber-500); }
 .cb-badge--outline { background: transparent; box-shadow: inset 0 0 0 1px var(--border-default); color: var(--text-body); }
 .cb-badge__dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
@@ -208,7 +207,7 @@ function inject() {
 
 /**
  * Small status / category label. Soft tints by default; use `solid` for the
- * teal brand emphasis pill and `dot` for a status indicator.
+ * cherry-red emphasis pill and `dot` for a status indicator.
  */
 function Badge({
   tone = 'neutral',
@@ -240,7 +239,7 @@ const CSS = `
 .cb-bc { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-family: var(--font-body); font-size: var(--fs-body-sm); }
 .cb-bc a, .cb-bc span { color: var(--text-muted); text-decoration: none; }
 .cb-bc a { transition: color var(--dur-fast) var(--ease-out); }
-.cb-bc a:hover { color: var(--brand-primary); }
+.cb-bc a:hover { color: var(--red-500); }
 .cb-bc__sep { color: var(--border-strong); display: inline-flex; }
 .cb-bc__cur { color: var(--text-strong); font-weight: var(--fw-medium); }
 `;
@@ -321,10 +320,10 @@ const CSS = `
 }
 .cb-btn--sm { font-size: var(--fs-caption); min-height: 38px; padding: 0 16px; gap: 6px; }
 .cb-btn--lg { font-size: var(--fs-body); min-height: 56px; padding: 0 32px; }
-.cb-btn--green { --_bg: var(--action-green-bg); --_bg-hover: var(--action-green-bg-hover); --_bg-press: var(--cyan-800); --_fg: #fff; }
+.cb-btn--green { --_bg: var(--action-green-bg); --_bg-hover: var(--action-green-bg-hover); --_bg-press: var(--green-700); --_fg: #fff; }
 .cb-btn--blue { --_bg: var(--blue-500); --_bg-hover: var(--blue-600); --_bg-press: var(--blue-700); --_fg: #fff; }
 .cb-btn--primary { box-shadow: var(--shadow-brand); }
-.cb-btn--primary:hover { box-shadow: 0 12px 30px color-mix(in srgb, var(--blue-500) 34%, transparent); }
+.cb-btn--primary:hover { box-shadow: 0 12px 30px color-mix(in srgb, var(--red-500) 34%, transparent); }
 .cb-btn--outline {
   background: transparent; color: var(--text-strong);
   box-shadow: inset 0 0 0 var(--border-2) var(--border-strong);
@@ -348,8 +347,8 @@ function inject() {
 }
 
 /**
- * Colaberry primary button. Teal by default; supports accent (cyan) /
- * blue brand tones, outline/ghost/link variants, three sizes, and icons.
+ * Colaberry primary button. Cherry-red by default; supports green/blue
+ * brand tones, outline/ghost/link variants, three sizes, and icons.
  */
 function Button({
   variant = 'primary',
@@ -411,8 +410,8 @@ const CSS = `
 .cb-card--hoverable:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
 .cb-card--flat { box-shadow: none; }
 .cb-card--elevated { box-shadow: var(--shadow-md); border-color: transparent; }
-.cb-card--accent { border-top: 4px solid var(--brand-primary); }
-.cb-card--accent-green { border-top: 4px solid var(--cyan-500); }
+.cb-card--accent { border-top: 4px solid var(--red-500); }
+.cb-card--accent-green { border-top: 4px solid var(--green-500); }
 .cb-card--accent-blue { border-top: 4px solid var(--blue-500); }
 .cb-card__media { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--surface-sunken); }
 .cb-card__body { padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); }
@@ -571,10 +570,10 @@ const CSS = `
   margin-top: 1px;
 }
 .cb-check__box svg { width: 14px; height: 14px; opacity: 0; transform: scale(.6); transition: all var(--dur-fast) var(--ease-spring); }
-.cb-check input:checked + .cb-check__box { background: var(--brand-primary); border-color: var(--brand-primary); }
+.cb-check input:checked + .cb-check__box { background: var(--green-500); border-color: var(--green-500); }
 .cb-check input:checked + .cb-check__box svg { opacity: 1; transform: scale(1); }
 .cb-check input:focus-visible + .cb-check__box { box-shadow: var(--focus-ring); }
-.cb-check:hover .cb-check__box { border-color: var(--brand-primary); }
+.cb-check:hover .cb-check__box { border-color: var(--green-500); }
 .cb-check input:disabled + .cb-check__box { opacity: .45; }
 .cb-check--disabled { cursor: not-allowed; color: var(--text-subtle); }
 `;
@@ -588,7 +587,7 @@ function inject() {
 }
 
 /**
- * Checkbox with a teal checked state and a soft spring-in tick.
+ * Checkbox with a leaf-green checked state and a soft spring-in tick.
  */
 function Checkbox({
   label,
@@ -942,7 +941,7 @@ const CSS = `
 .cb-pag button:hover:not(:disabled):not(.is-current) { background: var(--surface-sunken); border-color: var(--border-strong); }
 .cb-pag button:active:not(:disabled) { transform: translateY(1px); }
 .cb-pag button:focus-visible { outline: none; box-shadow: var(--focus-ring); }
-.cb-pag button.is-current { background: var(--brand-primary); border-color: var(--brand-primary); color: #fff; }
+.cb-pag button.is-current { background: var(--red-500); border-color: var(--red-500); color: #fff; }
 .cb-pag button:disabled { opacity: .4; cursor: not-allowed; }
 .cb-pag__ellipsis { min-width: 24px; text-align: center; color: var(--text-subtle); }
 `;
@@ -960,7 +959,7 @@ function range(start, end) {
 }
 
 /**
- * Page navigation with prev/next and truncated number pills (current = teal).
+ * Page navigation with prev/next and truncated number pills (current = cherry).
  */
 function Pagination({
   page = 1,
@@ -1094,8 +1093,8 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 const CSS = `
 .cb-prog { width: 100%; }
 .cb-prog__track { height: 10px; background: var(--surface-sunken); border-radius: var(--radius-pill); overflow: hidden; }
-.cb-prog__bar { height: 100%; border-radius: var(--radius-pill); background: var(--brand-primary); width: 0; transition: width var(--dur-slow) var(--ease-out); }
-.cb-prog__bar.green { background: var(--cyan-600); } .cb-prog__bar.blue { background: var(--blue-500); }
+.cb-prog__bar { height: 100%; border-radius: var(--radius-pill); background: var(--red-500); width: 0; transition: width var(--dur-slow) var(--ease-out); }
+.cb-prog__bar.green { background: var(--green-600); } .cb-prog__bar.blue { background: var(--blue-500); }
 .cb-prog__bar.indet { width: 40% !important; animation: cb-indet 1.3s var(--ease-in-out) infinite; }
 .cb-prog__head { display: flex; justify-content: space-between; margin-bottom: 8px; font-family: var(--font-body); font-size: var(--fs-caption); }
 .cb-prog__label { color: var(--text-strong); font-weight: var(--fw-medium); }
@@ -1208,7 +1207,7 @@ const CSS = `
 .cb-switch input { position: absolute; opacity: 0; width: 0; height: 0; }
 .cb-switch__track { width: 44px; height: 26px; border-radius: var(--radius-pill); background: var(--neutral-300); position: relative; flex: none; transition: background var(--dur-base) var(--ease-out); }
 .cb-switch__knob { position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: var(--shadow-sm); transition: transform var(--dur-base) var(--ease-spring); }
-.cb-switch input:checked + .cb-switch__track { background: var(--brand-primary); }
+.cb-switch input:checked + .cb-switch__track { background: var(--green-600); }
 .cb-switch input:checked + .cb-switch__track .cb-switch__knob { transform: translateX(18px); }
 .cb-switch input:focus-visible + .cb-switch__track { box-shadow: var(--focus-ring); }
 .cb-switch:hover .cb-switch__track { filter: brightness(0.97); }
@@ -1224,7 +1223,7 @@ function inject() {
 }
 
 /**
- * On/off toggle switch with a soft spring knob (teal when on).
+ * On/off toggle switch with a soft spring knob (leaf-green when on).
  */
 function Switch({
   label,
@@ -1592,7 +1591,7 @@ function OverlayDemo() {
     onClick: () => setTst(true)
   }, "Show toast")), /*#__PURE__*/React.createElement(Dialog, {
     open: dlg,
-    title: "Confirm request",
+    title: "Confirm enrollment",
     onClose: () => setDlg(false),
     footer: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
       variant: "ghost",
@@ -1602,23 +1601,23 @@ function OverlayDemo() {
       size: "sm",
       onClick: () => setDlg(false)
     }, "Confirm"))
-  }, "Ready to start your data engagement? Our team will reach out to scope the work."), /*#__PURE__*/React.createElement(Drawer, {
+  }, "Ready to start the Data Analytics program? You can change your cohort later."), /*#__PURE__*/React.createElement(Drawer, {
     open: drw,
     title: "Filters",
     onClose: () => setDrw(false)
   }, /*#__PURE__*/React.createElement("div", {
     className: "stack"
   }, /*#__PURE__*/React.createElement(Checkbox, {
-    label: "Remote",
+    label: "Online",
     defaultChecked: true
   }), /*#__PURE__*/React.createElement(Checkbox, {
-    label: "Onsite"
+    label: "On campus"
   }), /*#__PURE__*/React.createElement(Switch, {
-    label: "Open roles only"
+    label: "Scholarships only"
   }))), /*#__PURE__*/React.createElement(Toast, {
     open: tst,
     variant: "success",
-    title: "Message sent",
+    title: "Application sent",
     onClose: () => setTst(false)
   }, "We'll be in touch within a day."));
 }
@@ -1642,9 +1641,9 @@ function Gallery() {
     name: "Button"
   }, /*#__PURE__*/React.createElement("div", {
     className: "row"
-  }, /*#__PURE__*/React.createElement(Button, null, "Contact us"), /*#__PURE__*/React.createElement(Button, {
+  }, /*#__PURE__*/React.createElement(Button, null, "Apply now"), /*#__PURE__*/React.createElement(Button, {
     tone: "green"
-  }, "Get started"), /*#__PURE__*/React.createElement(Button, {
+  }, "Enroll"), /*#__PURE__*/React.createElement(Button, {
     tone: "blue"
   }, "Book a call")), /*#__PURE__*/React.createElement("div", {
     className: "row"
@@ -1669,16 +1668,16 @@ function Gallery() {
   }, /*#__PURE__*/React.createElement(Badge, {
     tone: "green",
     dot: true
-  }, "Hiring"), /*#__PURE__*/React.createElement(Badge, {
+  }, "Enrolling"), /*#__PURE__*/React.createElement(Badge, {
     tone: "blue"
-  }, "Consulting"), /*#__PURE__*/React.createElement(Badge, {
+  }, "Data Science"), /*#__PURE__*/React.createElement(Badge, {
     tone: "red",
     dot: true
-  }, "Urgent"), /*#__PURE__*/React.createElement(Badge, {
+  }, "Closing"), /*#__PURE__*/React.createElement(Badge, {
     solid: true
   }, "New"), /*#__PURE__*/React.createElement(Badge, {
     outline: true
-  }, "Remote")), /*#__PURE__*/React.createElement("div", {
+  }, "Self-paced")), /*#__PURE__*/React.createElement("div", {
     className: "row",
     style: {
       marginTop: 16
@@ -1720,7 +1719,7 @@ function Gallery() {
     type: "email",
     placeholder: "ada@email.com"
   }), /*#__PURE__*/React.createElement(Textarea, {
-    label: "How can we help?",
+    label: "Why data?",
     placeholder: "A sentence or two\u2026",
     maxLength: 120
   }))), /*#__PURE__*/React.createElement(Tile, {
@@ -1728,7 +1727,7 @@ function Gallery() {
   }, /*#__PURE__*/React.createElement("div", {
     className: "stack"
   }, /*#__PURE__*/React.createElement(Checkbox, {
-    label: "Email me Colaberry insights",
+    label: "Email me about new cohorts",
     defaultChecked: true
   }), /*#__PURE__*/React.createElement(Checkbox, {
     label: "I agree to the terms"
@@ -1744,11 +1743,11 @@ function Gallery() {
   }, /*#__PURE__*/React.createElement(Accordion, {
     defaultOpen: [0],
     items: [{
-      title: 'What does an engagement include?',
-      content: 'Discovery, a data roadmap, specialized talent, and managed delivery — scoped to your goals.'
+      title: 'What is included?',
+      content: 'Live classes, 1:1 mentorship, a portfolio project, and a year of job support.'
     }, {
-      title: 'How do you staff teams?',
-      content: 'We match vetted data specialists to your roles — contingent or contract-to-hire — with expert recruitment.'
+      title: 'Do I need a degree?',
+      content: 'No — a GED or diploma is all you need. No admissions tests.'
     }]
   })), /*#__PURE__*/React.createElement(Tile, {
     name: "Breadcrumb \xB7 Pagination"
@@ -1756,9 +1755,9 @@ function Gallery() {
     items: [{
       label: 'Home'
     }, {
-      label: 'What We Do'
+      label: 'Programs'
     }, {
-      label: 'Consulting & Staffing'
+      label: 'Data Analytics'
     }]
   }), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -1788,12 +1787,12 @@ function Gallery() {
       color: 'var(--text-muted)',
       fontSize: 13
     }
-  }, "Talk to our team \u2014 no pressure.")))), /*#__PURE__*/React.createElement(Tile, {
+  }, "Talk to an advisor \u2014 no pressure.")))), /*#__PURE__*/React.createElement(Tile, {
     name: "Progress \xB7 Skeleton"
   }, /*#__PURE__*/React.createElement("div", {
     className: "stack"
   }, /*#__PURE__*/React.createElement(Progress, {
-    label: "Delivery progress",
+    label: "Course progress",
     value: 68,
     showValue: true
   }), /*#__PURE__*/React.createElement(Progress, {
@@ -1824,7 +1823,7 @@ function Gallery() {
   }, /*#__PURE__*/React.createElement(Table, {
     columns: [{
       key: 'name',
-      header: 'Engagement'
+      header: 'Cohort'
     }, {
       key: 'start',
       header: 'Starts'
@@ -1841,17 +1840,17 @@ function Gallery() {
       }, v)
     }],
     data: [{
-      name: 'Analytics consulting',
+      name: 'Data Analytics',
       start: 'Apr 8',
       wk: 12,
       st: 'Open'
     }, {
-      name: 'Data engineering',
+      name: 'Data Science',
       start: 'May 6',
       wk: 24,
       st: 'Open'
     }, {
-      name: 'Discovery sprint',
+      name: 'Intro Seminar',
       start: 'Mar 18',
       wk: 2,
       st: 'Closed'
@@ -1860,7 +1859,7 @@ function Gallery() {
     name: "Carousel",
     wide: true
   }, /*#__PURE__*/React.createElement(Carousel, {
-    slides: [slide('Consulting', 'blue-500', 'blue-700'), slide('Staffing', 'cyan-500', 'cyan-700'), slide('Training', 'blue-400', 'blue-600')]
+    slides: [slide('Mentorship', 'blue-500', 'blue-700'), slide('Real projects', 'green-500', 'green-700'), slide('Get hired', 'red-400', 'red-600')]
   })));
 }
 
@@ -1914,7 +1913,7 @@ function SignIn() {
       color: 'var(--text-muted)',
       margin: '0 0 24px'
     }
-  }, "Sign in to your client workspace."), /*#__PURE__*/React.createElement("div", {
+  }, "Sign in to continue your data journey."), /*#__PURE__*/React.createElement("div", {
     className: "stack"
   }, /*#__PURE__*/React.createElement(Input, {
     label: "Email",
@@ -1950,30 +1949,30 @@ function SignIn() {
     }
   }, "New here? ", /*#__PURE__*/React.createElement("a", {
     href: "#"
-  }, "Contact us"))));
+  }, "Apply now"))));
 }
 function Pricing() {
   const plans = [{
     tone: 'blue',
-    tag: 'Talent',
-    name: 'Consulting & Staffing',
-    price: 'Flexible',
-    feats: ['Vetted specialists', 'Role-matched', 'Contingent or managed'],
+    tag: '12 weeks',
+    name: 'Data Analytics',
+    price: '$1,999',
+    feats: ['SQL & reporting', 'Dashboards', 'Portfolio project'],
     cta: 'blue'
   }, {
     tone: 'red',
     tag: 'Most popular',
-    name: 'Data Fabric Services',
-    price: 'Custom',
-    feats: ['Architecture & roadmap', 'Integration', 'Governance'],
+    name: 'Analytics + Accelerator',
+    price: '$12,000',
+    feats: ['Everything in Analytics', '1:1 mentorship', '1-year job support'],
     featured: true,
     cta: 'red'
   }, {
     tone: 'green',
-    tag: 'Operations',
-    name: 'Managed Data Services',
-    price: 'Scoped',
-    feats: ['Reliable pipelines', 'Monitoring', 'Ongoing support'],
+    tag: '24 weeks',
+    name: 'Data Science',
+    price: '$4,500',
+    feats: ['Python & ML', 'Statistics', 'Capstone project'],
     cta: 'green'
   }];
   return /*#__PURE__*/React.createElement(Frame, {
@@ -1990,7 +1989,7 @@ function Pricing() {
     elevation: p.featured ? 'md' : 'sm',
     accent: p.featured ? 'red' : undefined,
     style: p.featured ? {
-      outline: '2px solid var(--blue-500)'
+      outline: '2px solid var(--red-500)'
     } : undefined
   }, /*#__PURE__*/React.createElement(Badge, {
     tone: p.tone,
@@ -2029,7 +2028,7 @@ function Pricing() {
     fill: "none"
   }, /*#__PURE__*/React.createElement("path", {
     d: "M20 6 9 17l-5-5",
-    stroke: "var(--cyan-600)",
+    stroke: "var(--green-600)",
     strokeWidth: "2.4",
     strokeLinecap: "round",
     strokeLinejoin: "round"
@@ -2037,10 +2036,10 @@ function Pricing() {
     fullWidth: true,
     tone: p.cta,
     variant: p.featured ? 'primary' : 'outline'
-  }, "Learn more")))));
+  }, "Choose plan")))));
 }
 function Dashboard() {
-  const stats = [['68%', 'Delivered'], ['12', 'Tasks left'], ['4.9', 'CSAT'], ['Apr 30', 'Milestone']];
+  const stats = [['68%', 'Course complete'], ['12', 'Lessons left'], ['4.9', 'Avg. score'], ['Apr 30', 'Cohort ends']];
   return /*#__PURE__*/React.createElement(Frame, {
     title: "dashboard.html"
   }, /*#__PURE__*/React.createElement("div", {
@@ -2058,7 +2057,7 @@ function Dashboard() {
       fontFamily: 'var(--font-display)',
       fontWeight: 900,
       fontSize: 28,
-      color: 'var(--blue-500)'
+      color: 'var(--red-500)'
     }
   }, s[0]), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -2086,13 +2085,13 @@ function Dashboard() {
       margin: 0,
       fontSize: 18
     }
-  }, "Active engagements"), /*#__PURE__*/React.createElement(Badge, {
+  }, "Upcoming cohorts"), /*#__PURE__*/React.createElement(Badge, {
     tone: "green",
     dot: true
   }, "Live")), /*#__PURE__*/React.createElement(Table, {
     columns: [{
       key: 'name',
-      header: 'Client'
+      header: 'Program'
     }, {
       key: 'wk',
       header: 'Weeks',
@@ -2105,15 +2104,15 @@ function Dashboard() {
       }, v)
     }],
     data: [{
-      name: 'Northwind Financial',
+      name: 'Data Analytics',
       wk: 12,
       st: 'Open'
     }, {
-      name: 'Acme Retail',
+      name: 'Data Science',
       wk: 24,
       st: 'Open'
     }, {
-      name: 'Discovery sprint',
+      name: 'Intro Seminar',
       wk: 2,
       st: 'Closed'
     }]
@@ -2127,16 +2126,16 @@ function Dashboard() {
   }, "This week"), /*#__PURE__*/React.createElement("div", {
     className: "stack"
   }, /*#__PURE__*/React.createElement(Progress, {
-    label: "Pipeline build",
+    label: "SQL fundamentals",
     value: 90,
     showValue: true,
     tone: "green"
   }), /*#__PURE__*/React.createElement(Progress, {
-    label: "Reporting",
+    label: "Dashboards",
     value: 55,
     showValue: true
   }), /*#__PURE__*/React.createElement(Progress, {
-    label: "Handover",
+    label: "Capstone",
     value: 20,
     showValue: true,
     tone: "blue"
@@ -2161,7 +2160,7 @@ if (C.Button) {
 
 // landing.js
 try { (() => {
-/* Colaberry DS landing — interactive hero + GSAP choreography.
+/* Colaberry DS landing — Three.js hero + GSAP choreography.
    Motion tiers:
    - FULL  (motion OK, rAF alive): masked headline, parallax, scrubs, counters, pin.
    - LITE  (reduced motion, rAF alive): opacity-only fades — reduce, don't remove.
@@ -2196,17 +2195,17 @@ try { (() => {
 
   /* ---------- Color ramps (generated) ---------- */
   var RAMPS = [{
-    name: 'Teal',
-    base: '#357895',
-    hex: ['#EAF3F6', '#D2E4EB', '#A9CAD8', '#79A9BF', '#4E8AA6', '#357895', '#2C6981', '#25566B', '#1F4556', '#193646']
+    name: 'Cherry Red',
+    base: '#FB2832',
+    hex: ['#FFF0F1', '#FFDBDD', '#FFB8BC', '#FE8A90', '#FD5760', '#FB2832', '#E5121D', '#C20E1E', '#9B0E18', '#7A1016']
   }, {
-    name: 'Cyan',
-    base: '#00C4CC',
-    hex: ['#DFFAFB', '#B3F2F4', '#7FE7EB', '#45D8DE', '#16CBD2', '#00C4CC', '#00A6AD', '#00858B', '#0A696E', '#0E5256']
+    name: 'Leaf Green',
+    base: '#77BB4A',
+    hex: ['#F1F9EA', '#DEF0CC', '#C2E3A1', '#A2D375', '#8AC759', '#77BB4A', '#5BA63C', '#468A2E', '#356A24', '#2A521E']
   }, {
-    name: 'Slate',
-    base: '#404B51',
-    hex: ['#F5F7F8', '#ECEFF1', '#DDE3E6', '#CBD3D7', '#A7B2B8', '#7E8B92', '#5E6B72', '#404B51', '#283034', '#161C1F']
+    name: 'Berry Blue',
+    base: '#367895',
+    hex: ['#EAF2F6', '#CFE0E9', '#A6C5D5', '#6F9DB6', '#4A86A2', '#367895', '#2E6A86', '#265A72', '#20485C', '#1A3947']
   }];
   var rampsRoot = document.getElementById('ramps');
   if (rampsRoot) {
@@ -2240,7 +2239,7 @@ try { (() => {
 
   /* ---------- Copy snippets ---------- */
   var SNIPS = {
-    prompt: 'Using the Colaberry design system, create a [social post / flyer / email header / slide] at [size] for [topic]. Headline: [your headline]. Add a [call-to-action] button and the logo. Keep it clean and on-brand, no emoji — and give me 3 options.',
+    prompt: 'Using the Colaberry design system, create a [social post / flyer / email header / slide] at [size] for [topic]. Headline: [your headline]. Add a [call-to-action] button and the logo. Keep it warm and on-brand, no emoji — and give me 3 options.',
     install: '<link rel="stylesheet" href="colaberry/styles.css">\n<scr' + 'ipt src="colaberry/_ds_bundle.js"></scr' + 'ipt>\n/* var(--brand-accent) · window.ColaberryDesignSystem_098454 */'
   };
   document.querySelectorAll('[data-snip]').forEach(function (el) {
@@ -2287,8 +2286,8 @@ try { (() => {
     if (!ctx) return;
     var hero = document.querySelector('.hero');
 
-    // Brand palette (teal + cyan + slate), weighted toward teal
-    var PAL = ['#357895', '#357895', '#00C4CC', '#357895', '#16CBD2', '#45D8DE', '#5E6B72'];
+    // Brand palette (cherry / leaf / berry + tints), weighted toward cherry
+    var PAL = ['#FB2832', '#FB2832', '#77BB4A', '#367895', '#FD5760', '#8AC759', '#4A86A2'];
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     var W = 0,
       H = 0;
@@ -2407,7 +2406,7 @@ try { (() => {
           var md = Math.sqrt(mdx * mdx + mdy * mdy);
           if (md < MOUSE) {
             var ma = (1 - md / MOUSE) * 0.55;
-            ctx.strokeStyle = rgba('#00C4CC', ma);
+            ctx.strokeStyle = rgba('#FB2832', ma);
             ctx.lineWidth = 1.3;
             ctx.beginPath();
             ctx.moveTo(pointer.x, pointer.y);
@@ -2447,7 +2446,7 @@ try { (() => {
         r2.rad += 7;
         r2.power *= 0.94;
         r2.alpha *= 0.95;
-        ctx.strokeStyle = rgba('#00C4CC', r2.alpha);
+        ctx.strokeStyle = rgba('#FB2832', r2.alpha);
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.arc(r2.x, r2.y, r2.rad, 0, 6.2832);
@@ -2788,268 +2787,227 @@ try { (() => {
 
 // ui_kits/marketing-website/home.jsx
 try { (() => {
-/* Colaberry — Home view (Data Consultancy & Talent Solutions Provider) */
+/* Colaberry marketing site — Home view */
 const {
   Button: HButton,
   Card: HCard,
-  Badge: HBadge
+  Badge: HBadge,
+  Avatar: HAvatar
 } = window.ColaberryDesignSystem_098454;
+function Photo({
+  label,
+  tone = 'blue',
+  tall = false,
+  children
+}) {
+  const grad = {
+    blue: 'linear-gradient(135deg, var(--blue-400), var(--blue-700))',
+    green: 'linear-gradient(135deg, var(--green-400), var(--green-700))',
+    red: 'linear-gradient(135deg, var(--red-400), var(--red-700))',
+    mix: 'linear-gradient(135deg, var(--blue-500), var(--green-600))'
+  }[tone];
+  return /*#__PURE__*/React.createElement("div", {
+    className: "cbsite-photo",
+    style: {
+      background: grad,
+      minHeight: tall ? 380 : 220
+    }
+  }, children, /*#__PURE__*/React.createElement("span", {
+    className: "cbsite-photo__tag"
+  }, /*#__PURE__*/React.createElement(I, {
+    n: "image"
+  }), label));
+}
 function HomeView({
   go
 }) {
-  const services = [{
-    icon: 'users',
-    cyan: false,
-    title: 'Consulting & Staff Augmentation',
-    desc: 'Get specialized Data Science, analytics, and engineering talent for your business to succeed and thrive with our expert recruitment solutions.'
+  const programs = [{
+    tone: 'blue',
+    tag: '12 weeks · Beginner-friendly',
+    title: 'Data Analytics',
+    desc: 'Master SQL, reporting and data storytelling with dashboards. No degree required.',
+    icon: 'bar-chart-3'
   }, {
-    icon: 'share-2',
-    cyan: true,
-    title: 'Data Fabric Services',
-    desc: 'Partner with us for a customized digital transformation journey that positions you as a data-driven leader in your industry.'
+    tone: 'green',
+    tag: '24 weeks · Intermediate',
+    title: 'Data Science',
+    desc: 'Python, machine learning and the statistics behind modern AI systems.',
+    icon: 'brain-circuit'
   }, {
-    icon: 'graduation-cap',
-    cyan: false,
-    title: 'Training & Development',
-    desc: 'Texas Workforce Commission approved training and upskilling solutions to bridge the skills gap for existing and emerging roles at scale.'
+    tone: 'red',
+    tag: 'Add-on · 1 year support',
+    title: 'Career Accelerator',
+    desc: 'Mentorship, interview prep and job coaching until you are hired.',
+    icon: 'rocket'
   }];
-  const expertise = [{
-    icon: 'flask-conical',
-    label: 'Data Science'
+  const steps = [{
+    n: '01',
+    icon: 'phone-call',
+    h: 'Talk to admissions',
+    p: 'No tests. Discuss your goals and flexible payment options.'
   }, {
-    icon: 'bar-chart-3',
-    label: 'Data Analytics'
+    n: '02',
+    icon: 'laptop',
+    h: 'Learn by doing',
+    p: 'Instructor-led, project-based lessons with real-world data.'
   }, {
-    icon: 'database',
-    label: 'Data Engineering'
-  }, {
-    icon: 'git-merge',
-    label: 'Machine Learning'
-  }, {
-    icon: 'code-2',
-    label: 'Software Engineering'
-  }, {
-    icon: 'line-chart',
-    label: 'Business Intelligence'
+    n: '03',
+    icon: 'badge-check',
+    h: 'Get hired',
+    p: 'Build a portfolio, earn badges, and land a data role.'
   }];
-  const help = [{
-    icon: 'server',
-    title: 'Build a Data-Enabled Infrastructure',
-    points: ['Data architecture roadmap', 'Data Lake vs. Data Warehouse', 'Flexible, reliable data pipelines', 'Automate data collection']
-  }, {
-    icon: 'layers',
-    title: 'Adopt & Implement Data Solutions',
-    points: ['Increase org-wide data literacy', 'Build a data-driven culture', 'Custom integration & compliance']
-  }, {
-    icon: 'git-fork',
-    title: 'Develop Robust Talent Pipelines',
-    points: ['Build high-performing data teams', 'Ongoing reskilling & upskilling', 'Sustained delivery capability']
-  }];
-  const industries = [['Energy & Utilities', 'zap'], ['Agriculture', 'sprout'], ['Healthcare', 'heart-pulse'], ['Financial Services', 'landmark'], ['Biotech', 'microscope'], ['Hospitality', 'hotel'], ['Insurance', 'shield'], ['Technology', 'cpu'], ['Pharmaceuticals', 'pill'], ['Retail', 'shopping-bag'], ['Government', 'building-2'], ['Education', 'book-open']];
-  const cases = {
-    'All': [['Zendesk Ticketing System', 'Analyzing support-ticket data end to end — from creation to resolution — to improve response time and service quality.', 'Operations'], ['Colaberry Event Dashboard', 'Evaluating the events platform and attendee data across public, student, and alumni programs to sharpen engagement.', 'Analytics'], ['DISC Dashboard & Tools', 'Behavioral analytics on DISC assessment data — Dominance, Influence, Steadiness, Compliance — for team insight.', 'Data Science']],
-    'Operations': [['Zendesk Ticketing System', 'Analyzing support-ticket data end to end — from creation to resolution — to improve response time and service quality.', 'Operations'], ['Managed Data Services', 'Standing up reliable pipelines and monitoring so client data teams ship with confidence.', 'Operations']],
-    'Analytics': [['Colaberry Event Dashboard', 'Evaluating the events platform and attendee data across public, student, and alumni programs to sharpen engagement.', 'Analytics'], ['Retail Demand Signals', 'Forecasting and reporting that turns transaction data into merchandising decisions.', 'Analytics']],
-    'Data Science': [['DISC Dashboard & Tools', 'Behavioral analytics on DISC assessment data — Dominance, Influence, Steadiness, Compliance — for team insight.', 'Data Science'], ['Healthcare Risk Models', 'Predictive modeling on clinical data to flag risk earlier and route care efficiently.', 'Data Science']]
-  };
-  const caseTabs = Object.keys(cases);
-  const [caseTab, setCaseTab] = React.useState('All');
   return /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement("section", {
     className: "cbsite-hero"
   }, /*#__PURE__*/React.createElement("div", {
     className: "cbsite-hero__copy"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "cbsite-eyebrow"
-  }, "Data Consultancy & Talent Solutions"), /*#__PURE__*/React.createElement("h1", null, "We are Colaberry. ", /*#__PURE__*/React.createElement("span", {
-    className: "cbsite-rotate"
-  }, "Shaping the future of work.")), /*#__PURE__*/React.createElement("p", null, "Colaberry transforms data from an obstacle into an asset \u2014 so individuals and organizations reach their full potential and thrive in today's technology-powered world."), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(HBadge, {
+    tone: "green",
+    dot: true
+  }, "Texas Workforce Commission approved"), /*#__PURE__*/React.createElement("h1", null, "Future-proof your career in ", /*#__PURE__*/React.createElement("span", {
+    className: "cb-grad"
+  }, "data & AI")), /*#__PURE__*/React.createElement("p", null, "Colaberry turns ambition into a data career \u2014 through hands-on projects, mentorship, and a community built on tenacity. No degree required."), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-hero__cta"
   }, /*#__PURE__*/React.createElement(HButton, {
     size: "lg",
     onClick: () => go('enroll')
-  }, "Contact Us"), /*#__PURE__*/React.createElement(HButton, {
+  }, "Apply now"), /*#__PURE__*/React.createElement(HButton, {
     size: "lg",
     variant: "outline",
     onClick: () => go('program'),
     trailingIcon: /*#__PURE__*/React.createElement(I, {
       n: "arrow-right"
     })
-  }, "What we do")), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-catlinks"
+  }, "See the program")), /*#__PURE__*/React.createElement("div", {
+    className: "cbsite-trust"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-catlinks__label"
-  }, "Trusted across industries \xB7 recognized for excellence:"), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-chips"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "cbsite-chip"
-  }, /*#__PURE__*/React.createElement(I, {
-    n: "award",
-    s: 15
-  }), "Inc. 5000"), /*#__PURE__*/React.createElement("span", {
-    className: "cbsite-chip"
-  }, /*#__PURE__*/React.createElement(I, {
-    n: "shield-check",
-    s: 15
-  }), "Microsoft Partner"), /*#__PURE__*/React.createElement("span", {
-    className: "cbsite-chip"
-  }, /*#__PURE__*/React.createElement(I, {
-    n: "graduation-cap",
-    s: 15
-  }), "TWC Approved")))), /*#__PURE__*/React.createElement("div", {
+    className: "cb-avatar-group"
+  }, /*#__PURE__*/React.createElement(HAvatar, {
+    name: "Mika Rivera",
+    size: "sm"
+  }), /*#__PURE__*/React.createElement(HAvatar, {
+    name: "Owen Brooks",
+    size: "sm"
+  }), /*#__PURE__*/React.createElement(HAvatar, {
+    name: "Ada Lovelace",
+    size: "sm"
+  }), /*#__PURE__*/React.createElement(HAvatar, {
+    name: "Sam Okafor",
+    size: "sm"
+  })), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "5,000+"), " careers changed since 2012"))), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-hero__media"
+  }, /*#__PURE__*/React.createElement(Photo, {
+    label: "Students collaborating",
+    tone: "mix",
+    tall: true
   }, /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-statpanel"
+    className: "cbsite-floatchip cbsite-floatchip--tl"
+  }, /*#__PURE__*/React.createElement(I, {
+    n: "trending-up"
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "$74k"), /*#__PURE__*/React.createElement("span", null, "median starting salary"))), /*#__PURE__*/React.createElement("div", {
+    className: "cbsite-floatchip cbsite-floatchip--br"
+  }, /*#__PURE__*/React.createElement(I, {
+    n: "users"
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "49"), /*#__PURE__*/React.createElement("span", null, "countries served")))))), /*#__PURE__*/React.createElement("section", {
+    className: "cbsite-stats"
+  }, [['5,000+', 'Graduates placed'], ['2012', 'Founded for veterans'], ['1:1', 'Mentor support'], ['12 wks', 'To job-ready']].map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "cbsite-stat"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-statpanel__big"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-statpanel__n"
-  }, "5,000+"), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-statpanel__lbl"
-  }, "Data careers launched & teams empowered")), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-statpanel__grid"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-statpanel__cell"
-  }, /*#__PURE__*/React.createElement(I, {
-    n: "briefcase"
-  }), /*#__PURE__*/React.createElement("strong", null, "Staffing"), /*#__PURE__*/React.createElement("span", null, "Specialized data talent")), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-statpanel__cell"
-  }, /*#__PURE__*/React.createElement(I, {
-    n: "share-2"
-  }), /*#__PURE__*/React.createElement("strong", null, "Fabric"), /*#__PURE__*/React.createElement("span", null, "Digital transformation")), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-statpanel__cell"
-  }, /*#__PURE__*/React.createElement(I, {
-    n: "database"
-  }), /*#__PURE__*/React.createElement("strong", null, "Managed"), /*#__PURE__*/React.createElement("span", null, "Reliable data services")), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-statpanel__cell"
-  }, /*#__PURE__*/React.createElement(I, {
-    n: "graduation-cap"
-  }), /*#__PURE__*/React.createElement("strong", null, "Training"), /*#__PURE__*/React.createElement("span", null, "TWC-approved upskilling")))))), /*#__PURE__*/React.createElement("section", {
+    className: "cbsite-stat__n"
+  }, s[0]), /*#__PURE__*/React.createElement("div", {
+    className: "cbsite-stat__l"
+  }, s[1])))), /*#__PURE__*/React.createElement("section", {
     className: "cbsite-section"
   }, /*#__PURE__*/React.createElement("div", {
     className: "cbsite-section__head"
   }, /*#__PURE__*/React.createElement(HBadge, {
     tone: "blue"
-  }, "What we do"), /*#__PURE__*/React.createElement("h2", null, "Data solutions & talent for tomorrow's workplace"), /*#__PURE__*/React.createElement("p", null, "We support organizations and individuals with consulting, staffing, managed data services, and training & development \u2014 end-to-end solutions that turn organizations into agile, data-powered industry leaders.")), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-cards"
-  }, services.map((s, i) => /*#__PURE__*/React.createElement("a", {
+  }, "Programs"), /*#__PURE__*/React.createElement("h2", null, "Two proven paths into tech"), /*#__PURE__*/React.createElement("p", null, "Both bootcamps blend technical depth with the human skills employers actually hire for.")), /*#__PURE__*/React.createElement("div", {
+    className: "cbsite-prog"
+  }, programs.map((p, i) => /*#__PURE__*/React.createElement(HCard, {
     key: i,
-    className: "cbsite-card",
-    onClick: () => go('program')
+    hoverable: true,
+    media: /*#__PURE__*/React.createElement("div", {
+      className: "cbsite-prog__media",
+      style: {
+        ['--g']: `var(--${p.tone}-500)`
+      }
+    }, /*#__PURE__*/React.createElement(I, {
+      n: p.icon
+    }))
+  }, /*#__PURE__*/React.createElement(HBadge, {
+    tone: p.tone
+  }, p.tag), /*#__PURE__*/React.createElement("h3", null, p.title), /*#__PURE__*/React.createElement("p", null, p.desc), /*#__PURE__*/React.createElement(HButton, {
+    variant: "link",
+    onClick: () => go('program'),
+    trailingIcon: /*#__PURE__*/React.createElement(I, {
+      n: "arrow-right"
+    })
+  }, "Course details"))))), /*#__PURE__*/React.createElement("section", {
+    className: "cbsite-section cbsite-section--subtle"
   }, /*#__PURE__*/React.createElement("div", {
-    className: 'cbsite-card__ic' + (s.cyan ? ' cbsite-card__ic--cyan' : '')
+    className: "cbsite-section__head"
+  }, /*#__PURE__*/React.createElement(HBadge, {
+    tone: "green"
+  }, "How it works"), /*#__PURE__*/React.createElement("h2", null, "From day one to hired")), /*#__PURE__*/React.createElement("div", {
+    className: "cbsite-steps"
+  }, steps.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "cbsite-step"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cbsite-step__icon"
   }, /*#__PURE__*/React.createElement(I, {
     n: s.icon
-  })), /*#__PURE__*/React.createElement("h3", null, s.title), /*#__PURE__*/React.createElement("p", null, s.desc), /*#__PURE__*/React.createElement("span", {
-    className: "cbsite-card__more"
-  }, "Learn more ", /*#__PURE__*/React.createElement(I, {
-    n: "arrow-right",
-    s: 15
-  })))))), /*#__PURE__*/React.createElement("section", {
-    className: "cbsite-section cbsite-section--subtle"
+  })), /*#__PURE__*/React.createElement("span", {
+    className: "cbsite-step__n"
+  }, s.n), /*#__PURE__*/React.createElement("h3", null, s.h), /*#__PURE__*/React.createElement("p", null, s.p))))), /*#__PURE__*/React.createElement("section", {
+    className: "cbsite-quote"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-section__head"
-  }, /*#__PURE__*/React.createElement(HBadge, {
-    tone: "cyan"
-  }, "Areas of expertise"), /*#__PURE__*/React.createElement("h2", null, "Deep capability across the data stack"), /*#__PURE__*/React.createElement("p", null, "From strategy to delivery, our specialists cover the disciplines that move data-driven organizations forward.")), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-integrations"
-  }, expertise.map((e, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "cbsite-int"
+    className: "cbsite-quote__mark"
   }, /*#__PURE__*/React.createElement(I, {
-    n: e.icon
-  }), /*#__PURE__*/React.createElement("span", null, e.label))))), /*#__PURE__*/React.createElement("section", {
-    className: "cbsite-section"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-section__head"
-  }, /*#__PURE__*/React.createElement(HBadge, {
-    tone: "blue"
-  }, "We can help you"), /*#__PURE__*/React.createElement("h2", null, "From infrastructure to people"), /*#__PURE__*/React.createElement("p", null, "Three ways we partner with organizations to build lasting data capability.")), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-cards"
-  }, help.map((h, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "cbsite-card cbsite-card--static"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-card__ic"
-  }, /*#__PURE__*/React.createElement(I, {
-    n: h.icon
-  })), /*#__PURE__*/React.createElement("h3", null, h.title), /*#__PURE__*/React.createElement("ul", {
-    className: "cbsite-checklist"
-  }, h.points.map((p, j) => /*#__PURE__*/React.createElement("li", {
-    key: j
-  }, /*#__PURE__*/React.createElement(I, {
-    n: "check",
-    s: 15
-  }), p))))))), /*#__PURE__*/React.createElement("section", {
-    className: "cbsite-section cbsite-section--subtle"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-section__head"
-  }, /*#__PURE__*/React.createElement(HBadge, {
-    tone: "blue"
-  }, "Industries we serve"), /*#__PURE__*/React.createElement("h2", null, "Domain expertise where it counts"), /*#__PURE__*/React.createElement("p", null, "We bring data solutions to the sectors building the future.")), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-industries"
-  }, industries.map((it, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "cbsite-industry"
-  }, /*#__PURE__*/React.createElement(I, {
-    n: it[1]
-  }), it[0])))), /*#__PURE__*/React.createElement("section", {
-    className: "cbsite-section"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-section__head"
-  }, /*#__PURE__*/React.createElement(HBadge, {
-    tone: "cyan"
-  }, "Client success"), /*#__PURE__*/React.createElement("h2", null, "Real outcomes from real data work"), /*#__PURE__*/React.createElement("p", null, "A selection of projects delivered with our consulting and analytics teams.")), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-tabs"
-  }, caseTabs.map(t => /*#__PURE__*/React.createElement("button", {
-    key: t,
-    className: 'cbsite-tab' + (caseTab === t ? ' is-active' : ''),
-    onClick: () => setCaseTab(t)
-  }, t))), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-cards"
-  }, cases[caseTab].map((c, i) => /*#__PURE__*/React.createElement("a", {
-    key: i,
-    className: "cbsite-card",
-    onClick: () => go('program')
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "cbsite-card__count"
-  }, c[2]), /*#__PURE__*/React.createElement("h3", null, c[0]), /*#__PURE__*/React.createElement("p", null, c[1]), /*#__PURE__*/React.createElement("span", {
-    className: "cbsite-card__more"
-  }, "View case study ", /*#__PURE__*/React.createElement(I, {
-    n: "arrow-right",
-    s: 15
-  })))))), /*#__PURE__*/React.createElement("section", {
+    n: "quote"
+  })), /*#__PURE__*/React.createElement("blockquote", null, "I had no tech experience before Colaberry. I now lead the team of mentors serving trainees in over 49 countries. This program is a seed \u2014 you decide how far it grows."), /*#__PURE__*/React.createElement("div", {
+    className: "cbsite-quote__by"
+  }, /*#__PURE__*/React.createElement(HAvatar, {
+    name: "Mika Rivera",
+    size: "lg",
+    ring: true
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Mika Rivera"), /*#__PURE__*/React.createElement("span", null, "Program Success Manager \xB7 Data Analytics grad")))), /*#__PURE__*/React.createElement("section", {
     className: "cbsite-cta"
   }, /*#__PURE__*/React.createElement("div", {
     className: "cbsite-cta__inner"
-  }, /*#__PURE__*/React.createElement("h2", null, "We'd love to talk"), /*#__PURE__*/React.createElement("p", null, "Whether you need consulting, staffing, managed data services, or training, Colaberry is here to help you reach the highest levels of your organizational and individual potential."), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h2", null, "Your data career starts with one conversation."), /*#__PURE__*/React.createElement("p", null, "Everyone with a high-school diploma or GED is welcome. Scholarships and flexible payment plans available."), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-cta__btns"
   }, /*#__PURE__*/React.createElement(HButton, {
     size: "lg",
     tone: "green",
     onClick: () => go('enroll')
-  }, "Contact Us"), /*#__PURE__*/React.createElement(HButton, {
+  }, "Apply now"), /*#__PURE__*/React.createElement(HButton, {
     size: "lg",
     variant: "outline",
-    onClick: () => go('program')
-  }, "Explore services")))));
+    onClick: () => go('enroll')
+  }, "Download catalog")))));
 }
 Object.assign(window, {
-  HomeView
+  HomeView,
+  Photo
 });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/marketing-website/home.jsx", error: String((e && e.message) || e) }); }
 
 // ui_kits/marketing-website/parts.jsx
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-/* Colaberry — shared parts: Logo, Header, Footer, helpers.
-   Data Consultancy & Talent Solutions Provider. Exposes to window. */
+/* Colaberry marketing site — shared parts: Logo, Header, Footer, helpers.
+   Exposes to window for the other script files. */
 const {
   Button: CBButton,
+  Avatar: CBAvatar,
   Badge: CBBadge
 } = window.ColaberryDesignSystem_098454;
 
 /* React-safe Lucide icon. React owns the <span>; Lucide mutates only the
-   inner <i>→<svg>, so re-renders never touch the swapped node. */
+   inner <i>→<svg>, so re-renders never touch the swapped node. Size = font-size
+   (1em), color = currentColor — both driven by CSS/parent. */
 function I({
   n,
   s,
@@ -3070,6 +3028,7 @@ function I({
     }
   });
 }
+// Back-compat alias
 function Icon({
   name,
   size,
@@ -3083,10 +3042,10 @@ function Icon({
   }, rest));
 }
 function Logo({
-  height = 30,
+  height = 34,
   variant = 'default'
 }) {
-  const src = variant === 'white' ? '../../assets/logo/colaberry-horizontal-white.png?v=3' : '../../assets/logo/colaberry-horizontal.png?v=3';
+  const src = variant === 'white' ? '../../assets/logo/colaberry-horizontal-white.png?v=2' : '../../assets/logo/colaberry-horizontal.png';
   return /*#__PURE__*/React.createElement("img", {
     src: src,
     alt: "Colaberry",
@@ -3096,38 +3055,22 @@ function Logo({
     }
   });
 }
-const WHATWEDO = [{
-  label: 'Consulting & Staffing',
-  icon: 'users',
+const NAV = [{
+  label: 'Programs',
   view: 'program'
 }, {
-  label: 'Data Fabric Services',
-  icon: 'share-2',
-  view: 'program'
-}, {
-  label: 'Managed Data Services',
-  icon: 'database',
-  view: 'program'
-}, {
-  label: 'Enterprise Training',
-  icon: 'graduation-cap',
-  view: 'program'
-}];
-const RESOURCES = [{
-  label: 'Case Studies',
-  icon: 'folder-open',
+  label: 'Outcomes',
   view: 'home'
 }, {
-  label: 'White Papers',
-  icon: 'file-text',
+  label: 'Scholarships',
   view: 'home'
 }, {
-  label: 'Events',
-  icon: 'calendar',
+  label: 'About',
   view: 'home'
 }];
 function Header({
-  go
+  go,
+  current
 }) {
   const [scrolled, setScrolled] = React.useState(false);
   React.useEffect(() => {
@@ -3137,10 +3080,6 @@ function Header({
     target.addEventListener('scroll', onScroll);
     return () => target.removeEventListener('scroll', onScroll);
   }, []);
-  const toggleMode = () => {
-    const html = document.documentElement;
-    html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-  };
   return /*#__PURE__*/React.createElement("header", {
     className: "cbsite-header",
     "data-scrolled": scrolled
@@ -3151,82 +3090,33 @@ function Header({
     onClick: () => go('home')
   }, /*#__PURE__*/React.createElement(Logo, null)), /*#__PURE__*/React.createElement("nav", {
     className: "cbsite-nav"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-nav__item"
-  }, /*#__PURE__*/React.createElement("a", {
-    className: "cbsite-nav__link",
-    onClick: () => go('program')
-  }, "What We Do ", /*#__PURE__*/React.createElement(I, {
-    n: "chevron-down",
-    s: 14
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-menu"
-  }, WHATWEDO.map((m, i) => /*#__PURE__*/React.createElement("a", {
+  }, NAV.map((n, i) => /*#__PURE__*/React.createElement("a", {
     key: i,
-    onClick: () => go(m.view)
-  }, /*#__PURE__*/React.createElement(I, {
-    n: m.icon,
-    s: 16
-  }), m.label)))), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-nav__item"
-  }, /*#__PURE__*/React.createElement("a", {
     className: "cbsite-nav__link",
-    onClick: () => go('home')
-  }, "Industries")), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-nav__item"
-  }, /*#__PURE__*/React.createElement("a", {
-    className: "cbsite-nav__link",
-    onClick: () => go('home')
-  }, "Resources ", /*#__PURE__*/React.createElement(I, {
-    n: "chevron-down",
-    s: 14
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-menu"
-  }, RESOURCES.map((m, i) => /*#__PURE__*/React.createElement("a", {
-    key: i,
-    onClick: () => go(m.view)
-  }, /*#__PURE__*/React.createElement(I, {
-    n: m.icon,
-    s: 16
-  }), m.label)))), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-nav__item"
-  }, /*#__PURE__*/React.createElement("a", {
-    className: "cbsite-nav__link",
-    onClick: () => go('home')
-  }, "About"))), /*#__PURE__*/React.createElement("div", {
+    onClick: () => go(n.view)
+  }, n.label))), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-header__actions"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "cbsite-modetoggle",
-    onClick: toggleMode,
-    "aria-label": "Toggle color mode"
-  }, /*#__PURE__*/React.createElement(I, {
-    n: "sun-moon",
-    s: 18
-  })), /*#__PURE__*/React.createElement("a", {
-    className: "cbsite-phone",
-    href: "tel:+19729921024"
-  }, /*#__PURE__*/React.createElement(I, {
-    n: "phone",
-    s: 15
-  }), "(972) 992-1024"), /*#__PURE__*/React.createElement(CBButton, {
+  }, /*#__PURE__*/React.createElement("a", {
+    className: "cbsite-nav__link cbsite-nav__link--ghost",
+    onClick: () => go('enroll')
+  }, "Sign in"), /*#__PURE__*/React.createElement(CBButton, {
     size: "sm",
     onClick: () => go('enroll')
-  }, "Contact Us"))));
+  }, "Apply now"))));
 }
 function Footer({
   go
 }) {
   const cols = [{
-    h: 'What We Do',
-    items: ['Consulting & Staffing', 'Data Fabric Services', 'Managed Data Services', 'Enterprise Training', 'Career Training']
+    h: 'Programs',
+    items: ['Data Analytics', 'Data Science', 'Intro Seminar', 'Career Accelerator']
   }, {
-    h: 'Resources',
-    items: ['Case Studies', 'White Papers', 'Projects', 'Events', 'Careers']
+    h: 'School',
+    items: ['About us', 'Outcomes', 'Mentors', 'Reviews']
   }, {
-    h: 'Company',
-    items: ['About Us', 'Awards & Recognition', 'Blog', 'Contact Us']
+    h: 'Support',
+    items: ['Scholarships', 'Payment options', 'FAQ', 'Contact']
   }];
-  const social = ['linkedin', 'instagram', 'youtube', 'twitter', 'facebook'];
   return /*#__PURE__*/React.createElement("footer", {
     className: "cbsite-footer"
   }, /*#__PURE__*/React.createElement("div", {
@@ -3235,28 +3125,16 @@ function Footer({
     className: "cbsite-footer__brand"
   }, /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
-    height: 30
-  }), /*#__PURE__*/React.createElement("p", null, "Colaberry empowers individuals and organizations to reach their full potential by unlocking the power of data \u2014 turning data from an obstacle into an asset in today's technology-powered world."), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-footer__badges"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "cbsite-footer__badge"
-  }, /*#__PURE__*/React.createElement(I, {
-    n: "award",
-    s: 15
-  }), "Inc. 5000"), /*#__PURE__*/React.createElement("span", {
-    className: "cbsite-footer__badge"
-  }, /*#__PURE__*/React.createElement(I, {
-    n: "shield-check",
-    s: 15
-  }), "Microsoft Partner")), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-footer__social"
-  }, social.map((s, i) => /*#__PURE__*/React.createElement("a", {
-    key: i,
-    "aria-label": s
-  }, /*#__PURE__*/React.createElement(Icon, {
-    name: s,
-    size: 16
-  }))))), /*#__PURE__*/React.createElement("div", {
+    height: 32
+  }), /*#__PURE__*/React.createElement("p", null, "Build amazing, local, diverse, and job-ready talent in Data Analytics & Data Science. Since 2012."), /*#__PURE__*/React.createElement("div", {
+    className: "cbsite-footer__loc"
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement(Icon, {
+    name: "map-pin",
+    size: 15
+  }), " Plano, TX"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement(Icon, {
+    name: "map-pin",
+    size: 15
+  }), " Boston, MA"))), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-footer__cols"
   }, cols.map((c, i) => /*#__PURE__*/React.createElement("div", {
     key: i,
@@ -3266,13 +3144,15 @@ function Footer({
     onClick: () => go('home')
   }, it)))))), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-footer__bar"
-  }, /*#__PURE__*/React.createElement("span", null, "\xA9 2026 Colaberry, Inc. \xB7 All rights reserved. \xB7 Plano, TX"), /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", null, "\xA9 2026 Colaberry, Inc. \xB7 Texas Workforce Commission approved"), /*#__PURE__*/React.createElement("span", {
     className: "cbsite-footer__legal"
   }, /*#__PURE__*/React.createElement("a", {
     onClick: () => go('home')
   }, "Privacy"), /*#__PURE__*/React.createElement("a", {
     onClick: () => go('home')
-  }, "Terms"))));
+  }, "Terms"), /*#__PURE__*/React.createElement("a", {
+    onClick: () => go('home')
+  }, "Accreditation"))));
 }
 Object.assign(window, {
   Icon,
@@ -3285,7 +3165,7 @@ Object.assign(window, {
 
 // ui_kits/marketing-website/program-enroll.jsx
 try { (() => {
-/* Colaberry — Service detail + Contact views */
+/* Colaberry marketing site — Program detail + Enroll views */
 const {
   Button: PButton,
   Card: PCard,
@@ -3298,36 +3178,36 @@ function ProgramView({
 }) {
   const [open, setOpen] = React.useState(0);
   const modules = [{
-    h: 'Discovery & data strategy',
-    d: 'We assess your data maturity, goals, and gaps — then build a roadmap that ties data investment to business outcomes.',
-    wk: 'Engage'
+    h: 'Foundations of Data Analytics',
+    d: 'How data drives decisions, the analyst workflow, and reading real datasets.',
+    wk: 'Weeks 1–2'
   }, {
-    h: 'Specialized talent & teams',
-    d: 'Get vetted data scientists, analysts, and engineers — contingent staffing or fully managed teams, ramped to your needs.',
-    wk: 'Staff'
+    h: 'SQL & SQL Server',
+    d: 'Querying, joins, aggregation and building reporting tables with SSDT.',
+    wk: 'Weeks 3–6'
   }, {
-    h: 'Delivery & managed services',
-    d: 'Reliable pipelines, governance, and monitoring so your data work ships on time and stays healthy in production.',
-    wk: 'Deliver'
+    h: 'Reporting with SSRS & SSIS',
+    d: 'ETL pipelines, report architecture and automated delivery.',
+    wk: 'Weeks 7–9'
   }, {
-    h: 'Training & enablement',
-    d: 'TWC-approved training and ongoing upskilling that raises data literacy and builds a durable, data-driven culture.',
-    wk: 'Enable'
+    h: 'Dashboards & Storytelling',
+    d: 'Turn analysis into compelling dashboards and a portfolio project.',
+    wk: 'Weeks 10–12'
   }];
   const faqs = [{
-    q: 'How does staff augmentation work?',
-    a: 'We match specialized Data Science, analytics, and engineering talent to your roles — contingent or contract-to-hire — with expert recruitment and a fast, quality-first process.'
+    q: 'Do I need a degree or experience?',
+    a: 'No. Everyone with a high-school diploma or GED is welcome — there are no tests in admissions.'
   }, {
-    q: 'What are Data Fabric Services?',
-    a: 'A customized digital transformation journey: data architecture, integration, and governance that positions you as a data-driven leader in your industry.'
+    q: 'Is it online or in person?',
+    a: 'Both. Join live online from anywhere, or on campus in Plano, TX. Sessions are instructor-led.'
   }, {
-    q: 'Do you offer managed data services?',
-    a: 'Yes. We run reliable pipelines, data quality, and monitoring as a managed service so your teams can focus on outcomes, not maintenance.'
+    q: 'How do I pay for it?',
+    a: 'Scholarships, military grants, loan options and Income Share Agreements are available to fit your situation.'
   }, {
-    q: 'Is your training accredited?',
-    a: 'Our training & development programs are Texas Workforce Commission approved and designed to bridge the skills gap for existing and emerging roles at scale.'
+    q: 'What happens after I finish?',
+    a: 'The Career Accelerator adds mentorship, interview prep and job coaching with one year of on-the-job support.'
   }];
-  const tools = ['Consulting', 'Staffing', 'Data Fabric', 'Managed Services', 'Training', 'Governance'];
+  const tools = ['SQL Server', 'SSRS', 'SSIS', 'Power BI', 'Excel', 'Git'];
   return /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement("div", {
     className: "cbsite-prog-hero"
   }, /*#__PURE__*/React.createElement("div", {
@@ -3336,68 +3216,67 @@ function ProgramView({
     className: "cbsite-bc"
   }, /*#__PURE__*/React.createElement("a", {
     onClick: () => go('home')
-  }, "What We Do"), " ", /*#__PURE__*/React.createElement(I, {
-    n: "chevron-right",
-    s: 14
-  }), " ", /*#__PURE__*/React.createElement("span", null, "Consulting & Staff Augmentation")), /*#__PURE__*/React.createElement("div", {
+  }, "Home"), " ", /*#__PURE__*/React.createElement(I, {
+    n: "chevron-right"
+  }), " ", /*#__PURE__*/React.createElement("a", {
+    onClick: () => go('home')
+  }, "Programs"), " ", /*#__PURE__*/React.createElement(I, {
+    n: "chevron-right"
+  }), " ", /*#__PURE__*/React.createElement("span", null, "Data Analytics")), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-prog-hero__grid"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(PBadge, {
     tone: "blue",
     dot: true
-  }, "Consulting & Staffing"), /*#__PURE__*/React.createElement("h1", null, "Specialized data talent, ready when you are"), /*#__PURE__*/React.createElement("p", null, "Get the Data Science, analytics, and engineering talent your business needs to succeed and thrive \u2014 through expert recruitment and consulting solutions tailored to your goals."), /*#__PURE__*/React.createElement("div", {
+  }, "Now enrolling \xB7 Spring cohort"), /*#__PURE__*/React.createElement("h1", null, "Data Analytics Bootcamp"), /*#__PURE__*/React.createElement("p", null, "Become job-ready in 12 weeks. Learn the exact SQL, reporting and dashboard skills employers hire for \u2014 guided by industry mentors, start to finish."), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-meta"
   }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement(I, {
-    n: "users",
-    s: 16
-  }), " Contingent & managed teams"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement(I, {
-    n: "shield-check",
-    s: 16
-  }), " Microsoft Partner"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement(I, {
-    n: "award",
-    s: 16
-  }), " Inc. 5000"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement(I, {
-    n: "map-pin",
-    s: 16
-  }), " Plano, TX")), /*#__PURE__*/React.createElement("div", {
+    n: "clock"
+  }), " 12 weeks"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement(I, {
+    n: "monitor"
+  }), " Online or Plano, TX"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement(I, {
+    n: "signal"
+  }), " Beginner-friendly"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement(I, {
+    n: "globe"
+  }), " 49 countries")), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-prog-hero__cta"
   }, /*#__PURE__*/React.createElement(PButton, {
     size: "lg",
     onClick: () => go('enroll')
-  }, "Contact Us"), /*#__PURE__*/React.createElement(PButton, {
+  }, "Apply for this cohort"), /*#__PURE__*/React.createElement(PButton, {
     size: "lg",
     variant: "ghost",
-    onClick: () => go('home'),
+    onClick: () => go('enroll'),
     leadingIcon: /*#__PURE__*/React.createElement(I, {
-      n: "folder-open"
+      n: "download"
     })
-  }, "View case studies"))), /*#__PURE__*/React.createElement(PCard, {
+  }, "Syllabus"))), /*#__PURE__*/React.createElement(PCard, {
     elevation: "md",
     padded: true,
     className: "cbsite-pricecard"
   }, /*#__PURE__*/React.createElement("span", {
     className: "cbsite-pricecard__label"
-  }, "Engagement models"), /*#__PURE__*/React.createElement("div", {
+  }, "Tuition from"), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-pricecard__price"
-  }, "4", /*#__PURE__*/React.createElement("small", null, "core services")), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(I, {
+  }, "$1,999", /*#__PURE__*/React.createElement("small", null, "/ session")), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(I, {
     n: "check"
-  }), /*#__PURE__*/React.createElement("span", null, "Consulting & staff augmentation")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(I, {
+  }), /*#__PURE__*/React.createElement("span", null, "Live instructor-led classes")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(I, {
     n: "check"
-  }), /*#__PURE__*/React.createElement("span", null, "Data Fabric Services")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(I, {
+  }), /*#__PURE__*/React.createElement("span", null, "1:1 mentorship")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(I, {
     n: "check"
-  }), /*#__PURE__*/React.createElement("span", null, "Managed Data Services")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(I, {
+  }), /*#__PURE__*/React.createElement("span", null, "Portfolio project & badge")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(I, {
     n: "check"
-  }), /*#__PURE__*/React.createElement("span", null, "Training & development"))), /*#__PURE__*/React.createElement(PButton, {
+  }), /*#__PURE__*/React.createElement("span", null, "Scholarships available"))), /*#__PURE__*/React.createElement(PButton, {
     fullWidth: true,
     onClick: () => go('enroll')
-  }, "Talk to our team"), /*#__PURE__*/React.createElement("span", {
+  }, "Apply now"), /*#__PURE__*/React.createElement("span", {
     className: "cbsite-pricecard__note"
-  }, "Flexible to your size & stage"))))), /*#__PURE__*/React.createElement("section", {
+  }, "Deferred & ISA payment options available"))))), /*#__PURE__*/React.createElement("section", {
     className: "cbsite-section"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-section__head cbsite-section__head--row"
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(PBadge, {
-    tone: "cyan"
-  }, "How we engage"), /*#__PURE__*/React.createElement("h2", null, "From strategy to delivery"))), /*#__PURE__*/React.createElement("div", {
+    className: "cbsite-section__head cbsite-section__head--left"
+  }, /*#__PURE__*/React.createElement(PBadge, {
+    tone: "green"
+  }, "Curriculum"), /*#__PURE__*/React.createElement("h2", null, "What you'll learn")), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-modules"
   }, modules.map((m, i) => /*#__PURE__*/React.createElement("div", {
     key: i,
@@ -3411,16 +3290,16 @@ function ProgramView({
     n: open === i ? 'minus' : 'plus'
   })), open === i && /*#__PURE__*/React.createElement("p", null, m.d)))), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-tools"
-  }, /*#__PURE__*/React.createElement("span", null, "Services & capabilities"), /*#__PURE__*/React.createElement("div", null, tools.map((t, i) => /*#__PURE__*/React.createElement(PBadge, {
+  }, /*#__PURE__*/React.createElement("span", null, "Tools you'll master"), /*#__PURE__*/React.createElement("div", null, tools.map((t, i) => /*#__PURE__*/React.createElement(PBadge, {
     key: i,
     outline: true
   }, t))))), /*#__PURE__*/React.createElement("section", {
     className: "cbsite-section cbsite-section--subtle"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-section__head cbsite-section__head--row"
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(PBadge, {
+    className: "cbsite-section__head cbsite-section__head--left"
+  }, /*#__PURE__*/React.createElement(PBadge, {
     tone: "blue"
-  }, "FAQ"), /*#__PURE__*/React.createElement("h2", null, "Questions, answered"))), /*#__PURE__*/React.createElement("div", {
+  }, "FAQ"), /*#__PURE__*/React.createElement("h2", null, "Questions, answered")), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-faq"
   }, faqs.map((f, i) => /*#__PURE__*/React.createElement("details", {
     key: i,
@@ -3431,42 +3310,34 @@ function ProgramView({
     className: "cbsite-cta"
   }, /*#__PURE__*/React.createElement("div", {
     className: "cbsite-cta__inner"
-  }, /*#__PURE__*/React.createElement("h2", null, "Let's build your data advantage"), /*#__PURE__*/React.createElement("p", null, "Tell us about your goals and our team will map the right mix of consulting, staffing, managed services, and training."), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h2", null, "Ready to start your data career?"), /*#__PURE__*/React.createElement("p", null, "Apply in minutes. Our admissions team will help you find the right path and payment plan."), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-cta__btns"
   }, /*#__PURE__*/React.createElement(PButton, {
     size: "lg",
     tone: "green",
     onClick: () => go('enroll')
-  }, "Contact Us")))));
+  }, "Apply now")))));
 }
 function EnrollView({
   go
 }) {
-  const [interest, setInterest] = React.useState('consulting');
+  const [program, setProgram] = React.useState('analytics');
   const [done, setDone] = React.useState(false);
-  const opts = {
-    consulting: {
-      name: 'Consulting & Staffing',
-      desc: 'Specialized data talent',
-      tone: 'blue'
+  const progs = {
+    analytics: {
+      name: 'Data Analytics',
+      price: '$1,999',
+      tone: 'blue',
+      len: '12 weeks'
     },
-    fabric: {
-      name: 'Data Fabric Services',
-      desc: 'Digital transformation',
-      tone: 'cyan'
-    },
-    managed: {
-      name: 'Managed Data Services',
-      desc: 'Reliable data operations',
-      tone: 'blue'
-    },
-    training: {
-      name: 'Training & Development',
-      desc: 'Upskill your team',
-      tone: 'cyan'
+    science: {
+      name: 'Data Science',
+      price: '$4,500',
+      tone: 'green',
+      len: '24 weeks'
     }
   };
-  const sel = opts[interest];
+  const p = progs[program];
   if (done) {
     return /*#__PURE__*/React.createElement("main", {
       className: "cbsite-enroll"
@@ -3476,7 +3347,7 @@ function EnrollView({
       className: "cbsite-success__icon"
     }, /*#__PURE__*/React.createElement(I, {
       n: "check"
-    })), /*#__PURE__*/React.createElement("h1", null, "Thanks \u2014 we'll be in touch!"), /*#__PURE__*/React.createElement("p", null, "Thanks for your interest in ", /*#__PURE__*/React.createElement("strong", null, sel.name), ". A member of our team will reach out within one business day. Prefer to talk now? Call (972) 992-1024."), /*#__PURE__*/React.createElement("div", {
+    })), /*#__PURE__*/React.createElement("h1", null, "You're on the list!"), /*#__PURE__*/React.createElement("p", null, "Thanks for applying to the ", /*#__PURE__*/React.createElement("strong", null, p.name), " program. An admissions advisor will reach out within one business day to talk goals and payment options."), /*#__PURE__*/React.createElement("div", {
       className: "cbsite-success__btns"
     }, /*#__PURE__*/React.createElement(PButton, {
       onClick: () => {
@@ -3486,7 +3357,7 @@ function EnrollView({
     }, "Back to home"), /*#__PURE__*/React.createElement(PButton, {
       variant: "outline",
       onClick: () => go('program')
-    }, "Explore services"))));
+    }, "Explore the curriculum"))));
   }
   return /*#__PURE__*/React.createElement("main", {
     className: "cbsite-enroll"
@@ -3498,24 +3369,24 @@ function EnrollView({
       e.preventDefault();
       setDone(true);
     }
-  }, /*#__PURE__*/React.createElement("h1", null, "Contact us"), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h1", null, "Apply to Colaberry"), /*#__PURE__*/React.createElement("p", {
     className: "cbsite-form__sub"
-  }, "Tell us about your goals and we'll map the right solution. Takes about 2 minutes."), /*#__PURE__*/React.createElement("div", {
+  }, "No tests, no degree required. Takes about 2 minutes."), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-form__choice"
   }, /*#__PURE__*/React.createElement("span", {
     className: "cbsite-form__legend"
-  }, "What can we help with?"), /*#__PURE__*/React.createElement("div", {
+  }, "Choose your program"), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-choice"
-  }, Object.entries(opts).map(([k, v]) => /*#__PURE__*/React.createElement("button", {
+  }, Object.entries(progs).map(([k, v]) => /*#__PURE__*/React.createElement("button", {
     type: "button",
     key: k,
-    className: 'cbsite-choice__opt' + (interest === k ? ' is-sel' : ''),
-    onClick: () => setInterest(k)
+    className: 'cbsite-choice__opt' + (program === k ? ' is-sel' : ''),
+    onClick: () => setProgram(k)
   }, /*#__PURE__*/React.createElement("span", {
     className: "cbsite-choice__check"
   }, /*#__PURE__*/React.createElement(I, {
     n: "check"
-  })), /*#__PURE__*/React.createElement("strong", null, v.name), /*#__PURE__*/React.createElement("span", null, v.desc))))), /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("strong", null, v.name), /*#__PURE__*/React.createElement("span", null, v.len, " \xB7 from ", v.price))))), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-form__row"
   }, /*#__PURE__*/React.createElement(PInput, {
     label: "First name",
@@ -3526,57 +3397,55 @@ function EnrollView({
     placeholder: "Lovelace",
     required: true
   })), /*#__PURE__*/React.createElement(PInput, {
-    label: "Work email",
+    label: "Email",
     type: "email",
-    placeholder: "ada@company.com",
-    required: true
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "cbsite-form__row"
-  }, /*#__PURE__*/React.createElement(PInput, {
-    label: "Company",
-    placeholder: "Acme Inc.",
+    placeholder: "ada@email.com",
     required: true
   }), /*#__PURE__*/React.createElement(PInput, {
     label: "Phone",
-    placeholder: "(972) 992-1024"
-  })), /*#__PURE__*/React.createElement(PInput, {
-    label: "How can we help?",
+    type: "tel",
+    placeholder: "(972) 992-1024",
+    helperText: "We'll only call about your application."
+  }), /*#__PURE__*/React.createElement(PInput, {
+    label: "Why do you want to learn data?",
     multiline: true,
     rows: 3,
-    placeholder: "Tell us about your data goals, team, and timeline\u2026"
+    placeholder: "A sentence or two about your goals\u2026"
   }), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-form__checks"
   }, /*#__PURE__*/React.createElement(PCheckbox, {
-    label: "Send me Colaberry insights \u2014 data strategy, talent & training",
+    label: "I'd like to hear about scholarships and upcoming cohorts",
     defaultChecked: true
   }), /*#__PURE__*/React.createElement(PCheckbox, {
-    label: "I agree to be contacted by Colaberry about my request",
+    label: "I agree to be contacted by Colaberry's admissions team",
     required: true
   })), /*#__PURE__*/React.createElement(PButton, {
     type: "submit",
     size: "lg",
     fullWidth: true
-  }, "Send message")), /*#__PURE__*/React.createElement("aside", {
+  }, "Submit application")), /*#__PURE__*/React.createElement("aside", {
     className: "cbsite-summary"
   }, /*#__PURE__*/React.createElement(PCard, {
     elevation: "md",
     padded: true
   }, /*#__PURE__*/React.createElement(PBadge, {
-    tone: sel.tone,
+    tone: p.tone,
     dot: true
-  }, "Your interest"), /*#__PURE__*/React.createElement("h3", null, sel.name), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(I, {
+  }, "Selected program"), /*#__PURE__*/React.createElement("h3", null, p.name), /*#__PURE__*/React.createElement("div", {
+    className: "cbsite-summary__price"
+  }, p.price, /*#__PURE__*/React.createElement("small", null, "from / session")), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(I, {
+    n: "calendar"
+  }), /*#__PURE__*/React.createElement("span", null, p.len, ", instructor-led")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(I, {
     n: "users"
-  }), /*#__PURE__*/React.createElement("span", null, "Specialized data talent & teams")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(I, {
-    n: "share-2"
-  }), /*#__PURE__*/React.createElement("span", null, "Digital transformation & data fabric")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(I, {
-    n: "database"
-  }), /*#__PURE__*/React.createElement("span", null, "Managed, reliable data operations")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(I, {
-    n: "graduation-cap"
-  }), /*#__PURE__*/React.createElement("span", null, "TWC-approved training & upskilling")))), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("span", null, "1:1 mentorship included")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(I, {
+    n: "award"
+  }), /*#__PURE__*/React.createElement("span", null, "Verifiable digital badge")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(I, {
+    n: "shield-check"
+  }), /*#__PURE__*/React.createElement("span", null, "1-year job support")))), /*#__PURE__*/React.createElement("div", {
     className: "cbsite-summary__trust"
   }, /*#__PURE__*/React.createElement(I, {
-    n: "phone"
-  }), /*#__PURE__*/React.createElement("p", null, "Prefer to talk? Call ", /*#__PURE__*/React.createElement("b", null, "(972) 992-1024"), " or email hello@colaberry.com \u2014 we'd love to talk.")))));
+    n: "heart-handshake"
+  }), /*#__PURE__*/React.createElement("p", null, "Built on inclusivity since 2012 \u2014 proudly supporting veterans and career-changers.")))));
 }
 Object.assign(window, {
   ProgramView,

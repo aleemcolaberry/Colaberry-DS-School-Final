@@ -1,15 +1,17 @@
 # Font licenses
 
-The Colaberry design system uses two typefaces, currently loaded from the **Google Fonts CDN**
-via `tokens/fonts.css`. Both are free and self-hostable. To self-host, download the `.woff2`
+The Colaberry design system uses three typefaces, currently loaded from the **Google Fonts CDN**
+via `tokens/fonts.css`. All three are free and self-hostable. To self-host, download the `.woff2`
 files into this folder and replace the `@import` in `tokens/fonts.css` with local `@font-face` rules.
 
 | Font | Role | License | Source |
 |---|---|---|---|
-| **Plus Jakarta Sans** | Display + body | SIL Open Font License 1.1 | https://fonts.google.com/specimen/Plus+Jakarta+Sans |
-| **JetBrains Mono** | Code / data | SIL Open Font License 1.1 | https://fonts.google.com/specimen/JetBrains+Mono |
+| **Roboto** | Display + body | Apache License 2.0 | https://fonts.google.com/specimen/Roboto |
+| **Roboto Mono** | Code / data | Apache License 2.0 | https://fonts.google.com/specimen/Roboto+Mono |
+| **Quicksand** | *olaberry* logotype only | SIL Open Font License 1.1 | https://fonts.google.com/specimen/Quicksand |
 
-- **SIL OFL-1.1** permits free use, embedding, and self-hosting in commercial work.
+- **Apache-2.0** and **SIL OFL-1.1** both permit free use, embedding, and self-hosting in commercial work.
 - Keep this notice with the font files if you redistribute them.
 
-> The Colaberry wordmark is a vector lockup (`assets/logo/`), not a font — no logotype typeface is loaded.
+> Quicksand is used here as the closest open-source match to Colaberry's custom *olaberry* logotype.
+> If the original logotype font is available, substitute it and update `tokens/typography.css`.

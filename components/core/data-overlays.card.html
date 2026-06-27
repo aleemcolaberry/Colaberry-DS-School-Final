@@ -28,7 +28,7 @@
         <div>
           <div className="lbl">Table</div>
           <Table columns={[
-            { key: 'name', header: 'Engagement' },
+            { key: 'name', header: 'Cohort' },
             { key: 'wk', header: 'Weeks', align: 'right' },
             { key: 'st', header: 'Status', render: (v) => <Badge tone={v === 'Open' ? 'green' : 'neutral'} dot={v === 'Open'}>{v}</Badge> },
           ]} data={[
@@ -41,11 +41,11 @@
             <Button size="sm" onClick={() => setDlg(true)}>Open dialog</Button>
             <Button size="sm" variant="outline" onClick={() => setDrw(true)}>Open drawer</Button>
           </div>
-          <Dialog open={dlg} title="Confirm request" onClose={() => setDlg(false)}
+          <Dialog open={dlg} title="Confirm enrollment" onClose={() => setDlg(false)}
             footer={<><Button variant="ghost" size="sm" onClick={() => setDlg(false)}>Cancel</Button><Button size="sm" onClick={() => setDlg(false)}>Confirm</Button></>}>
-            Ready to start your data engagement? Our team will reach out to scope the work.
+            Ready to start the Data Analytics program? You can change your cohort later.
           </Dialog>
-          <Drawer open={drw} title="Filters" onClose={() => setDrw(false)}>Pick a service, scope, and start date.</Drawer>
+          <Drawer open={drw} title="Filters" onClose={() => setDrw(false)}>Pick a program, format, and start date.</Drawer>
         </div>
         <div>
           <div className="lbl">Textarea</div>

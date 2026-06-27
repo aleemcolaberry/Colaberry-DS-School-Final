@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 /**
- * Colaberry button. Teal primary by default.
+ * Colaberry button. Cherry-red primary by default.
  */
 export interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
   /** Visual style. @default "primary" */
   variant?: 'primary' | 'solid' | 'outline' | 'ghost' | 'link';
-  /** Brand fill tone for solid/primary buttons. @default teal */
+  /** Brand fill tone for solid/primary buttons. @default cherry red */
   tone?: 'red' | 'green' | 'blue';
   /** @default "md" */
   size?: 'sm' | 'md' | 'lg';

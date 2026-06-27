@@ -37,8 +37,8 @@
         "message": "Raw px value — use a design-system spacing token via var()."
       },
       {
-        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Plus Jakarta Sans|JetBrains Mono))/i]",
-        "message": "Font not provided by the design system. Available: Plus Jakarta Sans, JetBrains Mono."
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Roboto|Roboto Mono|Quicksand))/i]",
+        "message": "Font not provided by the design system. Available: Roboto, Roboto Mono, Quicksand."
       },
       {
         "selector": "JSXOpeningElement[name.name='AccordionItem'] > JSXAttribute > JSXIdentifier[name!=/^(?:title|content|key|ref|className|style|children)$/]",
@@ -57,8 +57,8 @@
         "message": "<Badge> doesn't accept that prop. Declared props: tone, solid, outline, dot, children."
       },
       {
-        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute[name.name='tone'] > Literal[value!=/^(?:neutral|red|green|blue|cyan|warning)$/]",
-        "message": "<Badge> tone must be one of 'neutral' | 'red' | 'green' | 'blue' | 'cyan' | 'warning'."
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute[name.name='tone'] > Literal[value!=/^(?:neutral|red|green|blue|warning)$/]",
+        "message": "<Badge> tone must be one of 'neutral' | 'red' | 'green' | 'blue' | 'warning'."
       },
       {
         "selector": "JSXOpeningElement[name.name='Crumb'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|href|onClick|key|ref|className|style|children)$/]",
@@ -256,9 +256,6 @@
       }
     },
     "tokens": [
-      "--action-accent-bg",
-      "--action-accent-bg-hover",
-      "--action-accent-fg",
       "--action-bg",
       "--action-bg-hover",
       "--action-bg-press",
@@ -311,16 +308,6 @@
       "--container-md",
       "--container-sm",
       "--container-xl",
-      "--cyan-100",
-      "--cyan-200",
-      "--cyan-300",
-      "--cyan-400",
-      "--cyan-50",
-      "--cyan-500",
-      "--cyan-600",
-      "--cyan-700",
-      "--cyan-800",
-      "--cyan-900",
       "--div-mid",
       "--div-neg-1",
       "--div-neg-2",
@@ -400,6 +387,7 @@
       "--neutral-800",
       "--neutral-900",
       "--neutral-950",
+      "--purple-500",
       "--radius-2xl",
       "--radius-circle",
       "--radius-lg",
@@ -454,7 +442,6 @@
       "--status-success-bg",
       "--status-warning",
       "--status-warning-bg",
-      "--surface-accent-subtle",
       "--surface-blue-subtle",
       "--surface-brand",
       "--surface-brand-subtle",
@@ -474,7 +461,6 @@
       "--text-on-inverse",
       "--text-strong",
       "--text-subtle",
-      "--violet-500",
       "--z-base",
       "--z-modal",
       "--z-overlay",
@@ -482,26 +468,6 @@
       "--z-toast"
     ],
     "tokenKinds": {
-      "--blue-50": "color",
-      "--blue-100": "color",
-      "--blue-200": "color",
-      "--blue-300": "color",
-      "--blue-400": "color",
-      "--blue-500": "color",
-      "--blue-600": "color",
-      "--blue-700": "color",
-      "--blue-800": "color",
-      "--blue-900": "color",
-      "--cyan-50": "color",
-      "--cyan-100": "color",
-      "--cyan-200": "color",
-      "--cyan-300": "color",
-      "--cyan-400": "color",
-      "--cyan-500": "color",
-      "--cyan-600": "color",
-      "--cyan-700": "color",
-      "--cyan-800": "color",
-      "--cyan-900": "color",
       "--red-50": "color",
       "--red-100": "color",
       "--red-200": "color",
@@ -522,6 +488,16 @@
       "--green-700": "color",
       "--green-800": "color",
       "--green-900": "color",
+      "--blue-50": "color",
+      "--blue-100": "color",
+      "--blue-200": "color",
+      "--blue-300": "color",
+      "--blue-400": "color",
+      "--blue-500": "color",
+      "--blue-600": "color",
+      "--blue-700": "color",
+      "--blue-800": "color",
+      "--blue-900": "color",
       "--neutral-0": "color",
       "--neutral-50": "color",
       "--neutral-100": "color",
@@ -537,7 +513,7 @@
       "--neutral-1000": "color",
       "--amber-500": "color",
       "--amber-50": "color",
-      "--violet-500": "color",
+      "--purple-500": "color",
       "--teal-500": "color",
       "--chart-1": "color",
       "--chart-2": "color",
@@ -569,7 +545,6 @@
       "--surface-inverse": "color",
       "--surface-brand": "color",
       "--surface-brand-subtle": "color",
-      "--surface-accent-subtle": "color",
       "--surface-green-subtle": "color",
       "--surface-blue-subtle": "color",
       "--text-strong": "font",
@@ -589,9 +564,6 @@
       "--action-bg-hover": "color",
       "--action-bg-press": "color",
       "--action-fg": "color",
-      "--action-accent-bg": "color",
-      "--action-accent-bg-hover": "color",
-      "--action-accent-fg": "color",
       "--action-green-bg": "color",
       "--action-green-bg-hover": "color",
       "--action-green-fg": "color",
@@ -708,8 +680,9 @@
       "--stagger-tight": "other"
     },
     "fontFamilies": [
-      "JetBrains Mono",
-      "Plus Jakarta Sans"
+      "Quicksand",
+      "Roboto",
+      "Roboto Mono"
     ]
   }
 }

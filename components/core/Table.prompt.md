@@ -1,9 +1,9 @@
-Data table with a styled header and hover rows — engagements, outcomes, dashboards.
+Data table with a styled header and hover rows — cohorts, outcomes, dashboards.
 
 ```jsx
 <Table
   columns={[
-    { key: 'name', header: 'Engagement' },
+    { key: 'name', header: 'Cohort' },
     { key: 'wk', header: 'Weeks', align: 'right' },
     { key: 'st', header: 'Status', render: (v) => <Badge tone="green">{v}</Badge> },
   ]}

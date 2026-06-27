@@ -2,9 +2,9 @@ Centered modal dialog with scrim — confirmations, forms. Locks scroll, manages
 
 ```jsx
 const [open, setOpen] = React.useState(false);
-<Dialog open={open} title="Confirm request" onClose={() => setOpen(false)}
+<Dialog open={open} title="Confirm enrollment" onClose={() => setOpen(false)}
   footer={<><Button variant="ghost" onClick={() => setOpen(false)}>Cancel</Button><Button onClick={confirm}>Confirm</Button></>}>
-  Ready to start your data engagement?
+  Ready to start the Data Analytics program?
 </Dialog>
 ```
 

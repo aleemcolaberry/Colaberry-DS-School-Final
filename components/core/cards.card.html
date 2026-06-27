@@ -1,4 +1,4 @@
-<!-- @dsCard group="Components" viewport="700x340" name="Cards" subtitle="Service & content cards with media, accent, hover" -->
+<!-- @dsCard group="Components" viewport="700x340" name="Cards" subtitle="Program & content cards with media, accent, hover" -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,23 +23,23 @@
   function Demo() {
     return (
       <div className="grid">
-        <Card hoverable media={<div className="ph" style={{background:'linear-gradient(135deg,var(--blue-500),var(--blue-700))'}}>Consult</div>}>
-          <Badge tone="blue">Consulting</Badge>
-          <h3>Consulting &amp; Staffing</h3>
-          <p>Specialized data talent through expert recruitment.</p>
+        <Card hoverable media={<div className="ph" style={{background:'linear-gradient(135deg,var(--blue-500),var(--blue-700))'}}>Analytics</div>}>
+          <Badge tone="blue">12 weeks</Badge>
+          <h3>Data Analytics</h3>
+          <p>SQL, dashboards & storytelling with data.</p>
           <Button size="sm" tone="blue">Explore</Button>
         </Card>
-        <Card hoverable media={<div className="ph" style={{background:'linear-gradient(135deg,var(--cyan-500),var(--cyan-700))'}}>Fabric</div>}>
-          <Badge tone="green">Transformation</Badge>
-          <h3>Data Fabric Services</h3>
-          <p>Digital transformation toward data-driven leadership.</p>
+        <Card hoverable media={<div className="ph" style={{background:'linear-gradient(135deg,var(--green-500),var(--green-700))'}}>Science</div>}>
+          <Badge tone="green">24 weeks</Badge>
+          <h3>Data Science</h3>
+          <p>Python, machine learning & statistics.</p>
           <Button size="sm" tone="green">Explore</Button>
         </Card>
-        <Card padded accent="blue" elevation="md">
-          <Badge solid>Approved</Badge>
-          <h3>Training &amp; Development</h3>
-          <p>TWC-approved upskilling to bridge the data skills gap.</p>
-          <Button size="sm">Learn more</Button>
+        <Card padded accent="red" elevation="md">
+          <Badge solid>Scholarship</Badge>
+          <h3>Veterans grant</h3>
+          <p>Full-tuition support for those who served.</p>
+          <Button size="sm">Apply</Button>
         </Card>
       </div>
     );

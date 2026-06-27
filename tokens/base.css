@@ -57,7 +57,7 @@ code, kbd, samp, pre {
   border-radius: var(--radius-xs);
 }
 
-::selection { background: var(--cyan-200); color: var(--neutral-900); }
+::selection { background: var(--red-200); color: var(--neutral-900); }
 
 /* ----------------------------------------------------------------
    Text-wrapping utilities (opt-in helper classes)

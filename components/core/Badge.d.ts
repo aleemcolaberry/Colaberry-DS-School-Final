@@ -3,8 +3,8 @@ import * as React from 'react';
 /** Small status / category label. */
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   /** Soft-tint color. @default "neutral" */
-  tone?: 'neutral' | 'red' | 'green' | 'blue' | 'cyan' | 'warning';
-  /** Solid teal brand emphasis pill. @default false */
+  tone?: 'neutral' | 'red' | 'green' | 'blue' | 'warning';
+  /** Solid cherry-red emphasis pill. @default false */
   solid?: boolean;
   /** Outlined style. @default false */
   outline?: boolean;

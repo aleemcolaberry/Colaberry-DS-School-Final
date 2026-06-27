@@ -7,4 +7,4 @@ Compact label for status, category, or metadata — soft tints by default.
 <Badge outline>Self-paced</Badge>
 ```
 
-Tones: `neutral` (default), `red`, `green`, `blue`, `warning`. Use `solid` for a teal emphasis pill, `outline` for a quiet bordered chip, `dot` to prefix a status dot.
+Tones: `neutral` (default), `red`, `green`, `blue`, `warning`. Use `solid` for a cherry-red emphasis pill, `outline` for a quiet bordered chip, `dot` to prefix a status dot.

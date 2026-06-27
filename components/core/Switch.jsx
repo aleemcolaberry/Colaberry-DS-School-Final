@@ -5,7 +5,7 @@ const CSS = `
 .cb-switch input { position: absolute; opacity: 0; width: 0; height: 0; }
 .cb-switch__track { width: 44px; height: 26px; border-radius: var(--radius-pill); background: var(--neutral-300); position: relative; flex: none; transition: background var(--dur-base) var(--ease-out); }
 .cb-switch__knob { position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: var(--shadow-sm); transition: transform var(--dur-base) var(--ease-spring); }
-.cb-switch input:checked + .cb-switch__track { background: var(--brand-primary); }
+.cb-switch input:checked + .cb-switch__track { background: var(--green-600); }
 .cb-switch input:checked + .cb-switch__track .cb-switch__knob { transform: translateX(18px); }
 .cb-switch input:focus-visible + .cb-switch__track { box-shadow: var(--focus-ring); }
 .cb-switch:hover .cb-switch__track { filter: brightness(0.97); }
@@ -19,7 +19,7 @@ function inject() {
 }
 
 /**
- * On/off toggle switch with a soft spring knob (teal when on).
+ * On/off toggle switch with a soft spring knob (leaf-green when on).
  */
 export function Switch({ label, disabled = false, className = '', children, ...rest }) {
   inject();

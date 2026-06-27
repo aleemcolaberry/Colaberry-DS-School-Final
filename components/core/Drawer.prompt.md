@@ -3,7 +3,7 @@ Slide-in panel anchored to a screen edge — filters, nav, detail views. Locks s
 ```jsx
 const [open, setOpen] = React.useState(false);
 <Drawer open={open} side="right" title="Filters" onClose={() => setOpen(false)}>
-  <Checkbox label="Remote" /><Switch label="Open roles only" />
+  <Checkbox label="Online" /><Switch label="Scholarships only" />
 </Drawer>
 ```
 

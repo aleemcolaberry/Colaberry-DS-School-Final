@@ -1,4 +1,4 @@
-/* Colaberry DS landing — interactive hero + GSAP choreography.
+/* Colaberry DS landing — Three.js hero + GSAP choreography.
    Motion tiers:
    - FULL  (motion OK, rAF alive): masked headline, parallax, scrubs, counters, pin.
    - LITE  (reduced motion, rAF alive): opacity-only fades — reduce, don't remove.
@@ -26,9 +26,9 @@
 
   /* ---------- Color ramps (generated) ---------- */
   var RAMPS = [
-    { name: 'Teal', base: '#357895', hex: ['#EAF3F6','#D2E4EB','#A9CAD8','#79A9BF','#4E8AA6','#357895','#2C6981','#25566B','#1F4556','#193646'] },
-    { name: 'Cyan', base: '#00C4CC', hex: ['#DFFAFB','#B3F2F4','#7FE7EB','#45D8DE','#16CBD2','#00C4CC','#00A6AD','#00858B','#0A696E','#0E5256'] },
-    { name: 'Slate', base: '#404B51', hex: ['#F5F7F8','#ECEFF1','#DDE3E6','#CBD3D7','#A7B2B8','#7E8B92','#5E6B72','#404B51','#283034','#161C1F'] }
+    { name: 'Cherry Red', base: '#FB2832', hex: ['#FFF0F1','#FFDBDD','#FFB8BC','#FE8A90','#FD5760','#FB2832','#E5121D','#C20E1E','#9B0E18','#7A1016'] },
+    { name: 'Leaf Green', base: '#77BB4A', hex: ['#F1F9EA','#DEF0CC','#C2E3A1','#A2D375','#8AC759','#77BB4A','#5BA63C','#468A2E','#356A24','#2A521E'] },
+    { name: 'Berry Blue', base: '#367895', hex: ['#EAF2F6','#CFE0E9','#A6C5D5','#6F9DB6','#4A86A2','#367895','#2E6A86','#265A72','#20485C','#1A3947'] }
   ];
   var rampsRoot = document.getElementById('ramps');
   if (rampsRoot) {
@@ -62,7 +62,7 @@
 
   /* ---------- Copy snippets ---------- */
   var SNIPS = {
-    prompt: 'Using the Colaberry design system, create a [social post / flyer / email header / slide] at [size] for [topic]. Headline: [your headline]. Add a [call-to-action] button and the logo. Keep it clean and on-brand, no emoji — and give me 3 options.',
+    prompt: 'Using the Colaberry design system, create a [social post / flyer / email header / slide] at [size] for [topic]. Headline: [your headline]. Add a [call-to-action] button and the logo. Keep it warm and on-brand, no emoji — and give me 3 options.',
     install: '<link rel="stylesheet" href="colaberry/styles.css">\n<scr' + 'ipt src="colaberry/_ds_bundle.js"></scr' + 'ipt>\n/* var(--brand-accent) · window.ColaberryDesignSystem_098454 */'
   };
   document.querySelectorAll('[data-snip]').forEach(function (el) {
@@ -104,8 +104,8 @@
     if (!ctx) return;
     var hero = document.querySelector('.hero');
 
-    // Brand palette (teal + cyan + slate), weighted toward teal
-    var PAL = ['#357895', '#357895', '#00C4CC', '#357895', '#16CBD2', '#45D8DE', '#5E6B72'];
+    // Brand palette (cherry / leaf / berry + tints), weighted toward cherry
+    var PAL = ['#FB2832', '#FB2832', '#77BB4A', '#367895', '#FD5760', '#8AC759', '#4A86A2'];
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     var W = 0, H = 0;
     var nodes = [];
@@ -210,7 +210,7 @@
           var md = Math.sqrt(mdx * mdx + mdy * mdy);
           if (md < MOUSE) {
             var ma = (1 - md / MOUSE) * 0.55;
-            ctx.strokeStyle = rgba('#00C4CC', ma);
+            ctx.strokeStyle = rgba('#FB2832', ma);
             ctx.lineWidth = 1.3;
             ctx.beginPath(); ctx.moveTo(pointer.x, pointer.y); ctx.lineTo(nc.x, nc.y); ctx.stroke();
           }
@@ -240,7 +240,7 @@
       for (var q = ripples.length - 1; q >= 0; q--) {
         var r2 = ripples[q];
         r2.rad += 7; r2.power *= 0.94; r2.alpha *= 0.95;
-        ctx.strokeStyle = rgba('#00C4CC', r2.alpha);
+        ctx.strokeStyle = rgba('#FB2832', r2.alpha);
         ctx.lineWidth = 1.5;
         ctx.beginPath(); ctx.arc(r2.x, r2.y, r2.rad, 0, 6.2832); ctx.stroke();
         if (r2.rad > Math.max(W, H) || r2.alpha < 0.02) ripples.splice(q, 1);

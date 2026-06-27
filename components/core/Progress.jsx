@@ -3,8 +3,8 @@ import React from 'react';
 const CSS = `
 .cb-prog { width: 100%; }
 .cb-prog__track { height: 10px; background: var(--surface-sunken); border-radius: var(--radius-pill); overflow: hidden; }
-.cb-prog__bar { height: 100%; border-radius: var(--radius-pill); background: var(--brand-primary); width: 0; transition: width var(--dur-slow) var(--ease-out); }
-.cb-prog__bar.green { background: var(--cyan-600); } .cb-prog__bar.blue { background: var(--blue-500); }
+.cb-prog__bar { height: 100%; border-radius: var(--radius-pill); background: var(--red-500); width: 0; transition: width var(--dur-slow) var(--ease-out); }
+.cb-prog__bar.green { background: var(--green-600); } .cb-prog__bar.blue { background: var(--blue-500); }
 .cb-prog__bar.indet { width: 40% !important; animation: cb-indet 1.3s var(--ease-in-out) infinite; }
 .cb-prog__head { display: flex; justify-content: space-between; margin-bottom: 8px; font-family: var(--font-body); font-size: var(--fs-caption); }
 .cb-prog__label { color: var(--text-strong); font-weight: var(--fw-medium); }

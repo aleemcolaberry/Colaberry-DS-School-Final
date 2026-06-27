@@ -9,7 +9,7 @@ const CSS_Accordion = `
 .cb-acc__btn { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; background: none; border: none; cursor: pointer; font-family: var(--font-body); font-weight: var(--fw-bold); font-size: var(--fs-body); color: var(--text-strong); text-align: left; transition: background var(--dur-fast) var(--ease-out); }
 .cb-acc__btn:hover { background: var(--surface-sunken); }
 .cb-acc__btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
-.cb-acc__ic { flex: none; color: var(--brand-primary); transition: transform var(--dur-base) var(--ease-out); }
+.cb-acc__ic { flex: none; color: var(--red-500); transition: transform var(--dur-base) var(--ease-out); }
 .cb-acc__item[data-open="true"] .cb-acc__ic { transform: rotate(180deg); }
 .cb-acc__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--dur-base) var(--ease-out); }
 .cb-acc__item[data-open="true"] .cb-acc__panel { grid-template-rows: 1fr; }
@@ -60,7 +60,7 @@ const CSS_Avatar = `
   display: inline-flex; align-items: center; justify-content: center;
   border-radius: 50%; overflow: hidden; flex: none;
   font-family: var(--font-body); font-weight: var(--fw-bold); color: #fff;
-  background: var(--blue-500); user-select: none;
+  background: var(--green-500); user-select: none;
 }
 .cb-avatar { position: relative; }
 .cb-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background: inherit; }
@@ -70,13 +70,13 @@ const CSS_Avatar = `
 .cb-avatar--md { width: 48px; height: 48px; font-size: 16px; }
 .cb-avatar--lg { width: 64px; height: 64px; font-size: 22px; }
 .cb-avatar--xl { width: 88px; height: 88px; font-size: 30px; }
-.cb-avatar--ring { box-shadow: 0 0 0 3px var(--surface-card), 0 0 0 5px var(--brand-primary); }
+.cb-avatar--ring { box-shadow: 0 0 0 3px var(--surface-card), 0 0 0 5px var(--red-500); }
 .cb-avatar-group { display: inline-flex; }
 .cb-avatar-group > .cb-avatar { box-shadow: 0 0 0 3px var(--surface-card); }
 .cb-avatar-group > .cb-avatar + .cb-avatar { margin-left: -12px; }
 `;
 
-const TONES = ['var(--blue-500)', 'var(--cyan-600)', 'var(--blue-700)', 'var(--blue-600)', 'var(--cyan-700)'];
+const TONES = ['var(--green-500)', 'var(--blue-500)', 'var(--red-500)', 'var(--green-600)', 'var(--blue-600)'];
 
 function injectAvatar() {
   if (typeof document === 'undefined') return;
@@ -124,12 +124,11 @@ const CSS_Badge = `
   background: var(--surface-sunken); color: var(--text-body);
   white-space: nowrap;
 }
-.cb-badge--solid { background: var(--brand-primary); color: #fff; }
+.cb-badge--solid { background: var(--red-500); color: #fff; }
 .cb-badge--neutral { background: var(--surface-sunken); color: var(--text-body); }
 .cb-badge--red { background: var(--status-danger-bg); color: var(--red-700); }
 .cb-badge--green { background: var(--status-success-bg); color: var(--green-700); }
 .cb-badge--blue { background: var(--status-info-bg); color: var(--blue-700); }
-.cb-badge--cyan { background: var(--surface-accent-subtle); color: var(--cyan-800); }
 .cb-badge--warning { background: var(--status-warning-bg); color: var(--amber-500); }
 .cb-badge--outline { background: transparent; box-shadow: inset 0 0 0 1px var(--border-default); color: var(--text-body); }
 .cb-badge__dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
@@ -146,7 +145,7 @@ function injectBadge() {
 
 /**
  * Small status / category label. Soft tints by default; use `solid` for the
- * teal brand emphasis pill and `dot` for a status indicator.
+ * cherry-red emphasis pill and `dot` for a status indicator.
  */
 function Badge({ tone = 'neutral', solid = false, outline = false, dot = false, className = '', children, ...rest }) {
   injectBadge();
@@ -168,7 +167,7 @@ const CSS_Breadcrumb = `
 .cb-bc { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-family: var(--font-body); font-size: var(--fs-body-sm); }
 .cb-bc a, .cb-bc span { color: var(--text-muted); text-decoration: none; }
 .cb-bc a { transition: color var(--dur-fast) var(--ease-out); }
-.cb-bc a:hover { color: var(--brand-primary); }
+.cb-bc a:hover { color: var(--red-500); }
 .cb-bc__sep { color: var(--border-strong); display: inline-flex; }
 .cb-bc__cur { color: var(--text-strong); font-weight: var(--fw-medium); }
 `;
@@ -227,10 +226,10 @@ const CSS_Button = `
 }
 .cb-btn--sm { font-size: var(--fs-caption); min-height: 38px; padding: 0 16px; gap: 6px; }
 .cb-btn--lg { font-size: var(--fs-body); min-height: 56px; padding: 0 32px; }
-.cb-btn--green { --_bg: var(--action-green-bg); --_bg-hover: var(--action-green-bg-hover); --_bg-press: var(--cyan-800); --_fg: #fff; }
+.cb-btn--green { --_bg: var(--action-green-bg); --_bg-hover: var(--action-green-bg-hover); --_bg-press: var(--green-700); --_fg: #fff; }
 .cb-btn--blue { --_bg: var(--blue-500); --_bg-hover: var(--blue-600); --_bg-press: var(--blue-700); --_fg: #fff; }
 .cb-btn--primary { box-shadow: var(--shadow-brand); }
-.cb-btn--primary:hover { box-shadow: 0 12px 30px color-mix(in srgb, var(--blue-500) 34%, transparent); }
+.cb-btn--primary:hover { box-shadow: 0 12px 30px color-mix(in srgb, var(--red-500) 34%, transparent); }
 .cb-btn--outline {
   background: transparent; color: var(--text-strong);
   box-shadow: inset 0 0 0 var(--border-2) var(--border-strong);
@@ -255,7 +254,7 @@ function injectButton() {
 }
 
 /**
- * Colaberry primary button. Teal by default; supports accent/blue
+ * Colaberry primary button. Cherry-red by default; supports green/blue
  * brand tones, outline/ghost/link variants, three sizes, and icons.
  */
 function Button({
@@ -320,8 +319,8 @@ const CSS_Card = `
 .cb-card--hoverable:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
 .cb-card--flat { box-shadow: none; }
 .cb-card--elevated { box-shadow: var(--shadow-md); border-color: transparent; }
-.cb-card--accent { border-top: 4px solid var(--brand-primary); }
-.cb-card--accent-green { border-top: 4px solid var(--cyan-500); }
+.cb-card--accent { border-top: 4px solid var(--red-500); }
+.cb-card--accent-green { border-top: 4px solid var(--green-500); }
 .cb-card--accent-blue { border-top: 4px solid var(--blue-500); }
 .cb-card__media { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--surface-sunken); }
 .cb-card__body { padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); }
@@ -431,10 +430,10 @@ const CSS_Checkbox = `
   margin-top: 1px;
 }
 .cb-check__box svg { width: 14px; height: 14px; opacity: 0; transform: scale(.6); transition: all var(--dur-fast) var(--ease-spring); }
-.cb-check input:checked + .cb-check__box { background: var(--brand-primary); border-color: var(--brand-primary); }
+.cb-check input:checked + .cb-check__box { background: var(--green-500); border-color: var(--green-500); }
 .cb-check input:checked + .cb-check__box svg { opacity: 1; transform: scale(1); }
 .cb-check input:focus-visible + .cb-check__box { box-shadow: var(--focus-ring); }
-.cb-check:hover .cb-check__box { border-color: var(--brand-primary); }
+.cb-check:hover .cb-check__box { border-color: var(--green-500); }
 .cb-check input:disabled + .cb-check__box { opacity: .45; }
 .cb-check--disabled { cursor: not-allowed; color: var(--text-subtle); }
 `;
@@ -449,7 +448,7 @@ function injectCheckbox() {
 }
 
 /**
- * Checkbox with a teal checked state and a soft spring-in tick.
+ * Checkbox with a leaf-green checked state and a soft spring-in tick.
  */
 function Checkbox({ label, disabled = false, className = '', children, ...rest }) {
   injectCheckbox();
@@ -690,7 +689,7 @@ const CSS_Pagination = `
 .cb-pag button:hover:not(:disabled):not(.is-current) { background: var(--surface-sunken); border-color: var(--border-strong); }
 .cb-pag button:active:not(:disabled) { transform: translateY(1px); }
 .cb-pag button:focus-visible { outline: none; box-shadow: var(--focus-ring); }
-.cb-pag button.is-current { background: var(--brand-primary); border-color: var(--brand-primary); color: #fff; }
+.cb-pag button.is-current { background: var(--red-500); border-color: var(--red-500); color: #fff; }
 .cb-pag button:disabled { opacity: .4; cursor: not-allowed; }
 .cb-pag__ellipsis { min-width: 24px; text-align: center; color: var(--text-subtle); }
 `;
@@ -703,7 +702,7 @@ function injectPagination() {
 function range(start, end) { const a = []; for (let i = start; i <= end; i++) a.push(i); return a; }
 
 /**
- * Page navigation with prev/next and truncated number pills (current = teal).
+ * Page navigation with prev/next and truncated number pills (current = cherry).
  */
 function Pagination({ page = 1, total = 1, siblings = 1, onChange = () => {}, className = '', ...rest }) {
   injectPagination();
@@ -771,8 +770,8 @@ function Popover({ trigger, placement = 'bottom', children, className = '', ...r
 const CSS_Progress = `
 .cb-prog { width: 100%; }
 .cb-prog__track { height: 10px; background: var(--surface-sunken); border-radius: var(--radius-pill); overflow: hidden; }
-.cb-prog__bar { height: 100%; border-radius: var(--radius-pill); background: var(--brand-primary); width: 0; transition: width var(--dur-slow) var(--ease-out); }
-.cb-prog__bar.green { background: var(--cyan-600); } .cb-prog__bar.blue { background: var(--blue-500); }
+.cb-prog__bar { height: 100%; border-radius: var(--radius-pill); background: var(--red-500); width: 0; transition: width var(--dur-slow) var(--ease-out); }
+.cb-prog__bar.green { background: var(--green-600); } .cb-prog__bar.blue { background: var(--blue-500); }
 .cb-prog__bar.indet { width: 40% !important; animation: cb-indet 1.3s var(--ease-in-out) infinite; }
 .cb-prog__head { display: flex; justify-content: space-between; margin-bottom: 8px; font-family: var(--font-body); font-size: var(--fs-caption); }
 .cb-prog__label { color: var(--text-strong); font-weight: var(--fw-medium); }
@@ -847,7 +846,7 @@ const CSS_Switch = `
 .cb-switch input { position: absolute; opacity: 0; width: 0; height: 0; }
 .cb-switch__track { width: 44px; height: 26px; border-radius: var(--radius-pill); background: var(--neutral-300); position: relative; flex: none; transition: background var(--dur-base) var(--ease-out); }
 .cb-switch__knob { position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: var(--shadow-sm); transition: transform var(--dur-base) var(--ease-spring); }
-.cb-switch input:checked + .cb-switch__track { background: var(--brand-primary); }
+.cb-switch input:checked + .cb-switch__track { background: var(--green-600); }
 .cb-switch input:checked + .cb-switch__track .cb-switch__knob { transform: translateX(18px); }
 .cb-switch input:focus-visible + .cb-switch__track { box-shadow: var(--focus-ring); }
 .cb-switch:hover .cb-switch__track { filter: brightness(0.97); }
@@ -861,7 +860,7 @@ function injectSwitch() {
 }
 
 /**
- * On/off toggle switch with a soft spring knob (teal when on).
+ * On/off toggle switch with a soft spring knob (leaf-green when on).
  */
 function Switch({ label, disabled = false, className = '', children, ...rest }) {
   injectSwitch();

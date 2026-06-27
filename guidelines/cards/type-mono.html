@@ -1,4 +1,4 @@
-<!-- @dsCard group="Type" viewport="700x180" name="Mono / data" subtitle="JetBrains Mono — code, metrics & tabular data" -->
+<!-- @dsCard group="Type" viewport="700x180" name="Mono / data" subtitle="Roboto Mono — code, metrics & tabular data" -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,12 +17,12 @@
 </head>
 <body>
   <div class="grid">
-    <pre><span class="k">SELECT</span> client,
-       <span class="f">COUNT</span>(*) AS projects
-<span class="k">FROM</span> engagements
-<span class="k">GROUP BY</span> client;</pre>
+    <pre><span class="k">SELECT</span> cohort,
+       <span class="f">COUNT</span>(*) AS grads
+<span class="k">FROM</span> outcomes
+<span class="k">GROUP BY</span> cohort;</pre>
     <div class="metrics">
-      <div class="m"><div class="n">10+</div><div class="l">Industries served</div></div>
+      <div class="m"><div class="n">5,000+</div><div class="l">Careers changed</div></div>
       <div class="m"><div class="n">2012</div><div class="l">Founded</div></div>
     </div>
   </div>

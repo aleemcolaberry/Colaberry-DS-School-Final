@@ -131,7 +131,7 @@ Props for each are in its `components/core/<Name>.d.ts`; live demos are in the
 ```
 
 Key semantic tokens: `--surface-page/-card/-sunken`, `--text-strong/-body/-muted`,
-`--border-subtle/-default/-strong`, `--brand-accent` (cyan), `--brand-primary` (teal, constant), `--status-*`,
+`--border-subtle/-default/-strong`, `--brand-accent` (cherry, constant), `--status-*`,
 `--space-*`, `--radius-*`, `--shadow-*`, `--ease-*`, `--dur-*`. Full list: open
 `design-system.html` → **Color / Spacing** (click any token to copy).
 
@@ -145,7 +145,7 @@ Every token re-points automatically. Flip one attribute on `<html>`:
 document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 ```
 
-The teal primary stays constant; foreground/surfaces invert. No component changes needed.
+The cherry accent stays constant; foreground/surfaces invert. No component changes needed.
 
 ---
 
@@ -153,8 +153,8 @@ The teal primary stays constant; foreground/surfaces invert. No component change
 
 - Use the motion tokens for transitions: `transition: background var(--dur-fast) var(--ease-out);`
   Components already do this and respect `@media (prefers-reduced-motion: reduce)`.
-- **Body text:** use `--neutral-800` / `--text-muted` on light. Cyan is an
-  **accent / large-text** color — for small text use `--blue-600+` / `--neutral-800`, or
+- **Body text:** use `--neutral-800` / `--text-muted` on light. Cherry and leaf are
+  **accent / large-text** colors — for small text use `--red-600+` / `--green-700+`, or
   dark text on a tint. (See the WCAG audit in `design-system.html`.)
 - Keep the visible focus ring (`--focus-ring`) — it's on by default via `:focus-visible`.
 
@@ -186,7 +186,7 @@ Opt-in helper classes for the cases the defaults don't cover:
 > flex child and the text wraps correctly.
 
 ```jsx
-<h1 className="cb-balance">Shaping the future of work with data</h1>
+<h1 className="cb-balance">Future-proof your career in data &amp; AI</h1>
 <div style={{ display: 'flex', gap: 12 }}>
   <Avatar name="Mika R." />
   <p className="cb-min0">Long description that should wrap, not overflow its flex row…</p>
@@ -197,7 +197,7 @@ Opt-in helper classes for the cases the defaults don't cover:
 
 ## 10 · Fonts
 
-Plus Jakarta Sans + JetBrains Mono load from Google Fonts via `tokens/fonts.css`. To
+Roboto + Roboto Mono + Quicksand load from Google Fonts via `tokens/fonts.css`. To
 **self-host** (recommended for production): drop the `.woff2` files into `assets/fonts/`
 and replace the `@import` in `tokens/fonts.css` with local `@font-face` rules. Licenses:
 `assets/fonts/LICENSES.md` (Apache-2.0 / OFL-1.1).

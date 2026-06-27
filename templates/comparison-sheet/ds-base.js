@@ -13,3 +13,11 @@
   s.onerror = () => console.error('ds-base.js: failed to load ' + s.src + ' — if this is a consuming project, point the base line in ds-base.js at the bound _ds/<folder> tree relative to this page (e.g. _ds/<folder> at the project root, ../_ds/<folder> one level down); in a fresh design system this can just mean the bundle is not compiled yet');
   document.head.appendChild(s);
 })();
+
+// ---- Colaberry shared template toolbar (Download + Edit) ----
+(() => {
+  const s = document.createElement('script');
+  s.src = '../_shared/cb-toolbar.js';
+  s.defer = true;
+  document.head.appendChild(s);
+})();
