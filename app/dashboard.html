@@ -1,0 +1,256 @@
+<!-- @dsCard group="Application" viewport="1280x880" name="Analytics dashboard" subtitle="App shell, animated charts, table, dark-mode toggle" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard — Colaberry Learn</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css">
+<link rel="stylesheet" href="../components.css">
+<link rel="stylesheet" href="app.css">
+<script>
+  // Set theme before paint to avoid flash.
+  try { var t = localStorage.getItem('cb-theme') || 'light'; document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+</script>
+</head>
+<body>
+<div class="dash">
+
+  <!-- MOBILE DRAWER -->
+  <div class="scrim" id="scrim"></div>
+  <nav class="drawer" id="drawer" aria-label="Mobile">
+    <button class="iconbtn drawer__close" id="drawerClose" aria-label="Close menu"><span class="cb-i"><i class="ri-close-line"></i></span></button>
+    <a href="index.html" class="brand side__brand" style="padding-top:0"><img class="brand__logo" src="../assets/logo/colaberry-horizontal-black.png" alt="Colaberry" id="drawerLogo"></a>
+    <div class="cb-stack cb-stack--2">
+      <a class="navitem is-active" href="dashboard.html"><span class="cb-i"><i class="ri-dashboard-3-line"></i></span> Overview</a>
+      <a class="navitem" href="#"><span class="cb-i"><i class="ri-book-open-line"></i></span> My courses</a>
+      <a class="navitem" href="#"><span class="cb-i"><i class="ri-line-chart-line"></i></span> Analytics</a>
+      <a class="navitem" href="#"><span class="cb-i"><i class="ri-file-list-3-line"></i></span> Assignments <span class="cb-badge cb-badge--red" style="margin-left:auto;font-size:11px;padding:2px 8px">2</span></a>
+      <a class="navitem" href="#"><span class="cb-i"><i class="ri-calendar-line"></i></span> Schedule</a>
+      <div class="side__group">Career</div>
+      <a class="navitem" href="#"><span class="cb-i"><i class="ri-briefcase-4-line"></i></span> Job board</a>
+      <a class="navitem" href="#"><span class="cb-i"><i class="ri-user-star-line"></i></span> Mentor</a>
+      <a class="navitem" href="#"><span class="cb-i"><i class="ri-settings-3-line"></i></span> Settings</a>
+      <a class="navitem" href="login.html"><span class="cb-i"><i class="ri-logout-box-r-line"></i></span> Log out</a>
+    </div>
+  </nav>
+
+  <!-- SIDEBAR -->
+  <aside class="side">
+    <a href="index.html" class="brand side__brand"><img class="brand__logo" src="../assets/logo/colaberry-horizontal-black.png" alt="Colaberry" id="sideLogo"></a>
+    <nav class="cb-stack cb-stack--2" aria-label="Main">
+      <a class="navitem is-active" href="dashboard.html"><span class="cb-i"><i class="ri-dashboard-3-line"></i></span> Overview</a>
+      <a class="navitem" href="#"><span class="cb-i"><i class="ri-book-open-line"></i></span> My courses</a>
+      <a class="navitem" href="#"><span class="cb-i"><i class="ri-line-chart-line"></i></span> Analytics</a>
+      <a class="navitem" href="#"><span class="cb-i"><i class="ri-file-list-3-line"></i></span> Assignments <span class="cb-badge cb-badge--red" style="margin-left:auto;font-size:11px;padding:2px 8px">2</span></a>
+      <a class="navitem" href="#"><span class="cb-i"><i class="ri-calendar-line"></i></span> Schedule</a>
+      <div class="side__group">Career</div>
+      <a class="navitem" href="#"><span class="cb-i"><i class="ri-briefcase-4-line"></i></span> Job board</a>
+      <a class="navitem" href="#"><span class="cb-i"><i class="ri-user-star-line"></i></span> Mentor</a>
+      <a class="navitem" href="#"><span class="cb-i"><i class="ri-settings-3-line"></i></span> Settings</a>
+    </nav>
+    <div class="side__foot">
+      <div class="side__user">
+        <span class="cb-avatar cb-avatar--sm" style="background:var(--chart-2)">AL</span>
+        <div style="min-width:0;flex:1">
+          <div class="cb-truncate" style="font-weight:600;font-size:14px;color:var(--text-strong)">Ada Lovelace</div>
+          <div class="cb-truncate muted" style="font-size:12px">AI Architect · Cohort 12</div>
+        </div>
+        <a href="login.html" class="cb-i" style="color:var(--text-muted);font-size:18px" title="Log out"><i class="ri-logout-box-r-line"></i></a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <button class="iconbtn dash-burger" id="burger" aria-label="Open menu"><span class="cb-i"><i class="ri-menu-line"></i></span></button>
+      <div class="topbar__search">
+        <span class="cb-i"><i class="ri-search-line"></i></span>
+        <input placeholder="Search courses, projects, people…">
+      </div>
+      <div style="flex:1"></div>
+      <button class="iconbtn" id="themeBtn" title="Toggle theme"><span class="cb-i"><i class="ri-moon-line" id="themeIcon"></i></span></button>
+      <button class="iconbtn" title="Notifications" style="position:relative"><span class="cb-i"><i class="ri-notification-3-line"></i></span><span class="dot-status" style="background:var(--brand-primary);position:absolute;top:9px;right:10px"></span></button>
+      <span class="cb-avatar cb-avatar--sm" style="background:var(--chart-2)">AL</span>
+    </div>
+
+    <div class="dash__body">
+
+      <!-- PAGE HEAD -->
+      <div class="page-head">
+        <div>
+          <p class="muted" style="margin:0 0 4px;font-size:14px">Wednesday, June 26 · Week 8 of 24</p>
+          <h1>Welcome back, Ada 👋</h1>
+        </div>
+        <div class="cb-cluster">
+          <button class="cb-btn cb-btn--outline cb-btn--sm"><span class="cb-i"><i class="ri-download-2-line"></i></span> Export</button>
+          <a class="cb-btn cb-btn--primary cb-btn--sm" href="#"><span class="cb-i"><i class="ri-play-circle-line"></i></span> Resume lesson</a>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpis">
+        <div class="cb-card kpi" data-reveal>
+          <div class="kpi__top">
+            <span class="kpi__ic" style="background:var(--chart-1)"><span class="cb-i"><i class="ri-progress-4-line"></i></span></span>
+            <span class="trend up"><span class="cb-i"><i class="ri-arrow-up-line"></i></span> 12%</span>
+          </div>
+          <div><div class="kpi__val">68%</div><div class="kpi__lbl">Course progress</div></div>
+          <svg class="spark" viewBox="0 0 120 40" preserveAspectRatio="none"><polyline points="0,34 20,30 40,31 60,22 80,18 100,12 120,6" fill="none" stroke="var(--chart-1)" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="cb-card kpi" data-reveal style="--i:1">
+          <div class="kpi__top">
+            <span class="kpi__ic" style="background:var(--chart-3)"><span class="cb-i"><i class="ri-medal-line"></i></span></span>
+            <span class="trend up"><span class="cb-i"><i class="ri-arrow-up-line"></i></span> 4%</span>
+          </div>
+          <div><div class="kpi__val">A−</div><div class="kpi__lbl">Average grade · 91%</div></div>
+          <svg class="spark" viewBox="0 0 120 40" preserveAspectRatio="none"><polyline points="0,28 20,26 40,22 60,24 80,16 100,14 120,10" fill="none" stroke="var(--chart-3)" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="cb-card kpi" data-reveal style="--i:2">
+          <div class="kpi__top">
+            <span class="kpi__ic" style="background:var(--chart-6)"><span class="cb-i"><i class="ri-calendar-check-line"></i></span></span>
+            <span class="trend up"><span class="cb-i"><i class="ri-arrow-up-line"></i></span> 2%</span>
+          </div>
+          <div><div class="kpi__val">96%</div><div class="kpi__lbl">Attendance</div></div>
+          <svg class="spark" viewBox="0 0 120 40" preserveAspectRatio="none"><polyline points="0,18 20,14 40,20 60,12 80,14 100,8 120,9" fill="none" stroke="var(--chart-6)" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="cb-card kpi" data-reveal style="--i:3">
+          <div class="kpi__top">
+            <span class="kpi__ic" style="background:var(--chart-2)"><span class="cb-i"><i class="ri-rocket-2-line"></i></span></span>
+            <span class="trend down"><span class="cb-i"><i class="ri-arrow-down-line"></i></span> 1 due</span>
+          </div>
+          <div><div class="kpi__val">3 / 4</div><div class="kpi__lbl">Projects shipped</div></div>
+          <svg class="spark" viewBox="0 0 120 40" preserveAspectRatio="none"><polyline points="0,30 24,30 48,22 72,22 96,14 120,14" fill="none" stroke="var(--chart-2)" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+
+      <!-- ROW: line chart + donut -->
+      <div class="dash-grid">
+        <section class="cb-card cb-card--pad" data-reveal>
+          <div class="panel-head">
+            <h3>Progress over the cohort</h3>
+            <div class="seg" id="seg">
+              <button class="is-active" data-series="progress">Progress</button>
+              <button data-series="hours">Study hours</button>
+              <button data-series="grades">Grades</button>
+            </div>
+          </div>
+          <svg id="lineChart" class="chart" viewBox="0 0 640 240" style="height:260px" preserveAspectRatio="none" aria-label="Progress line chart">
+            <g id="grid" stroke="var(--border-subtle)" stroke-width="1"></g>
+            <path id="areaPath" fill="url(#ag)"></path>
+            <path id="linePath" fill="none" stroke="var(--chart-1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+            <defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--chart-1)" stop-opacity="0.22"/><stop offset="1" stop-color="var(--chart-1)" stop-opacity="0"/></linearGradient></defs>
+          </svg>
+          <div class="legend"><span><i style="background:var(--chart-1)"></i> You</span><span><i style="background:var(--border-strong)"></i> Cohort average</span></div>
+        </section>
+
+        <section class="cb-card cb-card--pad" data-reveal style="--i:1">
+          <div class="panel-head"><h3>Program completion</h3></div>
+          <div class="donut">
+            <svg viewBox="0 0 180 180" width="200" height="200" style="transform:rotate(-90deg)">
+              <circle cx="90" cy="90" r="74" fill="none" stroke="var(--surface-sunken)" stroke-width="20"></circle>
+              <circle id="donutArc" cx="90" cy="90" r="74" fill="none" stroke="var(--chart-1)" stroke-width="20" stroke-linecap="round" data-pct="68" stroke-dasharray="465" stroke-dashoffset="465"></circle>
+            </svg>
+            <div class="donut__center" style="position:absolute"><b>68%</b><span>16 of 24 weeks</span></div>
+          </div>
+          <div class="cb-stack cb-stack--3" style="margin-top:12px">
+            <div class="cb-cluster cb-cluster--between"><span class="cb-cluster cb-cluster--2"><span class="dot-status" style="background:var(--chart-1)"></span> Completed</span><b>16 wks</b></div>
+            <div class="cb-cluster cb-cluster--between"><span class="cb-cluster cb-cluster--2"><span class="dot-status" style="background:var(--surface-sunken)"></span> Remaining</span><b>8 wks</b></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ROW: skills + project scores -->
+      <div class="dash-grid">
+        <section class="cb-card cb-card--pad" data-reveal>
+          <div class="panel-head"><h3>Skill mastery</h3><span class="cb-badge cb-badge--outline">Updated today</span></div>
+          <div class="cb-stack cb-stack--6">
+            <div class="skill"><div class="skill__top"><b>Python</b><span>92%</span></div><div class="track"><i style="background:var(--chart-3)" data-w="92"></i></div></div>
+            <div class="skill"><div class="skill__top"><b>SQL &amp; Databases</b><span>88%</span></div><div class="track"><i style="background:var(--chart-3)" data-w="88"></i></div></div>
+            <div class="skill"><div class="skill__top"><b>Data Visualization</b><span>85%</span></div><div class="track"><i style="background:var(--chart-1)" data-w="85"></i></div></div>
+            <div class="skill"><div class="skill__top"><b>Statistics</b><span>81%</span></div><div class="track"><i style="background:var(--chart-1)" data-w="81"></i></div></div>
+            <div class="skill"><div class="skill__top"><b>Machine Learning</b><span>74%</span></div><div class="track"><i style="background:var(--chart-4)" data-w="74"></i></div></div>
+            <div class="skill"><div class="skill__top"><b>LLMs &amp; GenAI</b><span>60%</span></div><div class="track"><i style="background:var(--chart-2)" data-w="60"></i></div></div>
+          </div>
+        </section>
+
+        <section class="cb-card cb-card--pad" data-reveal style="--i:1">
+          <div class="panel-head"><h3>Project scores</h3><span class="muted" style="font-size:13px">vs cohort avg</span></div>
+          <div class="bars" id="bars">
+            <div class="bars__col"><div style="display:flex;gap:4px;align-items:flex-end;width:100%;max-width:52px;height:100%;justify-content:center">
+              <div style="width:14px;background:var(--chart-1);border-radius:4px 4px 0 0;height:0;transition:height .8s var(--ease-out)" data-h="88"></div>
+              <div style="width:14px;background:var(--border-default);border-radius:4px 4px 0 0;height:0;transition:height .8s var(--ease-out)" data-h="79"></div>
+            </div><div class="bars__lbl">EDA</div></div>
+            <div class="bars__col"><div style="display:flex;gap:4px;align-items:flex-end;width:100%;max-width:52px;height:100%;justify-content:center">
+              <div style="width:14px;background:var(--chart-1);border-radius:4px 4px 0 0;height:0;transition:height .8s var(--ease-out)" data-h="92"></div>
+              <div style="width:14px;background:var(--border-default);border-radius:4px 4px 0 0;height:0;transition:height .8s var(--ease-out)" data-h="81"></div>
+            </div><div class="bars__lbl">Dashboard</div></div>
+            <div class="bars__col"><div style="display:flex;gap:4px;align-items:flex-end;width:100%;max-width:52px;height:100%;justify-content:center">
+              <div style="width:14px;background:var(--chart-1);border-radius:4px 4px 0 0;height:0;transition:height .8s var(--ease-out)" data-h="85"></div>
+              <div style="width:14px;background:var(--border-default);border-radius:4px 4px 0 0;height:0;transition:height .8s var(--ease-out)" data-h="83"></div>
+            </div><div class="bars__lbl">ML model</div></div>
+            <div class="bars__col"><div style="display:flex;gap:4px;align-items:flex-end;width:100%;max-width:52px;height:100%;justify-content:center">
+              <div style="width:14px;background:var(--chart-1);border-radius:4px 4px 0 0;height:0;transition:height .8s var(--ease-out);opacity:.45" data-h="40"></div>
+              <div style="width:14px;background:var(--border-default);border-radius:4px 4px 0 0;height:0;transition:height .8s var(--ease-out)" data-h="80"></div>
+            </div><div class="bars__lbl">Capstone</div></div>
+          </div>
+          <div class="legend"><span><i style="background:var(--chart-1)"></i> You</span><span><i style="background:var(--border-default)"></i> Cohort avg</span></div>
+        </section>
+      </div>
+
+      <!-- ASSIGNMENTS TABLE -->
+      <section class="cb-card cb-card--pad" data-reveal>
+        <div class="panel-head">
+          <h3>Upcoming &amp; recent assignments</h3>
+          <a href="#" class="cb-btn cb-btn--link">View all</a>
+        </div>
+        <div class="cb-scroll">
+          <table class="cb-table cb-table--hover" style="width:100%;min-width:560px">
+            <thead><tr><th>Assignment</th><th>Module</th><th>Due</th><th>Status</th><th class="num">Score</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><div class="who"><span class="cb-i" style="color:var(--chart-2);font-size:18px"><i class="ri-file-code-line"></i></span> LLM capstone — proposal</div></td>
+                <td class="muted">GenAI</td><td class="muted">Jun 28</td>
+                <td><span class="cb-badge cb-badge--warning">Due soon</span></td>
+                <td class="num muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="who"><span class="cb-i" style="color:var(--chart-4);font-size:18px"><i class="ri-bar-chart-box-line"></i></span> Churn model evaluation</div></td>
+                <td class="muted">Machine Learning</td><td class="muted">Jun 24</td>
+                <td><span class="cb-badge cb-badge--blue">In review</span></td>
+                <td class="num muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="who"><span class="cb-i" style="color:var(--chart-1);font-size:18px"><i class="ri-dashboard-line"></i></span> Sales analytics dashboard</div></td>
+                <td class="muted">Data Viz</td><td class="muted">Jun 17</td>
+                <td><span class="cb-badge cb-badge--green">Graded</span></td>
+                <td class="num"><b>92</b></td>
+              </tr>
+              <tr>
+                <td><div class="who"><span class="cb-i" style="color:var(--chart-3);font-size:18px"><i class="ri-database-2-line"></i></span> SQL window functions lab</div></td>
+                <td class="muted">SQL</td><td class="muted">Jun 12</td>
+                <td><span class="cb-badge cb-badge--green">Graded</span></td>
+                <td class="num"><b>96</b></td>
+              </tr>
+              <tr>
+                <td><div class="who"><span class="cb-i" style="color:var(--chart-3);font-size:18px"><i class="ri-funtion-line"></i></span> Pandas EDA notebook</div></td>
+                <td class="muted">Foundations</td><td class="muted">Jun 5</td>
+                <td><span class="cb-badge cb-badge--green">Graded</span></td>
+                <td class="num"><b>88</b></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <p class="muted" style="text-align:center;font-size:13px;padding:8px 0 24px">Colaberry Learn · demo dashboard built entirely on the design system</p>
+    </div>
+  </div>
+</div>
+
+<script src="../motion.js"></script>
+<script src="charts.js"></script>
+</body>
+</html>

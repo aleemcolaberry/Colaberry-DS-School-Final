@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Colaberry — Switch to a Career in Data &amp; AI</title>
+<meta name="description" content="Make the switch to a transformative career in Data & AI with no previous IT experience required. Project-based, mentor-led, outcomes-driven.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css">
+<link rel="stylesheet" href="../components.css">
+<link rel="stylesheet" href="landing.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script defer src="landing.js"></script>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+
+<!-- LOADER -->
+<div class="loader" aria-hidden="true">
+  <div class="loader__inner">
+    <div class="loader__brand">Cola<b>berry</b></div>
+    <div class="loader__bar"><i></i></div>
+    <div class="loader__count">000</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrapx nav__in">
+    <a class="nav__logo" href="index.html"><img src="../assets/logo/colaberry-horizontal-white.png" alt="Colaberry"></a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="data-analytics.html">Data Analytics</a>
+      <a href="data-science.html">Data Science</a>
+      <a href="job-readiness.html">Job Readiness</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="success-stories.html">Stories</a>
+    </nav>
+    <a class="nav__cta is-desk btn-mag magnetic" href="https://app.colaberry.com/account/login"><span>Apply Now</span></a>
+    <button class="nav__burger" aria-label="Open menu"><span class="cb-i"><i class="ri-menu-line"></i></span></button>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mmenu" aria-hidden="true">
+  <div class="mmenu__top">
+    <img src="../assets/logo/colaberry-horizontal-white.png" alt="Colaberry">
+    <button class="mmenu__close" aria-label="Close menu"><span class="cb-i"><i class="ri-close-line"></i></span></button>
+  </div>
+  <nav class="mmenu__links" aria-label="Mobile">
+    <a href="data-analytics.html">Data Analytics</a>
+    <a href="data-science.html">Data Science</a>
+    <a href="job-readiness.html">Job Readiness</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="success-stories.html">Stories</a>
+  </nav>
+  <a class="mmenu__cta" href="https://app.colaberry.com/account/login">Apply Now</a>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <canvas class="hero__canvas" aria-hidden="true"></canvas>
+    <div class="hero__fade" aria-hidden="true"></div>
+    <div class="wrapx hero__in">
+      <span class="hero__eyebrow"><span class="dot"></span> Colaberry · School of Data Science &amp; Analytics</span>
+      <h1>
+        <span class="hline">Switch to a career</span>
+        <span class="hline">in <span class="hl">data &amp; AI.</span></span>
+      </h1>
+      <p class="hero__sub">Make the switch to a transformative tech career with <b style="color:#fff">no previous IT experience</b> required. Project-based, mentor-led, and built around your life.</p>
+      <div class="hero__cta">
+        <a class="btn-mag primary magnetic" href="https://app.colaberry.com/account/login"><span>Apply Now</span></a>
+        <a class="btn-mag ghost magnetic" href="how-it-works.html"><span>How it works</span></a>
+      </div>
+    </div>
+    <div class="hero__scroll"><span>Scroll</span><span class="ln"></span></div>
+  </section>
+
+  <!-- MARQUEE -->
+  <section class="marq" aria-hidden="true">
+    <div class="marq__track">
+      <span>Data Analytics</span><span>Data Science</span><span>Machine Learning</span><span>Artificial Intelligence</span><span>Career Switch</span>
+      <span>Data Analytics</span><span>Data Science</span><span>Machine Learning</span><span>Artificial Intelligence</span><span>Career Switch</span>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto">
+    <div class="wrapx">
+      <div class="manifesto__eyebrow">Why Colaberry</div>
+      <p>
+        <span class="w">We&nbsp;</span><span class="w">turn&nbsp;</span><span class="w">ambition&nbsp;</span><span class="w">into&nbsp;</span><span class="w">opportunity&nbsp;</span><span class="w">—&nbsp;</span><span class="w">reskilling&nbsp;</span><span class="w">careers&nbsp;</span><span class="w">in&nbsp;</span><span class="w">data&nbsp;</span><span class="w">and&nbsp;</span><span class="w">AI,&nbsp;</span><span class="w">no&nbsp;</span><span class="w">degree&nbsp;</span><span class="w">required.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats2">
+    <div class="wrapx">
+      <div class="stats2__grid">
+        <div class="stat2"><div class="stat2__n" data-to="5000" data-suf="+">0</div><div class="stat2__l">Successful graduates since 2012</div></div>
+        <div class="stat2"><div class="stat2__n" data-to="45" data-suf="+">0</div><div class="stat2__l">Countries represented</div></div>
+        <div class="stat2"><div class="stat2__n" data-to="80000" data-pre="$" data-sep="1">0</div><div class="stat2__l">Average starting salary</div></div>
+        <div class="stat2"><div class="stat2__n" data-to="98" data-suf="%">0</div><div class="stat2__l">Employment rate</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS HORIZONTAL -->
+  <section class="progx">
+    <div class="wrapx progx__head">
+      <div class="progx__eyebrow">Career Pathways</div>
+      <h2 data-rise>Pick your<br>pathway.</h2>
+    </div>
+    <div class="progx__pin">
+      <div class="progx__track">
+        <a class="pcardx magnetic" href="data-analytics.html">
+          <img src="https://training.colaberry.com/hubfs/Image.jpg" alt="Data Analytics">
+          <div class="pcardx__scrim"></div>
+          <div class="pcardx__body">
+            <div class="pcardx__meta">Online · 12 weeks</div>
+            <h3>Data Analytics</h3>
+            <p>Become a data-driven decision maker. SQL, dashboards, and the analyst mindset.</p>
+            <span class="pcardx__link">Explore <i class="ri-arrow-right-line cb-i"></i></span>
+          </div>
+        </a>
+        <a class="pcardx magnetic" href="data-science.html">
+          <img src="https://training.colaberry.com/hubfs/Image%20(2).jpg" alt="Data Science">
+          <div class="pcardx__scrim"></div>
+          <div class="pcardx__body">
+            <div class="pcardx__meta">Online · 8–24 weeks</div>
+            <h3>Data Science</h3>
+            <p>Python, machine learning, and applied AI — build models and ship an AI capstone.</p>
+            <span class="pcardx__link">Explore <i class="ri-arrow-right-line cb-i"></i></span>
+          </div>
+        </a>
+        <a class="pcardx magnetic" href="job-readiness.html">
+          <img src="https://training.colaberry.com/hubfs/Image%20(3).jpg" alt="Job Readiness">
+          <div class="pcardx__scrim"></div>
+          <div class="pcardx__body">
+            <div class="pcardx__meta">Online · 6–12 months</div>
+            <h3>Job Readiness</h3>
+            <p>Projects, mentorship, and interview prep — supported until you're hired.</p>
+            <span class="pcardx__link">Explore <i class="ri-arrow-right-line cb-i"></i></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY / PARALLAX -->
+  <section class="why">
+    <div class="wrapx">
+      <div class="why__row">
+        <div class="why__text">
+          <div class="why__num">01 — Lucrative</div>
+          <h3>A future-proof, well-paid career.</h3>
+          <p>As industries run on data-driven insight and AI, skilled professionals are in high demand — with competitive salaries and roles that transfer across every industry.</p>
+          <a class="btn-mag ghost magnetic" href="pricing.html" style="color:var(--ink);border-color:rgba(0,0,0,.2);margin-top:8px"><span>See pricing</span></a>
+        </div>
+        <div class="why__media"><img src="https://training.colaberry.com/hubfs/Image%20Container%20(6).png" alt="Learner with laptop"></div>
+      </div>
+      <div class="why__row rev">
+        <div class="why__text">
+          <div class="why__num">02 — Human</div>
+          <h3>Technical depth, human skills.</h3>
+          <p>We blend cutting-edge data skills with the communication and problem-solving abilities that make careers — through hands-on projects, mentorship, and a community that has your back.</p>
+          <a class="btn-mag ghost magnetic" href="mentorship.html" style="color:var(--ink);border-color:rgba(0,0,0,.2);margin-top:8px"><span>Meet our mentors</span></a>
+        </div>
+        <div class="why__media"><img src="https://training.colaberry.com/hubfs/Image%20Container%20(4).png" alt="Professional at work"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIG QUOTE -->
+  <section class="bigq">
+    <div class="wrapx">
+      <blockquote>"Colaberry's project-based teaching enabled me to learn critical data skills and land a <span class="hl">rewarding career</span>."</blockquote>
+      <div class="bigq__by">
+        <img src="https://training.colaberry.com/hubfs/Mask%20group.jpg" alt="Kodjovi Togbey">
+        <div><b>Kodjovi Togbey</b><span>Colaberry Graduate</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGO MARQUEE -->
+  <section class="lmarq">
+    <div class="lmarq__lbl">Our graduates work at top companies</div>
+    <div class="lmarq__track">
+      <img src="https://training.colaberry.com/hs-fs/hubfs/image%202.png?width=124&height=42&name=image%202.png" alt="Google">
+      <img src="https://training.colaberry.com/hs-fs/hubfs/image%203.png?width=161&height=29&name=image%203.png" alt="Cognizant">
+      <img src="https://training.colaberry.com/hs-fs/hubfs/f0ac3a09438d550442ca15b10ecc21c0.png?width=160&height=50&name=f0ac3a09438d550442ca15b10ecc21c0.png" alt="Anthem">
+      <img src="https://training.colaberry.com/hs-fs/hubfs/image%206.png?width=123&height=25&name=image%206.png" alt="Meta">
+      <img src="https://training.colaberry.com/hs-fs/hubfs/IBM_logo.svg.png?width=100&height=40&name=IBM_logo.svg.png" alt="IBM">
+      <img src="https://training.colaberry.com/hs-fs/hubfs/Accenture.svg.png?width=130&height=34&name=Accenture.svg.png" alt="Accenture">
+      <img src="https://training.colaberry.com/hs-fs/hubfs/image%204.png?width=246&height=25&name=image%204.png" alt="Bank of America">
+      <img src="https://training.colaberry.com/hs-fs/hubfs/Microsoft_logo_(2012).svg.png?width=160&height=34&name=Microsoft_logo_(2012).svg.png" alt="Microsoft">
+      <img src="https://training.colaberry.com/hs-fs/hubfs/image%202.png?width=124&height=42&name=image%202.png" alt="Google">
+      <img src="https://training.colaberry.com/hs-fs/hubfs/image%203.png?width=161&height=29&name=image%203.png" alt="Cognizant">
+      <img src="https://training.colaberry.com/hs-fs/hubfs/f0ac3a09438d550442ca15b10ecc21c0.png?width=160&height=50&name=f0ac3a09438d550442ca15b10ecc21c0.png" alt="Anthem">
+      <img src="https://training.colaberry.com/hs-fs/hubfs/image%206.png?width=123&height=25&name=image%206.png" alt="Meta">
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="fcta">
+    <canvas class="fcta__canvas" aria-hidden="true"></canvas>
+    <div class="wrapx fcta__in">
+      <h2 data-rise>Ready to make<br>the <span class="hl">switch?</span></h2>
+      <p>Apply now or schedule a time to speak with a member of our admissions team. No degree, no risk.</p>
+      <a class="btn-mag primary magnetic" href="https://app.colaberry.com/account/login"><span>Apply Now</span></a>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="flf">
+  <div class="wrapx">
+    <div class="flf__grid">
+      <div>
+        <img src="../assets/logo/colaberry-horizontal-white.png" alt="Colaberry">
+        <p style="max-width:32ch;font-size:14px;margin:0">The School of Data Science &amp; Analytics. Reskilling careers in data &amp; AI since 2012.</p>
+        <div class="flf__social">
+          <a href="https://www.facebook.com/colaberryschoolofdataanalytics/" aria-label="Facebook"><span class="cb-i"><i class="ri-facebook-fill"></i></span></a>
+          <a href="https://twitter.com/ColaberrySODA" aria-label="Twitter"><span class="cb-i"><i class="ri-twitter-x-fill"></i></span></a>
+          <a href="https://www.instagram.com/colaberryschool/" aria-label="Instagram"><span class="cb-i"><i class="ri-instagram-line"></i></span></a>
+          <a href="https://www.linkedin.com/company/colaberry-school-of-data-analytics/" aria-label="LinkedIn"><span class="cb-i"><i class="ri-linkedin-box-fill"></i></span></a>
+        </div>
+      </div>
+      <div><h5>Courses</h5><a href="data-analytics.html">Data Analytics</a><a href="data-science.html">Data Science</a><a href="job-readiness.html">Job Readiness</a></div>
+      <div><h5>Why Colaberry</h5><a href="our-story.html">Our Story</a><a href="how-it-works.html">How It Works</a><a href="mentorship.html">Mentorship</a><a href="success-stories.html">Success Stories</a><a href="reviews.html">Reviews</a></div>
+      <div><h5>Resources</h5><a href="blog.html">Blog</a><a href="events.html">Events</a><a href="pricing.html">Pricing</a><a href="faq.html">FAQs</a><a href="hire-our-grads.html">Hire Our Grads</a><a href="contact.html">Contact</a></div>
+    </div>
+    <div class="flf__bottom"><span>© 2026 Colaberry School of Data Science &amp; Analytics</span><span><a href="home-classic.html" style="display:inline">Classic home</a></span></div>
+  </div>
+</footer>
+
+</body>
+</html>
