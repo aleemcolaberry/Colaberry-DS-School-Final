@@ -127,16 +127,21 @@
   --border-brand:   var(--red-500);
   --border-focus:   var(--blue-500);
 
-  /* Interactive — primary (cherry) */
-  --action-bg:        var(--red-500);
-  --action-bg-hover:  var(--red-600);
-  --action-bg-press:  var(--red-700);
+  /* Interactive — primary (cherry). Filled buttons carry white text at
+     body size, so the fill sits one step darker than the brand cherry:
+     white on red-600 4.73:1, red-700 6.22:1, red-800 8.50:1 (WCAG AA 4.5:1).
+     Brand cherry red-500 is 3.85:1 under white and stays for marks,
+     borders, large display text and --surface-brand. */
+  --action-bg:        var(--red-600);
+  --action-bg-hover:  var(--red-700);
+  --action-bg-press:  var(--red-800);
   --action-fg:        var(--neutral-0);
 
-  /* Interactive — secondary (leaf). green-600 fill keeps white button
-     text at >=3:1 for large/bold labels (green-500 would fail). */
-  --action-green-bg:       var(--green-600);
-  --action-green-bg-hover: var(--green-700);
+  /* Interactive — secondary (leaf). White text on green-800 6.48:1 and
+     green-900 9.04:1. green-600 (3.02:1) and green-700 (4.26:1) fail AA
+     for body-size labels. */
+  --action-green-bg:       var(--green-800);
+  --action-green-bg-hover: var(--green-900);
   --action-green-fg:       var(--neutral-0);
 
   /* Status */
@@ -182,12 +187,14 @@
   --border-default: rgba(255,255,255,0.14);
   --border-strong:  rgba(255,255,255,0.24);
 
-  --action-bg:        var(--red-500);
-  --action-bg-hover:  var(--red-400);
-  --action-bg-press:  var(--red-600);
+  /* Buttons keep white text in dark, so fills keep the light theme's
+     AA steps; lighter fills (red-400 3.13:1, green-500 2.34:1) fail. */
+  --action-bg:        var(--red-600);
+  --action-bg-hover:  var(--red-700);
+  --action-bg-press:  var(--red-800);
 
-  --action-green-bg:       var(--green-500);
-  --action-green-bg-hover: var(--green-400);
+  --action-green-bg:       var(--green-800);
+  --action-green-bg-hover: var(--green-900);
 
   --status-success:    var(--green-400);
   --status-danger:     var(--red-400);

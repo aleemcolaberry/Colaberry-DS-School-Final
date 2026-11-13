@@ -213,7 +213,7 @@ Never `linear` or hard bounces.
 
 | Interaction | What changes | Token |
 |---|---|---|
-| Hover — solid button | Fill steps one shade darker (red-500 → 600) | 140ms · ease-out |
+| Hover — solid button | Fill steps one shade darker (red-600 → 700) | 140ms · ease-out |
 | Hover — ghost / outline | Soft sunken background fills in | 140ms · ease-out |
 | Hover — card (clickable) | Lifts 6px, shadow deepens (sm → lg) | 220ms · ease-out |
 | Hover — link | Underline wipes in from the left | 220ms · ease-out |
@@ -231,9 +231,9 @@ Friendly action CTAs ("Apply now", "Enroll today"). **No emoji** in product/web.
 
 ## Accessibility (WCAG 2.2)
 - Body text on white: `--neutral-800` (13.6:1) or `--text-muted` (5.3:1).
-- Links: `--blue-600` (6.0:1). Green text: `--green-700+`.
+- Links: `--blue-600` (6.0:1). Green text: `--green-800+` (6.5:1; green-700 is 4.3:1 and fails for body text).
 - Cherry red and leaf green are **accent / large-text** colors — don't use raw red-500/green-500 for small body text.
-- White button text passes on cherry (3.9:1) and green-600 (3.0:1) at large/bold sizes (our buttons are 20px bold).
+- Filled buttons use `--action-bg` (red-600, white text 4.7:1) and `--action-green-bg` (green-800, 6.5:1). Button labels are 14–18px bold, below the 18.66px bold large-text size, so they need 4.5:1: white on brand cherry red-500 (3.9:1) or green-600 (3.0:1) fails for a button label. Keep cherry for the mark, borders, large display text and brand surfaces.
 - Focus: visible 3px berry-blue ring on every interactive element.
 
 ## Don'ts
