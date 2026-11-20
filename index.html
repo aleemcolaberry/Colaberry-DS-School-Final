@@ -3,379 +3,447 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preload" href="assets/fonts/files/roboto-400-21.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/files/remixicon.woff2" as="font" type="font/woff2" crossorigin>
 <title>Colaberry Design System — One system, every experience</title>
-<meta name="description" content="Tokens, components, and guidelines for Colaberry — the School of Data Science & Analytics.">
+<meta name="description" content="The living design system of Colaberry, the School of Data and AI — tokens, components, templates and rules that people and AI can read.">
 <link rel="icon" href="assets/logo/export/favicon-32.png">
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="landing.css">
+<script src="theme.js?v=1"></script>
+<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="components.css?v=2f0fe275">
+<link rel="stylesheet" href="landing.css?v=v6">
 </head>
 <body data-screen-label="DS Landing">
+<a class="cb-skip-link" href="#main">Skip to content</a>
 
 <nav class="lnav" aria-label="Main">
   <div class="lnav__in">
-    <a class="lnav__logo" href="index.html" aria-label="Colaberry home"><img src="assets/logo/colaberry-horizontal.png" alt="Colaberry"></a>
+    <a class="lnav__logo" href="index.html" aria-label="Colaberry home"><img class="lg-l" src="assets/logo/colaberry-horizontal.webp" alt="Colaberry" width="800" height="188" fetchpriority="high"><img class="lg-d" src="assets/logo/colaberry-horizontal-white.webp" alt="Colaberry" width="800" height="189"></a>
     <div class="lnav__links">
-      <a href="#colors">Color</a>
-      <a href="#type">Type</a>
-      <a href="#components">Components</a>
-      <a href="#examples">In practice</a>
-      <a href="#start">Get started</a>
+      <a href="#system">What's inside</a>
+      <a href="#flow">How it works</a>
+      <a href="#work">In practice</a>
+      <a href="#principles">Principles</a>
+      <a href="#start">Start here</a>
     </div>
-    <a class="btn btn--primary lnav__cta" href="design-system.html">Open the docs</a>
+    <div class="lnav__end">
+      <button class="icobtn" data-theme-toggle aria-pressed="false" aria-label="Toggle dark mode"><span class="cb-i"><i class="ri-moon-line"></i></span></button>
+      <a class="btn btn--primary lnav__cta" href="design-system.html">Open the docs</a>
+      <button class="icobtn burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Menu"><i></i><i></i></button>
+    </div>
   </div>
 </nav>
 
-<!-- ============ HERO ============ -->
-<header class="hero">
-  <canvas id="hero-fx" aria-hidden="true"></canvas>
-  <div class="hero__glow" id="heroGlow" aria-hidden="true"></div>
-
-  <div class="hero__in">
-    <span class="hero__pill"><span class="dot"></span>Colaberry Design System · v1.0</span>
-    <h1 class="hero__h1">
-      <span class="hl"><span class="hl__i">One system.</span></span>
-      <span class="hl"><span class="hl__i">Every <span class="grad">Colaberry</span></span></span>
-      <span class="hl"><span class="hl__i">experience<span class="cherry">.</span></span></span>
-    </h1>
-    <p class="hero__sub">Tokens, components, and guidelines for the School of Data Science &amp; Analytics — warm, accessible, and ready for production.</p>
-    <div class="hero__cta">
-      <a class="btn btn--primary" href="design-system.html">Explore the full system</a>
-      <a class="btn btn--ghost" href="#components">Meet the components</a>
+<div class="menu" id="menu" aria-hidden="true" data-screen-label="Menu overlay">
+  <div class="menu__in">
+    <nav class="menu__links" aria-label="Page sections">
+      <a href="#system"><small>01</small>What's inside</a>
+      <a href="#flow"><small>02</small>How it works</a>
+      <a href="#work"><small>03</small>In practice</a>
+      <a href="#principles"><small>04</small>Principles</a>
+      <a href="#start"><small>05</small>Start here</a>
+      <a href="playbook.html"><small>06</small>Playbook</a>
+    </nav>
+    <div class="menu__foot">
+      <a class="btn btn--primary" href="design-system.html">Open the docs</a>
+      <button class="btn btn--ghost" data-theme-toggle aria-pressed="false"><span class="cb-i"><i class="ri-moon-line"></i></span>Theme</button>
     </div>
-    <div class="hero__meta">
-      <span><b>20</b> components</span>
-      <span><b>245</b> tokens</span>
-      <span><b>WCAG 2.2</b> audited</span>
-      <span><b>Light &amp; dark</b> themes</span>
-    </div>
-  </div>
-  <span class="hero__fxhint" aria-hidden="true">Move &amp; click the field</span>
-</header>
-
-<!-- ============ MARQUEE ============ -->
-<div class="marq" aria-hidden="true">
-  <div class="marq__track" id="marqTrack">
-    <span class="marq__item">Button</span><span class="marq__item">Badge</span><span class="marq__item">Card</span><span class="marq__item">Avatar</span><span class="marq__item">Input</span><span class="marq__item">Textarea</span><span class="marq__item">Checkbox</span><span class="marq__item">Switch</span><span class="marq__item">Accordion</span><span class="marq__item">Breadcrumb</span><span class="marq__item">Pagination</span><span class="marq__item">Tooltip</span><span class="marq__item">Popover</span><span class="marq__item">Progress</span><span class="marq__item">Skeleton</span><span class="marq__item">Toast</span><span class="marq__item">Table</span><span class="marq__item">Dialog</span><span class="marq__item">Drawer</span><span class="marq__item">Carousel</span>
-    <span class="marq__item">Button</span><span class="marq__item">Badge</span><span class="marq__item">Card</span><span class="marq__item">Avatar</span><span class="marq__item">Input</span><span class="marq__item">Textarea</span><span class="marq__item">Checkbox</span><span class="marq__item">Switch</span><span class="marq__item">Accordion</span><span class="marq__item">Breadcrumb</span><span class="marq__item">Pagination</span><span class="marq__item">Tooltip</span><span class="marq__item">Popover</span><span class="marq__item">Progress</span><span class="marq__item">Skeleton</span><span class="marq__item">Toast</span><span class="marq__item">Table</span><span class="marq__item">Dialog</span><span class="marq__item">Drawer</span><span class="marq__item">Carousel</span>
   </div>
 </div>
 
-<!-- ============ MASTER BENTO ============ -->
-<section class="bento-sec" id="overview">
-  <div class="bento-head" data-reveal>
-    <p class="kicker"><span class="idx">01</span>The system at a glance</p>
-    <h2 class="h2">One language.<br>Many surfaces.</h2>
-  </div>
-  <div class="bento" data-reveal-group>
-
-    <!-- Color -->
-    <div class="bt bt--color c4 r3" id="colors">
-      <p class="bt__k">Color</p>
-      <h3 class="bt__h">Three hues, one voice.</h3>
-      <div id="ramps"></div>
-      <p class="lr-hint">Click any swatch to copy its hex.</p>
+<main id="main">
+<header class="hero" id="top" data-screen-label="Hero">
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>Colaberry Design System · v1.0</p>
+      <h1 class="hero__h1">One system. Every Colaberry experience<span class="cherry">.</span></h1>
+      <p class="hero__sub">Tokens, components, templates and rules for the School of Data and AI — written as code that people and Claude can both read. Describe what you need, and ship it on-brand in minutes.</p>
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="design-system.html">Explore the system</a>
+        <a class="btn btn--ghost" href="#start">Start with a prompt<span class="cb-i"><i class="ri-arrow-right-line"></i></span></a>
+      </div>
+      <ul class="hero__for" aria-label="Built for">
+        <li><span class="cb-i"><i class="ri-megaphone-line"></i></span>Marketing</li>
+        <li><span class="cb-i"><i class="ri-pencil-ruler-2-line"></i></span>Design</li>
+        <li><span class="cb-i"><i class="ri-code-s-slash-line"></i></span>Engineering</li>
+        <li><span class="cb-i"><i class="ri-sparkling-2-line"></i></span>Claude</li>
+      </ul>
     </div>
-
-    <!-- Type -->
-    <div class="bt bt--type c2 r3" id="type">
-      <div>
-        <p class="bt__k">Typography</p>
-        <div class="type-aa" aria-hidden="true">Aa<span class="g">.</span></div>
-      </div>
-      <div>
-        <div class="type-row"><span class="m">Black · 900</span><span class="s" style="font-weight:900;font-size:clamp(18px,2vw,26px)">Future-proof</span></div>
-        <div class="type-row"><span class="m">Regular</span><span class="s" style="font-family:var(--font-body);font-weight:400;font-size:15px;color:var(--text-body)">Roboto carries the voice.</span></div>
-        <div class="type-row"><span class="m">Mono</span><span class="s" style="font-family:var(--font-mono);font-weight:500;font-size:14px;color:var(--blue-600)">COUNT(*)</span></div>
-      </div>
-    </div>
-
-    <!-- Stats -->
-    <div class="bt bt--stat c2 r1"><div class="bt__n" data-count="20">0</div><div class="bt__nl">Accessible components</div></div>
-    <div class="bt bt--stat bt--b c2 r1"><div class="bt__n" data-count="245">0</div><div class="bt__nl">Design tokens · light &amp; dark</div></div>
-    <div class="bt bt--stat bt--g c2 r1"><div class="bt__n">2.2</div><div class="bt__nl">WCAG-audited contrast</div></div>
-
-    <!-- Dark mode showcase -->
-    <div class="bt bt--dark c3 r2" data-theme="dark">
-      <p class="bt__k">Theme</p>
-      <h3 class="bt__h" style="font-size:clamp(20px,2.2vw,28px)">Dark mode, free.</h3>
-      <p class="bt__p">Set <code style="font-family:var(--font-mono);font-size:.9em;color:var(--green-400)">data-theme="dark"</code> — the cherry accent stays constant.</p>
-      <div class="mini">
-        <div class="mini-card"><b>Data Analytics</b><span>12 weeks · Enrolling</span></div>
-        <div class="mini-row">
-          <button class="r-btn">Apply now</button>
-          <span class="r-badge r-badge--g"><span class="d"></span>Open</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Data-viz -->
-    <div class="bt bt--viz c3 r2">
-      <p class="bt__k">Data visualization</p>
-      <h3 class="bt__h" style="font-size:clamp(20px,2.2vw,28px)">Charts, on brand.</h3>
-      <div class="viz-bars" aria-hidden="true">
-        <i style="height:64%;background:var(--chart-1)"></i>
-        <i style="height:92%;background:var(--chart-2)"></i>
-        <i style="height:48%;background:var(--chart-3)"></i>
-        <i style="height:76%;background:var(--chart-4)"></i>
-        <i style="height:58%;background:var(--chart-5)"></i>
-        <i style="height:84%;background:var(--chart-6)"></i>
-        <i style="height:40%;background:var(--chart-7)"></i>
-      </div>
-      <div class="viz-legend">
-        <span><i style="background:var(--chart-1)"></i>Categorical</span>
-        <span><i style="background:var(--chart-3)"></i>Color-blind safe</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ============ COMPONENTS ============ -->
-<section class="sec" id="components" style="background: var(--surface-subtle);">
-  <div class="wrap">
-    <div data-reveal>
-      <p class="kicker"><span class="idx">02</span>Components</p>
-      <h2 class="h2">Twenty primitives,<br>token-driven.</h2>
-      <p class="lead">Every component reads the same tokens, animates on the same curves, and ships with accessibility built in.</p>
-    </div>
-  </div>
-  <div class="cmp-bento" data-reveal-group>
-      <div class="cmp-card c2">
-        <h3>Buttons</h3>
-        <div class="row"><button class="r-btn">Apply now</button><button class="r-btn r-btn--green">Enroll</button></div>
-        <div class="row"><button class="r-btn r-btn--blue">Book a call</button><button class="r-btn r-btn--ghost">Maybe later</button></div>
-      </div>
-      <div class="cmp-card c2">
-        <h3>Badges &amp; Avatars</h3>
-        <div class="row"><span class="r-badge r-badge--g"><span class="d"></span>Enrolling</span><span class="r-badge r-badge--b">Data Science</span><span class="r-badge r-badge--r">New</span></div>
-        <div class="row" style="margin-top:16px">
-          <span class="r-avgroup">
-            <img class="r-av" src="assets/avatars/person-1.png" alt="">
-            <img class="r-av" src="assets/avatars/person-2.png" alt="">
-            <img class="r-av" src="assets/avatars/person-3.png" alt="">
-            <span class="r-av r-av--txt">AL</span>
-          </span>
-          <span style="font-size:13px;color:var(--text-muted)">5,000+ careers changed</span>
-        </div>
-      </div>
-      <div class="cmp-card c2">
-        <h3>Forms</h3>
-        <label class="r-label" for="r-email">Email</label>
-        <input class="r-input" id="r-email" type="email" placeholder="ada@email.com">
-        <div class="row" style="margin-top:14px; align-items:center;">
-          <button class="r-switch" role="switch" aria-checked="true" aria-label="Email me about new cohorts"></button>
-          <span style="font-size:13.5px;color:var(--text-body)">Email me about new cohorts</span>
-        </div>
-      </div>
-      <div class="cmp-card c4">
-        <h3>Data</h3>
-        <table class="r-table">
-          <thead><tr><th>Cohort</th><th>Starts</th><th>Weeks</th><th>Status</th></tr></thead>
-          <tbody>
-            <tr><td>Data Analytics</td><td>Apr 8</td><td>12</td><td><span class="r-badge r-badge--g"><span class="d"></span>Open</span></td></tr>
-            <tr><td>Data Science</td><td>May 6</td><td>24</td><td><span class="r-badge r-badge--g"><span class="d"></span>Open</span></td></tr>
-            <tr><td>Intro Seminar</td><td>Mar 18</td><td>2</td><td><span class="r-badge r-badge--b">Waitlist</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="cmp-card c2">
-        <h3>Progress &amp; Skeleton</h3>
-        <div class="stack">
-          <div><div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-muted);margin-bottom:6px"><span>Course progress</span><b style="color:var(--text-strong)">68%</b></div><div class="r-prog"><i data-val="68"></i></div></div>
-          <div class="r-prog r-prog--g"><i data-val="42"></i></div>
-          <div style="display:flex;gap:10px;align-items:flex-start">
-            <span class="r-skel" style="width:38px;height:38px;border-radius:50%;flex:none"></span>
-            <span style="flex:1"><span class="r-skel" style="display:block;height:11px;width:82%;margin-bottom:8px"></span><span class="r-skel" style="display:block;height:11px;width:58%"></span></span>
+    <figure class="board" aria-label="The same learner card built from the design system, in light and dark themes">
+      <div class="pane" data-theme="light">
+        <span class="pane__tag"><span class="cb-i"><i class="ri-sun-line"></i></span>Light</span>
+        <div class="cb-card cb-card--pad spec">
+          <div class="spec__who">
+            <span class="cb-avatar cb-avatar--md" role="img" aria-label="Ada Lovelace"><span class="cb-avatar__txt" aria-hidden="true">AL</span></span>
+            <div class="spec__name"><b>Ada Lovelace</b><span>Data Analytics · Cohort 14</span></div>
+            <span class="cb-badge cb-badge--green"><span class="cb-badge__dot" aria-hidden="true"></span>Enrolling</span>
           </div>
+          <div class="cb-prog"><div class="cb-prog__head"><span class="cb-prog__label">Course progress</span><span class="cb-prog__val">68%</span></div><div class="cb-prog__track"><div class="cb-prog__bar" style="width:68%"></div></div></div>
+          <div class="spec__row"><button class="cb-btn cb-btn--primary cb-btn--sm" type="button">Continue lesson</button><button class="cb-btn cb-btn--outline cb-btn--sm" type="button">Book a 1:1</button></div>
+        </div>
+        <div class="cb-toast cb-toast--success spec__toast" role="status"><span class="cb-toast__ic cb-i" aria-hidden="true"><i class="ri-checkbox-circle-line"></i></span><div class="cb-toast__body"><div class="cb-toast__title">Assignment submitted</div><div class="cb-toast__msg">Your mentor reviews it within two business days.</div></div></div>
+      </div>
+      <div class="pane" data-theme="dark">
+        <span class="pane__tag"><span class="cb-i"><i class="ri-moon-line"></i></span>Dark</span>
+        <div class="cb-card cb-card--pad spec">
+          <div class="spec__who">
+            <span class="cb-avatar cb-avatar--md" role="img" aria-label="Grace Hopper"><span class="cb-avatar__txt" aria-hidden="true">GH</span></span>
+            <div class="spec__name"><b>Grace Hopper</b><span>AI Systems Architect · Cohort 3</span></div>
+            <span class="cb-badge cb-badge--blue"><span class="cb-badge__dot" aria-hidden="true"></span>In review</span>
+          </div>
+          <div class="cb-prog"><div class="cb-prog__head"><span class="cb-prog__label">Capstone</span><span class="cb-prog__val">92%</span></div><div class="cb-prog__track"><div class="cb-prog__bar blue" style="width:92%"></div></div></div>
+          <div class="spec__row"><button class="cb-btn cb-btn--primary cb-btn--sm" type="button">View feedback</button><button class="cb-btn cb-btn--outline cb-btn--sm" type="button">Download certificate</button></div>
+        </div>
+        <div class="cb-toast cb-toast--info spec__toast" role="status"><span class="cb-toast__ic cb-i" aria-hidden="true"><i class="ri-calendar-line"></i></span><div class="cb-toast__body"><div class="cb-toast__title">Mentor session Thursday, 5:30 PM</div><div class="cb-toast__msg">Agenda: capstone proposal review.</div></div></div>
+      </div>
+      <figcaption class="board__cap">Real components from this system — nothing mocked. Both panes are pinned; the page theme toggles around them.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<div class="facts" aria-label="At a glance">
+  <ul class="wrap facts__in">
+    <li><span class="cb-i"><i class="ri-braces-line"></i></span><b>289</b><span>design tokens</span></li>
+    <li><span class="cb-i"><i class="ri-layout-grid-line"></i></span><b>26</b><span>live components</span></li>
+    <li><span class="cb-i"><i class="ri-layout-masonry-line"></i></span><b>29</b><span>starting templates</span></li>
+    <li><span class="cb-i"><i class="ri-contrast-2-line"></i></span><b>AA</b><span>WCAG 2.2, light and dark</span></li>
+  </ul>
+</div>
+
+<section class="sec" id="system" data-screen-label="What's inside">
+  <div class="wrap shead">
+    <p class="kicker"><span class="idx">01</span>What's inside</p>
+    <h2 class="h2">Everything the brand knows, in one place.</h2>
+    <p class="lead">A design system is a brand's shared language — color, type, components, motion and voice — packed into code that people and AI can read. Everything below is live; go ahead and touch it.</p>
+  </div>
+  <div class="wrap">
+    <div class="bento">
+      <div class="tile t-ramps" data-reveal>
+        <div class="tile__hd"><span class="ico ico--red"><span class="cb-i"><i class="ri-palette-line"></i></span></span><div><p class="tile__k">Color</p><h3 class="tile__h">Three hues, one voice.</h3></div></div>
+        <div id="ramps"></div>
+        <p class="tile__hint">Click any swatch to copy its hex.</p>
+      </div>
+      <div class="tile t-type" data-reveal>
+        <div class="tile__hd"><span class="ico ico--neutral"><span class="cb-i"><i class="ri-font-size-2"></i></span></span><div><p class="tile__k">Type</p><h3 class="tile__h">Two faces, clear roles.</h3></div></div>
+        <div class="tw-aa" id="twAa" aria-hidden="true">Aa<span class="g">.</span></div>
+        <div class="tw-row" role="group" aria-label="Preview weight">
+          <button class="tw-btn" data-w="400" type="button">400</button>
+          <button class="tw-btn" data-w="500" type="button">500</button>
+          <button class="tw-btn" data-w="700" type="button">700</button>
+          <button class="tw-btn is-on" data-w="900" type="button" aria-pressed="true">900</button>
+        </div>
+        <p class="tile__p">Roboto carries every word. Roboto Mono carries code and numbers. Quicksand is reserved for the logotype.</p>
+      </div>
+      <div class="tile t-tokens" data-reveal>
+        <div class="tile__hd"><span class="ico ico--blue"><span class="cb-i"><i class="ri-braces-line"></i></span></span><div><p class="tile__k">Tokens</p><h3 class="tile__h">Every decision, named.</h3></div></div>
+        <p class="tile__p">Components never hard-code a value. Change a token and every surface follows.</p>
+        <div class="tok-col">
+          <span class="tok"><i style="background:var(--brand-primary)"></i><code>--brand-accent</code></span>
+          <span class="tok"><i class="pill"></i><code>--radius-pill</code></span>
+          <span class="tok"><i class="aa">ms</i><code>--dur-base · 220ms</code></span>
         </div>
       </div>
-      <div class="cmp-card c2">
-        <h3>Feedback</h3>
-        <div class="r-toast"><span class="r-tick">✓</span><span><b>Application sent</b><span>We'll be in touch within a day.</span></span></div>
+      <div class="tile t-voice" data-reveal>
+        <div class="tile__hd"><span class="ico ico--green"><span class="cb-i"><i class="ri-chat-quote-line"></i></span></span><div><p class="tile__k">Voice</p><h3 class="tile__h">Warm, plain, second person.</h3></div></div>
+        <p class="tile__p">One sentence of what happened, one of what to do. Never blame, never jargon.</p>
+        <div class="voice">
+          <span class="voice__no"><span class="cb-i"><i class="ri-close-line"></i></span>Invalid input. Error 422.</span>
+          <span class="voice__yes"><span class="cb-i"><i class="ri-check-line"></i></span>Enter a valid email like you@domain.com.</span>
+        </div>
       </div>
-      <a class="cmp-card c2" href="design-system.html#components" style="text-decoration:none; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:10px;">
-        <h3 style="margin:0">All 20 components</h3>
-        <span style="font-family:var(--font-display);font-weight:900;font-size:clamp(20px,2.4vw,30px);color:var(--text-strong);line-height:1.05;letter-spacing:-.02em">Live &amp; interactive&nbsp;→</span>
-        <span style="font-size:13px;color:var(--text-muted)">Accordion, Dialog, Drawer, Carousel, Tooltip…</span>
-      </a>
+      <div class="tile t-motion" data-reveal>
+        <div class="tile__hd"><span class="ico ico--neutral"><span class="cb-i"><i class="ri-pulse-line"></i></span></span><div><p class="tile__k">Motion</p><h3 class="tile__h">Quick, gentle, purposeful.</h3></div></div>
+        <p class="tile__p">140–360 ms, ease-out in, spring only to confirm. Never showy, never infinite on reading content.</p>
+        <div class="mo-stage" id="mstage"><span class="mo-chip">enter · 360 ms</span><span class="mo-chip">stagger · 70 ms</span><span class="mo-chip">hover · 140 ms</span><span class="mo-check"><span class="cb-i"><i class="ri-check-line"></i></span></span></div>
+        <button class="tw-btn mo-play" id="mplay" type="button"><span class="cb-i"><i class="ri-repeat-2-line"></i></span>Replay</button>
+      </div>
+      <div class="tile t-cmp" data-reveal>
+        <div class="tile__hd"><span class="ico ico--red"><span class="cb-i"><i class="ri-layout-grid-line"></i></span></span><div><p class="tile__k">Components</p><h3 class="tile__h">Live, accessible, token-fed.</h3></div></div>
+        <div class="cmp-live">
+          <div class="row"><button class="cb-btn cb-btn--primary" type="button">Apply now</button><button class="cb-btn cb-btn--confirm" type="button">Enroll</button><button class="cb-btn cb-btn--outline" type="button">Maybe later</button></div>
+          <div class="row"><span class="cb-badge cb-badge--green"><span class="cb-badge__dot" aria-hidden="true"></span>Enrolling</span><span class="cb-badge cb-badge--blue">Data Science</span><span class="cb-badge cb-badge--warning">3 seats left</span></div>
+          <div class="cb-field"><label class="cb-field__label" for="demo-email">Email</label><input class="cb-input" id="demo-email" type="email" placeholder="ada@email.com" autocomplete="off"></div>
+          <label class="cb-switch"><input type="checkbox" checked><span class="cb-switch__track"><span class="cb-switch__knob"></span></span>Email me about new cohorts</label>
+          <div class="cb-prog"><div class="cb-prog__head"><span class="cb-prog__label">Course progress</span><span class="cb-prog__val">68%</span></div><div class="cb-prog__track"><div class="cb-prog__bar" style="width:68%"></div></div></div>
+        </div>
+        <a class="tile__link" href="design-system.html#components">Meet all twenty-six<span class="cb-i"><i class="ri-arrow-right-line"></i></span></a>
+      </div>
+      <div class="tile t-tpl" data-reveal>
+        <div class="tile__hd"><span class="ico ico--blue"><span class="cb-i"><i class="ri-layout-masonry-line"></i></span></span><div><p class="tile__k">Templates</p><h3 class="tile__h">Start at 80% done.</h3></div></div>
+        <div class="tpl-grid">
+          <div class="tpl tpl--social"><small>social · 1:1</small><b>Your data career starts here.</b></div>
+          <div class="tpl tpl--cert"><small>certificate</small><span class="seal" aria-hidden="true"></span><b>Certificate of Completion</b></div>
+          <div class="tpl tpl--resume"><small>resume · letter</small><i class="hd"></i><i style="width:80%"></i><i style="width:68%"></i><i style="width:74%"></i></div>
+          <div class="tpl tpl--deck"><small>deck · 16:9</small><b>Q2 Investor Briefing</b><span class="mini-bars" aria-hidden="true"><i style="height:40%;background:var(--chart-1)"></i><i style="height:70%;background:var(--chart-2)"></i><i style="height:55%;background:var(--chart-3)"></i><i style="height:100%;background:var(--chart-4)"></i></span></div>
+        </div>
+        <p class="tile__p">Social posts, decks, certificates, resumes, event pages, newsletters — pre-wired to the tokens. Pick one, swap the words, ship it.</p>
+        <a class="tile__link" href="design-system.html">See the template kit<span class="cb-i"><i class="ri-arrow-right-line"></i></span></a>
+      </div>
+      <div class="tile t-prompt" data-reveal>
+        <div class="tile__hd"><span class="ico ico--green"><span class="cb-i"><i class="ri-sparkling-2-line"></i></span></span><div><p class="tile__k">AI-readable</p><h3 class="tile__h">Plain English is the API.</h3></div></div>
+        <p class="tile__p">Claude reads the brand guide, tokens and components, then does the busywork: describe the artifact, download finished HTML.</p>
+        <div class="prompt-card" data-snip="prompt" role="button" tabindex="0" aria-label="Copy the starter prompt">
+          <span class="copybtn"><span class="cb-i"><i class="ri-file-copy-line"></i></span>Copy</span>
+          <code>"Using the <b>Colaberry design system</b>, create a [social post / flyer / slide] at [size] for [topic]. Headline: [your words] — give me 3 options."</code>
+        </div>
+        <div class="prompt-ret"><span class="arr">returns</span><span class="cb-i" aria-hidden="true"><i class="ri-arrow-right-line"></i></span><span class="filechip"><span class="cb-i"><i class="ri-file-download-line"></i></span>spring-cohort-post.html · 1080×1080</span></div>
+      </div>
+      <div class="tile t-a11y" data-reveal>
+        <div class="tile__hd"><span class="ico ico--neutral"><span class="cb-i"><i class="ri-contrast-2-line"></i></span></span><div><p class="tile__k">Accessibility</p><h3 class="tile__h">AA is the floor.</h3></div></div>
+        <p class="tile__p">Every color pair audited in both themes. Focus is always visible.</p>
+        <div class="ctr-row">
+          <span class="ctr"><b>14.2:1</b><span>body text</span></span>
+          <span class="ctr"><b>6.0:1</b><span>links</span></span>
+          <span class="ctr"><b>44 px</b><span>touch targets</span></span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ============ EXAMPLES ============ -->
-<section class="sec" id="examples">
-  <div class="ex-head" data-reveal>
-    <p class="kicker"><span class="idx">03</span>In practice</p>
-    <h2 class="h2">One system.<br>Every kind of output.</h2>
-    <p class="lead">Decks, social posts, and product screens — all generated from the same tokens, type, and components. Nothing custom, nothing off-brand.</p>
+<section class="sec" id="flow" data-screen-label="How it works">
+  <div class="wrap shead">
+    <p class="kicker"><span class="idx">02</span>How it works</p>
+    <h2 class="h2">From one token to a finished file.</h2>
+    <p class="lead">One cherry-red decision travels from a variable, through components and templates, into something you can ship.</p>
   </div>
+  <div class="wrap">
+    <ol class="steps">
+      <li class="step" data-reveal>
+        <div class="step__hd"><span class="step__n">1</span><span class="ico ico--red"><span class="cb-i"><i class="ri-braces-line"></i></span></span></div>
+        <h3 class="step__h">A decision gets a name.</h3>
+        <div class="step__stage"><code><span class="c">/* tokens/colors.css */</span><br>--brand-accent: <b>#FB2832</b>;</code><span class="step__swatch" aria-hidden="true"></span></div>
+        <p class="step__p">289 named decisions cover color, type, space and motion — the single source of truth.</p>
+      </li>
+      <li class="step" data-reveal>
+        <div class="step__hd"><span class="step__n">2</span><span class="ico ico--red"><span class="cb-i"><i class="ri-layout-grid-line"></i></span></span></div>
+        <h3 class="step__h">Components inherit it.</h3>
+        <div class="step__stage"><button class="cb-btn cb-btn--primary" type="button">Apply now</button><code class="step__mini">background: var(--action-bg)</code></div>
+        <p class="step__p">Nothing hard-codes a value. Edit one line and all twenty-six components restyle themselves.</p>
+      </li>
+      <li class="step" data-reveal>
+        <div class="step__hd"><span class="step__n">3</span><span class="ico ico--red"><span class="cb-i"><i class="ri-layout-masonry-line"></i></span></span></div>
+        <h3 class="step__h">Templates assemble them.</h3>
+        <div class="step__stage"><div class="step__post"><small>social · 1080×1080</small><b>Your data career starts here.</b><span class="step__pill">Apply now</span></div></div>
+        <p class="step__p">29 starting points — posts, decks, certificates, pages — arrive 80% done.</p>
+      </li>
+      <li class="step" data-reveal>
+        <div class="step__hd"><span class="step__n">4</span><span class="ico ico--red"><span class="cb-i"><i class="ri-download-2-line"></i></span></span></div>
+        <h3 class="step__h">Anyone ships, on-brand.</h3>
+        <div class="step__stage"><span class="filechip"><span class="cb-i"><i class="ri-file-download-line"></i></span>spring-cohort-post.html</span><span class="step__ok"><span class="cb-i"><i class="ri-check-double-line"></i></span>on-brand · AA · dark-mode ready</span></div>
+        <p class="step__p">Describe it in plain English. A person or Claude delivers the finished file in minutes.</p>
+      </li>
+    </ol>
+  </div>
+</section>
 
-  <!-- DECKS -->
-  <div class="ex-group" data-reveal-group>
-    <div class="ex-gh"><span class="ex-gh__n">A</span><span class="ex-gh__t">Decks &amp; presentations</span><span class="ex-gh__line"></span><span class="ex-gh__fmt">16 : 9 · PPTX-ready</span></div>
-    <div class="ex-row ex-row--deck">
-      <div class="ex-slide ex-slide--title">
-        <div class="lg"><img src="assets/logo/colaberry-horizontal-white.png" alt="Colaberry"></div>
-        <h4>Future-proof your career in data &amp; AI</h4>
-        <div class="meta"><span>Investor Briefing</span><span>Q2 2026</span></div>
+<section class="sec sec--tint" id="work" data-screen-label="In practice">
+  <div class="wrap shead shead--tight">
+    <div class="gal-head">
+      <div>
+        <p class="kicker"><span class="idx">03</span>In practice</p>
+        <h2 class="h2">One system, every medium.</h2>
+        <p class="lead">Decks, posts, product, print — all drawn from the same tokens. Nothing custom, nothing off-brand.</p>
       </div>
-      <div class="ex-slide ex-slide--data">
+      <div class="gal-ui">
+        <span class="gal-track" aria-hidden="true"><i id="galBar"></i></span>
+        <button class="icobtn" data-gal="prev" aria-label="Scroll gallery back"><span class="cb-i"><i class="ri-arrow-left-line"></i></span></button>
+        <button class="icobtn" data-gal="next" aria-label="Scroll gallery forward"><span class="cb-i"><i class="ri-arrow-right-line"></i></span></button>
+      </div>
+    </div>
+  </div>
+  <div class="gal" id="gal" tabindex="0" aria-label="Examples of artifacts built from the system — scroll horizontally">
+    <div class="gitem">
+      <p class="glabel">Deck · title 16:9</p>
+      <div class="gcard gcard--deck g-title">
+        <img src="assets/logo/colaberry-horizontal-white.webp" alt="" width="800" height="189" loading="lazy" decoding="async">
+        <h3>Future-proof your career in data &amp; AI</h3>
+        <div class="meta"><span>Investor briefing</span><span>Q2 2026</span></div>
+      </div>
+    </div>
+    <div class="gitem">
+      <p class="glabel">Deck · data slide</p>
+      <div class="gcard gcard--deck g-data">
         <p class="sh">Graduate outcomes</p>
-        <div class="bars">
+        <h3>5,000+ careers changed</h3>
+        <div class="g-bars">
           <i data-l="'23" style="height:52%;background:var(--chart-1)"></i>
-          <i data-l="'24" style="height:68%;background:var(--chart-3)"></i>
-          <i data-l="'25" style="height:84%;background:var(--chart-2)"></i>
+          <i data-l="'24" style="height:68%;background:var(--chart-2)"></i>
+          <i data-l="'25" style="height:84%;background:var(--chart-3)"></i>
           <i data-l="'26" style="height:97%;background:var(--chart-4)"></i>
         </div>
-        <p class="ex-sub" style="margin:18px 0 0">5,000+ careers changed · 49 countries</p>
       </div>
     </div>
-  </div>
-
-  <!-- SOCIAL -->
-  <div class="ex-group" data-reveal-group>
-    <div class="ex-gh"><span class="ex-gh__n">B</span><span class="ex-gh__t">Social posts</span><span class="ex-gh__line"></span><span class="ex-gh__fmt">1:1 feed · 9:16 story</span></div>
-    <div class="ex-row ex-row--social">
-      <div class="ex-post ex-post--cherry">
-        <span class="tag">Now enrolling</span>
-        <h4>Your data career starts here.</h4>
-        <span class="pill">Apply now →</span>
-      </div>
-      <div class="ex-post ex-post--cream">
-        <img class="lgm" src="assets/logo/colaberry-horizontal.png" alt="Colaberry">
-        <h4>No degree.<br>No problem.</h4>
+    <div class="gitem">
+      <p class="glabel">Social · 1:1</p>
+      <div class="gcard gcard--sq g-post g-post--cream">
+        <img src="assets/logo/colaberry-horizontal.webp" alt="" width="800" height="188" loading="lazy" decoding="async">
+        <h3>No degree.<br>No problem.</h3>
         <span class="pill">Free info session</span>
       </div>
-      <div class="ex-story">
+    </div>
+    <div class="gitem">
+      <p class="glabel">Story · 9:16</p>
+      <div class="gcard gcard--story g-story">
         <span class="tag">Spring cohort</span>
-        <h4>12 weeks to job-ready.</h4>
+        <h3>12 weeks to job-ready.</h3>
         <span class="pill">Swipe up</span>
       </div>
     </div>
-  </div>
-
-  <!-- WEB -->
-  <div class="ex-group" data-reveal-group>
-    <div class="ex-gh"><span class="ex-gh__n">C</span><span class="ex-gh__t">Web pages</span><span class="ex-gh__line"></span><span class="ex-gh__fmt">Responsive · light &amp; dark</span></div>
-    <div class="ex-row ex-row--web">
-      <div class="ex-frame">
-        <div class="ex-bar"><i></i><i></i><i></i><span>sign-in.html</span></div>
-        <div class="ex-body">
-          <p class="ex-title" style="text-align:center">Welcome back</p>
-          <p class="ex-sub" style="text-align:center">Sign in to continue your data journey.</p>
-          <label class="r-label">Email</label>
-          <input class="r-input" type="email" placeholder="ada@email.com">
-          <div style="height:12px"></div>
-          <label class="r-label">Password</label>
-          <input class="r-input" type="password" placeholder="••••••••">
-          <div style="height:18px"></div>
-          <button class="r-btn" style="width:100%">Sign in</button>
-        </div>
-      </div>
-      <div class="ex-frame">
-        <div class="ex-bar"><i></i><i></i><i></i><span>pricing.html</span></div>
-        <div class="ex-body">
-          <p class="ex-title">Two proven paths</p>
-          <p class="ex-sub">Pick a program; scholarships available for both.</p>
-          <div class="ex-cards3">
-            <div class="ex-price"><b>Data Analytics</b><span class="p">$1,999</span><button class="r-btn r-btn--blue" style="width:100%">Choose</button></div>
-            <div class="ex-price feat"><b>+ Accelerator</b><span class="p">$12k</span><button class="r-btn" style="width:100%">Choose</button></div>
-            <div class="ex-price"><b>Data Science</b><span class="p">$4,500</span><button class="r-btn r-btn--green" style="width:100%">Choose</button></div>
-          </div>
-        </div>
-      </div>
-      <div class="ex-frame">
-        <div class="ex-bar"><i></i><i></i><i></i><span>dashboard.html</span></div>
-        <div class="ex-body">
-          <p class="ex-title">This week</p>
-          <p class="ex-sub">Cohort dashboard, light &amp; dark ready.</p>
-          <div class="ex-stats4">
-            <div class="ex-stat"><b>68%</b><span>Complete</span></div>
-            <div class="ex-stat"><b>12</b><span>Lessons left</span></div>
-            <div class="ex-stat"><b>4.9</b><span>Avg. score</span></div>
-            <div class="ex-stat"><b>Apr 30</b><span>Ends</span></div>
-          </div>
-          <div class="stack" style="display:flex;flex-direction:column;gap:12px">
-            <div><div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-muted);margin-bottom:6px"><span>SQL fundamentals</span><b style="color:var(--text-strong)">90%</b></div><div class="r-prog r-prog--g"><i data-val="90"></i></div></div>
-            <div><div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-muted);margin-bottom:6px"><span>Dashboards</span><b style="color:var(--text-strong)">55%</b></div><div class="r-prog"><i data-val="55"></i></div></div>
-          </div>
+    <div class="gitem">
+      <p class="glabel">Web · sign-in</p>
+      <div class="gcard gcard--web">
+        <div class="g-bar"><i></i><i></i><i></i><span>sign-in.html</span></div>
+        <div class="g-body">
+          <p class="ttl">Welcome back</p>
+          <p class="sub">Sign in to continue your data journey.</p>
+          <div class="cb-field"><label class="cb-field__label" for="g-email">Email</label><input class="cb-input" id="g-email" type="email" placeholder="ada@email.com" autocomplete="off"></div>
+          <button class="cb-btn cb-btn--primary cb-btn--full" type="button">Sign in</button>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- BROCHURE -->
-  <div class="ex-group" data-reveal-group>
-    <div class="ex-gh"><span class="ex-gh__n">D</span><span class="ex-gh__t">Print &amp; brochures</span><span class="ex-gh__line"></span><span class="ex-gh__fmt">A4 · print-ready</span></div>
-    <div class="ex-row ex-row--brochure">
-      <div class="ex-broch">
-        <div class="ex-broch__back">
-          <img src="assets/logo/colaberry-horizontal.png" alt="Colaberry" style="height:20px">
-          <div>
-            <b style="display:block;font-family:var(--font-display);font-weight:900;font-size:15px;color:var(--text-strong);margin-bottom:6px">Get in touch</b>
-            <span style="font-size:11px;color:var(--text-muted);line-height:1.6">training.colaberry.com<br>Irving, TX</span>
+    <div class="gitem">
+      <p class="glabel">Web · dashboard, dark</p>
+      <div class="gcard gcard--web" data-theme="dark">
+        <div class="g-bar"><i></i><i></i><i></i><span>dashboard.html</span></div>
+        <div class="g-body">
+          <p class="ttl">This week</p>
+          <div class="g-stats">
+            <span class="g-stat"><b>68%</b><span>Complete</span></span>
+            <span class="g-stat"><b>4.9</b><span>Avg. score</span></span>
           </div>
-          <span style="font-size:9px;color:var(--text-subtle)">© 2026 Colaberry</span>
-        </div>
-        <div class="ex-broch__front">
-          <img src="assets/logo/colaberry-horizontal-white.png" alt="Colaberry" style="height:20px">
-          <h4>Future-proof your career in data &amp; AI</h4>
-          <span class="pill">Spring cohort</span>
+          <div class="cb-prog"><div class="cb-prog__head"><span class="cb-prog__label">SQL fundamentals</span><span class="cb-prog__val">90%</span></div><div class="cb-prog__track"><div class="cb-prog__bar green" style="width:90%"></div></div></div>
+          <div class="cb-prog"><div class="cb-prog__head"><span class="cb-prog__label">Dashboards</span><span class="cb-prog__val">55%</span></div><div class="cb-prog__track"><div class="cb-prog__bar" style="width:55%"></div></div></div>
         </div>
       </div>
-      <div class="ex-broch ex-broch--inside">
-        <div class="ex-broch__col">
-          <b style="font-family:var(--font-display);font-weight:900;font-size:14px;color:var(--text-strong)">Why Colaberry</b>
-          <span class="ln"><i style="background:var(--green-500)"></i>Instructor-led classes</span>
-          <span class="ln"><i style="background:var(--blue-500)"></i>1:1 mentorship</span>
-          <span class="ln"><i style="background:var(--red-500)"></i>A year of job support</span>
+    </div>
+    <div class="gitem">
+      <p class="glabel">Social · 1:1</p>
+      <div class="gcard gcard--sq g-post g-post--green">
+        <span class="tag">Scholarships</span>
+        <h3>Veterans: full-tuition scholarships open.</h3>
+        <span class="pill">Apply now</span>
+      </div>
+    </div>
+    <div class="gitem">
+      <p class="glabel">Print · brochure A4</p>
+      <div class="gcard gcard--print g-print">
+        <img src="assets/logo/colaberry-horizontal.webp" alt="" width="800" height="188" loading="lazy" decoding="async">
+        <h3>Why Colaberry</h3>
+        <div class="col">
+          <span class="ln"><i style="background:var(--chart-3)"></i>Instructor-led classes</span>
+          <span class="ln"><i style="background:var(--chart-1)"></i>1:1 mentorship</span>
+          <span class="ln"><i style="background:var(--chart-2)"></i>A year of job support</span>
         </div>
-        <div class="ex-broch__col">
-          <b style="font-family:var(--font-display);font-weight:900;font-size:14px;color:var(--text-strong)">Programs</b>
-          <span class="prog" style="border-top-color:var(--blue-500)">Data Analytics · 12 wks</span>
-          <span class="prog" style="border-top-color:var(--green-500)">Data Science · 24 wks</span>
-          <span class="prog" style="border-top-color:var(--red-500)">Career Accelerator</span>
-        </div>
+        <span class="pill">Spring cohort</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ GET STARTED ============ -->
-<section class="sec" id="start" style="padding-top: 0;">
+<section class="band" data-theme="dark" data-screen-label="Proof" aria-label="The school this system serves">
+  <div class="wrap band__in">
+    <div class="band__lead">
+      <p class="kicker kicker--on-dark"><span class="idx">—</span>The school this system serves</p>
+      <h2 class="h2 band__h">Built for a school that has changed 5,000 careers.</h2>
+      <p class="lead band__p">Colaberry has taught data and AI since 2012 — project-based, mentor-led, Texas Workforce Commission approved. Every pixel here exists to make that story easier to tell.</p>
+    </div>
+    <dl class="band__grid">
+      <div class="bstat"><dt>Teaching data &amp; AI since</dt><dd>2012</dd></div>
+      <div class="bstat bstat--red"><dt>Careers changed</dt><dd>5,000+</dd></div>
+      <div class="bstat"><dt>Countries reached</dt><dd>49</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="sec" id="principles" data-screen-label="Principles">
+  <div class="wrap shead">
+    <p class="kicker"><span class="idx">04</span>Principles</p>
+    <h2 class="h2">Five beliefs that break ties.</h2>
+    <p class="lead">When a design decision is ambiguous, these settle it — in order.</p>
+  </div>
   <div class="wrap">
-    <div data-reveal>
-      <p class="kicker"><span class="idx">04</span>Get started</p>
-      <h2 class="h2">Build with it<br>in one line.</h2>
-      <p class="lead">Prompt Claude in plain English, or wire the tokens and components into your own codebase.</p>
-    </div>
-    <div class="go-grid" data-reveal-group>
-      <div class="go-card">
-        <h3>Prompting Claude</h3>
-        <p>For marketing, designers — anyone. Start with the magic words and describe the outcome.</p>
-        <div class="go-snip" data-snip="prompt" role="button" tabindex="0" aria-label="Copy prompt template">
-          <span class="copy">Copy</span>
-          <code><span class="c">"Using the Colaberry design system,</span>
-<span class="c">create a</span> <span class="k">[social post / flyer / slide]</span>
-<span class="c">at</span> <span class="k">[size]</span> <span class="c">for</span> <span class="k">[topic]</span><span class="c">…"</span></code>
+    <ol class="pr-list">
+      <li class="pr" data-reveal>
+        <span class="pr__n">01</span>
+        <span class="ico ico--green"><span class="cb-i"><i class="ri-hand-heart-line"></i></span></span>
+        <div class="pr__body"><h3>Inclusive by default</h3><p>Accessibility, plain language and generous touch targets are requirements, not extras. If everyone can't use it, it isn't done.</p></div>
+        <p class="pr__tag">44 px targets · AA contrast · plain words</p>
+      </li>
+      <li class="pr" data-reveal>
+        <span class="pr__n">02</span>
+        <span class="ico ico--red"><span class="cb-i"><i class="ri-hearts-line"></i></span></span>
+        <div class="pr__body"><h3>Warm, not loud</h3><p>Soft shapes, gentle motion, friendly copy — confidence without hype.</p></div>
+        <p class="pr__tag">soft radii · 140–360 ms motion · no shouting</p>
+      </li>
+      <li class="pr" data-reveal>
+        <span class="pr__n">03</span>
+        <span class="ico ico--blue"><span class="cb-i"><i class="ri-focus-3-line"></i></span></span>
+        <div class="pr__body"><h3>Clarity over decoration</h3><p>We teach data, so content and numbers lead. Ornament earns its place.</p></div>
+        <p class="pr__tag">numbers first · ornament earns its place</p>
+      </li>
+      <li class="pr" data-reveal>
+        <span class="pr__n">04</span>
+        <span class="ico ico--neutral"><span class="cb-i"><i class="ri-team-line"></i></span></span>
+        <div class="pr__body"><h3>One system, many makers</h3><p>Semantic tokens and reusable components let a marketer, a developer and an AI produce the same brand.</p></div>
+        <p class="pr__tag">289 tokens · 26 components · one voice</p>
+      </li>
+      <li class="pr" data-reveal>
+        <span class="pr__n">05</span>
+        <span class="ico ico--red"><span class="cb-i"><i class="ri-repeat-2-line"></i></span></span>
+        <div class="pr__body"><h3>Consistent &amp; constant</h3><p>The cherry accent never changes; foreground inverts with the background. Trust is built by repetition.</p></div>
+        <p class="pr__tag">the cherry never changes</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="start" data-screen-label="Start here">
+  <div class="wrap shead">
+    <p class="kicker"><span class="idx">05</span>Start here</p>
+    <h2 class="h2">Three ways in.</h2>
+    <p class="lead">Pick your lane — plain English, the living docs, or two lines of code.</p>
+  </div>
+  <div class="wrap">
+    <div class="go-grid">
+      <div class="go-card" data-reveal>
+        <span class="ico ico--red ico--lg"><span class="cb-i"><i class="ri-chat-smile-2-line"></i></span></span>
+        <p class="go-k">Marketing &amp; everyone</p>
+        <h3>Describe it, download it.</h3>
+        <ol class="go-steps">
+          <li>Attach this project in a Claude chat.</li>
+          <li>Say what you need — format, size, your words.</li>
+          <li>Preview, tweak in plain English, download.</li>
+        </ol>
+        <div class="go-snip prompt-card" data-snip="prompt" role="button" tabindex="0" aria-label="Copy prompt template">
+          <span class="copybtn"><span class="cb-i"><i class="ri-file-copy-line"></i></span>Copy</span>
+          <code>"Using the Colaberry design system, create a [social post] at [1080×1080] for [the spring cohort]…"</code>
         </div>
       </div>
-      <div class="go-card">
-        <h3>For developers</h3>
-        <p>Link the tokens, load the components, reference semantics — dark mode comes free.</p>
-        <div class="go-snip" data-snip="install" role="button" tabindex="0" aria-label="Copy install snippet">
-          <span class="copy">Copy</span>
-          <code><span class="t">&lt;link</span> <span class="k">rel</span>=<span class="c">"stylesheet"</span> <span class="k">href</span>=<span class="c">"colaberry/styles.css"</span><span class="t">&gt;</span>
-<span class="t">&lt;script</span> <span class="k">src</span>=<span class="c">"colaberry/_ds_bundle.js"</span><span class="t">&gt;&lt;/script&gt;</span>
-<span class="c">/* var(--brand-accent) · 20 components */</span></code>
+      <div class="go-card" data-reveal>
+        <span class="ico ico--blue ico--lg"><span class="cb-i"><i class="ri-book-open-line"></i></span></span>
+        <p class="go-k">Designers</p>
+        <h3>The living reference.</h3>
+        <p>Tokens with contrast ratios, logo and clear-space rules, the full WCAG audit, motion recipes, and every component in light and dark — interactive, not a PDF.</p>
+        <div class="go-links"><a class="btn btn--ghost" href="design-system.html">Open the docs</a><a class="tile__link" href="playbook.html">Build &amp; critique playbook<span class="cb-i"><i class="ri-arrow-right-line"></i></span></a></div>
+      </div>
+      <div class="go-card" data-reveal>
+        <span class="ico ico--green ico--lg"><span class="cb-i"><i class="ri-terminal-box-line"></i></span></span>
+        <p class="go-k">Developers</p>
+        <h3>Two files, fully wired.</h3>
+        <p>Link the stylesheet for tokens and fonts, load the bundle for components, reference semantic variables — dark mode comes free.</p>
+        <div class="go-snip prompt-card" data-snip="install" role="button" tabindex="0" aria-label="Copy install snippet">
+          <span class="copybtn"><span class="cb-i"><i class="ri-file-copy-line"></i></span>Copy</span>
+          <code><span class="t">&lt;link</span> rel="stylesheet" href="colaberry/styles.css"<span class="t">&gt;</span>
+<span class="t">&lt;script</span> src="colaberry/_ds_bundle.js"<span class="t">&gt;&lt;/script&gt;</span></code>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ CTA ============ -->
-<div class="cta" data-reveal>
-  <div class="cta__in">
+<div class="cta" data-screen-label="CTA">
+  <div class="cta__in" data-reveal>
     <h2>Build something on-brand today.</h2>
     <p>The full reference — tokens, live components, accessibility audit, logo rules and hand-off guides — is one click away.</p>
     <div class="cta__btns">
@@ -384,25 +452,37 @@
     </div>
   </div>
 </div>
+</main>
 
-<!-- ============ FOOTER ============ -->
-<footer class="foot">
-  <div class="foot__in">
-    <img src="assets/logo/colaberry-horizontal-white.png?v=2" alt="Colaberry">
-    <div class="foot__links">
-      <a href="design-system.html">Documentation</a>
-      <a href="design-system.html#components">Components</a>
-      <a href="design-system.html#a11y">Accessibility</a>
-      <a href="design-system.html#handoff">Hand-off</a>
+<footer class="foot" data-theme="dark" data-screen-label="Footer">
+  <div class="wrap foot__in">
+    <div class="foot__brand">
+      <img src="assets/logo/colaberry-horizontal-white.webp" alt="Colaberry" width="800" height="189" loading="lazy" decoding="async">
+      <p>The School of Data and AI — helping people future-proof their careers since 2012. 5,000+ careers changed across 49 countries.</p>
+    </div>
+    <div class="foot__cols">
+      <nav class="foot__col" aria-label="System">
+        <b>System</b>
+        <a href="design-system.html">Documentation</a>
+        <a href="design-system.html#components">Components</a>
+        <a href="design-system.html#a11y">Accessibility</a>
+        <a href="design-system.html#handoff">Hand-off</a>
+        <a href="playbook.html">Build &amp; Critique Playbook</a>
+      </nav>
+      <nav class="foot__col" aria-label="This page">
+        <b>This page</b>
+        <a href="#system">What's inside</a>
+        <a href="#flow">How it works</a>
+        <a href="#work">In practice</a>
+        <a href="#principles">Principles</a>
+        <a href="#start">Start here</a>
+      </nav>
     </div>
   </div>
-  <div class="foot__bar"><div>© <span id="yr">2026</span> Colaberry, Inc. · School of Data Science &amp; Analytics · Plano, TX &amp; Boston, MA</div></div>
+  <div class="foot__bar"><div class="wrap"><span>© <span id="yr">2026</span> · Colaberry School of Data and AI is operated by Colaberry Inc.</span><span>Plano, TX &amp; Boston, MA</span></div></div>
 </footer>
 
 <div class="l-toast" id="ltoast" role="status" aria-live="polite"></div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="landing.js"></script>
+<script src="landing.js?v=v6" defer></script>
 </body>
 </html>

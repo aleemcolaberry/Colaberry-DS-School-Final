@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CSS = `
-.cb-drawer__scrim { position: fixed; inset: 0; z-index: var(--z-modal); background: rgba(15,15,15,0.5); opacity: 0; transition: opacity var(--dur-base) var(--ease-out); }
+.cb-drawer__scrim { position: fixed; inset: 0; z-index: var(--z-modal); background: var(--overlay-scrim); opacity: 0; transition: opacity var(--dur-base) var(--ease-out); }
 .cb-drawer__scrim.is-open { opacity: 1; }
 .cb-drawer { position: fixed; z-index: var(--z-modal); top: 0; bottom: 0; width: min(380px, 88vw); background: var(--surface-card); box-shadow: var(--shadow-xl); display: flex; flex-direction: column; transition: transform var(--dur-base) var(--ease-out); }
 .cb-drawer--right { right: 0; transform: translateX(100%); }
@@ -9,11 +9,19 @@ const CSS = `
 .cb-drawer.is-open { transform: translateX(0); }
 .cb-drawer__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 22px; border-bottom: 1px solid var(--border-subtle); }
 .cb-drawer__title { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--fs-h4); color: var(--text-strong); margin: 0; }
-.cb-drawer__close { background: none; border: none; cursor: pointer; color: var(--text-subtle); padding: 4px; border-radius: var(--radius-sm); transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out); }
+.cb-drawer__close { background: none; border: none; cursor: pointer; color: var(--text-subtle); min-width: 36px; min-height: 36px; display: inline-grid; place-items: center; padding: 4px; border-radius: var(--radius-sm); transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out); }
 .cb-drawer__close:hover { background: var(--surface-sunken); color: var(--text-strong); }
 .cb-drawer__body { padding: 20px 22px; overflow-y: auto; font-family: var(--font-body); font-size: var(--fs-body); color: var(--text-body); line-height: 1.6; flex: 1; }
 @media (prefers-reduced-motion: reduce){ .cb-drawer__scrim, .cb-drawer { transition-duration: .001ms; } }
 `;
+
+function trapTab(e, root) {
+  const f = root.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])');
+  if (!f.length) { e.preventDefault(); root.focus(); return; }
+  const first = f[0], last = f[f.length - 1], a = document.activeElement;
+  if (e.shiftKey && (a === first || a === root)) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && (a === last || !root.contains(a))) { e.preventDefault(); first.focus(); }
+}
 
 function inject() {
   if (typeof document === 'undefined' || document.getElementById('cb-drawer-css')) return;
@@ -39,7 +47,10 @@ export function Drawer({ open = false, side = 'right', title, onClose, children,
   }, [open]);
   React.useEffect(() => {
     if (!open) return;
-    const onKey = (e) => e.key === 'Escape' && onClose && onClose();
+    const onKey = (e) => {
+      if (e.key === 'Escape') { onClose && onClose(); return; }
+      if (e.key === 'Tab' && panelRef.current) trapTab(e, panelRef.current); // keep focus inside the drawer
+    };
     document.addEventListener('keydown', onKey);
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';

@@ -3,15 +3,15 @@ import React from 'react';
 const CSS = `
 .cb-ta-field { display: flex; flex-direction: column; gap: 6px; font-family: var(--font-body); }
 .cb-ta-field__label { font-size: var(--fs-body-sm); font-weight: var(--fw-medium); color: var(--text-strong); }
-.cb-ta-field__req { color: var(--red-500); margin-left: 2px; }
-.cb-ta { font-family: var(--font-body); font-size: var(--fs-body); color: var(--text-strong); background: var(--surface-card); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: 12px 14px; width: 100%; resize: vertical; min-height: 96px; line-height: 1.5; transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out); }
+.cb-ta-field__req { color: var(--status-danger); margin-left: 2px; }
+.cb-ta { font-family: var(--font-body); font-size: var(--fs-body); color: var(--text-strong); background: var(--surface-card); border: 1px solid var(--border-control); border-radius: var(--radius-md); padding: 12px 14px; width: 100%; resize: vertical; min-height: 96px; line-height: 1.5; transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out); }
 .cb-ta::placeholder { color: var(--text-subtle); }
-.cb-ta:hover { border-color: var(--border-strong); }
-.cb-ta:focus { outline: none; border-color: var(--blue-500); box-shadow: var(--focus-ring); }
+.cb-ta:hover { border-color: var(--text-muted); }
+.cb-ta:focus { outline: none; border-color: var(--border-focus); box-shadow: var(--focus-ring); }
 .cb-ta:disabled { background: var(--surface-sunken); color: var(--text-subtle); cursor: not-allowed; }
-.cb-ta-field--error .cb-ta { border-color: var(--red-500); }
+.cb-ta-field--error .cb-ta { border-color: var(--status-danger); }
 .cb-ta-field__foot { display: flex; justify-content: space-between; font-size: var(--fs-caption); color: var(--text-muted); }
-.cb-ta-field--error .cb-ta-field__msg { color: var(--red-600); }
+.cb-ta-field--error .cb-ta-field__msg { color: var(--status-danger-fg); }
 .cb-ta-field__count { font-family: var(--font-mono); margin-left: auto; }
 `;
 

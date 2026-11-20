@@ -24,6 +24,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Quality gate (CLAUDE.md §1–§8 static rules — fails the deploy on any error)
+        # Same rules as scraps/rwd-lint.html, run headless over every live page on disk (listed or not).
+        # Zero errors before anything ships; documented exceptions live in _lint.mjs ALLOW + AUDIT.md.
+        run: node _lint.mjs
+
+      - name: Responsive gate (every live page × 19 widths, 320→1920, headless Chromium)
+        # Same probe as scraps/rwd-sweep.html: no horizontal scroll, no text spill/clip/overlap, no
+        # squeezed column, no sub-24px tap target, no hidden nav — at ANY width. Playwright is installed
+        # in /tmp so nothing lands in the Pages artifact. Exceptions: _sweep.mjs ALLOW + AUDIT.md.
+        run: |
+          mkdir -p /tmp/pw && cd /tmp/pw && npm init -y >/dev/null 2>&1 && npm i playwright@1.47.2 >/dev/null 2>&1 && npx playwright install --with-deps chromium >/dev/null 2>&1
+          cd "$GITHUB_WORKSPACE" && PW_DIR=/tmp/pw node _sweep.mjs
+
+      - name: Build (flatten CSS, precompile School JSX, refresh cache-busting stamps)
+        # styles.css / components.css are generated from tokens/* + components.src.css (one request, no
+        # @import chain); Colaberry School/dist/*.js from the .jsx sources (no Babel on live pages);
+        # then ?v=<content-hash> on every local css/js reference. Idempotent — see CLAUDE.md §8.
+        run: node _build.mjs
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

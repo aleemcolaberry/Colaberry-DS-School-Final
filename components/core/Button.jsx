@@ -11,6 +11,7 @@ const CSS = `
   font-size: var(--fs-body-sm); line-height: 1.2; min-height: 48px;
   border: none; border-radius: var(--radius-pill); cursor: pointer;
   padding: 0 24px; text-decoration: none; white-space: nowrap;
+  max-width: 100%;
   background: var(--_bg); color: var(--_fg);
   transition: background var(--dur-fast) var(--ease-out),
               transform var(--dur-fast) var(--ease-out),
@@ -24,8 +25,9 @@ const CSS = `
 }
 .cb-btn--sm { font-size: var(--fs-caption); min-height: 38px; padding: 0 16px; gap: 6px; }
 .cb-btn--lg { font-size: var(--fs-body); min-height: 56px; padding: 0 32px; }
-.cb-btn--green { --_bg: var(--action-green-bg); --_bg-hover: var(--action-green-bg-hover); --_bg-press: var(--green-900); --_fg: #fff; }
-.cb-btn--blue { --_bg: var(--blue-500); --_bg-hover: var(--blue-600); --_bg-press: var(--blue-700); --_fg: #fff; }
+.cb-btn--green, .cb-btn--confirm { --_bg: var(--action-confirm-bg); --_bg-hover: var(--action-confirm-bg-hover); --_bg-press: var(--action-confirm-bg-press); --_fg: var(--action-confirm-fg); }
+.cb-btn--danger { --_bg: var(--action-danger-bg); --_bg-hover: var(--action-danger-bg-hover); --_bg-press: var(--action-danger-bg-press); --_fg: var(--action-danger-fg); }
+.cb-btn--blue { --_bg: var(--blue-500); --_bg-hover: var(--blue-600); --_bg-press: var(--blue-700); --_fg: var(--neutral-0); }
 .cb-btn--primary { box-shadow: var(--shadow-brand); }
 .cb-btn--primary:hover { box-shadow: 0 12px 30px color-mix(in srgb, var(--red-500) 34%, transparent); }
 .cb-btn--outline {
@@ -40,6 +42,19 @@ const CSS = `
 .cb-btn--link { background: transparent; color: var(--text-link); border-radius: var(--radius-xs); padding: 4px 6px; min-height: 0; }
 .cb-btn--link:hover { background: transparent; color: var(--text-link-hover); text-decoration: underline; }
 .cb-btn--full { width: 100%; }
+/* Loading: keep width, hide label, show ring; block repeat clicks but stay focusable so AT hears aria-busy. */
+.cb-btn[aria-busy="true"] { position: relative; cursor: progress; pointer-events: none; }
+.cb-btn[aria-busy="true"] > :not(.cb-btn__spin) { visibility: hidden; }
+.cb-btn__spin { position: absolute; inset: 0; display: grid; place-items: center; }
+.cb-btn__spin::after { content: ''; width: 18px; height: 18px; border-radius: 50%; border: 2.5px solid color-mix(in srgb, currentColor 25%, transparent); border-top-color: currentColor; animation: cb-btn-rot .8s linear infinite; }
+.cb-btn--sm .cb-btn__spin::after { width: 14px; height: 14px; border-width: 2px; }
+@keyframes cb-btn-rot { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce){ .cb-btn__spin::after { animation-duration: 1.6s; } }
+/* Responsive ground rule: on small screens a long label wraps inside the
+   pill instead of pushing past the viewport. */
+@media (max-width: 480px) {
+  .cb-btn { white-space: normal; text-align: center; line-height: 1.25; padding-top: 10px; padding-bottom: 10px; }
+}
 `;
 
 function inject() {
@@ -60,6 +75,8 @@ export function Button({
   tone,
   size = 'md',
   fullWidth = false,
+  loading = false,
+  loadingLabel = 'Loading',
   leadingIcon,
   trailingIcon,
   as,
@@ -73,6 +90,8 @@ export function Button({
   if (variant === 'outline') classes.push('cb-btn--outline');
   if (variant === 'ghost') classes.push('cb-btn--ghost');
   if (variant === 'link') classes.push('cb-btn--link');
+  if (variant === 'confirm') classes.push('cb-btn--confirm');
+  if (variant === 'danger') classes.push('cb-btn--danger');
   // tone overrides fill color for solid buttons
   if ((variant === 'primary' || variant === 'solid') && tone === 'green') classes.push('cb-btn--green');
   if ((variant === 'primary' || variant === 'solid') && tone === 'blue') classes.push('cb-btn--blue');
@@ -91,12 +110,14 @@ export function Button({
   }
   const Tag = (rest.href || as === 'a') ? 'a' : (as || 'button');
   if (Tag === 'button' && dom.type === undefined) dom.type = 'button';
+  if (loading) { dom['aria-busy'] = 'true'; dom['aria-disabled'] = 'true'; delete dom.disabled; if (dom.onClick) dom.onClick = (e) => e.preventDefault(); }
 
   return (
     <Tag className={classes.join(' ')} {...dom}>
       {leadingIcon}
       {children && <span>{children}</span>}
       {trailingIcon}
+      {loading && <span className="cb-btn__spin" role="status" aria-label={loadingLabel} />}
     </Tag>
   );
 }

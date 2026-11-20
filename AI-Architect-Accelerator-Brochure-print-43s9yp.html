@@ -16,7 +16,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Systems Architect Accelerator — Colaberry</title>
 <link rel="icon" href="assets/logo/export/favicon-32.png">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=b492c172">
 <style>
   body { margin: 0; background: var(--neutral-200); }
   .stage { display: flex; flex-direction: column; align-items: center; gap: 28px; padding: 32px 16px; }
@@ -33,12 +33,12 @@
   /* Running header / footer */
   .runhead { display: flex; align-items: center; justify-content: space-between; padding: 22px 60px; border-bottom: 1px solid var(--border-subtle); }
   .runhead img { height: 24px; }
-  .runhead span { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-subtle); }
-  .runfoot { margin-top: auto; padding: 18px 60px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--text-subtle); }
-  .runfoot b { color: var(--red-500); font-weight: var(--fw-bold); }
+  .runhead span { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-subtle); }
+  .runfoot { margin-top: auto; padding: 18px 60px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-subtle); }
+  .runfoot b { color: var(--text-brand); font-weight: var(--fw-bold); }
 
   /* Cover */
-  .cover { background: linear-gradient(150deg, var(--red-500), var(--red-700)); color: #fff; flex: 1; justify-content: space-between; }
+  .cover { background: linear-gradient(150deg, var(--red-600), var(--red-700)); color: #fff; flex: 1; justify-content: space-between; }
   .cover .pad { display: flex; flex-direction: column; justify-content: space-between; flex: 1; }
   .cover__logo { height: 32px; align-self: flex-start; }
   .cover__eyebrow { font-family: var(--font-mono); font-size: 14px; letter-spacing: .12em; text-transform: uppercase; opacity: .9; margin: 0 0 20px; }
@@ -50,7 +50,7 @@
   .cover__foot { display: flex; gap: 28px; font-size: 14px; opacity: .9; flex-wrap: wrap; }
 
   /* Section heads */
-  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--red-500); margin: 0 0 10px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-brand); margin: 0 0 10px; }
   h2.sec { font-family: var(--font-display); font-weight: 900; font-size: 34px; letter-spacing: -.02em; color: var(--text-strong); margin: 0 0 16px; line-height: 1.08; }
   h3.sub { font-family: var(--font-display); font-weight: 700; font-size: 19px; color: var(--text-strong); margin: 0 0 8px; }
   p.body { font-size: 15px; line-height: 1.65; color: var(--text-body); margin: 0 0 16px; text-wrap: pretty; }
@@ -73,7 +73,7 @@
   .build__row { display: grid; grid-template-columns: 132px 1fr; gap: 18px; align-items: start; padding: 16px 0; border-bottom: 1px solid var(--border-subtle); }
   .build__row:last-child { border-bottom: none; }
   .build__wk { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
-  .build__wk b { display: block; font-family: var(--font-display); font-weight: 900; font-size: 15px; color: var(--red-500); margin-bottom: 4px; letter-spacing: -.01em; }
+  .build__wk b { display: block; font-family: var(--font-display); font-weight: 900; font-size: 15px; color: var(--text-brand); margin-bottom: 4px; letter-spacing: -.01em; }
   .build__d b { color: var(--text-strong); }
   .build__d { font-size: 14px; line-height: 1.6; color: var(--text-body); }
 
@@ -81,12 +81,12 @@
   .price { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 8px 0 20px; }
   .plan { border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 26px; position: relative; }
   .plan--feat { border: 2px solid var(--red-500); }
-  .plan__tag { position: absolute; top: -11px; left: 24px; background: var(--red-500); color: #fff; font-size: 11px; font-weight: var(--fw-bold); padding: 4px 12px; border-radius: var(--radius-pill); }
+  .plan__tag { position: absolute; top: -11px; left: 24px; background: var(--action-bg); color: #fff; font-size: 12px; font-weight: var(--fw-bold); padding: 4px 12px; border-radius: var(--radius-pill); }
   .plan__name { font-size: 14px; color: var(--text-muted); margin: 0 0 6px; }
   .plan__price { font-family: var(--font-display); font-weight: 900; font-size: 44px; color: var(--text-strong); line-height: 1; letter-spacing: -.02em; }
   .plan__price small { font-size: 16px; font-weight: var(--fw-regular); color: var(--text-muted); }
   .plan__note { font-size: 13px; color: var(--text-muted); margin: 10px 0 0; line-height: 1.5; }
-  .founding { background: linear-gradient(135deg, var(--red-500), var(--red-700)); color: #fff; border-radius: var(--radius-xl); padding: 26px 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: var(--shadow-brand); }
+  .founding { background: linear-gradient(135deg, var(--red-600), var(--red-700)); color: #fff; border-radius: var(--radius-xl); padding: 26px 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: var(--shadow-brand); }
   .founding b { font-family: var(--font-display); font-weight: 900; font-size: 22px; display: block; letter-spacing: -.01em; }
   .founding p { margin: 6px 0 0; font-size: 14px; opacity: .92; line-height: 1.5; max-width: 44ch; }
   .founding__seats { font-family: var(--font-display); font-weight: 900; font-size: 52px; line-height: .9; flex: none; text-align: center; }
@@ -113,12 +113,23 @@
   /* Dates / CTA */
   .dates { background: var(--surface-subtle); border-radius: var(--radius-xl); padding: 30px; }
   .dates__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-bottom: 24px; }
-  .dates__item b { font-family: var(--font-mono); font-size: 12px; color: var(--red-500); letter-spacing: .04em; display: block; margin-bottom: 4px; }
+  .dates__item b { font-family: var(--font-mono); font-size: 12px; color: var(--text-brand); letter-spacing: .04em; display: block; margin-bottom: 4px; }
   .dates__item span { font-size: 15px; color: var(--text-strong); font-weight: var(--fw-medium); }
   .enroll { display: flex; align-items: center; justify-content: space-between; gap: 20px; background: var(--text-strong); color: var(--neutral-0); border-radius: var(--radius-lg); padding: 22px 28px; }
   .enroll b { font-family: var(--font-display); font-weight: 900; font-size: 20px; }
   .enroll span { font-family: var(--font-mono); font-size: 14px; color: var(--neutral-300); }
 
+  /* screen-only reflow */
+  @media screen and (max-width: 640px) {
+    .cover h1 { font-size: clamp(34px, 11vw, 62px); }
+    .cover__sub { font-size: 17px; }
+    .cover__foot { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .price, .dates__grid { grid-template-columns: minmax(0, 1fr); }
+    .build__row { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+    .inc__item { flex-wrap: wrap; }
+    .dive__h b { padding-right: 0; }
+    .dive__wk { float: none; display: block; margin-bottom: 4px; }
+  }
   @media print {
     body { background: #fff; }
     .stage { padding: 0; gap: 0; }
@@ -168,7 +179,7 @@
         <div class="inc__item"><span class="inc__ic" style="background:var(--red-500)"><span class="cb-i"><i data-lucide="folder-git-2"></i></span></span><div><b>Portfolio projects</b><p>Guided projects that build up your GitHub portfolio with real, demonstrable AI systems.</p></div></div>
       </div>
     </div>
-    <div class="runfoot"><span>training.colaberry.com</span><span><b>Colaberry</b> · School of Data Science &amp; Analytics</span></div>
+    <div class="runfoot"><span>training.colaberry.com</span><span><b>Colaberry</b> · School of Data and AI</span></div>
   </div>
 
   <!-- PAGE 3 — WHAT YOU BUILD + PRICING -->
@@ -207,7 +218,7 @@
         <div class="founding__seats">40<span>seats only</span></div>
       </div>
     </div>
-    <div class="runfoot"><span>training.colaberry.com</span><span><b>Colaberry</b> · School of Data Science &amp; Analytics</span></div>
+    <div class="runfoot"><span>training.colaberry.com</span><span><b>Colaberry</b> · School of Data and AI</span></div>
   </div>
 
   <!-- PAGE 4 — INTENSIVE DEEP DIVES -->
@@ -238,7 +249,7 @@
         <p>You leave with reusable frameworks and a polished package suitable for executive review, technical interviews, or RFP submissions.</p>
       </div>
     </div>
-    <div class="runfoot"><span>training.colaberry.com</span><span><b>Colaberry</b> · School of Data Science &amp; Analytics</span></div>
+    <div class="runfoot"><span>training.colaberry.com</span><span><b>Colaberry</b> · School of Data and AI</span></div>
   </div>
 
   <!-- PAGE 5 — FAQ + DATES -->
@@ -267,11 +278,11 @@
         </div>
       </div>
     </div>
-    <div class="runfoot"><span>© 2026 Colaberry, Inc.</span><span><b>Colaberry</b> · School of Data Science &amp; Analytics</span></div>
+    <div class="runfoot"><span>© 2026 Colaberry, Inc.</span><span><b>Colaberry</b> · School of Data and AI</span></div>
   </div>
 
 </div>
-<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script src="assets/vendor/lucide.min.js"></script>
 <script>if (window.lucide) lucide.createIcons();</script>
 <script>
 (async () => {

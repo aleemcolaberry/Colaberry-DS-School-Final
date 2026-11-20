@@ -6,6 +6,35 @@
 
 html { -webkit-text-size-adjust: 100%; }
 
+/* ----------------------------------------------------------------
+   RESPONSIVE SAFETY NET (CLAUDE.md §1). These make the common mistakes
+   harmless instead of page-breaking; they are not a substitute for
+   per-layout breakpoints.
+   ---------------------------------------------------------------- */
+/* The viewport is the page: nothing may widen it. Clip, don't scroll. */
+html, body { max-width: 100%; overflow-x: clip; }
+/* Every flex/grid child may shrink below its content width so text
+   wraps instead of pushing the track wider (the #1 cause of overflow). */
+:where(.cb-grid, .cb-cluster, .cb-row, .cb-stack) > * { min-width: 0; }
+/* Tables and <pre> scroll inside themselves rather than the page. */
+pre { max-width: 100%; overflow-x: auto; }
+table { max-width: 100%; }
+/* Long unbroken strings (URLs, emails, hashes) always break. */
+a[href^="http"], a[href^="mailto"], code, kbd, samp { overflow-wrap: anywhere; }
+
+/* ----------------------------------------------------------------
+   CARD SAFETY NET (CLAUDE.md §7.1). Any card-like surface — class
+   contains card / tile / panel / __item — and its direct children may
+   shrink, so text wraps instead of pushing the card (or its grid track)
+   wider; children of any *grid* class may shrink too. Zero specificity
+   (:where) so page CSS always wins; it only fills the gap when a page
+   forgot min-width: 0.
+   ---------------------------------------------------------------- */
+:where([class*="card"], [class*="tile"], [class*="panel"], [class*="__item"]),
+:where([class*="card"], [class*="tile"], [class*="panel"], [class*="__item"], [class*="grid"]) > :where(*) { min-width: 0; }
+/* Mono strings inside cards (hex, file names, tokens) never widen them. */
+:where([class*="card"], [class*="tile"]) :where(code, kbd, samp, [class*="mono"], [class*="file"]) { overflow-wrap: anywhere; }
+
 body {
   margin: 0;
   font-family: var(--body-font);
@@ -21,8 +50,11 @@ body {
 }
 
 /* Media never overflows its container. */
-img, svg, video, canvas, picture { max-width: 100%; }
+img, svg, video, canvas, picture, iframe { max-width: 100%; }
 img, video { height: auto; }
+
+/* Form controls never overflow their container. */
+input, select, textarea { max-width: 100%; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--heading-font);
@@ -45,6 +77,19 @@ li { text-wrap: pretty; }
 
 a { color: var(--text-link); text-decoration: none; }
 a:hover { color: var(--text-link-hover); text-decoration: underline; }
+/* Links inside running text are underlined (WCAG 1.4.1 — colour alone is
+   not enough: blue-600 is only 2.4:1 against the body ink). Styled links
+   (buttons, nav, cards) carry a class and keep their own treatment. */
+p a:not([class]), li p a:not([class]), td a:not([class]), dd a:not([class]),
+blockquote a:not([class]), figcaption a:not([class]), .cb-prose a {
+  text-decoration: underline; text-underline-offset: 0.14em; text-decoration-thickness: 1px;
+}
+
+/* Placeholder text clears AA by default (browser default grey is ~2.7:1). */
+::placeholder { color: var(--text-subtle); opacity: 1; }
+
+/* hidden always means hidden, whatever display a class sets. */
+[hidden] { display: none !important; }
 
 code, kbd, samp, pre {
   font-family: var(--font-mono);
@@ -55,6 +100,30 @@ code, kbd, samp, pre {
   outline: none;
   box-shadow: var(--focus-ring);
   border-radius: var(--radius-xs);
+}
+/* Windows High Contrast / forced-colors drops box-shadow, so every ring in
+   the system (base + components) falls back to a real outline there. */
+@media (forced-colors: active) {
+  :focus-visible { outline: 3px solid Highlight !important; outline-offset: 2px !important; }
+}
+
+/* ----------------------------------------------------------------
+   REDUCED MOTION NET (CLAUDE.md §3.8 / §7.3). Every transition and
+   animation in the system collapses to its end state in one frame;
+   reveal layers set opacity back to 1 in their own files. Loading
+   indicators (the only allowed loops) keep looping, slower. This is a
+   backstop — every stylesheet still owns a reduce block for its rules.
+   ---------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    transition-duration: .01ms !important; transition-delay: 0ms !important;
+    animation-duration: .01ms !important; animation-delay: 0ms !important; animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+  :where([class*="spin"], [class*="spin"]::after, [class*="skel"], [class*="skel"]::after, .cb-bar > i, .cb-pulse, [class*="loader"], [class*="loading"]::after) {
+    animation-duration: 1.6s !important; animation-iteration-count: infinite !important;
+  }
 }
 
 ::selection { background: var(--red-200); color: var(--neutral-900); }
@@ -105,7 +174,7 @@ code, kbd, samp, pre {
 .cb-icon-tile {
   display: grid; place-items: center; flex: none;
   width: var(--tile, 44px); height: var(--tile, 44px);
-  border-radius: var(--radius-md); color: #fff;
+  border-radius: var(--radius-md); color: var(--text-on-accent);
   font-size: calc(var(--tile, 44px) * 0.48); line-height: 0;
 }
 .cb-icon-tile.cb-icon-tile--round { border-radius: 50%; }

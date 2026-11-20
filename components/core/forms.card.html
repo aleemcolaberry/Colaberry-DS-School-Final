@@ -1,9 +1,9 @@
-<!-- @dsCard group="Components" viewport="700x340" name="Form controls" subtitle="Inputs, textarea, checkbox & a sample form" -->
+<!-- @dsCard group="Components" viewport="700x400" name="Form controls" subtitle="Input states, Select, Radio, Checkbox & a sample form" -->
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../../styles.css?v=ea85358a">
 <style>
   body { margin: 0; padding: 26px; background: var(--surface-page); }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
@@ -12,24 +12,27 @@
 </head>
 <body>
 <div id="root"></div>
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script src="../../_ds_bundle.js"></script>
+<script src="../../assets/vendor/react.production.min.js"></script>
+<script src="../../assets/vendor/react-dom.production.min.js"></script>
+<script src="../../assets/vendor/babel.min.js"></script>
+<script src="../../_ds_bundle.js?v=states2610"></script>
 <script type="text/babel">
-  const { Input, Checkbox, Button } = window.ColaberryDesignSystem_098454;
+  const { Input, Checkbox, Button, Select, RadioGroup } = window.ColaberryDesignSystem_098454;
   function Demo() {
     return (
       <div className="grid">
         <div className="stack">
-          <Input label="Full name" placeholder="Ada Lovelace" required />
-          <Input label="Email" type="email" placeholder="ada@email.com" helperText="We'll send your catalog here." />
-          <Input label="Phone" error="Enter a valid number." defaultValue="123" />
+          <Input label="Full name" placeholder="Ada Lovelace" required autoComplete="name" />
+          <Input label="Email" type="email" inputMode="email" placeholder="ada@email.com" helperText="We'll send your catalog here." />
+          <Input label="Phone" error="Enter a 10-digit number, like 972 555 0144." defaultValue="123" />
+          <Input label="Username" success="Available" defaultValue="ada.l" />
+          <Input label="Referral code" optional disabled placeholder="Opens after you apply" />
         </div>
         <div className="stack">
-          <Input label="Why data?" multiline rows={3} placeholder="Tell us in a sentence…" />
+          <Select label="Program" placeholder="Choose a program" required options={['Data Analytics', 'Data Science', 'AI Architect Accelerator']} />
+          <RadioGroup label="How will you attend?" defaultValue="live" direction="row" options={[{ value: 'live', label: 'Live online' }, { value: 'campus', label: 'On campus' }]} />
           <Checkbox label="Email me about upcoming cohorts" defaultChecked />
-          <Checkbox label="I agree to the terms of enrollment" />
+          <Checkbox label="I agree to the terms of enrollment" required error="Tick this box to continue." />
           <Button fullWidth>Request info</Button>
         </div>
       </div>

@@ -2,7 +2,10 @@
 
 This repo is a **static, dependency-free site** — `index.html` (the landing page) and
 `design-system.html` (the living docs) at the root, with CSS/JS/asset files beside them.
-That means you can host it anywhere that serves static files. No build step required.
+Everything is **self-hosted**: fonts (`assets/fonts/`), icon font, and all JS libraries
+(React, Babel, GSAP, Lucide, three.js — `assets/vendor/`). Zero CDN requests, so the site
+works offline and on locked-down networks. Host it anywhere that serves static files.
+No build step required.
 
 ---
 
@@ -75,10 +78,44 @@ Full integration steps (plain HTML, React/Vite/Next, tokens, dark mode) are in
 
 ---
 
-## 5 · Verify before you ship
+## 5 · Build & cache-busting (already wired)
+
+Three things are **generated** and must be rebuilt after editing their sources (CLAUDE.md §8):
+
+| Generated | From | Why |
+|---|---|---|
+| `styles.css` | `tokens/*.css` + `assets/fonts/*.css` | one flat request — no `@import` chain before the first font byte |
+| `components.css` | `styles.css` + `components.src.css` | the one-link entry for no-build pages |
+| `Colaberry School/school.css` | the 13 School section stylesheets | one site stylesheet, cached across every School page |
+| `Colaberry School/dist/*.js`, `guidelines/dist/*.js` | the `.jsx` sources | no 3 MB Babel transpiling in the visitor's browser |
+
+Every project-relative `.css` / `.js` reference then gets a `?v=<content-hash>` stamp so browsers
+cache aggressively but always pick up changed files. **After editing any CSS/JS/JSX, build before you push:**
+
+```bash
+npm run build   # = node _build.mjs — regenerates the files above, then runs the stamper; idempotent
+```
+
+The Pages workflow runs the same command, so a forgotten build never ships — but `scraps/rwd-lint.html`
+reports a stale generated file as a `§8.1` error, and the generated files are never edited by hand.
+
+Vendored libraries in `assets/vendor/` and font binaries are version-pinned by filename
+and deliberately left unstamped.
+
+> **One remaining external class:** content photos on the blog and training-site pages
+> still hot-link Colaberry's own HubSpot (`training.colaberry.com/hubfs/…`) — first-party
+> infrastructure, not a third-party CDN. Each carries an `onerror` fallback (brand
+> placeholder, or the logo hides), so nothing looks broken offline. To make those pages
+> fully self-contained, export the files from HubSpot into `assets/remote/` and swap the
+> `src` attributes (find them with a search for `training.colaberry.com/hubfs`).
+
+---
+
+## 6 · Verify before you ship
 
 - [ ] `index.html` opens locally (`npm start` → http://localhost:3000) with no console errors
-- [ ] Fonts render (Roboto / Roboto Mono / Quicksand) — or self-host per `assets/fonts/LICENSES.md`
+- [ ] **Offline check**: DevTools → Network → "Offline" (after one load) or disconnect Wi-Fi — pages still render with correct fonts and icons; the Network panel shows zero requests to external domains
+- [ ] `npm run build` was run after the last CSS/JS/JSX edit (lint shows no `STALE`)
 - [ ] Logos load from `assets/logo/`
 - [ ] Pages build succeeds (green check in the **Actions** tab)
 - [ ] The live URL shows the landing page and `/design-system.html` shows the docs

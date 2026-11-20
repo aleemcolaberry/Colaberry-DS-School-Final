@@ -1,18 +1,28 @@
 import React from 'react';
 
 const CSS = `
-.cb-dialog__scrim { position: fixed; inset: 0; z-index: var(--z-modal); background: rgba(15,15,15,0.5); display: grid; place-items: center; padding: 24px; opacity: 0; transition: opacity var(--dur-base) var(--ease-out); }
+.cb-dialog__scrim { position: fixed; inset: 0; z-index: var(--z-modal); background: var(--overlay-scrim); display: grid; place-items: center; padding: 24px; opacity: 0; transition: opacity var(--dur-base) var(--ease-out); }
 .cb-dialog__scrim.is-open { opacity: 1; }
 .cb-dialog { width: min(520px, 100%); max-height: 90vh; overflow-y: auto; background: var(--surface-card); border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); transform: translateY(10px) scale(.97); transition: transform var(--dur-base) var(--ease-spring); }
 .cb-dialog__scrim.is-open .cb-dialog { transform: translateY(0) scale(1); }
 .cb-dialog__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 22px 24px 0; }
 .cb-dialog__title { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--fs-h4); color: var(--text-strong); margin: 0; }
-.cb-dialog__close { flex: none; background: none; border: none; cursor: pointer; color: var(--text-subtle); padding: 4px; border-radius: var(--radius-sm); transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out); }
+.cb-dialog__close { flex: none; background: none; border: none; cursor: pointer; color: var(--text-subtle); min-width: 36px; min-height: 36px; display: inline-grid; place-items: center; padding: 4px; border-radius: var(--radius-sm); transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out); }
 .cb-dialog__close:hover { background: var(--surface-sunken); color: var(--text-strong); }
 .cb-dialog__body { padding: 12px 24px 8px; font-family: var(--font-body); font-size: var(--fs-body); color: var(--text-body); line-height: 1.6; }
-.cb-dialog__foot { display: flex; justify-content: flex-end; gap: 12px; padding: 16px 24px 24px; }
+.cb-dialog__foot { display: flex; justify-content: flex-end; gap: 12px; padding: 16px 24px 24px; flex-wrap: wrap; }
+.cb-dialog--destructive .cb-dialog__title { display: flex; align-items: center; gap: 10px; }
+.cb-dialog__warn { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--status-danger-bg); color: var(--status-danger-fg); flex: none; }
 @media (prefers-reduced-motion: reduce){ .cb-dialog__scrim, .cb-dialog { transition-duration: .001ms; } }
 `;
+
+function trapTab(e, root) {
+  const f = root.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])');
+  if (!f.length) { e.preventDefault(); root.focus(); return; }
+  const first = f[0], last = f[f.length - 1], a = document.activeElement;
+  if (e.shiftKey && (a === first || a === root)) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && (a === last || !root.contains(a))) { e.preventDefault(); first.focus(); }
+}
 
 function inject() {
   if (typeof document === 'undefined' || document.getElementById('cb-dialog-css')) return;
@@ -21,9 +31,11 @@ function inject() {
 
 /**
  * Centered modal dialog with scrim. Controlled via `open`; closes on scrim
- * click or Esc. Provide `footer` for action buttons.
+ * click or Esc. Provide `footer` for action buttons. `destructive` turns it
+ * into an alertdialog (confirm-before-delete): warning glyph, body described
+ * to AT, and scrim-click no longer closes it — the user must choose.
  */
-export function Dialog({ open = false, title, onClose, footer, children, className = '', ...rest }) {
+export function Dialog({ open = false, title, onClose, footer, destructive = false, children, className = '', ...rest }) {
   inject();
   const [mounted, setMounted] = React.useState(open);
   const [shown, setShown] = React.useState(false);
@@ -38,7 +50,10 @@ export function Dialog({ open = false, title, onClose, footer, children, classNa
   }, [open]);
   React.useEffect(() => {
     if (!open) return;
-    const onKey = (e) => e.key === 'Escape' && onClose && onClose();
+    const onKey = (e) => {
+      if (e.key === 'Escape') { onClose && onClose(); return; }
+      if (e.key === 'Tab' && panelRef.current) trapTab(e, panelRef.current); // keep focus inside the modal
+    };
     document.addEventListener('keydown', onKey);
     // body scroll lock
     const prevOverflow = document.body.style.overflow;
@@ -55,17 +70,17 @@ export function Dialog({ open = false, title, onClose, footer, children, classNa
   }, [open, onClose]);
   if (!mounted) return null;
   return (
-    <div className={'cb-dialog__scrim ' + (shown ? 'is-open' : '')} onMouseDown={(e) => { if (e.target === e.currentTarget && onClose) onClose(); }}>
-      <div className={'cb-dialog ' + className} role="dialog" aria-modal="true" aria-labelledby={title ? titleId : undefined} tabIndex={-1} ref={panelRef} {...rest}>
+    <div className={'cb-dialog__scrim ' + (shown ? 'is-open' : '')} onMouseDown={(e) => { if (e.target === e.currentTarget && onClose && !destructive) onClose(); }}>
+      <div className={'cb-dialog ' + (destructive ? 'cb-dialog--destructive ' : '') + className} role={destructive ? 'alertdialog' : 'dialog'} aria-modal="true" aria-labelledby={title ? titleId : undefined} aria-describedby={destructive ? titleId + '-body' : undefined} tabIndex={-1} ref={panelRef} {...rest}>
         {(title || onClose) && (
           <div className="cb-dialog__head">
-            {title && <h2 className="cb-dialog__title" id={titleId}>{title}</h2>}
+            {title && <h2 className="cb-dialog__title" id={titleId}>{destructive && <span className="cb-dialog__warn" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 8v5M12 16.5v.5M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>}{title}</h2>}
             {onClose && <button className="cb-dialog__close" onClick={onClose} aria-label="Close">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6 6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
             </button>}
           </div>
         )}
-        <div className="cb-dialog__body">{children}</div>
+        <div className="cb-dialog__body" id={destructive ? titleId + '-body' : undefined}>{children}</div>
         {footer && <div className="cb-dialog__foot">{footer}</div>}
       </div>
     </div>

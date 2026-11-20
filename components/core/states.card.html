@@ -1,0 +1,63 @@
+<!-- @dsCard group="Components" viewport="760x420" name="States & feedback" subtitle="Empty · loading · error · success — Alert, EmptyState, Spinner, Table states, Button loading" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css?v=ea85358a">
+<style>
+  body { margin: 0; padding: 24px; background: var(--surface-page); }
+  .grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 22px; align-items: start; }
+  .lbl { font-family: var(--font-mono); font-size: 11px; color: var(--text-subtle); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .05em; }
+  .stack { display: flex; flex-direction: column; gap: 12px; }
+  .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="../../assets/vendor/react.production.min.js"></script>
+<script src="../../assets/vendor/react-dom.production.min.js"></script>
+<script src="../../assets/vendor/babel.min.js"></script>
+<script src="../../_ds_bundle.js?v=states2610"></script>
+<script type="text/babel">
+  const { Alert, EmptyState, Spinner, Table, Button, Badge } = window.ColaberryDesignSystem_098454;
+  const cols = [{ key: 'name', header: 'Cohort' }, { key: 'st', header: 'Status', render: (v) => <Badge tone="green" dot>{v}</Badge> }];
+  function Demo() {
+    const [busy, setBusy] = React.useState(false);
+    return (
+      <div className="grid">
+        <div className="stack">
+          <div>
+            <div className="lbl">Alert — persistent, actionable</div>
+            <Alert variant="danger" title="Payment didn't go through" actions={<><Button size="sm">Retry payment</Button><Button size="sm" variant="ghost">Use another card</Button></>}>Your bank declined the card ending in 4421. No charge was made.</Alert>
+          </div>
+          <Alert variant="warning" title="Cohort is almost full">3 seats left for the Jul 13 start.</Alert>
+          <div>
+            <div className="lbl">Table — loading</div>
+            <Table caption={{ text: 'Cohorts loading', visuallyHidden: true }} columns={cols} data={[]} loading loadingRows={2} />
+          </div>
+          <div className="row">
+            <Button size="sm" loading={busy} loadingLabel="Saving" onClick={() => { setBusy(true); setTimeout(() => setBusy(false), 1500); }}>Save changes</Button>
+            <Button size="sm" variant="outline" disabled>Publish</Button>
+            <Spinner size="sm" tone="muted" /><span style={{ fontSize: 13, color: 'var(--text-muted)' }}>Syncing…</span>
+          </div>
+        </div>
+        <div className="stack">
+          <div>
+            <div className="lbl">EmptyState — nothing yet</div>
+            <EmptyState size="sm" title="No assignments yet" description="Your mentor posts the first one after orientation." action={<Button size="sm">View schedule</Button>} />
+          </div>
+          <div>
+            <div className="lbl">EmptyState — no results · failed</div>
+            <div className="row" style={{ alignItems: 'stretch' }}>
+              <div style={{ flex: 1, minWidth: 150 }}><EmptyState size="sm" kind="search" title="No matches" description="Try a shorter keyword." action={<Button size="sm" variant="outline">Clear filters</Button>} /></div>
+              <div style={{ flex: 1, minWidth: 150 }}><EmptyState size="sm" kind="error" title="Couldn't load" description="Check your connection." action={<Button size="sm" variant="outline">Retry</Button>} /></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script>
+</body>
+</html>

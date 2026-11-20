@@ -3,7 +3,7 @@
 **Make the best UI the easiest UI for an agent to generate.**
 
 A working design system that humans, developers, and AI coding agents can all read from — built
-end-to-end for **Colaberry, the School of Data Science & Analytics**. Not a static style guide, but a
+end-to-end for **Colaberry, the School of Data and AI**. Not a static style guide, but a
 running, branded system where every token, color, and component in the docs is the same code that
 ships to production.
 
@@ -20,19 +20,6 @@ ships to production.
 
 ---
 
-## Quick start — pick your path
-
-| You are… | Do this |
-|---|---|
-| **Marketing / non-technical** | Open this project in Claude (or invoke the `colaberry-design` skill) and ask in plain English — *"Using the Colaberry design system, make a square Instagram post for our Spring cohort…"* You get a downloadable, on-brand HTML artifact. No code. |
-| **Developer** | Link `styles.css` (tokens + fonts) and `_ds_bundle.js` (components on `window.ColaberryDesignSystem_098454`). Reference **semantic tokens**, never raw hex. → [Using it in a project](#using-it-in-a-project) · [`IMPLEMENTATION.md`](IMPLEMENTATION.md) |
-| **Designer** | Open `design-system.html` (the living guide) + `BRAND.md`; reuse logos, colors, and type from `assets/`. |
-| **AI agent / Claude** | Start any prompt with *"Using the Colaberry design system, …"* — `SKILL.md` loads the rules so the output snaps to brand on the first try. |
-
-There's **no build step** — `npm start` (alias for `npx serve .`) serves the whole thing at `http://localhost:3000`.
-
----
-
 ## What this is
 
 This repo turns the Colaberry brand into an **executable UI language**.
@@ -46,7 +33,7 @@ It walks the full pipeline end-to-end:
 
 ```
 Brand style guide + logo  →  Claude  →  vector logo + token foundation
-                                      →  20 React components + living docs
+                                      →  25 React components + living docs
                                       →  GSAP / Three.js landing  →  static host
 ```
 
@@ -62,7 +49,7 @@ Strategy, brand direction, and every design decision were **owned and directed b
 | 1 | **Source brand** | Colaberry School style guide + logo PNGs (cherry mark, wordmark) |
 | 2 | **Rebuilt the mark** | Traced the raster logo into clean art + a full favicon / app-icon / OG export set |
 | 3 | **Token foundation** | palette → neutral → semantic → typography → spacing → radius → motion → data-viz → breakpoints (245 tokens, light + dark) |
-| 4 | **Real components** | 20 React primitives wired to those tokens, each with `.d.ts` types + usage prompt |
+| 4 | **Real components** | 25 React primitives wired to those tokens — every one with empty / loading / error / disabled states, `.d.ts` types + usage prompt |
 | 5 | **Applied the brand** | Cherry `#FB2832` · Leaf `#77BB4A` · Berry `#367895` · Roboto + Roboto Mono + Quicksand |
 | 6 | **Living docs + landing** | Scroll-spy docs site, WCAG audit, and an awwwards-style GSAP + Three.js landing page |
 | 7 | **Shipped** | MIT license, GitHub Pages workflow, hand-off + prompting guides |
@@ -81,7 +68,7 @@ token names map 1:1 to CSS variables.
 - `tokens/typography.css` — Roboto / Roboto Mono / Quicksand ramps, weights, line-heights.
 - `tokens/spacing.css` — 4px grid, radius, shadow, motion, **breakpoints + 12-col grid**.
 - `tokens.json` — all 245 tokens (+ dark overrides) for Style Dictionary / Figma Tokens / Tailwind.
-- `components/core/*` — 20 primitives (`.jsx` + `.d.ts` + usage prompt + live card), bundled to `_ds_bundle.js`.
+- `components/core/*` — 25 primitives (`.jsx` + `.d.ts` + usage prompt + live card), bundled to `_ds_bundle.js`.
 
 **3 · Agent layer (LLM-consumable)**
 `SKILL.md` + the living docs + `IMPLEMENTATION.md` + the built-in prompt templates. What an AI agent
@@ -94,9 +81,12 @@ reads to generate on-brand UI — start any request with *"Using the Colaberry d
 - **245 design tokens** — light + dark, every value a semantic CSS variable; exported as `tokens.json` for tooling.
 - **Data-visualization palette** — categorical (8) + sequential + diverging chart scales, color-blind safe, theme-aware.
 - **Design principles**, responsive **breakpoints + 12-col grid**, and accessibility guidance beyond contrast (keyboard, focus, touch, semantics).
-- **20 accessible components** — Accordion, Avatar, Badge, Breadcrumb, Button, Card, Carousel,
-  Checkbox, Dialog, Drawer, Input, Pagination, Popover, Progress, Skeleton, Switch, Table, Textarea,
-  Toast, Tooltip.
+- **25 accessible components** — Accordion, Alert, Avatar, Badge, Breadcrumb, Button, Card, Carousel,
+  Checkbox, Dialog, Drawer, EmptyState, Input, Pagination, Popover, Progress, Radio, Select, Skeleton,
+  Spinner, Switch, Table, Textarea, Toast, Tooltip.
+- **Every state designed** — empty, loading, error, success and disabled are first-class: `EmptyState`,
+  `Alert`, `Spinner`, `Button loading`, `Table loading/empty/error`, `Input error/success`,
+  `Dialog destructive`, image fallbacks — plus a **States & feedback** guide with copy rules.
 - **Full logo system** — color / mono-white / mono-black marks + lockups, app-icon tile, `favicon.ico`,
   apple-icon, 192/512 icons, square + OG / GitHub social cards.
 - **A marketing-website UI kit** — Home · Program · Enroll, composed only from the components.
@@ -112,6 +102,10 @@ index.html              Awwwards-style landing (GSAP + Three.js)
 design-system.html      Living docs — tokens, live components, a11y audit, logo rules, hand-off
 styles.css              Global entry point (@imports only)
 landing.css / landing.js  Landing-page styles + motion engine
+Colaberry School/        AI Accelerator microsite (accelerator.html = home) —
+                         AI Accelerator microsite home — plus audience pages (beginners ·
+                         builders · professionals), blog, events, faq, contact, our-story,
+                         podcasts, register, thank-you
 
 tokens/
 ├── colors.css            Cherry / Leaf / Berry ramps + neutrals + semantic + data-viz + dark theme
@@ -120,17 +114,15 @@ tokens/
 ├── fonts.css             @font-face / font loading
 └── base.css              Element defaults built on the tokens
 
-components/core/         20 primitives — <Name>.jsx + .d.ts + .prompt.md + card HTML
+components/core/         25 primitives — <Name>.jsx + .d.ts + .prompt.md + card HTML
 guidelines/cards/        Foundation specimen cards (color, type, spacing, brand)
-templates/               Fork-ready starting points, grouped by use-case:
-                         Web      — Web Page
-                         Social   — Social Post
-                         Deck     — Deck Slide
-                         Print    — Brochure · One-Pager · Comparison Sheet · Certificate
-                         Sales    — Case Study · Proposal/Quote · Business Card
-                         Email    — Email Newsletter
-                         Event    — Event Poster · Standee
+templates/               25+ fork-ready starting points — web · social · deck · print
+                         (brochure, one-pager, certificates) · sales (case study, proposal,
+                         business card) · email · event · video kits · hiring docs
 ui_kits/marketing-website/  Home · Program · Enroll click-through
+training-site/           Classic training-site pages (courses, pricing, mentorship, reviews)
+app/                     Learner-portal prototype (login · register · dashboard · legal)
+ads/                     Meta ad creatives
 
 assets/
 ├── logo/                 Marks, lockups, mono variants + export/ (favicons, app icons, OG)
@@ -163,7 +155,8 @@ npm start            # → http://localhost:3000   (alias for: npx serve .)
 | `index.html` | Landing — animated hero, color, type, components, examples, get-started |
 | `design-system.html` | The full living system (scroll-spy nav + light/dark toggle) |
 | `design-system.html#colors` | Color ramps + semantic tokens (click to copy) |
-| `design-system.html#components` | All 20 components, live & interactive |
+| `design-system.html#components` | All 25 components, live & interactive |
+| `design-system.html#states` | States & feedback — empty, loading, error, success; live lifecycle demo |
 | `design-system.html#a11y` | WCAG 2.2 contrast audit |
 | `design-system.html#handoff` | Hand-off + prompting guides |
 | `ui_kits/marketing-website/index.html` | Marketing site recreation (Home · Program · Enroll) |
@@ -180,38 +173,6 @@ npm start            # → http://localhost:3000   (alias for: npx serve .)
 Reference **semantic tokens** (`var(--brand-accent)`, `var(--surface-page)`, `var(--text-strong)`),
 never raw hex. Set `data-theme="dark"` on `<html>` for dark mode — the cherry accent stays constant.
 Full steps (plain HTML, React/Vite/Next): [`IMPLEMENTATION.md`](IMPLEMENTATION.md).
-
----
-
-## In production — a worked example
-
-The system isn't only for marketing artifacts; it drives real product UI. A recent example: the
-**course cards** in the Colaberry learning portal (the Anthropic / Skilljar "course wrapper").
-
-The starting point was a generic card with **broken information architecture** — three source badges
-stacked above the title, so metadata outranked the actual course, with card sizes that varied section
-to section. Rebuilt entirely on this system, it became a **bento** layout: a featured "Start here"
-course, compact supporting tiles, and a cherry path-summary anchor — assembled from `Card`, `Badge`,
-and `Button` with semantic tokens only, Roboto + Roboto Mono numerals, `--radius-xl`, and dark-mode
-support out of the box.
-
-| | Before | After |
-|---|---|---|
-| Tokens | hardcoded hex | semantic tokens only |
-| Information architecture | source badges above the title | content leads; source is a quiet kicker; grouped meta |
-| Layout | inconsistent card sizes | intentional bento hierarchy + responsive fallbacks (3 / 2 / 1 course) |
-| Accessibility | white-on-cherry 3.8:1 (fails AA) | text-bearing cherry moved `--red-500` → `--red-600` = 4.7:1 (AA) |
-| Dark mode | flat token inversion | lifted surfaces + border/glow elevation |
-
-**The method that drove it** — a repeatable, critique-led loop you can run on any page with this system:
-
-> **anchor** to the tokens + components → fix **information architecture** before pixels → choose a
-> **layout system** (uniform grid *or* bento — never ad-hoc) → **decide** → gate on **accessibility**
-> (contrast ratios + a heuristic pass) → **polish** the edges (dark mode, empty / long / 1-vs-many
-> states) → **approve** against the brand principles.
-
-> **Systemic note from that audit:** white text on the brand cherry `--red-500` is only 3.8:1. Use
-> `--red-600` / `--red-700` for text-bearing cherry surfaces; reserve `--red-500` for non-text accents.
 
 ---
 
@@ -251,14 +212,14 @@ Pages with no build step. Full guide: [`DEPLOY.md`](DEPLOY.md).
 **30 days · Foundation** ✅ *shipped in this repo*
 - ✅ Token foundation (palette + neutral + semantic + type + space + motion), light + dark.
 - ✅ Vector logo system + full favicon / app-icon / OG export set.
-- ✅ 20 accessible components with `.d.ts` types and usage prompts.
+- ✅ 25 accessible components with `.d.ts` types and usage prompts — every state (empty / loading / error / success / disabled) covered.
 - ✅ Living docs, WCAG 2.2 audit, awwwards-style landing, hand-off + prompting guides.
 
 **60 days · Build**
 - Add Storybook for component-by-component browsing.
 - Extract `tokens/` + `components/` into a publishable `@colaberry/design-system` npm package.
 - **LLM component manifest** — machine-readable JSON of every prop, state, and import path.
-- Self-host fonts; add a second UI kit (the LMS / course dashboard).
+- ~~Self-host fonts~~ ✓ done (fonts, icons &amp; all JS libraries are self-hosted — zero CDN); add a second UI kit (the LMS / course dashboard).
 
 **90 days · Integrate & govern**
 - **MCP server** exposing the manifest so any Claude / agent session can pull the system in-IDE.

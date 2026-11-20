@@ -6,7 +6,7 @@ const CSS = `
 .cb-pag button:hover:not(:disabled):not(.is-current) { background: var(--surface-sunken); border-color: var(--border-strong); }
 .cb-pag button:active:not(:disabled) { transform: translateY(1px); }
 .cb-pag button:focus-visible { outline: none; box-shadow: var(--focus-ring); }
-.cb-pag button.is-current { background: var(--red-500); border-color: var(--red-500); color: #fff; }
+.cb-pag button.is-current { background: var(--action-bg); border-color: var(--action-bg); color: var(--action-fg); }
 .cb-pag button:disabled { opacity: .4; cursor: not-allowed; }
 .cb-pag__ellipsis { min-width: 24px; text-align: center; color: var(--text-subtle); }
 `;

@@ -6,7 +6,7 @@ const CSS = `
 .cb-acc__btn { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; background: none; border: none; cursor: pointer; font-family: var(--font-body); font-weight: var(--fw-bold); font-size: var(--fs-body); color: var(--text-strong); text-align: left; transition: background var(--dur-fast) var(--ease-out); }
 .cb-acc__btn:hover { background: var(--surface-sunken); }
 .cb-acc__btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
-.cb-acc__ic { flex: none; color: var(--red-500); transition: transform var(--dur-base) var(--ease-out); }
+.cb-acc__ic { flex: none; color: var(--brand-primary); transition: transform var(--dur-base) var(--ease-out); }
 .cb-acc__item[data-open="true"] .cb-acc__ic { transform: rotate(180deg); }
 .cb-acc__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--dur-base) var(--ease-out); }
 .cb-acc__item[data-open="true"] .cb-acc__panel { grid-template-rows: 1fr; }
@@ -27,6 +27,7 @@ function inject() {
 export function Accordion({ items = [], allowMultiple = false, defaultOpen = [], className = '', ...rest }) {
   inject();
   const [open, setOpen] = React.useState(() => new Set(defaultOpen));
+  const uid = React.useMemo(() => 'cb-acc-' + Math.random().toString(36).slice(2, 7), []); // unique per instance so ids never collide
   const toggle = (i) => setOpen(prev => {
     const next = new Set(allowMultiple ? prev : []);
     if (prev.has(i)) next.delete(i); else next.add(i);
@@ -36,7 +37,7 @@ export function Accordion({ items = [], allowMultiple = false, defaultOpen = [],
     <div className={'cb-acc ' + className} {...rest}>
       {items.map((it, i) => {
         const isOpen = open.has(i);
-        const btnId = 'cb-acc-b' + i, panelId = 'cb-acc-p' + i;
+        const btnId = uid + '-b' + i, panelId = uid + '-p' + i;
         return (
           <div className="cb-acc__item" data-open={isOpen} key={i}>
             <button className="cb-acc__btn" id={btnId} aria-expanded={isOpen} aria-controls={panelId} onClick={() => toggle(i)}>

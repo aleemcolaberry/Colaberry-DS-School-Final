@@ -1,5 +1,5 @@
 /* Colaberry marketing site — Program detail + Enroll views */
-const { Button: PButton, Card: PCard, Badge: PBadge, Input: PInput, Checkbox: PCheckbox } = window.ColaberryDesignSystem_098454;
+const { Button: PButton, Card: PCard, Badge: PBadge, Input: PInput, Checkbox: PCheckbox, Alert: PAlert } = window.ColaberryDesignSystem_098454;
 
 function ProgramView({ go }) {
   const [open, setOpen] = React.useState(0);
@@ -20,7 +20,7 @@ function ProgramView({ go }) {
     <main>
       <div className="cbsite-prog-hero">
         <div className="cbsite-prog-hero__inner">
-          <div className="cbsite-bc"><a onClick={()=>go('home')}>Home</a> <I n="chevron-right"/> <a onClick={()=>go('home')}>Programs</a> <I n="chevron-right"/> <span>Data Analytics</span></div>
+          <div className="cbsite-bc"><a href="#" onClick={(e)=>{e.preventDefault();go('home');}}>Home</a> <I n="chevron-right"/> <a href="#" onClick={(e)=>{e.preventDefault();go('home');}}>Programs</a> <I n="chevron-right"/> <span aria-current="page">Data Analytics</span></div>
           <div className="cbsite-prog-hero__grid">
             <div>
               <PBadge tone="blue" dot>Now enrolling · Spring cohort</PBadge>
@@ -60,12 +60,12 @@ function ProgramView({ go }) {
         </div>
         <div className="cbsite-modules">
           {modules.map((m,i)=>(
-            <div key={i} className={'cbsite-module' + (open===i?' is-open':'')} onClick={()=>setOpen(open===i?-1:i)}>
-              <div className="cbsite-module__top">
+            <div key={i} className={'cbsite-module' + (open===i?' is-open':'')}>
+              <button type="button" className="cbsite-module__top" aria-expanded={open===i} onClick={()=>setOpen(open===i?-1:i)}>
                 <span className="cbsite-module__wk">{m.wk}</span>
                 <h3>{m.h}</h3>
                 <I n={open===i?'minus':'plus'}/>
-              </div>
+              </button>
               {open===i && <p>{m.d}</p>}
             </div>
           ))}
@@ -105,6 +105,30 @@ function ProgramView({ go }) {
 function EnrollView({ go }) {
   const [program, setProgram] = React.useState('analytics');
   const [done, setDone] = React.useState(false);
+  const [sending, setSending] = React.useState(false);
+  const [failed, setFailed] = React.useState(false);
+  const [errs, setErrs] = React.useState({});
+  const [vals, setVals] = React.useState({ first: '', last: '', email: '', phone: '', why: '', agree: false });
+  const set = (k) => (e) => { const v = e.target.type === 'checkbox' ? e.target.checked : e.target.value; setVals(s => ({ ...s, [k]: v })); if (errs[k]) setErrs(s => ({ ...s, [k]: undefined })); };
+  const validate = () => {
+    const e = {};
+    if (!vals.first.trim()) e.first = 'Enter your first name.';
+    if (!vals.last.trim()) e.last = 'Enter your last name.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(vals.email.trim())) e.email = 'Enter an email like ada@email.com.';
+    if (vals.phone.trim() && vals.phone.replace(/\D/g, '').length < 10) e.phone = 'Enter a 10-digit phone number, or leave it blank.';
+    if (!vals.agree) e.agree = 'Tick this box so admissions can contact you.';
+    return e;
+  };
+  const submit = (ev) => {
+    ev.preventDefault();
+    const e = validate();
+    setErrs(e); setFailed(false);
+    const first = Object.keys(e)[0];
+    if (first) { const el = ev.currentTarget.querySelector('[aria-invalid="true"]'); el && el.focus(); return; }
+    setSending(true);
+    // Demo transport: succeeds after a short delay. Replace with a real request; keep the catch.
+    new Promise((res) => setTimeout(res, 700)).then(() => { setSending(false); setDone(true); }).catch(() => { setSending(false); setFailed(true); });
+  };
   const progs = {
     analytics: { name: 'Data Analytics', price: '$1,999', tone: 'blue', len: '12 weeks' },
     science: { name: 'Data Science', price: '$4,500', tone: 'green', len: '24 weeks' },
@@ -128,9 +152,10 @@ function EnrollView({ go }) {
   return (
     <main className="cbsite-enroll">
       <div className="cbsite-enroll__grid">
-        <form className="cbsite-form" onSubmit={(e)=>{e.preventDefault();setDone(true);}}>
+        <form className="cbsite-form" onSubmit={submit} noValidate>
           <h1>Apply to Colaberry</h1>
           <p className="cbsite-form__sub">No tests, no degree required. Takes about 2 minutes.</p>
+          {failed && <PAlert variant="danger" title="We couldn't send your application" actions={<PButton size="sm" type="submit">Try again</PButton>}>Check your connection. Your answers are still here. Or email admissions@colaberry.com.</PAlert>}
 
           <div className="cbsite-form__choice">
             <span className="cbsite-form__legend">Choose your program</span>
@@ -146,17 +171,17 @@ function EnrollView({ go }) {
           </div>
 
           <div className="cbsite-form__row">
-            <PInput label="First name" placeholder="Ada" required />
-            <PInput label="Last name" placeholder="Lovelace" required />
+            <PInput label="First name" placeholder="Ada" required autoComplete="given-name" value={vals.first} onChange={set('first')} error={errs.first} />
+            <PInput label="Last name" placeholder="Lovelace" required autoComplete="family-name" value={vals.last} onChange={set('last')} error={errs.last} />
           </div>
-          <PInput label="Email" type="email" placeholder="ada@email.com" required />
-          <PInput label="Phone" type="tel" placeholder="(972) 992-1024" helperText="We'll only call about your application." />
-          <PInput label="Why do you want to learn data?" multiline rows={3} placeholder="A sentence or two about your goals…" />
+          <PInput label="Email" type="email" inputMode="email" autoComplete="email" placeholder="ada@email.com" required value={vals.email} onChange={set('email')} error={errs.email} />
+          <PInput label="Phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="(972) 992-1024" optional helperText="We'll only call about your application." value={vals.phone} onChange={set('phone')} error={errs.phone} />
+          <PInput label="Why do you want to learn data?" multiline rows={3} optional placeholder="A sentence or two about your goals…" value={vals.why} onChange={set('why')} />
           <div className="cbsite-form__checks">
             <PCheckbox label="I'd like to hear about scholarships and upcoming cohorts" defaultChecked />
-            <PCheckbox label="I agree to be contacted by Colaberry's admissions team" required />
+            <PCheckbox label="I agree to be contacted by Colaberry's admissions team" required checked={vals.agree} onChange={set('agree')} error={errs.agree} />
           </div>
-          <PButton type="submit" size="lg" fullWidth>Submit application</PButton>
+          <PButton type="submit" size="lg" fullWidth loading={sending} loadingLabel="Sending your application">Submit application</PButton>
         </form>
 
         <aside className="cbsite-summary">

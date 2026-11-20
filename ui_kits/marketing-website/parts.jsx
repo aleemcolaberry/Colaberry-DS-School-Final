@@ -30,6 +30,8 @@ const NAV = [
 
 function Header({ go, current }) {
   const [scrolled, setScrolled] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const nav = (view) => { setOpen(false); go(view); };
   React.useEffect(() => {
     const el = document.querySelector('.cbsite-scroll');
     const onScroll = () => setScrolled((el ? el.scrollTop : window.scrollY) > 8);
@@ -40,15 +42,16 @@ function Header({ go, current }) {
   return (
     <header className="cbsite-header" data-scrolled={scrolled}>
       <div className="cbsite-header__inner">
-        <a className="cbsite-logo" onClick={() => go('home')}><Logo /></a>
-        <nav className="cbsite-nav">
+        <a className="cbsite-logo" href="#home" onClick={(e) => { e.preventDefault(); nav('home'); }} aria-label="Colaberry home"><Logo /></a>
+        <nav className={'cbsite-nav' + (open ? ' is-open' : '')} id="cbsiteNav" aria-label="Primary">
           {NAV.map((n, i) => (
-            <a key={i} className="cbsite-nav__link" onClick={() => go(n.view)}>{n.label}</a>
+            <a key={i} href={'#' + n.view} className={'cbsite-nav__link' + (current === n.view ? ' is-active' : '')} onClick={(e) => { e.preventDefault(); nav(n.view); }}>{n.label}</a>
           ))}
         </nav>
         <div className="cbsite-header__actions">
-          <a className="cbsite-nav__link cbsite-nav__link--ghost" onClick={() => go('enroll')}>Sign in</a>
+          <a className="cbsite-nav__link cbsite-nav__link--ghost" href="#enroll" onClick={(e) => { e.preventDefault(); nav('enroll'); }}>Sign in</a>
           <CBButton size="sm" onClick={() => go('enroll')}>Apply now</CBButton>
+          <button type="button" className="cbsite-burger" aria-label="Menu" aria-expanded={open} aria-controls="cbsiteNav" onClick={() => setOpen(!open)}><I n={open ? 'x' : 'menu'} /></button>
         </div>
       </div>
     </header>
@@ -75,15 +78,15 @@ function Footer({ go }) {
         <div className="cbsite-footer__cols">
           {cols.map((c, i) => (
             <div key={i} className="cbsite-footer__col">
-              <h4>{c.h}</h4>
-              {c.items.map((it, j) => <a key={j} onClick={() => go('home')}>{it}</a>)}
+              <h3>{c.h}</h3>
+              {c.items.map((it, j) => <a key={j} href="#home" onClick={(e) => { e.preventDefault(); go('home'); }}>{it}</a>)}
             </div>
           ))}
         </div>
       </div>
       <div className="cbsite-footer__bar">
-        <span>© 2026 Colaberry, Inc. · Texas Workforce Commission approved</span>
-        <span className="cbsite-footer__legal"><a onClick={() => go('home')}>Privacy</a><a onClick={() => go('home')}>Terms</a><a onClick={() => go('home')}>Accreditation</a></span>
+        <span>© 2026 · Colaberry School of Data and AI is operated by Colaberry Inc. · Texas Workforce Commission approved</span>
+        <span className="cbsite-footer__legal"><a href="../../app/legal.html#privacy">Privacy</a><a href="../../app/legal.html#terms">Terms</a><a href="../../Colaberry School/our-story.html">Accreditation</a></span>
       </div>
     </footer>
   );

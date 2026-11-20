@@ -5,7 +5,7 @@ const CSS = `
 .cb-skel--text { height: 0.85em; border-radius: var(--radius-xs); margin: 0.2em 0; }
 .cb-skel--circle { border-radius: 50%; }
 .cb-skel::after { content: ''; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--neutral-0) 60%, transparent), transparent); animation: cb-shimmer 1.4s var(--ease-in-out) infinite; }
-[data-theme="dark"] .cb-skel::after { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent); }
+[data-theme="dark"] .cb-skel::after { background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--neutral-0) 6%, transparent), transparent); }
 @keyframes cb-shimmer { 100% { transform: translateX(100%); } }
 @media (prefers-reduced-motion: reduce){ .cb-skel::after { animation: none; } }
 `;

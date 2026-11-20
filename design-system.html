@@ -3,13 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preload" href="assets/fonts/files/roboto-400-21.woff2" as="font" type="font/woff2" crossorigin>
 <title>Colaberry — Design System</title>
 <link rel="icon" href="assets/logo/export/favicon-32.png">
-<link rel="stylesheet" href="styles.css">
-<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<link rel="stylesheet" href="styles.css?v=ea85358a">
+<script src="theme.js?v=1"></script>
+<script src="assets/vendor/lucide.min.js" defer></script>
 <style>
   html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   body { margin: 0; }
+  .ds-skip { position: absolute; left: -9999px; top: 14px; z-index: 3000; background: var(--surface-inverse); color: var(--text-on-inverse); font-family: var(--font-body); font-size: 14px; font-weight: var(--fw-medium); padding: 10px 18px; border-radius: var(--radius-pill); }
+  .ds-skip:focus { left: 14px; }
   .ds { display: grid; grid-template-columns: 264px 1fr; min-height: 100vh; }
 
   /* Sidebar */
@@ -21,22 +26,22 @@
   .ds-nav { display: flex; flex-direction: column; gap: 2px; }
   .ds-nav a { font-size: 14px; color: var(--text-muted); text-decoration: none; padding: 8px 12px; border-radius: var(--radius-sm); display: flex; align-items: center; gap: 10px; }
   .ds-nav a:hover { background: var(--surface-sunken); color: var(--text-strong); }
-  .ds-nav a.active { background: var(--surface-brand-subtle); color: var(--red-600); font-weight: var(--fw-medium); }
+  .ds-nav a.active { background: var(--surface-brand-subtle); color: var(--text-brand); font-weight: var(--fw-medium); }
   .ds-nav a .cb-i { font-size: 16px; }
-  .ds-dl { margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; font-family: var(--font-body); font-size: 13px; font-weight: var(--fw-medium); color: var(--text-on-accent); background: var(--red-500); padding: 11px 14px; border-radius: var(--radius-pill); box-shadow: var(--shadow-brand); transition: background var(--dur-fast) var(--ease-out); }
-  .ds-dl:hover { background: var(--red-600); text-decoration: none; color: var(--text-on-accent); }
+  .ds-dl { margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; font-family: var(--font-body); font-size: 13px; font-weight: var(--fw-medium); color: var(--text-on-accent); background: var(--action-bg); padding: 11px 14px; border-radius: var(--radius-pill); box-shadow: var(--shadow-brand); transition: background var(--dur-fast) var(--ease-out); }
+  .ds-dl:hover { background: var(--action-bg-hover); text-decoration: none; color: var(--text-on-accent); }
   .ds-dl .cb-i { font-size: 16px; }
   .ds-dl--alt { background: transparent; color: var(--text-strong); box-shadow: inset 0 0 0 1px var(--border-default); }
   .ds-dl--alt .cb-i { color: var(--blue-500); }
   .ds-dl--alt:hover { background: var(--surface-sunken); color: var(--text-strong); box-shadow: inset 0 0 0 1px var(--border-strong); }
   .ds-theme { margin-top: 12px; display: flex; align-items: center; gap: 10px; background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-pill); padding: 4px; }
-  .ds-theme button { flex: 1; border: none; background: transparent; padding: 8px; border-radius: var(--radius-pill); cursor: pointer; color: var(--text-muted); font-family: var(--font-body); font-size: 13px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+  .ds-theme button { flex: 1; border: none; background: transparent; padding: 8px; min-height: 40px; border-radius: var(--radius-pill); cursor: pointer; color: var(--text-muted); font-family: var(--font-body); font-size: 13px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
   .ds-theme button.active { background: var(--surface-inverse); color: var(--text-on-inverse); }
 
   /* Main */
   .ds-main { min-width: 0; }
   .ds-sec { padding: 72px 56px; border-bottom: 1px solid var(--border-subtle); max-width: 1080px; }
-  .ds-sec__eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: var(--ls-overline); text-transform: uppercase; color: var(--red-500); margin: 0 0 10px; }
+  .ds-sec__eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: var(--ls-overline); text-transform: uppercase; color: var(--text-brand); margin: 0 0 10px; }
   .ds-sec h2 { font-size: var(--fs-h2); margin: 0 0 14px; }
   .ds-sec__lead { font-size: var(--fs-body-lg); color: var(--text-muted); max-width: 60ch; margin: 0 0 36px; }
   .ds-h3 { font-size: var(--fs-h4); margin: 36px 0 16px; color: var(--text-strong); }
@@ -44,7 +49,7 @@
   /* Hero */
   .ds-hero { padding: 0; border-bottom: 1px solid var(--border-subtle); }
   .ds-hero__band { background: linear-gradient(135deg, var(--surface-subtle), var(--surface-page)); padding: 64px 56px 56px; }
-  .ds-hero__logo img { height: 64px; }
+  .ds-hero__logo img { height: 64px; width: auto; max-width: 100%; object-fit: contain; object-position: left; }
   .ds-hero h1 { font-size: clamp(36px, 4vw, 52px); margin: 28px 0 14px; letter-spacing: var(--ls-tighter); }
   .ds-hero p { font-size: var(--fs-body-lg); color: var(--text-muted); max-width: 56ch; margin: 0; }
   .ds-meta { display: flex; gap: 28px; margin-top: 30px; flex-wrap: wrap; }
@@ -52,41 +57,42 @@
   .ds-meta strong { display: block; font-family: var(--font-display); font-size: 22px; color: var(--text-strong); }
 
   /* Color swatches */
-  .ds-ramp { display: grid; grid-template-columns: repeat(10, 1fr); border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-subtle); margin-bottom: 10px; }
-  .ds-ramp.neutral { grid-template-columns: repeat(13, 1fr); }
-  .ds-sw { height: 76px; border: none; cursor: pointer; position: relative; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 7px; font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.9); transition: transform var(--dur-fast) var(--ease-out); }
-  .ds-sw[data-dark="1"] { color: rgba(0,0,0,.6); }
+  .ds-ramp { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-subtle); margin-bottom: 10px; }
+  .ds-ramp.neutral { grid-template-columns: repeat(13, minmax(0, 1fr)); }
+  .ds-sw { height: 76px; border: none; cursor: pointer; position: relative; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 7px; font-family: var(--font-mono); font-size: 12px; color: #fff; transition: transform var(--dur-fast) var(--ease-out); }
+  .ds-sw[data-dark="1"], .ds-chart-sw[data-dark="1"] { color: #000; }
   .ds-sw:hover { transform: translateY(-3px); z-index: 1; box-shadow: var(--shadow-md); }
+  .ds-sw:focus-visible { transform: translateY(-3px); z-index: 1; box-shadow: var(--focus-ring), var(--shadow-md); }
   .ds-semantic { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
   .ds-tok { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); cursor: pointer; background: var(--surface-card); }
   .ds-tok:hover { border-color: var(--border-strong); }
   .ds-tok__chip { width: 34px; height: 34px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); flex: none; }
   .ds-tok__name { font-family: var(--font-mono); font-size: 12px; color: var(--text-strong); }
-  .ds-tok__val { font-size: 11px; color: var(--text-muted); }
+  .ds-tok__val { font-size: 12px; color: var(--text-muted); }
 
   /* Type */
   .ds-type-row { display: flex; align-items: baseline; gap: 22px; padding: 14px 0; border-bottom: 1px dashed var(--border-subtle); }
-  .ds-type-row .meta { font-family: var(--font-mono); font-size: 11px; color: var(--text-subtle); width: 132px; flex: none; }
+  .ds-type-row .meta { font-family: var(--font-mono); font-size: 12px; color: var(--text-subtle); width: 132px; flex: none; }
   .ds-type-row .spec { color: var(--text-strong); }
 
   /* Spacing / radius */
   .ds-flex { display: flex; gap: 20px; align-items: flex-end; flex-wrap: wrap; }
   .ds-flex.top { align-items: flex-start; }
   .ds-cell { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-  .ds-cell .v { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .ds-cell .v { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
   .ds-bar { background: var(--red-500); border-radius: 3px; }
   .ds-rbox { width: 80px; height: 64px; background: var(--green-100); border: 2px solid var(--green-500); }
   .ds-shbox { width: 92px; height: 64px; background: var(--surface-card); border-radius: var(--radius-lg); }
 
   /* Components showcase */
   .ds-demo { border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 28px; background: var(--surface-card); margin-bottom: 20px; }
-  .ds-demo h4 { margin: 0 0 18px; font-size: var(--fs-body); color: var(--text-strong); }
+  .ds-demo h3, .ds-demo h4 { margin: 0 0 18px; font-size: var(--fs-body); color: var(--text-strong); }
   .ds-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
   .ds-row + .ds-row { margin-top: 16px; }
-  .ds-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .ds-grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 
   /* Logo rules */
-  .ds-logo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .ds-logo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
   .ds-logo-cell { border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 28px; display: grid; place-items: center; min-height: 120px; }
   .ds-logo-cell.dark { background: var(--neutral-900); }
   .ds-logo-cell.red { background: var(--red-500); }
@@ -94,24 +100,24 @@
   .ds-dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .ds-rule { border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden; }
   .ds-rule__head { padding: 10px 16px; font-weight: var(--fw-bold); font-size: 14px; display: flex; align-items: center; gap: 8px; }
-  .ds-rule.do .ds-rule__head { background: var(--green-50); color: var(--green-800); }
-  .ds-rule.dont .ds-rule__head { background: var(--red-50); color: var(--red-800); }
+  .ds-rule.do .ds-rule__head { background: var(--surface-green-subtle); color: var(--text-on-light-green); }
+  .ds-rule.dont .ds-rule__head { background: var(--surface-brand-subtle); color: var(--text-brand); }
   .ds-rule ul { margin: 0; padding: 14px 18px 16px 34px; }
   .ds-rule li { font-size: 14px; color: var(--text-body); margin-bottom: 8px; }
   .ds-clearspace { border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 30px; display: flex; justify-content: center; background: var(--surface-subtle); }
   .ds-clearspace__box { position: relative; padding: 40px; outline: 2px dashed var(--blue-300); }
-  .ds-clearspace__box img { height: 48px; display: block; }
+  .ds-clearspace__box img { height: 48px; width: auto; max-width: 100%; object-fit: contain; display: block; }
 
   /* Accessibility table */
   .ds-table { width: 100%; border-collapse: collapse; font-size: 14px; }
   .ds-table th, .ds-table td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border-subtle); }
   .ds-table th { font-size: 12px; text-transform: uppercase; letter-spacing: var(--ls-wide); color: var(--text-muted); }
   .ds-pair { display: inline-flex; align-items: center; gap: 8px; }
-  .ds-pair span { display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 30px; border-radius: var(--radius-sm); font-size: 12px; font-weight: var(--fw-bold); }
+  .ds-pair span { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 34px; border-radius: var(--radius-sm); font-size: 19px; font-weight: var(--fw-bold); }
   .ds-verdict { font-family: var(--font-mono); font-size: 12px; font-weight: var(--fw-bold); padding: 3px 9px; border-radius: var(--radius-pill); }
-  .ds-verdict.pass { background: var(--green-50); color: var(--green-800); }
-  .ds-verdict.large { background: var(--blue-50); color: var(--blue-700); }
-  .ds-verdict.fail { background: var(--red-50); color: var(--red-800); }
+  .ds-verdict.pass { background: var(--status-success-bg); color: var(--status-success-fg); }
+  .ds-verdict.large { background: var(--status-info-bg); color: var(--status-info-fg); }
+  .ds-verdict.fail { background: var(--status-danger-bg); color: var(--status-danger-fg); }
 
   /* Assets / checklist */
   .ds-assets { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 14px; }
@@ -143,17 +149,19 @@
   .ds-give { margin-top: 8px; }
 
   /* Data-viz swatches */
-  .ds-chart-row { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin-bottom: 22px; }
-  .ds-chart-sw { height: 64px; border-radius: var(--radius-md); border: none; cursor: pointer; position: relative; transition: transform var(--dur-fast) var(--ease-out); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 6px; font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.92); }
+  .ds-chart-row { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px; margin-bottom: 22px; }
+  .ds-chart-sw { height: 64px; border-radius: var(--radius-md); border: none; cursor: pointer; position: relative; transition: transform var(--dur-fast) var(--ease-out); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 6px; font-family: var(--font-mono); font-size: 12px; color: #fff; }
   .ds-chart-sw:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .ds-chart-sw:focus-visible { transform: translateY(-3px); box-shadow: var(--focus-ring), var(--shadow-md); }
+  .ds-scale button:focus-visible { position: relative; z-index: 1; }
   .ds-scales { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .ds-scale-lbl { font-family: var(--font-mono); font-size: 11px; color: var(--text-subtle); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px; }
+  .ds-scale-lbl { font-family: var(--font-mono); font-size: 12px; color: var(--text-subtle); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px; }
   .ds-scale { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; height: 44px; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-subtle); }
   .ds-scale button { border: none; cursor: pointer; padding: 0; }
-  @media (max-width: 900px) { .ds-chart-row { grid-template-columns: repeat(4, 1fr); } .ds-scales { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .ds-chart-row { grid-template-columns: repeat(4, minmax(0, 1fr)); } .ds-scales { grid-template-columns: 1fr; } }
 
   /* Design principles */
-  .ds-princ { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .ds-princ { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
   .ds-princ__card { border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); background: var(--surface-card); padding: 24px; }
   .ds-princ__ic { width: 44px; height: 44px; border-radius: var(--radius-lg); display: grid; place-items: center; color: #fff; margin-bottom: 16px; }
   .ds-princ__ic .cb-i { font-size: 22px; }
@@ -162,7 +170,7 @@
   @media (max-width: 900px) { .ds-princ { grid-template-columns: 1fr; } }
 
   /* Accessibility guideline grid */
-  .ds-a11y-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 28px 0 0; }
+  .ds-a11y-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 28px 0 0; }
   .ds-a11y-card { border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 20px 22px; background: var(--surface-card); }
   .ds-a11y-card h4 { margin: 0 0 12px; font-size: var(--fs-body); display: flex; align-items: center; gap: 10px; }
   .ds-a11y-card h4 .cb-i { color: var(--green-600); font-size: 19px; }
@@ -175,8 +183,8 @@
   .ds-doc { border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden; background: var(--surface-card); display: flex; flex-direction: column; min-width: 0; }
   .ds-doc__head { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--border-subtle); background: var(--surface-subtle); }
   .ds-doc__head span { font-family: var(--font-mono); font-size: 12px; color: var(--text-strong); font-weight: var(--fw-bold); }
-  .ds-doc__copy { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-size: 12px; font-weight: var(--fw-medium); color: var(--text-on-accent); background: var(--red-500); border: none; border-radius: var(--radius-pill); padding: 5px 12px; cursor: pointer; transition: background var(--dur-fast) var(--ease-out); }
-  .ds-doc__copy:hover { background: var(--red-600); }
+  .ds-doc__copy { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-size: 12px; font-weight: var(--fw-medium); color: var(--text-on-accent); background: var(--action-bg); border: none; border-radius: var(--radius-pill); min-height: 36px; padding: 5px 14px; cursor: pointer; transition: background var(--dur-fast) var(--ease-out); }
+  .ds-doc__copy:hover { background: var(--action-bg-hover); }
   .ds-doc__copy:active { transform: translateY(1px); }
   .ds-doc__pre { margin: 0; padding: 14px 16px; max-height: 360px; overflow: auto; font-family: var(--font-mono); font-size: 12px; line-height: 1.6; color: var(--text-body); white-space: pre-wrap; word-break: break-word; }
   @media (max-width: 900px) { .ds-docs { grid-template-columns: 1fr; } }
@@ -188,7 +196,7 @@
   .ds-track__ic { width: 38px; height: 38px; border-radius: var(--radius-md); display: grid; place-items: center; flex: none; color: #fff; }
   .ds-track__ic .cb-i { font-size: 20px; }
   .ds-track__head h3 { margin: 0; font-size: var(--fs-body-lg); line-height: 1.2; white-space: nowrap; }
-  .ds-track__tag { font-family: var(--font-mono); font-size: 11px; color: var(--text-subtle); margin-top: 3px; }
+  .ds-track__tag { font-family: var(--font-mono); font-size: 12px; color: var(--text-subtle); margin-top: 3px; }
   .ds-track__body { padding: 22px; }
   .ds-steps { list-style: none; counter-reset: step; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 18px; }
   .ds-steps > li { counter-increment: step; position: relative; padding-left: 40px; }
@@ -202,35 +210,36 @@
   .ds-note .cb-i { color: var(--blue-600); font-size: 17px; flex: none; margin-top: 1px; }
 
   /* Motion */
-  .ds-principles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 36px; }
+  .ds-principles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 36px; }
   .ds-principle { border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 18px; background: var(--surface-card); }
   .ds-principle .cb-i { font-size: 20px; color: var(--red-500); }
-  .ds-principle h4 { margin: 12px 0 6px; font-size: var(--fs-body-sm); color: var(--text-strong); }
+  .ds-principle h3, .ds-principle h4 { margin: 12px 0 6px; font-size: var(--fs-body-sm); color: var(--text-strong); }
   .ds-principle p { margin: 0; font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
   .ds-motion-panel { border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 24px; background: var(--surface-card); }
-  .ds-recipes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .ds-recipes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
   .ds-recipe { border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 18px; background: var(--surface-card); }
-  .ds-recipe__tag { display: inline-block; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--red-600); background: var(--surface-brand-subtle); padding: 3px 9px; border-radius: var(--radius-pill); margin-bottom: 12px; }
+  .ds-recipe__tag { display: inline-block; font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-brand); background: var(--surface-brand-subtle); padding: 3px 9px; border-radius: var(--radius-pill); margin-bottom: 12px; }
   .ds-recipe b { display: block; font-size: var(--fs-body); color: var(--text-strong); margin-bottom: 6px; }
   .ds-recipe p { margin: 0; font-size: 12.5px; color: var(--text-muted); line-height: 1.55; }
-  .ds-recipe code { font-family: var(--font-mono); font-size: .92em; color: var(--text-body); }
+  .ds-recipe code { font-family: var(--font-mono); font-size: max(.92em, 12px); color: var(--text-body); }
   @media (max-width: 900px) { .ds-recipes { grid-template-columns: 1fr; } }
   .ds-motion-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 16px; }
   .ds-motion-head h4 { margin: 0; font-size: var(--fs-body); color: var(--text-strong); }
-  .ds-replay { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-body); font-size: 13px; font-weight: var(--fw-medium); color: var(--text-strong); background: var(--surface-sunken); border: 1px solid var(--border-default); border-radius: var(--radius-pill); padding: 7px 14px; cursor: pointer; transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
+  .ds-replay { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-body); font-size: 13px; font-weight: var(--fw-medium); color: var(--text-strong); background: var(--surface-sunken); border: 1px solid var(--border-default); border-radius: var(--radius-pill); min-height: 40px; padding: 7px 14px; cursor: pointer; transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
   .ds-replay:hover { background: var(--surface-page); border-color: var(--border-strong); }
   .ds-replay:active { transform: translateY(1px); }
   .ds-replay .cb-i { font-size: 14px; color: var(--red-500); }
   .ds-track-row { display: grid; grid-template-columns: 132px 1fr; align-items: center; gap: 16px; margin-bottom: 14px; }
   .ds-track-row:last-child { margin-bottom: 0; }
-  .ds-track-lbl { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .ds-track-lbl { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
   .ds-track-lbl b { display: block; color: var(--text-strong); font-family: var(--font-body); font-size: 13px; margin-bottom: 2px; }
   .ds-track { position: relative; height: 34px; background: var(--surface-sunken); border-radius: var(--radius-pill); }
   .ds-dot { position: absolute; top: 5px; left: 5px; width: 24px; height: 24px; border-radius: 50%; background: var(--red-500); }
   .ds-dot.g { background: var(--green-600); } .ds-dot.b { background: var(--blue-500); }
-  .ds-states { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .ds-states { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
   .ds-state { border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 20px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; background: var(--surface-card); }
-  .ds-state__cap { font-size: 12px; color: var(--text-muted); margin-top: auto; line-height: 1.45; }
+  .ds-state__cap { font-size: 12px; color: var(--text-muted); margin-top: auto; line-height: 1.45; min-width: 0; }
+  @media (max-width: 1180px) { .ds-states { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .ds-state__cap b { color: var(--text-strong); font-weight: var(--fw-medium); }
   .ds-lift { width: 100%; height: 60px; border-radius: var(--radius-md); background: linear-gradient(135deg, var(--blue-500), var(--blue-700)); transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
   .ds-lift:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
@@ -249,6 +258,9 @@
     .ds-dot, .ds-lift, .ds-reveal > span, .ds-demo-link::after { transition-duration: 0.001ms !important; }
   }
 
+  code { font-size: max(.92em, 12px); }
+  .ds-aud li code, .ds-check li code, .ds-steps code { overflow-wrap: anywhere; }
+  @media (max-width: 960px) { .ds-main { overflow-x: clip; } }
   /* Toast */
   .ds-toast { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--neutral-900); color: #fff; padding: 12px 20px; border-radius: var(--radius-pill); font-size: 14px; box-shadow: var(--shadow-lg); opacity: 0; pointer-events: none; transition: all var(--dur-base) var(--ease-out); z-index: var(--z-toast); display: flex; align-items: center; gap: 8px; }
   .ds-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -260,10 +272,10 @@
   .ds-loading { padding: 40px; text-align: center; color: var(--text-subtle); font-family: var(--font-mono); font-size: 13px; }
 
   /* Live component gallery */
-  .ds-gal { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .ds-gal { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
   .ds-tile { border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); background: var(--surface-card); padding: 22px; min-width: 0; }
   .ds-tile--wide { grid-column: 1 / -1; }
-  .ds-tile__name { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-subtle); margin: 0 0 16px; }
+  .ds-tile__name { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-subtle); margin: 0 0 16px; }
   .ds-tile .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
   .ds-tile .row + .row { margin-top: 14px; }
   .ds-tile .stack { display: flex; flex-direction: column; gap: 14px; }
@@ -282,7 +294,7 @@
   .cb-btn:hover { background: var(--action-bg-hover); }
   .cb-btn:active { background: var(--action-bg-press); transform: translateY(1px); }
   .cb-btn.primary { box-shadow: var(--shadow-brand); }
-  .cb-btn.green { background: var(--action-green-bg); } .cb-btn.green:hover { background: var(--action-green-bg-hover); }
+  .cb-btn.green { background: var(--action-confirm-bg); color: var(--action-confirm-fg); } .cb-btn.green:hover { background: var(--action-confirm-bg-hover); }
   .cb-btn.blue { background: var(--blue-500); } .cb-btn.blue:hover { background: var(--blue-600); }
   .cb-btn.sm { font-size: var(--fs-caption); min-height: 38px; padding: 0 16px; }
   .cb-btn.lg { font-size: var(--fs-body); min-height: 56px; padding: 0 32px; }
@@ -292,7 +304,7 @@
   .cb-btn.link { background: transparent; color: var(--text-link); padding: 4px 6px; min-height: 0; } .cb-btn.link:hover { text-decoration: underline; }
   .cb-btn[disabled] { opacity: .45; cursor: not-allowed; }
   .cb-badge { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-weight: var(--fw-medium); font-size: var(--fs-caption); line-height: 1; padding: 5px 12px; border-radius: var(--radius-pill); background: var(--surface-sunken); color: var(--text-body); }
-  .cb-badge.solid { background: var(--red-500); color: #fff; }
+  .cb-badge.solid { background: var(--action-bg); color: #fff; }
   .cb-badge.red { background: var(--status-danger-bg); color: var(--red-700); }
   .cb-badge.green { background: var(--status-success-bg); color: var(--green-800); }
   .cb-badge.blue { background: var(--status-info-bg); color: var(--blue-700); }
@@ -304,20 +316,52 @@
   .cb-card h3 { margin: 0; font-size: 20px; } .cb-card p { margin: 0; font-size: 14px; color: var(--text-muted); }
   .cb-field { display: flex; flex-direction: column; gap: 6px; font-family: var(--font-body); margin-bottom: 14px; }
   .cb-field label { font-size: var(--fs-body-sm); font-weight: var(--fw-medium); color: var(--text-strong); }
-  .cb-input { font-family: var(--font-body); font-size: var(--fs-body); color: var(--text-strong); background: var(--surface-card); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: 12px 14px; width: 100%; }
+  .cb-input { font-family: var(--font-body); font-size: var(--fs-body); color: var(--text-strong); background: var(--surface-card); border: 1px solid var(--border-control); border-radius: var(--radius-md); padding: 12px 14px; width: 100%; }
   .cb-input:focus { outline: none; border-color: var(--blue-500); box-shadow: var(--focus-ring); }
   .cb-avatar { display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-family: var(--font-body); font-weight: var(--fw-bold); color: #fff; width: 48px; height: 48px; }
+
+  /* ---- Responsive — kept LAST so every override wins by source order (CLAUDE.md §1) ---- */
+  /* Responsive — the docs collapse to a single column with a top bar */
+  @media (max-width: 960px) {
+    .ds { grid-template-columns: minmax(0, 1fr); }
+    .ds-side { position: static; height: auto; overflow: visible; border-right: 0; border-bottom: 1px solid var(--border-subtle); padding: 16px 20px; gap: 14px; }
+    .ds-nav { flex-direction: row; overflow-x: auto; gap: 4px; margin: 0 -20px; padding: 2px 20px 8px; scrollbar-width: thin; }
+    .ds-nav a { white-space: nowrap; flex: none; min-height: 44px; }
+    .ds-dl { margin-top: 0; }
+    .ds-sec, .ds-hero__band { padding-left: 20px; padding-right: 20px; }
+    .ds-sec { padding-top: 52px; padding-bottom: 52px; }
+    .ds-grid3, .ds-logo-grid, .ds-dodont, .ds-audience, .ds-states, .ds-setup, .ds-gal, .ds-scales, .ds-docs, .ds-recipes, .ds-princ, .ds-a11y-grid { grid-template-columns: minmax(0, 1fr); }
+    .ds-principles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ds-type-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .ds-type-row .meta { width: auto; }
+    .ds-track-row { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+    .ds-table { display: block; overflow-x: auto; }
+    .ds-ex__body { padding: 16px; }
+    .ds-demo, .ds-tile, .ds-aud, .ds-motion-panel { padding: 18px; }
+    .ds-track__head h3 { white-space: normal; }
+  }
+  @media (max-width: 640px) {
+    .ds-principles { grid-template-columns: minmax(0, 1fr); }
+    .ds-ramp { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .ds-ramp.neutral { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+    .ds-chart-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .ds-hero h1 { font-size: clamp(30px, 8.5vw, 36px); }
+    .ds-sec h2 { font-size: clamp(26px, 7.5vw, 32px); }
+    .ds-meta { gap: 18px 24px; }
+  }
+
 </style>
 </head>
 <body data-screen-label="Design System">
+<a class="ds-skip" href="#dsMain">Skip to content</a>
 <div class="ds">
   <!-- SIDEBAR -->
   <aside class="ds-side">
     <div class="ds-side__logo">
-      <img src="assets/logo/colaberry-horizontal.png" alt="Colaberry" id="sideLogo">
+      <img src="assets/logo/colaberry-horizontal.webp" alt="Colaberry" id="sideLogo" data-logo-swap>
       <div class="ds-side__sub">Design System · v1.0</div>
     </div>
-    <nav class="ds-nav" id="dsNav">
+    <nav class="ds-nav" id="dsNav" aria-label="Design system sections">
       <a href="index.html"><span class="cb-i"><i data-lucide="sparkles"></i></span>Landing page</a>
       <a href="#overview"><span class="cb-i"><i data-lucide="home"></i></span>Overview</a>
       <a href="#principles"><span class="cb-i"><i data-lucide="compass"></i></span>Principles</a>
@@ -330,6 +374,7 @@
       <a href="#motion"><span class="cb-i"><i data-lucide="wand-sparkles"></i></span>Motion</a>
       <a href="#components"><span class="cb-i"><i data-lucide="component"></i></span>Components</a>
       <a href="#examples"><span class="cb-i"><i data-lucide="layout-template"></i></span>Examples</a>
+      <a href="#states"><span class="cb-i"><i data-lucide="life-buoy"></i></span>States &amp; Feedback</a>
       <a href="#a11y"><span class="cb-i"><i data-lucide="accessibility"></i></span>Accessibility</a>
       <a href="#rules"><span class="cb-i"><i data-lucide="shield-check"></i></span>Logo Rules</a>
       <a href="#assets"><span class="cb-i"><i data-lucide="download"></i></span>Assets</a>
@@ -337,24 +382,24 @@
     </nav>
     <a class="ds-dl" href="BRAND.md" download="BRAND.md"><span class="cb-i"><i data-lucide="file-down"></i></span>Download BRAND.md</a>
     <a class="ds-dl ds-dl--alt" href="IMPLEMENTATION.md" download="IMPLEMENTATION.md"><span class="cb-i"><i data-lucide="code"></i></span>Dev install guide</a>
-    <div class="ds-theme">
-      <button data-set-theme="light" class="active"><span class="cb-i"><i data-lucide="sun"></i></span>Light</button>
-      <button data-set-theme="dark"><span class="cb-i"><i data-lucide="moon"></i></span>Dark</button>
+    <div class="ds-theme" role="group" aria-label="Color theme">
+      <button data-set-theme="light" class="active" aria-pressed="true"><span class="cb-i"><i data-lucide="sun"></i></span>Light</button>
+      <button data-set-theme="dark" aria-pressed="false"><span class="cb-i"><i data-lucide="moon"></i></span>Dark</button>
     </div>
   </aside>
 
   <!-- MAIN -->
-  <main class="ds-main">
+  <main class="ds-main" id="dsMain" tabindex="-1">
     <!-- OVERVIEW -->
     <section class="ds-sec ds-hero" id="overview">
       <div class="ds-hero__band">
-        <div class="ds-hero__logo"><img src="assets/logo/colaberry-horizontal.png" alt="Colaberry" id="heroLogo"></div>
+        <div class="ds-hero__logo"><img src="assets/logo/colaberry-horizontal.webp" alt="Colaberry" id="heroLogo" data-logo-swap></div>
         <h1>The Colaberry Design System</h1>
-        <p>The brand foundations, components and rules that power Colaberry — the School of Data Science &amp; Analytics building job-ready talent since 2012. Warm, inclusive, and confident.</p>
+        <p>The brand foundations, components and rules that power Colaberry — the School of Data and AI building job-ready talent since 2012. Warm, inclusive, and confident.</p>
         <div class="ds-meta">
           <div><strong>3</strong>brand hues</div>
           <div><strong>20</strong>components</div>
-          <div><strong>245</strong>design tokens</div>
+          <div><strong>289</strong>design tokens</div>
           <div><strong>WCAG 2.2</strong>audited</div>
         </div>
       </div>
@@ -469,11 +514,11 @@ python3 -m http.server 8000</code></div>
       <p class="ds-sec__lead">Two cherries on a shared stem form the “C” of Colaberry — a warm, organic mark about growth, pairs, and collaboration. The wordmark sets “olaberry” in Quicksand with a green-to-blue gradient.</p>
       <h3 class="ds-h3">Lockups &amp; mark</h3>
       <div class="ds-logo-grid">
-        <div class="ds-logo-cell"><img src="assets/logo/colaberry-horizontal.png" alt="Default lockup"></div>
-        <div class="ds-logo-cell dark"><img src="assets/logo/colaberry-horizontal-white.png?v=2" alt="White lockup"></div>
-        <div class="ds-logo-cell red"><img src="assets/logo/colaberry-horizontal-white.png?v=2" alt="On cherry"></div>
-        <div class="ds-logo-cell"><img src="assets/logo/colaberry-mark.png" alt="Mark" style="max-height:72px"></div>
-        <div class="ds-logo-cell dark"><img src="assets/logo/colaberry-mark-white.png?v=2" alt="Mark white" style="max-height:72px"></div>
+        <div class="ds-logo-cell"><img src="assets/logo/colaberry-horizontal.webp" alt="Default lockup"></div>
+        <div class="ds-logo-cell dark"><img src="assets/logo/colaberry-horizontal-white.webp" alt="White lockup"></div>
+        <div class="ds-logo-cell red"><img src="assets/logo/colaberry-horizontal-white.webp" alt="On cherry"></div>
+        <div class="ds-logo-cell"><img src="assets/logo/colaberry-mark.webp" alt="Mark" style="max-height:72px"></div>
+        <div class="ds-logo-cell dark"><img src="assets/logo/colaberry-mark-white.webp" alt="Mark white" style="max-height:72px"></div>
         <div class="ds-logo-cell"><img src="assets/logo/colaberry-app-icon.png" alt="App icon" style="max-height:84px"></div>
       </div>
     </section>
@@ -484,9 +529,9 @@ python3 -m http.server 8000</code></div>
       <h2>Theme handling</h2>
       <p class="ds-sec__lead">Every color is a semantic token that re-points between light and dark. The rule: <strong>foreground inverts with the background; the cherry accent stays constant.</strong> Toggle the theme in the sidebar to see it live.</p>
       <div class="ds-grid3">
-        <div class="ds-demo"><h4>Surface</h4><p style="margin:0;color:var(--text-muted);font-size:14px">var(--surface-page) flips from white to near-black; cards, borders and sunken fills follow.</p></div>
-        <div class="ds-demo"><h4>Text</h4><p style="margin:0;color:var(--text-muted);font-size:14px">var(--text-strong) / --text-muted invert for contrast on either ground.</p></div>
-        <div class="ds-demo"><h4>Accent</h4><p style="margin:0;color:var(--text-muted);font-size:14px">var(--brand-accent) stays cherry red in both themes — the constant.</p></div>
+        <div class="ds-demo"><h3>Surface</h3><p style="margin:0;color:var(--text-muted);font-size:14px">var(--surface-page) flips from white to near-black; cards, borders and sunken fills follow.</p></div>
+        <div class="ds-demo"><h3>Text</h3><p style="margin:0;color:var(--text-muted);font-size:14px">var(--text-strong) / --text-muted invert for contrast on either ground.</p></div>
+        <div class="ds-demo"><h3>Accent</h3><p style="margin:0;color:var(--text-muted);font-size:14px">var(--brand-accent) stays cherry red in both themes — the constant.</p></div>
       </div>
     </section>
 
@@ -533,7 +578,7 @@ python3 -m http.server 8000</code></div>
         <div class="ds-type-row"><span class="meta">H2 · 36 · 700</span><span class="spec" style="font-family:var(--font-display);font-weight:700;font-size:32px">Learn data, with people</span></div>
         <div class="ds-type-row"><span class="meta">H3 · 28 · 700</span><span class="spec" style="font-family:var(--font-display);font-weight:700;font-size:26px">Built on tenacity</span></div>
         <div class="ds-type-row"><span class="meta">Body · 18 · 400</span><span class="spec" style="font-family:var(--font-body);font-size:18px;color:var(--text-body)">Colaberry nurtures an inclusive learning space for every background.</span></div>
-        <div class="ds-type-row"><span class="meta">Mono · 16 · 500</span><span class="spec" style="font-family:var(--font-mono);font-size:16px;color:var(--blue-600)">SELECT cohort, COUNT(*) FROM outcomes;</span></div>
+        <div class="ds-type-row"><span class="meta">Mono · 16 · 500</span><span class="spec" style="font-family:var(--font-mono);font-size:16px;color:var(--text-link)">SELECT cohort, COUNT(*) FROM outcomes;</span></div>
         <div class="ds-type-row"><span class="meta">Logotype</span><span class="spec" style="font-family:var(--font-logo);font-weight:600;font-size:34px;background:linear-gradient(90deg,var(--green-600),var(--blue-500));-webkit-background-clip:text;background-clip:text;color:transparent">Colaberry</span></div>
       </div>
     </section>
@@ -565,10 +610,10 @@ python3 -m http.server 8000</code></div>
         Gentle easing, quick durations, and always a graceful fallback for reduced motion.</p>
 
       <div class="ds-principles">
-        <div class="ds-principle"><span class="cb-i"><i data-lucide="target"></i></span><h4>Purposeful</h4><p>Every animation explains a change — never motion for its own sake.</p></div>
-        <div class="ds-principle"><span class="cb-i"><i data-lucide="gauge"></i></span><h4>Quick</h4><p>140–360ms. Fast enough to feel responsive, slow enough to read.</p></div>
-        <div class="ds-principle"><span class="cb-i"><i data-lucide="waves"></i></span><h4>Gentle</h4><p>Ease-out by default; a soft spring only for affirmations. No linear, no harsh bounces.</p></div>
-        <div class="ds-principle"><span class="cb-i"><i data-lucide="accessibility"></i></span><h4>Accessible</h4><p>Honors <code>prefers-reduced-motion</code> — transitions collapse to instant.</p></div>
+        <div class="ds-principle"><span class="cb-i"><i data-lucide="target"></i></span><h3>Purposeful</h3><p>Every animation explains a change — never motion for its own sake.</p></div>
+        <div class="ds-principle"><span class="cb-i"><i data-lucide="gauge"></i></span><h3>Quick</h3><p>140–360ms. Fast enough to feel responsive, slow enough to read.</p></div>
+        <div class="ds-principle"><span class="cb-i"><i data-lucide="waves"></i></span><h3>Gentle</h3><p>Ease-out by default; a soft spring only for affirmations. No linear, no harsh bounces.</p></div>
+        <div class="ds-principle"><span class="cb-i"><i data-lucide="accessibility"></i></span><h3>Accessible</h3><p>Honors <code>prefers-reduced-motion</code> — transitions collapse to instant.</p></div>
       </div>
 
       <h3 class="ds-h3">Easing</h3>
@@ -618,7 +663,7 @@ python3 -m http.server 8000</code></div>
           <p class="ds-state__cap"><b>Hover · press · button</b><br>Fill darkens on hover; nudges down 1px on press.</p>
         </div>
         <div class="ds-state">
-          <div class="cb-field" style="margin:0;width:100%"><input class="cb-input" placeholder="Click to focus me"></div>
+          <div class="cb-field" style="margin:0;width:100%"><input class="cb-input" placeholder="Click to focus me" aria-label="Focus demo field"></div>
           <p class="ds-state__cap"><b>Focus · input</b><br>Berry-blue border + 3px focus ring appears instantly.</p>
         </div>
         <div class="ds-state">
@@ -631,8 +676,8 @@ python3 -m http.server 8000</code></div>
         </div>
         <div class="ds-state">
           <div class="ds-reveal"><span>Reveal</span><span>fades</span><span>up</span><span>in</span><span>sequence</span></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;width:100%;margin-top:auto">
-            <p class="ds-state__cap" style="margin:0"><b>Entrance · stagger</b><br>70ms apart, fade + rise.</p>
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 14px;width:100%;margin-top:auto">
+            <p class="ds-state__cap" style="margin:0;flex:1 1 160px"><b>Entrance · stagger</b><br>70ms apart, fade + rise.</p>
             <button class="ds-replay" data-replay><span class="cb-i"><i data-lucide="rotate-cw"></i></span>Replay</button>
           </div>
         </div>
@@ -657,7 +702,7 @@ python3 -m http.server 8000</code></div>
     <section class="ds-sec" id="components">
       <p class="ds-sec__eyebrow">Library</p>
       <h2>Components</h2>
-      <p class="ds-sec__lead">Twenty token-driven React primitives — all live and interactive below, animated to the Motion spec. Hover, toggle, open and click them. Props live in each component's <code>.d.ts</code>.</p>
+      <p class="ds-sec__lead">Twenty-five token-driven React primitives — all live and interactive below, animated to the Motion spec. Hover, toggle, open and click them. Props live in each component's <code>.d.ts</code>.</p>
       <div id="cmp-root" class="ds-loading">Loading live components…</div>
     </section>
 
@@ -669,11 +714,64 @@ python3 -m http.server 8000</code></div>
       <div id="lay-root" class="ds-loading">Loading example layouts…</div>
     </section>
 
+    <!-- STATES & FEEDBACK -->
+    <section class="ds-sec" id="states">
+      <p class="ds-sec__eyebrow">Foundations</p>
+      <h2>States &amp; feedback</h2>
+      <p class="ds-sec__lead">A screen is only finished when every state is designed: <strong>empty, loading, error, success, disabled</strong>. The rules below say which component carries each state and how the copy should read — so a learner is never left looking at a blank panel, a frozen button, or a message that blames them.</p>
+
+      <div class="ds-principles">
+        <div class="ds-principle"><span class="cb-i"><i data-lucide="inbox"></i></span><h3>Never blank</h3><p>Nothing to show is still something to say. Every list, table, search and panel ships an empty state with one next step.</p></div>
+        <div class="ds-principle"><span class="cb-i"><i data-lucide="hourglass"></i></span><h3>Show the wait</h3><p>Under 300ms: nothing. Up to ~5s: skeleton or spinner. Longer or known: Progress plus a sentence about what's happening.</p></div>
+        <div class="ds-principle"><span class="cb-i"><i data-lucide="wrench"></i></span><h3>Errors are fixable</h3><p>Say what happened, what to do, and keep their work. Place the message where the fix is — on the field, in the panel, never only in a toast.</p></div>
+        <div class="ds-principle"><span class="cb-i"><i data-lucide="ear"></i></span><h3>Announced, not just colored</h3><p>Danger and warning use <code>role=alert</code>; everything else <code>role=status</code>. Icon + text always accompany red.</p></div>
+      </div>
+
+      <h3 class="ds-h3">Which component carries which state</h3>
+      <table class="ds-table">
+        <thead><tr><th>Situation</th><th>Use</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Nothing yet / no results / nothing matched</td><td><code>EmptyState</code> (or <code>Table emptyTitle</code>)</td><td>Explains the gap and offers one action — “Clear filters”, “Browse cohorts”.</td></tr>
+          <tr><td>Content area filling in</td><td><code>Skeleton</code>, <code>Table loading</code></td><td>Preserves layout; no spinner jitter. The only allowed loop.</td></tr>
+          <tr><td>An action is in flight</td><td><code>Button loading</code>, <code>Spinner</code></td><td>Keeps width, blocks double-submit, sets <code>aria-busy</code>.</td></tr>
+          <tr><td>Known duration or steps</td><td><code>Progress</code></td><td>Determinate with a value; indeterminate only when truly unknown.</td></tr>
+          <tr><td>A field is wrong</td><td><code>Input / Select / Checkbox error</code></td><td>Red border + icon + fix-it text, wired via <code>aria-describedby</code>; focus the first bad field on submit.</td></tr>
+          <tr><td>Something the user must read or act on</td><td><code>Alert</code></td><td>Persistent, inline, with action buttons — payment failed, cohort full, maintenance.</td></tr>
+          <tr><td>Brief confirmation / undo</td><td><code>Toast</code></td><td>Transient, auto-dismiss, pauses on hover. Never the only route to recovery.</td></tr>
+          <tr><td>Irreversible action</td><td><code>Dialog destructive</code></td><td><code>alertdialog</code>; specific cancel label + one danger button that names the action.</td></tr>
+          <tr><td>Image failed to load</td><td><code>Card media</code>, <code>Avatar</code></td><td>Both fall back automatically — placeholder tile, or initials.</td></tr>
+          <tr><td>Whole page failed / offline / 404</td><td><code>EmptyState kind="error"</code> or <code>"offline"</code> full-height</td><td>Centered, plain language, “Try again” + a way home.</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="ds-h3">Live: the same panel in every state</h3>
+      <p style="font-size:14px;color:var(--text-muted);margin:0 0 16px;max-width:62ch">Toggle the cohort list through its lifecycle. Everything below is the real <code>Table</code>, <code>EmptyState</code>, <code>Alert</code>, <code>Button</code> and <code>Toast</code> from the bundle.</p>
+      <div id="states-root" class="ds-loading">Loading state demo…</div>
+
+      <h3 class="ds-h3">Writing the message</h3>
+      <div class="ds-dodont">
+        <div class="ds-rule do"><div class="ds-rule__head"><span class="cb-i"><i data-lucide="check"></i></span>Do</div><ul>
+          <li>Lead with what happened in plain words: “Couldn't save your draft.”</li>
+          <li>Follow with the fix: “Check your connection and try again.”</li>
+          <li>Reassure about their work: “Your answers are still here.”</li>
+          <li>Name the action on the button: “Delete draft”, “Retry payment”, “Clear filters”.</li>
+          <li>Empty-state titles describe the gap in the learner's words: “No assignments yet”.</li>
+        </ul></div>
+        <div class="ds-rule dont"><div class="ds-rule__head"><span class="cb-i"><i data-lucide="x"></i></span>Don't</div><ul>
+          <li>“Invalid input”, “Error 500”, “Something went wrong” with no next step.</li>
+          <li>Blame: “You entered an incorrect email.” → “Enter an email like ada@email.com.”</li>
+          <li>Red text alone — always pair with an icon and a sentence.</li>
+          <li>“OK” / “Yes” on destructive confirms; a toast as the only place an error appears.</li>
+          <li>Spinners for content areas, or two indicators for the same wait.</li>
+        </ul></div>
+      </div>
+    </section>
+
     <!-- ACCESSIBILITY -->
     <section class="ds-sec" id="a11y">
       <p class="ds-sec__eyebrow">Foundations</p>
       <h2>Accessibility</h2>
-      <p class="ds-sec__lead">WCAG 2.2 contrast audit of core pairings. <strong>Cherry red and leaf green are accent / large-text colors</strong> — for body text use red-600+, green-700+, or dark text on a tint.</p>
+      <p class="ds-sec__lead">WCAG 2.2 contrast audit of core pairings — measured in <strong>both themes</strong>. <strong>Cherry red and leaf green are accent / large-text colors</strong> — for body text use <code>--text-brand</code> (red-700), green-800+, or dark text on a tint.</p>
       <table class="ds-table">
         <thead><tr><th>Pairing</th><th>Sample</th><th>Ratio</th><th>Verdict</th></tr></thead>
         <tbody id="a11yRows"></tbody>
@@ -686,8 +784,8 @@ python3 -m http.server 8000</code></div>
           <h4><span class="cb-i"><i data-lucide="keyboard"></i></span>Keyboard</h4>
           <ul>
             <li>Everything interactive is reachable and operable with Tab / Shift+Tab / Enter / Space.</li>
-            <li>Dialogs &amp; drawers trap focus and restore it to the trigger on close.</li>
-            <li>Esc closes overlays; arrow keys drive the carousel and pagination.</li>
+            <li>Dialogs &amp; drawers trap focus (Tab cycles inside) and restore it to the trigger on close.</li>
+            <li>Esc closes overlays and dismisses tooltips; arrow keys drive the carousel and radio groups.</li>
             <li>No keyboard traps; logical, source-order focus.</li>
           </ul>
         </div>
@@ -712,6 +810,7 @@ python3 -m http.server 8000</code></div>
           <ul>
             <li>Native elements first; ARIA roles/labels where needed (dialogs, switches, icon buttons).</li>
             <li>State conveyed by more than color (icons, text, dots).</li>
+            <li>Errors announce via <code>role=alert</code>; loading via <code>aria-busy</code>; empty states via <code>role=status</code>.</li>
             <li>All motion respects <code>prefers-reduced-motion</code> and degrades to fades.</li>
             <li>Images carry <code>alt</code>; decorative art is <code>aria-hidden</code>.</li>
           </ul>
@@ -725,7 +824,7 @@ python3 -m http.server 8000</code></div>
       <h2>Logo rules</h2>
       <p class="ds-sec__lead">Protect the mark so it always reads as Colaberry.</p>
       <h3 class="ds-h3">Clear space &amp; minimum size</h3>
-      <div class="ds-clearspace"><div class="ds-clearspace__box"><img src="assets/logo/colaberry-horizontal.png" alt="Clear space"></div></div>
+      <div class="ds-clearspace"><div class="ds-clearspace__box"><img src="assets/logo/colaberry-horizontal.webp" alt="Clear space"></div></div>
       <p style="font-size:13px;color:var(--text-muted);margin-top:10px">Keep clear space equal to the height of the cherry mark on all sides. Minimum width: 120px (horizontal lockup) / 24px (mark).</p>
       <h3 class="ds-h3">Do &amp; Don't</h3>
       <div class="ds-dodont">
@@ -740,17 +839,17 @@ python3 -m http.server 8000</code></div>
       <h2>Asset downloads</h2>
       <p class="ds-sec__lead">Production-ready logo and icon exports live in <code>assets/logo/</code>.</p>
       <div class="ds-assets">
-        <div class="ds-asset"><div class="ds-asset__prev"><img src="assets/logo/colaberry-horizontal.png"></div><span class="ds-asset__name">horizontal.png</span><span class="ds-asset__meta">+ white / black</span></div>
-        <div class="ds-asset"><div class="ds-asset__prev"><img src="assets/logo/colaberry-mark.png"></div><span class="ds-asset__name">mark.png</span><span class="ds-asset__meta">+ white / black</span></div>
-        <div class="ds-asset"><div class="ds-asset__prev"><img src="assets/logo/export/icon-192.png"></div><span class="ds-asset__name">app-icon</span><span class="ds-asset__meta">180 / 192 / 512</span></div>
-        <div class="ds-asset"><div class="ds-asset__prev"><img src="assets/logo/export/favicon-48.png"></div><span class="ds-asset__name">favicon.ico</span><span class="ds-asset__meta">16 / 32 / 48</span></div>
-        <div class="ds-asset"><div class="ds-asset__prev"><img src="assets/logo/export/square-400.png"></div><span class="ds-asset__name">square</span><span class="ds-asset__meta">400 / 600</span></div>
+        <div class="ds-asset"><div class="ds-asset__prev"><img src="assets/logo/colaberry-horizontal.webp" alt=""></div><span class="ds-asset__name">horizontal.png</span><span class="ds-asset__meta">+ white / black</span></div>
+        <div class="ds-asset"><div class="ds-asset__prev"><img src="assets/logo/colaberry-mark.webp" alt=""></div><span class="ds-asset__name">mark.png</span><span class="ds-asset__meta">+ white / black</span></div>
+        <div class="ds-asset"><div class="ds-asset__prev"><img src="assets/logo/export/icon-192.png" alt=""></div><span class="ds-asset__name">app-icon</span><span class="ds-asset__meta">180 / 192 / 512</span></div>
+        <div class="ds-asset"><div class="ds-asset__prev"><img src="assets/logo/export/favicon-48.png" alt=""></div><span class="ds-asset__name">favicon.ico</span><span class="ds-asset__meta">16 / 32 / 48</span></div>
+        <div class="ds-asset"><div class="ds-asset__prev"><img src="assets/logo/export/square-400.png" alt=""></div><span class="ds-asset__name">square</span><span class="ds-asset__meta">400 / 600</span></div>
       </div>
       <h3 class="ds-h3">Tokens for tooling</h3>
       <p style="font-size:14px;color:var(--text-muted);margin:0 0 14px;max-width:60ch">All 245 tokens (+ dark overrides) as JSON — drop into Style Dictionary, Figma Tokens, or Tailwind. Plus the raw CSS token files.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
         <a class="ds-dl" style="margin:0" href="tokens.json" download="tokens.json"><span class="cb-i"><i data-lucide="braces"></i></span>tokens.json</a>
-        <a class="ds-dl ds-dl--alt" style="margin:0" href="styles.css" download="styles.css"><span class="cb-i"><i data-lucide="file-code"></i></span>styles.css</a>
+        <a class="ds-dl ds-dl--alt" style="margin:0" href="styles.css?v=ea85358a" download="styles.css"><span class="cb-i"><i data-lucide="file-code"></i></span>styles.css</a>
       </div>
     </section>
 
@@ -768,7 +867,7 @@ python3 -m http.server 8000</code></div>
             <span class="ds-aud__ic" style="background:var(--green-600)"><span class="cb-i"><i data-lucide="megaphone"></i></span></span>
             <div><h3>Marketing / non-technical</h3><p class="ds-aud__sub">Describe it in plain English → get a downloadable file. No code.</p></div>
           </div>
-          <div class="ds-prompt" data-copytext="Using the Colaberry design system, create a [social post / flyer / email header / slide] at [size] for [topic]. Headline: [your headline]. Add a [call-to-action] button and the logo. Keep it warm and on-brand, no emoji — and give me 3 options.">
+          <div class="ds-prompt" role="button" tabindex="0" aria-label="Copy the marketing prompt template" data-copytext="Using the Colaberry design system, create a [social post / flyer / email header / slide] at [size] for [topic]. Headline: [your headline]. Add a [call-to-action] button and the logo. Keep it warm and on-brand, no emoji — and give me 3 options.">
             “Using the Colaberry design system, create a <em>[social post / flyer / email / slide]</em> at <em>[size]</em> for <em>[topic]</em>. Headline: <em>[your headline]</em>. Add a <em>[call-to-action]</em> button and the logo — give me <em>3 options</em>.”
             <span class="ds-prompt__copy"><span class="cb-i"><i data-lucide="copy"></i></span></span>
           </div>
@@ -784,7 +883,7 @@ python3 -m http.server 8000</code></div>
             <span class="ds-aud__ic" style="background:var(--blue-500)"><span class="cb-i"><i data-lucide="code"></i></span></span>
             <div><h3>Developers</h3><p class="ds-aud__sub">Tokens &amp; components are machine-readable — Claude scaffolds on-brand UI.</p></div>
           </div>
-          <div class="ds-prompt" data-copytext="Using the Colaberry design system, build [a page / a section / a component] — [describe what it does]. Use the Button, Card, Badge, Input components and semantic tokens, link styles.css, and support dark mode (data-theme='dark').">
+          <div class="ds-prompt" role="button" tabindex="0" aria-label="Copy the developer prompt template" data-copytext="Using the Colaberry design system, build [a page / a section / a component] — [describe what it does]. Use the Button, Card, Badge, Input components and semantic tokens, link styles.css, and support dark mode (data-theme='dark').">
             “Using the Colaberry design system, build <em>[a page / a section / a component]</em> — <em>[describe what it does]</em>. Use the <em>components</em> and <em>semantic tokens</em>, link <em>styles.css</em>, and support dark mode.”
             <span class="ds-prompt__copy"><span class="cb-i"><i data-lucide="copy"></i></span></span>
           </div>
@@ -802,8 +901,8 @@ python3 -m http.server 8000</code></div>
         <li><span class="cb-i"><i data-lucide="check"></i></span>Reference semantic tokens (<code>--surface-page</code>, <code>--text-strong</code>, <code>--brand-accent</code>) — never raw ramp values.</li>
         <li><span class="cb-i"><i data-lucide="check"></i></span>Set <code>data-theme="dark"</code> on <code>&lt;html&gt;</code> for dark mode; the accent stays constant.</li>
         <li><span class="cb-i"><i data-lucide="check"></i></span>Use the React primitives from the bundle (Button, Badge, Card, Input, Checkbox, Avatar).</li>
-        <li><span class="cb-i"><i data-lucide="check"></i></span>Use red-600+/green-700+ for body text on white (see Accessibility).</li>
-        <li><span class="cb-i"><i data-lucide="check"></i></span>Roboto / Roboto Mono / Quicksand load from Google Fonts — self-host for production (see BRAND.md).</li>
+        <li><span class="cb-i"><i data-lucide="check"></i></span>Use <code>--text-brand</code> / green-800+ for body text on white (see Accessibility).</li>
+        <li><span class="cb-i"><i data-lucide="check"></i></span>Roboto / Roboto Mono / Quicksand are self-hosted in <code>assets/fonts/</code> — no CDN requests, works offline.</li>
         <li><span class="cb-i"><i data-lucide="check"></i></span>Standardize icons on Lucide (2px stroke) to match the soft brand shape language.</li>
       </ul>
 
@@ -822,7 +921,7 @@ python3 -m http.server 8000</code></div>
   </main>
 </div>
 
-<div class="ds-toast" id="toast"><span class="cb-i"><i data-lucide="check"></i></span><span id="toastMsg">Copied</span></div>
+<div class="ds-toast" id="toast" role="status" aria-live="polite"><span class="cb-i"><i data-lucide="check"></i></span><span id="toastMsg">Copied</span></div>
 
 <script>
 const RAMPS = {
@@ -831,14 +930,14 @@ const RAMPS = {
   blue: ['50','100','200','300','400','500','600','700','800','900'],
   neutral: ['0','50','100','200','300','400','500','600','700','800','900','950','1000'],
 };
-const LIGHT_STEPS = { red:['50','100','200','300'], green:['50','100','200','300','400','500'], blue:['50','100','200','300'], neutral:['0','50','100','200','300','400'] };
+const LIGHT_STEPS_UNUSED = { red:['50','100','200','300'], green:['50','100','200','300','400','500'], blue:['50','100','200','300'], neutral:['0','50','100','200','300','400'] };
 function hexOf(varName){ const t=document.createElement('div'); t.style.color='var('+varName+')'; document.body.appendChild(t); const c=getComputedStyle(t).color; t.remove(); const m=c.match(/\d+/g); if(!m) return ''; return '#'+m.slice(0,3).map(n=>(+n).toString(16).padStart(2,'0')).join('').toUpperCase(); }
 Object.entries(RAMPS).forEach(([fam,steps])=>{
   const el=document.querySelector('[data-ramp="'+fam+'"]'); if(!el) return;
   steps.forEach(s=>{
     const v='--'+fam+'-'+s; const b=document.createElement('button');
     b.className='ds-sw'; b.style.background='var('+v+')'; b.textContent=s;
-    if(LIGHT_STEPS[fam] && LIGHT_STEPS[fam].includes(s)) b.dataset.dark='1';
+    b.setAttribute('aria-label','Copy '+v);
     b.dataset.copy=v; el.appendChild(b);
   });
 });
@@ -849,13 +948,18 @@ SEM.forEach(([v,name])=>{
   d.innerHTML='<span class="ds-tok__chip" style="background:var('+v+')"></span><span><span class="ds-tok__name">'+v+'</span><br><span class="ds-tok__val">'+name+'</span></span>';
   semWrap.appendChild(d);
 });
+// Label ink: black when the swatch is light enough, otherwise white — recomputed per theme so every label clears 4.5:1
+function lumOf(hex){ const n=parseInt(hex.slice(1),16); const f=c=>{c/=255;return c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4)}; return .2126*f(n>>16&255)+.7152*f(n>>8&255)+.0722*f(n&255); }
+function tintSwatchLabels(){ document.querySelectorAll('.ds-sw, .ds-chart-sw').forEach(b=>{ const hx=hexOf(b.dataset.copy); if(!hx) return; if(lumOf(hx)>=0.1791) b.dataset.dark='1'; else delete b.dataset.dark; }); }
 // Data-viz swatches
 const chartWrap=document.getElementById('chartCats');
-for(let i=1;i<=8;i++){ const v='--chart-'+i; const b=document.createElement('button'); b.className='ds-chart-sw'; b.style.background='var('+v+')'; b.textContent=i; b.dataset.copy=v; chartWrap.appendChild(b); }
+for(let i=1;i<=8;i++){ const v='--chart-'+i; const b=document.createElement('button'); b.className='ds-chart-sw'; b.style.background='var('+v+')'; b.textContent=i; b.dataset.copy=v; b.setAttribute('aria-label','Copy '+v); chartWrap.appendChild(b); }
 const seqWrap=document.getElementById('seqScale');
-for(let i=1;i<=6;i++){ const v='--seq-'+i; const b=document.createElement('button'); b.style.background='var('+v+')'; b.dataset.copy=v; seqWrap.appendChild(b); }
+for(let i=1;i<=6;i++){ const v='--seq-'+i; const b=document.createElement('button'); b.style.background='var('+v+')'; b.dataset.copy=v; b.setAttribute('aria-label','Copy '+v); seqWrap.appendChild(b); }
 const divWrap=document.getElementById('divScale');
-['--div-neg-2','--div-neg-1','--div-mid','--div-pos-1','--div-pos-2'].forEach(v=>{ const b=document.createElement('button'); b.style.background='var('+v+')'; b.dataset.copy=v; divWrap.appendChild(b); });
+['--div-neg-2','--div-neg-1','--div-mid','--div-pos-1','--div-pos-2'].forEach(v=>{ const b=document.createElement('button'); b.style.background='var('+v+')'; b.dataset.copy=v; b.setAttribute('aria-label','Copy '+v); divWrap.appendChild(b); });
+tintSwatchLabels();
+new MutationObserver(tintSwatchLabels).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 const SP=[['1','4'],['2','8'],['3','12'],['4','16'],['6','24'],['8','32'],['12','48'],['16','64'],['20','80'],['24','96']];
 const spWrap=document.getElementById('spaceScale');
 SP.forEach(([t,px])=>{ const c=document.createElement('div'); c.className='ds-cell'; c.innerHTML='<div class="ds-bar" style="width:'+px+'px;height:'+px+'px"></div><span class="v">'+px+'</span>'; spWrap.appendChild(c); });
@@ -864,15 +968,23 @@ const radWrap=document.getElementById('radiusScale');
 RAD.forEach(([n,px])=>{ const c=document.createElement('div'); c.className='ds-cell'; c.innerHTML='<div class="ds-rbox" style="border-radius:var(--radius-'+n+')"></div><span class="v">'+n+'</span>'; radWrap.appendChild(c); });
 
 const A11Y=[
-  {fg:'--neutral-800',bg:'#fff',fgc:'#fff',label:'Body / White',ratio:'13.6',v:'pass',txt:'Aa'},
-  {fg:'--text-muted',bg:'#fff',label:'Muted / White',ratio:'5.3',v:'pass',txt:'Aa'},
+  {fg:'--neutral-800',bg:'#fff',label:'Body / White',ratio:'14.2',v:'pass',txt:'Aa'},
+  {fg:'#6B6B6B',bg:'#fff',label:'Muted / White',ratio:'5.3',v:'pass',txt:'Aa'},
   {fg:'--blue-600',bg:'#fff',label:'Link / White',ratio:'6.0',v:'pass',txt:'Aa'},
-  {fg:'--green-700',bg:'#fff',label:'Green-700 / White',ratio:'4.3',v:'pass',txt:'Aa'},
+  {fg:'--red-700',bg:'#fff',label:'Brand text (red-700) / White',ratio:'6.2',v:'pass',txt:'Aa'},
+  {fg:'--green-800',bg:'#fff',label:'Green-800 / White (body)',ratio:'6.5',v:'pass',txt:'Aa'},
+  {fg:'--green-700',bg:'#fff',label:'Green-700 / White',ratio:'4.3',v:'large',txt:'Aa'},
+  {fg:'#fff',bg:'--red-600',label:'White / Cherry-600 (buttons)',ratio:'4.7',v:'pass',txt:'Aa'},
   {fg:'#fff',bg:'--red-500',label:'White / Cherry',ratio:'3.9',v:'large',txt:'Aa'},
-  {fg:'#fff',bg:'--blue-500',label:'White / Berry',ratio:'5.0',v:'pass',txt:'Aa'},
+  {fg:'#fff',bg:'--blue-500',label:'White / Berry',ratio:'4.9',v:'pass',txt:'Aa'},
   {fg:'#fff',bg:'--green-600',label:'White / Green-600',ratio:'3.0',v:'large',txt:'Aa'},
   {fg:'--red-500',bg:'#fff',label:'Cherry / White (text)',ratio:'3.9',v:'fail',txt:'Aa'},
-  {fg:'#fff',bg:'--neutral-900',label:'White / Near-black',ratio:'17.9',v:'pass',txt:'Aa'},
+  {fg:'#fff',bg:'--neutral-900',label:'White / Near-black',ratio:'17.4',v:'pass',txt:'Aa'},
+  {fg:'#FFFFFF',bg:'#0F0F0F',label:'Text strong / Page · dark',ratio:'19.2',v:'pass',txt:'Aa'},
+  {fg:'#B4B4B4',bg:'#0F0F0F',label:'Text muted / Page · dark',ratio:'9.2',v:'pass',txt:'Aa'},
+  {fg:'#6F9DB6',bg:'#0F0F0F',label:'Link / Page · dark',ratio:'6.6',v:'pass',txt:'Aa'},
+  {fg:'#FE8A90',bg:'#0F0F0F',label:'Brand text (red-300) / Page · dark',ratio:'8.3',v:'pass',txt:'Aa'},
+  {fg:'#FB2832',bg:'#0F0F0F',label:'Cherry / Page · dark',ratio:'5.0',v:'pass',txt:'Aa'},
 ];
 const VLAB={pass:'AA Pass',large:'AA Large',fail:'Body fail'};
 const rows=document.getElementById('a11yRows');
@@ -884,24 +996,24 @@ A11Y.forEach(p=>{
   rows.appendChild(tr);
 });
 
-// copy
+// copy — click or Enter/Space (the prompt cards are role=button)
 function toast(msg){ const t=document.getElementById('toast'); document.getElementById('toastMsg').textContent=msg; t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),1400); }
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Enter'&&e.key!==' ')return;
+  const pt=e.target.closest&&e.target.closest('[data-copytext]');
+  if(pt){ e.preventDefault(); pt.click(); }
+});
 document.addEventListener('click',e=>{
   const pt=e.target.closest('[data-copytext]');
   if(pt){ const t=pt.dataset.copytext; navigator.clipboard&&navigator.clipboard.writeText(t); toast('Prompt copied'); return; }
   const el=e.target.closest('[data-copy]'); if(!el) return; const v=el.dataset.copy; const hex=hexOf(v); const text=hex||v; navigator.clipboard&&navigator.clipboard.writeText(text); toast('Copied '+text);
 });
 
-// theme
-document.querySelectorAll('[data-set-theme]').forEach(b=>b.addEventListener('click',()=>{
-  const th=b.dataset.setTheme; document.documentElement.setAttribute('data-theme',th);
-  document.querySelectorAll('[data-set-theme]').forEach(x=>x.classList.toggle('active',x===b));
-  const white=th==='dark'; ['sideLogo','heroLogo'].forEach(id=>{ const img=document.getElementById(id); if(img) img.src='assets/logo/colaberry-horizontal'+(white?'-white':'')+'.png?v=2'; });
-}));
+// theme: owned by theme.js (persisted + OS-aware); swatch labels re-tint via the MutationObserver above.
 
 // scroll-spy
 const navLinks=[...document.querySelectorAll('.ds-nav a')];
-const obs=new IntersectionObserver(es=>{ es.forEach(en=>{ if(en.isIntersecting){ const id=en.target.id; navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id)); } }); },{rootMargin:'-45% 0px -50% 0px'});
+const obs=new IntersectionObserver(es=>{ es.forEach(en=>{ if(en.isIntersecting){ const id=en.target.id; navLinks.forEach(a=>{ const on=a.getAttribute('href')==='#'+id; a.classList.toggle('active',on); if(on)a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current'); }); } }); },{rootMargin:'-45% 0px -50% 0px'});
 document.querySelectorAll('.ds-sec').forEach(s=>obs.observe(s));
 
 // Motion demos — replay buttons + auto-play on first view
@@ -956,13 +1068,13 @@ document.querySelectorAll('.ds-doc__copy').forEach(b => b.addEventListener('clic
   toast('Copied ' + DOCS[k]);
 }));
 
-if(window.lucide) lucide.createIcons();
+const drawIcons=()=>{if(window.lucide) lucide.createIcons();};if(window.lucide)drawIcons();else document.addEventListener('DOMContentLoaded',drawIcons);
 </script>
 <!-- Live components + example layouts -->
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel" src="components/core/_standalone.jsx"></script>
-<script type="text/babel" src="guidelines/showcase.jsx"></script>
+<script src="assets/vendor/react.production.min.js" defer></script>
+<script src="assets/vendor/react-dom.production.min.js" defer></script>
+<!-- Precompiled by _build.mjs from components/core/_standalone.jsx + guidelines/showcase.jsx — no Babel on the live page -->
+<script src="guidelines/dist/standalone.js" defer></script>
+<script src="guidelines/dist/showcase.js" defer></script>
 </body>
 </html>

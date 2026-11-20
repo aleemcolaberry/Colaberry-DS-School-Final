@@ -1,13 +1,16 @@
 <!-- @dsCard group="Application" viewport="1120x760" name="Registration" subtitle="Split-panel application form with steps + validation" -->
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Apply — Colaberry Learn</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css">
-<link rel="stylesheet" href="../components.css">
-<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="../components.css?v=2f0fe275">
+<link rel="stylesheet" href="app.css?v=8655f1fb">
+<script src="../theme.js?v=1"></script>
+<script src="icons.js?v=c57b0605"></script>
+<script src="toast.js?v=006ae98e"></script>
+<script src="guard.js?v=states2610"></script>
 </head>
 <body>
 <div class="auth">
@@ -16,15 +19,15 @@
   <aside class="auth__aside">
     <span class="auth__blob" style="width:300px;height:300px;top:-60px;right:-60px"></span>
     <span class="auth__blob" style="width:200px;height:200px;bottom:40px;left:-40px"></span>
-    <a href="index.html" class="brand"><img class="brand__logo" src="../assets/logo/colaberry-horizontal-white.png" alt="Colaberry" style="height:28px"></a>
+    <a href="index.html" class="brand"><img class="brand__logo" src="../assets/logo/colaberry-horizontal-white.webp" alt="Colaberry" style="height:28px"></a>
     <h2>Start the application that changes your career.</h2>
     <div class="auth__quote">
       <p>"I was a teacher making $38k. Eight months after my Colaberry cohort I was a data analyst at $91k."</p>
       <cite>— Marcus R., Cohort 09 graduate</cite>
     </div>
-    <div class="cb-cluster" style="gap:32px;margin-top:40px;color:#fff">
-      <div><div style="font-family:var(--font-display);font-weight:900;font-size:28px">5,000+</div><div style="font-size:13px;opacity:.8">careers launched</div></div>
-      <div><div style="font-family:var(--font-display);font-weight:900;font-size:28px">87%</div><div style="font-size:13px;opacity:.8">hired in 6 mo.</div></div>
+    <div class="cb-cluster" style="gap:32px;margin-top:40px;color:var(--text-on-accent)">
+      <div><div style="font-family:var(--font-display);font-weight:900;font-size:28px">5,000+</div><div style="font-size:13px">careers launched</div></div>
+      <div><div style="font-family:var(--font-display);font-weight:900;font-size:28px">87%</div><div style="font-size:13px">hired in 6 mo.</div></div>
     </div>
   </aside>
 
@@ -101,11 +104,11 @@
 
           <label class="cb-check" style="display:flex;gap:12px;align-items:flex-start;cursor:pointer">
             <input type="checkbox" id="agree" required>
-            <span class="cb-check__box" aria-hidden="true"><svg viewBox="0 0 16 16" width="13" height="13"><path d="M3 8.5l3 3 7-7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span style="font-size:14px;color:var(--text-body)">I agree to the <a href="#" style="color:var(--text-link);text-decoration:none">Terms</a> and <a href="#" style="color:var(--text-link);text-decoration:none">Privacy Policy</a>, and consent to be contacted by an advisor.</span>
+            <span class="cb-check__box" aria-hidden="true"><svg viewBox="0 0 16 16" width="13" height="13"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span style="font-size:14px;color:var(--text-body)">I agree to the <a href="legal.html#terms" style="color:var(--text-link);text-decoration:none">Terms</a> and <a href="legal.html#privacy" style="color:var(--text-link);text-decoration:none">Privacy Policy</a>, and consent to be contacted by an advisor.</span>
           </label>
 
-          <button class="cb-btn cb-btn--primary cb-btn--lg cb-btn--full" type="submit">Continue to application</button>
+          <button class="cb-btn cb-btn--confirm cb-btn--lg cb-btn--full" type="submit"><span class="cb-i"><i class="ri-send-plane-line"></i></span> Continue to application</button>
 
           <div class="divider-or">or sign up with</div>
           <div class="cb-grid cb-grid--2 cb-grid--tight">
@@ -113,18 +116,57 @@
             <button type="button" class="social-btn"><span class="cb-i"><i class="ri-linkedin-box-fill"></i></span> LinkedIn</button>
           </div>
         </div>
-      </form>
+      </form><p class="muted" style="font-size:12.5px;margin-top:18px;text-align:center">Colaberry School of Data and AI is operated by Colaberry Inc.</p>
     </div>
   </main>
 </div>
 
 <!-- inline checkbox styling parity (the CSS-only build covers .cb-check) -->
 <script>
-  document.getElementById('regForm').addEventListener('submit', function (e) {
+  var regForm = document.getElementById('regForm');
+  var FIELDS = ['fn', 'ln', 'em', 'ph', 'track', 'bg', 'goal'];
+  /* Deep link: register.html?track=ai|analytics|enterprise preselects the track. */
+  var trackMap = { ai: 'AI Systems Architect \u2014 24 wk', analytics: 'Data Analytics \u2014 16 wk', enterprise: 'Enterprise (for teams)' };
+  var qTrack = new URLSearchParams(location.search).get('track');
+  /* Draft persistence: refresh or leaving never loses typed input. */
+  try {
+    var draft = JSON.parse(localStorage.getItem('cb-reg-draft') || '{}');
+    FIELDS.forEach(function (id) { if (draft[id]) document.getElementById(id).value = draft[id]; });
+  } catch (e) {}
+  if (qTrack && trackMap[qTrack]) document.getElementById('track').value = trackMap[qTrack];
+  regForm.addEventListener('input', function (ev) {
+    if (ev.target && ev.target.matches('input, select, textarea')) window.cbSetFieldError(ev.target, '');
+    var d = {};
+    FIELDS.forEach(function (id) { d[id] = document.getElementById(id).value; });
+    try { localStorage.setItem('cb-reg-draft', JSON.stringify(d)); } catch (e) {}
+  });
+  regForm.addEventListener('submit', function (e) {
     e.preventDefault();
+    var fn = document.getElementById('fn'), ln = document.getElementById('ln'), em = document.getElementById('em'), ph = document.getElementById('ph');
+    var bad = [];
+    if (!fn.value.trim()) { cbSetFieldError(fn, 'First name is required.'); bad.push(fn); }
+    if (!ln.value.trim()) { cbSetFieldError(ln, 'Last name is required.'); bad.push(ln); }
+    if (!em.value.trim()) { cbSetFieldError(em, 'Email is required.'); bad.push(em); }
+    else if (!cbEmailOk(em.value.trim())) { cbSetFieldError(em, 'Enter a valid email like you@domain.com.'); bad.push(em); }
+    if (ph.value.trim() && !cbPhoneOk(ph.value.trim())) { cbSetFieldError(ph, 'Enter a valid phone number.'); bad.push(ph); }
+    if (bad.length) {
+      window.cbToast('Fix the highlighted fields to continue.', { tone: 'error', title: 'A few details missing' });
+      bad[0].focus();
+      return;
+    }
     var agree = document.getElementById('agree');
-    if (!agree.checked) { agree.focus(); return; }
-    window.location.href = 'thank-you.html';
+    if (!agree.checked) {
+      window.cbToast('Please agree to the Terms and Privacy Policy to continue.', { tone: 'warning' });
+      agree.focus();
+      return;
+    }
+    try { localStorage.removeItem('cb-reg-draft'); } catch (e2) {}
+    window.cbSetBusy(regForm.querySelector('[type="submit"]'), true, 'Sending application…');
+    setTimeout(function () { window.location.href = 'thank-you.html'; }, 600);
+  });
+  /* Social auth is demo-wired: proceeds like a submitted application. */
+  document.querySelectorAll('.social-btn').forEach(function (b) {
+    b.addEventListener('click', function () { window.location.href = 'thank-you.html'; });
   });
 </script>
 </body>

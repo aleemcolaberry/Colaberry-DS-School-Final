@@ -2,9 +2,10 @@ import React from 'react';
 
 const CSS = `
 .cb-tip { position: relative; display: inline-flex; }
-.cb-tip__pop { position: absolute; z-index: var(--z-overlay); pointer-events: none; background: var(--neutral-900); color: #fff; font-family: var(--font-body); font-size: var(--fs-caption); font-weight: var(--fw-medium); line-height: 1.3; padding: 7px 11px; border-radius: var(--radius-sm); white-space: nowrap; box-shadow: var(--shadow-md); opacity: 0; transform: translateY(4px); transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+.cb-tip__pop { position: absolute; z-index: var(--z-overlay); pointer-events: none; background: var(--surface-inverse); color: var(--text-on-inverse); font-family: var(--font-body); font-size: var(--fs-caption); font-weight: var(--fw-medium); line-height: 1.3; padding: 7px 11px; border-radius: var(--radius-sm); white-space: nowrap; box-shadow: var(--shadow-md); opacity: 0; transform: translateY(4px); transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
 .cb-tip:hover .cb-tip__pop, .cb-tip:focus-within .cb-tip__pop { opacity: 1; transform: translateY(0); }
-.cb-tip__pop::after { content: ''; position: absolute; width: 8px; height: 8px; background: var(--neutral-900); transform: rotate(45deg); }
+.cb-tip.is-esc .cb-tip__pop { opacity: 0; }
+.cb-tip__pop::after { content: ''; position: absolute; width: 8px; height: 8px; background: var(--surface-inverse); transform: rotate(45deg); }
 .cb-tip__pop[data-p="top"] { bottom: calc(100% + 8px); left: 50%; translate: -50% 0; }
 .cb-tip__pop[data-p="top"]::after { bottom: -4px; left: 50%; margin-left: -4px; }
 .cb-tip__pop[data-p="bottom"] { top: calc(100% + 8px); left: 50%; translate: -50% 0; }
@@ -26,10 +27,14 @@ function inject() {
  */
 export function Tooltip({ label, placement = 'top', children, className = '', ...rest }) {
   inject();
+  const [esc, setEsc] = React.useState(false); // WCAG 1.4.13: Esc dismisses without moving focus
+  const tipId = React.useMemo(() => 'cb-tip-' + Math.random().toString(36).slice(2, 8), []);
   return (
-    <span className={'cb-tip ' + className} tabIndex={0} {...rest}>
+    <span className={'cb-tip ' + (esc ? 'is-esc ' : '') + className} tabIndex={0} aria-describedby={tipId}
+      onKeyDown={(e) => { if (e.key === 'Escape') setEsc(true); }}
+      onBlur={() => setEsc(false)} onMouseLeave={() => setEsc(false)} {...rest}>
       {children}
-      <span className="cb-tip__pop" data-p={placement} role="tooltip">{label}</span>
+      <span className="cb-tip__pop" id={tipId} data-p={placement} role="tooltip">{label}</span>
     </span>
   );
 }

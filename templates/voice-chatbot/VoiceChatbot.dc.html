@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="App · Voice Chatbot" description="Voice-first assistant panel with the animated Colaberry voice orb (idle / listening / thinking / speaking / muted), live transcript, suggestion chips and a type-instead fallback — plus the orb icon kit." -->
+<helmet>
+<script src="./ds-base.js"></script>
+<style>
+@keyframes cbvcRise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes cbvcBlink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes cbvcDot{0%,80%,100%{transform:translateY(0);opacity:.45}40%{transform:translateY(-4px);opacity:1}}
+@media (prefers-reduced-motion:reduce){[data-cbvc-anim]{animation:none!important}}
+</style>
+</helmet>
+<div data-theme="{{ theme }}" style="min-height:100vh;background:var(--surface-subtle);font-family:var(--font-body);color:var(--text-body);padding:clamp(16px,4vw,48px) 16px;box-sizing:border-box">
+<div style="max-width:560px;margin:0 auto;display:grid;gap:44px">
+
+<section data-export="colaberry-voice-chatbot" data-export-w="560" aria-label="Voice chatbot" style="background:var(--surface-card);border-radius:var(--radius-2xl);box-shadow:var(--shadow-xl);border:1px solid var(--border-subtle);overflow:hidden;display:grid">
+<header style="display:flex;align-items:center;gap:12px;padding:14px 14px 14px 20px;border-bottom:1px solid var(--border-subtle)">
+<img src="../../assets/logo/colaberry-mark.png" alt="" style="width:32px;height:32px;object-fit:contain;flex:none">
+<div style="min-width:0;flex:1">
+<div style="font-weight:700;font-size:16px;color:var(--text-strong);line-height:1.2">Career coach</div>
+<div style="font-size:13px;color:var(--text-muted);margin-top:2px">Colaberry School of Data and AI</div>
+</div>
+<x-import component-from-global-scope="ColaberryDesignSystem_098454.Badge" tone="{{ badgeTone }}" dot="{{ true }}" hint-size="86px,26px">{{ badgeLabel }}</x-import>
+<button type="button" aria-label="Close" style="width:40px;height:40px;flex:none;border-radius:50%;border:0;background:transparent;color:var(--text-muted);display:grid;place-items:center;cursor:pointer;font-size:20px;transition:background var(--dur-fast) var(--ease-out),color var(--dur-fast) var(--ease-out)" style-hover="background:var(--surface-hover);color:var(--text-strong)"><span class="cb-i"><i class="ri-close-line"></i></span></button>
+</header>
+
+<sc-if value="{{ showTranscript }}" hint-placeholder-val="{{ true }}">
+<div ref="{{ logRef }}" role="log" aria-live="polite" style="max-height:340px;overflow-y:auto;padding:20px 20px 8px;display:flex;flex-direction:column;gap:12px">
+<sc-for list="{{ messages }}" as="m" hint-placeholder-count="2">
+<sc-if value="{{ m.isBot }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;gap:10px;align-items:flex-end;max-width:88%;animation:cbvcRise .36s var(--ease-out) both">
+<img src="../../assets/logo/colaberry-mark.png" alt="Coach" style="width:24px;height:24px;flex:none;object-fit:contain;margin-bottom:4px">
+<div style="background:var(--surface-sunken);color:var(--text-body);padding:12px 16px;border-radius:18px 18px 18px 6px;font-size:16px;line-height:1.5;min-width:0;overflow-wrap:anywhere">{{ m.text }}</div>
+</div>
+</sc-if>
+<sc-if value="{{ m.isUser }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;justify-content:flex-end;animation:cbvcRise .36s var(--ease-out) both">
+<div style="background:var(--red-600);color:#fff;padding:12px 16px;border-radius:18px 18px 6px 18px;font-size:16px;line-height:1.5;max-width:88%;min-width:0;overflow-wrap:anywhere">{{ m.text }}</div>
+</div>
+</sc-if>
+</sc-for>
+<sc-if value="{{ isListening }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;justify-content:flex-end"><div style="color:var(--text-muted);font-size:16px;line-height:1.5;padding:2px 16px;font-style:italic;max-width:88%;text-align:right;overflow-wrap:anywhere">{{ interimText }}<span data-cbvc-anim style="display:inline-block;width:2px;height:1em;background:var(--red-500);vertical-align:-2px;margin-left:3px;animation:cbvcBlink 1s steps(2) infinite"></span></div></div>
+</sc-if>
+<sc-if value="{{ isThinking }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;gap:10px;align-items:flex-end">
+<img src="../../assets/logo/colaberry-mark.png" alt="" style="width:24px;height:24px;flex:none;object-fit:contain;margin-bottom:4px">
+<div aria-label="Coach is thinking" style="background:var(--surface-sunken);padding:0 16px;height:46px;border-radius:18px 18px 18px 6px;display:flex;gap:5px;align-items:center"><span data-cbvc-anim style="width:7px;height:7px;border-radius:50%;background:var(--text-muted);animation:cbvcDot 1.2s ease-in-out infinite"></span><span data-cbvc-anim style="width:7px;height:7px;border-radius:50%;background:var(--text-muted);animation:cbvcDot 1.2s ease-in-out .15s infinite"></span><span data-cbvc-anim style="width:7px;height:7px;border-radius:50%;background:var(--text-muted);animation:cbvcDot 1.2s ease-in-out .3s infinite"></span></div>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ voiceOnly }}" hint-placeholder-val="{{ false }}">
+<div style="padding:36px 24px 0;text-align:center;display:grid;justify-items:center;gap:10px">
+<p style="margin:0;font-size:20px;line-height:1.45;color:var(--text-strong);text-wrap:balance;max-width:34ch;overflow-wrap:anywhere">{{ caption }}</p>
+<p style="margin:0;font-size:15px;color:var(--text-muted);font-style:italic;min-height:1.5em;max-width:40ch;overflow-wrap:anywhere">{{ interimText }}</p>
+</div>
+</sc-if>
+
+<div style="display:grid;justify-items:center;gap:14px;padding:24px 20px 8px">
+<x-import component-from-global-scope="cb-voice-orb" from="./voice-orb.js" state="{{ orbState }}" size="{{ orbSize }}" color="{{ orbColor }}" interactive="true" label="{{ orbLabel }}" onClick="{{ onOrb }}" hint-size="112px,112px"></x-import>
+<div aria-live="polite" style="font-size:15px;color:var(--text-muted);text-align:center;min-height:1.5em;text-wrap:balance">{{ statusText }}</div>
+</div>
+
+<sc-if value="{{ showChips }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:8px 20px 0">
+<sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+<button type="button" onClick="{{ c.send }}" style="font:inherit;font-size:14px;font-weight:500;color:var(--text-body);background:var(--surface-card);border:1px solid var(--border-default);border-radius:var(--radius-pill);padding:10px 16px;cursor:pointer;min-height:44px;transition:background var(--dur-fast) var(--ease-out),border-color var(--dur-fast) var(--ease-out)" style-hover="background:var(--surface-hover);border-color:var(--border-strong)">{{ c.label }}</button>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ typing }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;gap:8px;padding:12px 20px 0">
+<input type="text" value="{{ draft }}" onChange="{{ onDraft }}" onKeyDown="{{ onKey }}" placeholder="Type your message" aria-label="Type your message" style="flex:1;min-width:0;font:inherit;font-size:16px;color:var(--text-body);background:var(--surface-card);border:1px solid var(--border-default);border-radius:var(--radius-pill);padding:12px 18px;height:48px;box-sizing:border-box;outline:none;transition:border-color var(--dur-fast) var(--ease-out),box-shadow var(--dur-fast) var(--ease-out)" style-focus="border-color:var(--blue-500);box-shadow:var(--focus-ring)">
+<button type="button" onClick="{{ onSend }}" aria-label="Send" style="width:48px;height:48px;flex:none;border-radius:50%;border:0;background:var(--red-500);color:#fff;font-size:20px;display:grid;place-items:center;cursor:pointer;transition:background var(--dur-fast) var(--ease-out)" style-hover="background:var(--red-600)"><span class="cb-i"><i class="ri-send-plane-2-line"></i></span></button>
+</div>
+</sc-if>
+
+<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:16px 20px 20px">
+<x-import component-from-global-scope="ColaberryDesignSystem_098454.Button" variant="outline" size="sm" onClick="{{ toggleMute }}" aria-pressed="{{ muted }}" hint-size="96px,40px"><span style="display:inline-flex;align-items:center;gap:6px"><span class="cb-i"><i class="{{ muteIcon }}"></i></span><span>{{ muteLabel }}</span></span></x-import>
+<x-import component-from-global-scope="ColaberryDesignSystem_098454.Button" variant="outline" size="sm" onClick="{{ toggleTyping }}" aria-pressed="{{ typing }}" hint-size="140px,40px"><span style="display:inline-flex;align-items:center;gap:6px"><span class="cb-i"><i class="ri-keyboard-line"></i></span><span>{{ typingLabel }}</span></span></x-import>
+<x-import component-from-global-scope="ColaberryDesignSystem_098454.Button" variant="ghost" size="sm" onClick="{{ endSession }}" hint-size="130px,40px"><span style="display:inline-flex;align-items:center;gap:6px"><span class="cb-i"><i class="ri-stop-circle-line"></i></span><span>End session</span></span></x-import>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between;align-items:center;padding:12px 20px;background:var(--surface-subtle);border-top:1px solid var(--border-subtle)">
+<span style="font-size:12px;color:var(--text-muted);line-height:1.5">Voice is transcribed in real time. You can type at any time.</span>
+<span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);letter-spacing:.06em">COLABERRY VOICE</span>
+</div>
+</section>
+
+<section data-export="colaberry-voice-orb-kit" data-export-w="560" aria-label="Voice orb icon kit" style="display:grid;gap:18px">
+<div>
+<h2 style="font-family:var(--font-display);font-weight:700;font-size:var(--fs-h4);color:var(--text-strong);margin:0 0 6px;letter-spacing:-.01em">Voice orb — animated icon</h2>
+<p style="margin:0;font-size:15px;color:var(--text-muted);line-height:1.55;text-wrap:pretty">One element, five states. Load <code style="font-family:var(--font-mono);font-size:13px;color:var(--text-body);background:var(--surface-sunken);padding:2px 6px;border-radius:6px">voice-orb.js</code> on any page and set <code style="font-family:var(--font-mono);font-size:13px;color:var(--text-body);background:var(--surface-sunken);padding:2px 6px;border-radius:6px">state</code>, <code style="font-family:var(--font-mono);font-size:13px;color:var(--text-body);background:var(--surface-sunken);padding:2px 6px;border-radius:6px">size</code> and <code style="font-family:var(--font-mono);font-size:13px;color:var(--text-body);background:var(--surface-sunken);padding:2px 6px;border-radius:6px">color</code>. Motion collapses under reduced-motion; the bars stay white so it reads on any brand fill.</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:10px">
+<sc-for list="{{ orbStates }}" as="s" hint-placeholder-count="5">
+<div style="background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:20px 8px 14px;display:grid;justify-items:center;gap:12px">
+<x-import component-from-global-scope="cb-voice-orb" from="./voice-orb.js" state="{{ s.id }}" size="64" color="{{ orbColor }}" hint-size="64px,64px"></x-import>
+<span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted)">{{ s.id }}</span>
+</div>
+</sc-for>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px">
+<div style="background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:20px 16px;display:flex;align-items:center;justify-content:space-evenly;gap:12px;flex-wrap:wrap">
+<x-import component-from-global-scope="cb-voice-orb" from="./voice-orb.js" state="speaking" size="24" color="{{ orbColor }}" hint-size="24px,24px"></x-import>
+<x-import component-from-global-scope="cb-voice-orb" from="./voice-orb.js" state="speaking" size="40" color="{{ orbColor }}" hint-size="40px,40px"></x-import>
+<x-import component-from-global-scope="cb-voice-orb" from="./voice-orb.js" state="speaking" size="56" color="{{ orbColor }}" hint-size="56px,56px"></x-import>
+<x-import component-from-global-scope="cb-voice-orb" from="./voice-orb.js" state="speaking" size="80" color="{{ orbColor }}" hint-size="80px,80px"></x-import>
+</div>
+<div style="background:var(--surface-inverse);border-radius:var(--radius-lg);padding:20px 16px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap">
+<button type="button" style="display:inline-flex;align-items:center;gap:10px;padding:6px 20px 6px 6px;border-radius:var(--radius-pill);background:#fff;color:var(--neutral-900);border:0;box-shadow:var(--shadow-lg);cursor:pointer;font:inherit;font-size:15px;font-weight:700;min-height:52px;transition:transform var(--dur-fast) var(--ease-out)" style-hover="transform:translateY(-1px)"><x-import component-from-global-scope="cb-voice-orb" from="./voice-orb.js" state="listening" size="40" color="{{ orbColor }}" hint-size="40px,40px"></x-import><span>Talk to a coach</span></button>
+</div>
+</div>
+<pre style="margin:0;font-family:var(--font-mono);font-size:12.5px;line-height:1.65;color:var(--text-body);background:var(--surface-sunken);border-radius:var(--radius-md);padding:14px 16px;white-space:pre-wrap;overflow-wrap:anywhere">&lt;script src="voice-orb.js"&gt;&lt;/script&gt;
+&lt;cb-voice-orb state="listening" size="64"&gt;&lt;/cb-voice-orb&gt;
+&lt;cb-voice-orb state="speaking" size="40" color="#367895" interactive&gt;&lt;/cb-voice-orb&gt;</pre>
+</section>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;state&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;auto&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;idle&quot;,&quot;listening&quot;,&quot;thinking&quot;,&quot;speaking&quot;,&quot;muted&quot;],&quot;tsType&quot;:&quot;'auto'|'idle'|'listening'|'thinking'|'speaking'|'muted'&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;autoplay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;mode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;transcript&quot;,&quot;options&quot;:[&quot;transcript&quot;,&quot;voice-only&quot;],&quot;tsType&quot;:&quot;'transcript'|'voice-only'&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;light&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;'light'|'dark'&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;orbColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#FB2832&quot;,&quot;options&quot;:[&quot;#FB2832&quot;,&quot;#77BB4A&quot;,&quot;#367895&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Orb&quot;}}">
+class Component extends DCLogic {
+  state = { phase: 'idle', muted: false, typing: false, draft: '', interim: '', step: 0, messages: [{ role: 'bot', text: "Hi — I'm your Colaberry career coach. Tell me what you're working toward and what's getting in the way." }] };
+  timers = [];
+  logRef = React.createRef();
+  script = [
+    { user: "I've managed a retail store for six years and I want to move into data analytics — but I don't have a degree.", bot: "Six years of running a store is data work already: targets, inventory, scheduling. No degree is required at Colaberry — a diploma or GED is enough. Would you be learning while you work?" },
+    { user: "Yes, I'd need evenings.", bot: "Perfect. The evening Data Analytics cohort runs twelve weeks, Monday to Thursday, with a year of job support after you finish. Want me to check whether you qualify for a scholarship?" },
+    { user: "Yes, please.", bot: "Three quick questions, then. First — are you a veteran or a military spouse?" },
+    { user: "No, but my husband is.", bot: "Then you may qualify as a military spouse. I'll note that for the admissions team. Next: have you used Excel or Google Sheets at work?" }
+  ];
+  replies = [
+    "Thanks — that helps. Would you be learning while you work, or full time?",
+    "Got it. Are you leaning toward analytics, data engineering, or AI?",
+    "Noted. I'll pass this to the admissions team and follow up with next steps."
+  ];
+  later(fn, ms) { const t = setTimeout(fn, ms); this.timers.push(t); return t; }
+  clearTimers() { this.timers.forEach(clearTimeout); this.timers = []; }
+  componentDidMount() { if (this.props.autoplay) this.later(() => this.listen(), 900); }
+  componentDidUpdate(prev) {
+    const el = this.logRef.current; if (el) el.scrollTop = el.scrollHeight;
+    if (this.props.autoplay && !prev.autoplay && this.state.phase === 'idle') this.later(() => this.listen(), 600);
+    if (!this.props.autoplay && prev.autoplay) this.clearTimers();
+  }
+  componentWillUnmount() { this.clearTimers(); }
+  forced() { const s = this.props.state; return s && s !== 'auto' ? s : null; }
+  nextUserLine() { return (this.script[this.state.step] || {}).user || "I'd like to learn more about the Data Analytics program."; }
+  listen() {
+    if (this.state.muted) return;
+    const line = this.nextUserLine();
+    const words = line.split(' ');
+    this.clearTimers();
+    this.setState({ phase: 'listening', interim: '' });
+    words.forEach((w, i) => this.later(() => this.setState(s => ({ interim: s.interim ? s.interim + ' ' + w : w })), 300 + i * 170));
+    this.later(() => this.commit(line), 300 + words.length * 170 + 700);
+  }
+  commit(text) {
+    this.clearTimers();
+    this.setState(s => ({ phase: 'thinking', interim: '', messages: [...s.messages, { role: 'user', text }] }));
+    this.later(() => this.reply(), 1300);
+  }
+  reply() {
+    const entry = this.script[this.state.step];
+    const text = entry ? entry.bot : this.replies[this.state.step % this.replies.length];
+    this.setState(s => ({ phase: 'speaking', step: s.step + 1, messages: [...s.messages, { role: 'bot', text }] }));
+    this.later(() => {
+      this.setState({ phase: 'idle' });
+      if (this.props.autoplay) this.later(() => this.listen(), 1600);
+    }, Math.min(6000, 1200 + text.length * 38));
+  }
+  send(text) { const t = (text || '').trim(); if (!t) return; this.setState({ draft: '' }); this.commit(t); }
+  onOrb = () => {
+    if (this.forced()) return;
+    const p = this.state.phase;
+    if (p === 'idle') { if (this.state.muted) this.setState({ muted: false }); else this.listen(); }
+    else if (p === 'listening') this.commit(this.state.interim || this.nextUserLine());
+    else if (p === 'speaking') { this.clearTimers(); this.setState({ phase: 'idle' }); }
+  };
+  renderVals() {
+    const phase = this.forced() || this.state.phase;
+    const muted = phase === 'muted' || (this.state.muted && phase === 'idle');
+    const orbState = muted ? 'muted' : phase;
+    const map = {
+      idle: ['neutral', 'Ready', this.state.typing ? 'Type below, or tap the orb to talk' : 'Tap the orb to talk'],
+      listening: ['red', 'Listening', "Listening — tap when you're done"],
+      thinking: ['blue', 'Thinking', 'Thinking…'],
+      speaking: ['green', 'Speaking', 'Speaking — tap to interrupt'],
+      muted: ['neutral', 'Muted', 'Microphone is muted — tap the orb to unmute, or type instead']
+    };
+    const [badgeTone, badgeLabel, statusText] = map[orbState] || map.idle;
+    const voiceOnly = (this.props.mode ?? 'transcript') === 'voice-only';
+    const messages = this.state.messages.map(m => ({ ...m, isBot: m.role === 'bot', isUser: m.role === 'user' }));
+    const lastBot = [...this.state.messages].reverse().find(m => m.role === 'bot');
+    const chipTexts = ['I want to switch into data analytics', "I'm a veteran", "I don't have a degree", 'What does it cost?'];
+    return {
+      theme: this.props.theme ?? 'light',
+      orbColor: this.props.orbColor ?? '#FB2832',
+      orbState, orbSize: voiceOnly ? 160 : 112,
+      orbLabel: orbState === 'idle' ? 'Tap to talk' : badgeLabel,
+      isListening: orbState === 'listening', isThinking: orbState === 'thinking',
+      badgeTone, badgeLabel, statusText,
+      showTranscript: !voiceOnly, voiceOnly, caption: lastBot ? lastBot.text : '',
+      messages, interimText: this.state.interim, logRef: this.logRef,
+      chips: chipTexts.map(label => ({ label, send: () => this.send(label) })),
+      showChips: orbState === 'idle' && !this.state.typing && this.state.messages.length < 3,
+      typing: this.state.typing, draft: this.state.draft,
+      onDraft: e => this.setState({ draft: e.target.value }),
+      onKey: e => { if (e.key === 'Enter') this.send(this.state.draft); },
+      onSend: () => this.send(this.state.draft),
+      toggleTyping: () => this.setState(s => ({ typing: !s.typing })),
+      typingLabel: this.state.typing ? 'Hide keyboard' : 'Type instead',
+      toggleMute: () => this.setState(s => ({ muted: !s.muted })),
+      muted: this.state.muted,
+      muteLabel: this.state.muted ? 'Unmute' : 'Mute',
+      muteIcon: this.state.muted ? 'ri-mic-off-line' : 'ri-mic-line',
+      endSession: () => { this.clearTimers(); this.setState(s => ({ phase: 'idle', interim: '', step: 0, typing: false, draft: '', messages: s.messages.slice(0, 1) })); },
+      onOrb: this.onOrb,
+      orbStates: ['idle', 'listening', 'thinking', 'speaking', 'muted'].map(id => ({ id }))
+    };
+  }
+}
+</script>
+</body>
+</html>

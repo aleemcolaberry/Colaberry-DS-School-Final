@@ -1,27 +1,30 @@
-<!-- @dsCard group="Application" viewport="1120x720" name="Login" subtitle="Returning-student portal, dark brand panel" -->
+<!-- @dsCard group="Application" viewport="1120x720" name="Login" subtitle="Returning-student portal, berry-blue brand panel" -->
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Log in — Colaberry Learn</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css">
-<link rel="stylesheet" href="../components.css">
-<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="../components.css?v=2f0fe275">
+<link rel="stylesheet" href="app.css?v=8655f1fb">
+<script src="../theme.js?v=1"></script>
+<script src="icons.js?v=c57b0605"></script>
+<script src="toast.js?v=006ae98e"></script>
+<script src="guard.js?v=states2610"></script>
 </head>
 <body>
 <div class="auth">
 
-  <aside class="auth__aside auth__aside--ink">
-    <span class="auth__blob" style="width:280px;height:280px;top:-40px;left:-60px;background:rgba(251,40,50,.18)"></span>
-    <span class="auth__blob" style="width:220px;height:220px;bottom:30px;right:-40px;background:rgba(54,120,149,.22)"></span>
-    <a href="index.html" class="brand"><img class="brand__logo" src="../assets/logo/colaberry-horizontal-white.png" alt="Colaberry" style="height:28px"></a>
+  <aside class="auth__aside auth__aside--blue">
+    <span class="auth__blob" style="width:280px;height:280px;top:-40px;left:-60px"></span>
+    <span class="auth__blob" style="width:220px;height:220px;bottom:30px;right:-40px"></span>
+    <a href="index.html" class="brand"><img class="brand__logo" src="../assets/logo/colaberry-horizontal-white.webp" alt="Colaberry" style="height:28px"></a>
     <h2 style="margin-top:auto">Welcome back. Your cohort missed you.</h2>
-    <p style="color:rgba(255,255,255,.78);max-width:40ch;margin:0 0 8px">Pick up your projects, track your progress, and jump back into live sessions.</p>
-    <div class="cb-panel cb-panel--pad" style="margin-top:32px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)">
-      <div class="cb-cluster cb-cluster--between" style="color:#fff">
-        <div><div style="font-size:13px;opacity:.7">This week's streak</div><div style="font-family:var(--font-display);font-weight:900;font-size:26px">5 days 🔥</div></div>
-        <span class="cb-badge cb-badge--green">On track</span>
+    <p style="color:var(--text-on-accent);max-width:40ch;margin:0 0 8px">Pick up your projects, track your progress, and jump back into live sessions.</p>
+    <div class="cb-panel cb-panel--pad" style="margin-top:32px;background:rgba(0,0,0,.16);border-color:var(--border-on-accent)">
+      <div class="cb-cluster cb-cluster--between" style="color:var(--text-on-accent)">
+        <div><div style="font-size:13px">This week's streak</div><div style="font-family:var(--font-display);font-weight:900;font-size:26px">5 days <span class="cb-i" style="font-size:22px"><i class="ri-fire-line"></i></span></div></div>
+        <span class="cb-badge cb-badge--green" data-status="done">On track</span>
       </div>
     </div>
   </aside>
@@ -45,18 +48,18 @@
           <div class="field">
             <div class="cb-cluster cb-cluster--between">
               <label for="pw">Password</label>
-              <a href="#" style="font-size:13px;color:var(--text-link);text-decoration:none">Forgot password?</a>
+              <a href="mailto:admissions@colaberry.com?subject=Password%20reset" id="forgot" style="display:inline-flex;align-items:center;min-height:44px;font-size:13px;color:var(--text-link);text-decoration:none">Forgot password?</a>
             </div>
             <input class="cb-input" id="pw" name="pw" type="password" placeholder="••••••••" value="demo1234" required>
           </div>
 
           <label class="cb-check" style="display:flex;gap:12px;align-items:center;cursor:pointer">
             <input type="checkbox" id="remember" checked>
-            <span class="cb-check__box" aria-hidden="true"><svg viewBox="0 0 16 16" width="13" height="13"><path d="M3 8.5l3 3 7-7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="cb-check__box" aria-hidden="true"><svg viewBox="0 0 16 16" width="13" height="13"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             <span style="font-size:14px;color:var(--text-body)">Keep me logged in for 30 days</span>
           </label>
 
-          <button class="cb-btn cb-btn--primary cb-btn--lg cb-btn--full" type="submit">Log in</button>
+          <button class="cb-btn cb-btn--confirm cb-btn--lg cb-btn--full" type="submit"><span class="cb-i"><i class="ri-login-box-line"></i></span> Log in</button>
 
           <div class="divider-or">or continue with</div>
           <div class="cb-grid cb-grid--2 cb-grid--tight">
@@ -67,14 +70,39 @@
       </form>
 
       <p class="muted" style="text-align:center;margin-top:28px;font-size:13px">Demo build — any credentials open the dashboard.</p>
+      <p class="muted" style="text-align:center;margin-top:10px;font-size:12.5px">Colaberry School of Data and AI is operated by Colaberry Inc.</p>
     </div>
   </main>
 </div>
 
 <script>
+  var emIn = document.getElementById('em'), pwIn = document.getElementById('pw');
+  [emIn, pwIn].forEach(function (el) { el.addEventListener('input', function () { window.cbSetFieldError(el, ''); }); });
   document.getElementById('loginForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    window.location.href = 'dashboard.html';
+    var bad = [];
+    if (!emIn.value.trim()) { cbSetFieldError(emIn, 'Email is required.'); bad.push(emIn); }
+    else if (!cbEmailOk(emIn.value.trim())) { cbSetFieldError(emIn, 'Enter a valid email like you@domain.com.'); bad.push(emIn); }
+    if (!pwIn.value) { cbSetFieldError(pwIn, 'Password is required.'); bad.push(pwIn); }
+    if (bad.length) {
+      window.cbToast('Fix the highlighted fields to log in.', { tone: 'error', title: 'Missing details' });
+      bad[0].focus();
+      return;
+    }
+    var submitBtn = e.currentTarget.querySelector('[type="submit"]');
+    window.cbSetBusy(submitBtn, true, 'Logging in…');
+    setTimeout(function () { window.location.href = 'dashboard.html'; }, 500);
+  });
+  /* Social auth is demo-wired: proceeds to the dashboard. */
+  document.querySelectorAll('.social-btn').forEach(function (b) {
+    b.addEventListener('click', function () { window.location.href = 'dashboard.html'; });
+  });
+  document.getElementById('forgot').addEventListener('click', function (e) {
+    e.preventDefault();
+    var v = emIn.value.trim();
+    if (!v) { cbSetFieldError(emIn, 'Enter your email first, then we can send the link.'); window.cbToast('Add your email address, then tap the link again.', { tone: 'warning' }); emIn.focus(); return; }
+    if (!cbEmailOk(v)) { cbSetFieldError(emIn, 'Enter a valid email like you@domain.com.'); window.cbToast('That email doesn\u2019t look right \u2014 check for typos.', { tone: 'error' }); emIn.focus(); return; }
+    window.cbToast('Password reset link sent to ' + v + '.', { tone: 'success' });
   });
 </script>
 </body>
