@@ -1,0 +1,70 @@
+<!-- @dsCard group="Patterns" viewport="760x440" name="State coverage" subtitle="Every page designs its empty · loading · error · success · offline · no-JS states — CLAUDE.md §5" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>State coverage — Colaberry DS</title>
+<link rel="stylesheet" href="../../components.css?v=4e65bfe9">
+<style>
+body{margin:0;padding:22px 24px;background:var(--surface-page);font-family:var(--font-body);color:var(--text-body)}
+.hd{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.hd h2{margin:0;font-family:var(--font-display);font-size:18px;color:var(--text-strong)}
+.hd p{margin:0;font-size:12px;color:var(--text-muted)}
+.hd code{font-family:var(--font-mono);font-size:12px;color:var(--text-strong)}
+.rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:10px 18px}
+.row{display:grid;grid-template-columns:92px minmax(0,1fr);gap:12px;align-items:start;padding:10px 0;border-top:1px solid var(--border-subtle)}
+.k{font-family:var(--font-mono);font-size:12px;font-weight:var(--fw-bold);letter-spacing:.05em;text-transform:uppercase;color:var(--text-strong);padding-top:3px}
+.k small{display:block;font-weight:400;letter-spacing:0;text-transform:none;color:var(--text-subtle);margin-top:3px}
+.v{min-width:0;display:flex;flex-direction:column;gap:6px}
+.v p{margin:0;font-size:12px;color:var(--text-muted);line-height:1.45;text-wrap:pretty}
+.v p b{color:var(--text-strong);font-weight:var(--fw-medium)}
+.fld{display:flex;flex-direction:column;gap:4px}
+.fld label{font-size:12px;font-weight:var(--fw-medium);color:var(--text-strong)}
+.fld .cb-input{padding:7px 10px;font-size:13px}
+.cb-field__msg--err{margin:0;overflow-wrap:anywhere}
+.skl{display:flex;gap:10px;align-items:flex-start}
+.skl .cb-skel--circle{width:30px;height:30px;border-radius:50%;flex:none}
+.skl div{flex:1;min-width:0}
+.cb-empty--sm{padding:14px 12px}
+.cb-empty--sm .cb-empty__ic{width:30px;height:30px;font-size:15px}
+.cb-alert{padding:10px 12px;font-size:12px}
+.cb-alert__title{font-size:12px}
+.cb-alert__msg{font-size:12px}
+.offl{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--status-warning-fg);background:var(--status-warning-bg);border-radius:var(--radius-md);padding:8px 10px;min-width:0}
+.offl span:last-child{min-width:0}
+.nojs{font-family:var(--font-mono);font-size:12px;color:var(--text-muted);background:var(--surface-sunken);border-radius:var(--radius-md);padding:8px 10px;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<div class="hd"><h2>Six states, every page</h2><p>Enforced by <code>scraps/rwd-lint.html</code> §5 + the §4 walk-through. Longest copy, 320 px, both themes.</p></div>
+<div class="rows">
+  <div class="row"><div class="k">Empty<small>nothing yet · no results</small></div><div class="v">
+    <div class="cb-empty cb-empty--sm cb-empty--search" role="status"><div class="cb-empty__ic" aria-hidden="true"><span class="cb-i"><i class="ri-search-line"></i></span></div><h3 class="cb-empty__title" style="font-size:13px;line-height:1.25;text-wrap:initial">No posts in this topic yet</h3><p class="cb-empty__desc" style="font-size:12px">Pick another topic, or browse every article.</p></div>
+    <p><b>EmptyState</b> / <code>.cb-empty</code> · <code>role="status"</code> + live count · one next step</p>
+  </div></div>
+  <div class="row"><div class="k">Loading<small>&gt; 300 ms · submitting</small></div><div class="v">
+    <div class="skl"><span class="cb-skel cb-skel--circle"></span><div><span class="cb-skel cb-skel--text" style="width:78%"></span><span class="cb-skel cb-skel--text" style="width:52%"></span></div></div>
+    <div><button class="cb-btn cb-btn--primary cb-btn--sm" aria-busy="true" type="button"><span>Sending…</span><span class="cb-btn__spin" aria-hidden="true"></span></button></div>
+    <p><b>Skeleton</b> in the content's shape · <b>Button</b> <code>aria-busy</code> keeps width, blocks repeats · reserve height so nothing jumps</p>
+  </div></div>
+  <div class="row"><div class="k">Error<small>field · request · screen</small></div><div class="v">
+    <div class="fld cb-field cb-field--error"><label for="em">Email</label><input class="cb-input" id="em" value="ada@colaberry" aria-invalid="true" aria-describedby="em-err"><p class="cb-field__msg cb-field__msg--err" id="em-err" role="alert">Enter a valid email like you@domain.com.</p></div>
+    <div class="cb-alert cb-alert--danger" role="alert"><span class="cb-alert__ic cb-i" aria-hidden="true"><i class="ri-error-warning-line"></i></span><div class="cb-alert__body"><p class="cb-alert__msg">We couldn't send that. Check your connection and try again — or email <a href="mailto:admissions@colaberry.com">admissions@colaberry.com</a>.</p></div></div>
+    <p>Inline, specific, actionable · <b>Retry</b> · focus moves to it · <code>forms.js</code> / <code>guard.js</code> do this for free</p>
+  </div></div>
+  <div class="row"><div class="k">Success<small>confirmed in place</small></div><div class="v">
+    <div class="cb-alert cb-alert--success" role="status"><span class="cb-alert__ic cb-i" aria-hidden="true"><i class="ri-check-line"></i></span><div class="cb-alert__body"><p class="cb-alert__msg">Thanks! We'll be in touch within one business day.</p></div></div>
+    <p>Fields hide, <code>role="status"</code> takes focus, copy says what happens next · or a thank-you page</p>
+  </div></div>
+  <div class="row"><div class="k">Offline<small>network lost</small></div><div class="v">
+    <div class="offl" role="status"><span class="cb-i" aria-hidden="true"><i class="ri-wifi-off-line"></i></span><span>You're offline. We'll keep showing what's already loaded.</span></div>
+    <p>Persistent banner in flow (not a toast) · keep loaded content · remote images fall back to <code>img-fallback.svg</code></p>
+  </div></div>
+  <div class="row"><div class="k">No JS<small>bundle blocked</small></div><div class="v">
+    <div class="nojs">&lt;noscript&gt; headline · price · CTA link &nbsp;+&nbsp; boot-fallback.js (7 s watchdog)</div>
+    <p>Never a white page: the real headline, the Open House CTA and a phone number render without React</p>
+  </div></div>
+</div>
+</body>
+</html>

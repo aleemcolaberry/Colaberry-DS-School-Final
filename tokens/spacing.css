@@ -99,4 +99,8 @@
   --motion-rise-lg: 28px;  /* @kind spacing */
   --stagger:        70ms;  /* @kind other */
   --stagger-tight:  45ms;  /* @kind other */
+
+  /* Interaction — the one hover lift and press scale (CLAUDE.md §7.2) */
+  --motion-lift:    3px;   /* @kind spacing */ /* card/tile hover rise; never more than 4px */
+  --motion-press:   0.985; /* @kind other */   /* :active scale on buttons and clickable cards */
 }

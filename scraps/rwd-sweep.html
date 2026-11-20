@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>RWD sweep</title>
+<style>
+body{margin:0;background:#1c1c1c;color:#ddd;font:13px/1.4 ui-monospace,Menlo,monospace}
+#bar{position:sticky;top:0;background:#111;padding:8px 12px;border-bottom:1px solid #333;display:flex;gap:12px;align-items:center;z-index:2}
+#log{padding:8px 12px;white-space:pre-wrap;max-height:46vh;overflow:auto;border-bottom:1px solid #333}
+#frames{padding:12px}
+iframe{border:0;background:#fff;height:900px;display:block}
+</style></head><body>
+<div id="bar"><b>RWD sweep</b><span id="status">idle</span></div>
+<div id="log"></div>
+<div id="frames"><iframe id="f" style="width:1280px" title="probe"></iframe></div>
+<script>
+const WIDTHS=[320,360,390,414,480,540,600,640,700,768,820,900,960,1024,1100,1180,1280,1440,1920];
+const RESULTS=window.RESULTS={};
+const $=id=>document.getElementById(id);
+// MessageChannel-driven sleep: not subject to background-tab timer throttling
+const chan=new MessageChannel();const waiters=[];chan.port1.onmessage=()=>{const now=Date.now();for(let i=waiters.length-1;i>=0;i--){if(now>=waiters[i].t){const r=waiters[i].r;waiters.splice(i,1);r()}}if(waiters.length)chan.port2.postMessage(0)};
+const sleep=ms=>new Promise(r=>{waiters.push({t:Date.now()+ms,r});chan.port2.postMessage(0)});
+function log(s){$('log').textContent+=s+'\n';$('log').scrollTop=1e9;console.log('[sweep] '+s)}
+function path(el){let p=[],e=el,n=0;while(e&&e.nodeType===1&&n<5){let s=e.tagName.toLowerCase();if(e.id)s+='#'+e.id;else if(e.classList.length)s+='.'+e.classList[0];p.unshift(s);if(e.id||/^(section|header|footer|main|nav|aside)$/.test(e.tagName.toLowerCase()))break;e=e.parentElement;n++}return p.join('>')}
+function hasText(el){for(const n of el.childNodes)if(n.nodeType===3&&n.textContent.trim())return true;return false}
+function txt(el){let t='';for(const n of el.childNodes)if(n.nodeType===3)t+=n.textContent;return t.trim().replace(/\s+/g,' ').slice(0,36)}
+function probe(fr,w){
+  const win=fr.contentWindow,doc=fr.contentDocument,de=doc.documentElement,vh=fr.clientHeight;
+  const o={w,scrollW:de.scrollWidth,bodyW:doc.body.scrollWidth,overflow:[],spill:[],clipped:[],vspill:[],overlap:[],squeezed:[],distorted:[],touch:[],nav:null,sticky:[],bigH1:[],textEls:0};
+  const seen=new Set();const texts=[];
+  const all=doc.querySelectorAll('body *');
+  for(const el of all){
+    const tag=el.tagName.toLowerCase();
+    if(/^(script|style|noscript|template|title|option|svg|path|g|defs|use|circle|rect|line|polyline|polygon|br)$/.test(tag)||el.closest('svg'))continue;
+    const r=el.getBoundingClientRect();if(!r.width&&!r.height)continue;
+    const cs=win.getComputedStyle(el);if(cs.display==='none'||cs.visibility==='hidden')continue;
+    {const d=el.closest('details:not([open])');if(d&&!el.closest('summary')&&d.contains(el))continue;} // collapsed <details> content reports stale geometry
+    if(r.width<=1&&r.height<=1&&/hidden|clip/.test(cs.overflow))continue; // visually-hidden (sr-only) text
+    const hidden=parseFloat(cs.opacity)<0.05;
+    // horizontal overflow past the viewport (ignore things clipped by an ancestor or deliberately offscreen skip links)
+    const over=r.right-w,left=-r.left;
+    if((over>2||left>2)&&!(left>5000)){
+      let p=el.parentElement,clip=false;while(p&&p!==doc.body){const pcs=win.getComputedStyle(p);if(/(hidden|clip|auto|scroll)/.test(pcs.overflowX)){clip=true;break}p=p.parentElement}
+      if(!clip&&!(cs.position==='fixed'&&(cs.visibility==='hidden'||cs.pointerEvents==='none'||hidden))){const key=path(el);if(!seen.has('o'+key)){seen.add('o'+key);o.overflow.push({el:key,right:Math.round(over),left:Math.round(left),w:Math.round(r.width),pos:cs.position,hidden,txt:txt(el)})}}
+    }
+    if(tag==='img'&&el.naturalWidth>0&&r.width>20&&r.height>20&&cs.objectFit==='fill'&&cs.transform==='none'){const nat=el.naturalWidth/el.naturalHeight,ren=el.clientWidth/el.clientHeight;if(Math.abs(nat-ren)/nat>0.08){const key=path(el);if(!seen.has('d'+key)){seen.add('d'+key);o.distorted.push({el:key,nat:+nat.toFixed(2),ren:+ren.toFixed(2),src:(el.getAttribute('src')||'').split('/').pop().slice(0,30)})}}}
+    if((cs.position==='fixed'||cs.position==='sticky')&&!hidden&&cs.pointerEvents!=='none'){if(r.top<=1&&r.width>=w*0.8&&r.height>vh*0.28){o.sticky.push({el:path(el),h:Math.round(r.height)})}}
+    if(tag==='h1'&&w<=414){const fs=parseFloat(cs.fontSize);if(fs>52)o.bigH1.push({el:path(el),fs})}
+    if(w<=480&&el.matches('a[href],button,[role="button"],input:not([type="hidden"]),select,textarea,summary')&&!hidden){const inline=/inline$/.test(cs.display)&&el.parentElement&&hasText(el.parentElement);if(!inline&&Math.min(r.width,r.height)<24&&r.width>0){const key=path(el);if(!seen.has('t'+key)){seen.add('t'+key);o.touch.push({el:key,w:Math.round(r.width),h:Math.round(r.height),txt:txt(el)||el.getAttribute('aria-label')||''})}}}
+    if(!hasText(el))continue;
+    if(cs.color==='rgba(0, 0, 0, 0)'||cs.webkitTextFillColor==='rgba(0, 0, 0, 0)'||cs.pointerEvents==='none')continue;
+    o.textEls++;
+    if(!hidden&&r.width>0&&r.height>0&&cs.position!=='fixed'&&!/inline$/.test(cs.display)){let vr={left:r.left,top:r.top,right:r.right,bottom:r.bottom},fixedAnc=false,p=el.parentElement;while(p&&p!==doc.body){const pcs=win.getComputedStyle(p);if(pcs.position==='fixed'){fixedAnc=true;break}if(/(hidden|clip|auto|scroll)/.test(pcs.overflowX)||/(hidden|clip|auto|scroll)/.test(pcs.overflowY)){const pr=p.getBoundingClientRect();vr={left:Math.max(vr.left,pr.left),top:Math.max(vr.top,pr.top),right:Math.min(vr.right,pr.right),bottom:Math.min(vr.bottom,pr.bottom)}}p=p.parentElement}if(!fixedAnc&&vr.right-vr.left>4&&vr.bottom-vr.top>4){vr.width=vr.right-vr.left;vr.height=vr.bottom-vr.top;texts.push({el,r:vr,key:path(el)})}}
+    if(/inline$/.test(cs.display))continue;
+    let scrollAnc=false,p=el.parentElement;while(p&&p!==doc.body){const pcs=win.getComputedStyle(p);if(/(auto|scroll)/.test(pcs.overflowX)){scrollAnc=true;break}p=p.parentElement}
+    if(scrollAnc)continue;
+    if(el.scrollWidth>el.clientWidth+2&&el.clientWidth>0){const key=path(el);if(!seen.has('s'+key)){seen.add('s'+key);const rec={el:key,sw:el.scrollWidth,cw:el.clientWidth,ws:cs.whiteSpace,txt:txt(el)};if(/visible/.test(cs.overflowX))o.spill.push(rec);else if(cs.textOverflow!=='ellipsis')o.clipped.push(rec)}}
+    if(el.scrollHeight>el.clientHeight+Math.max(12,el.clientHeight*0.25)&&el.clientHeight>0&&!/\d/.test(cs.webkitLineClamp)&&!/(auto|scroll)/.test(cs.overflowY)){const key=path(el);if(!seen.has('v'+key)){seen.add('v'+key);const rec={el:key,sh:el.scrollHeight,ch:el.clientHeight,txt:txt(el)};if(/hidden|clip/.test(cs.overflowY))o.clipped.push(Object.assign(rec,{axis:'y'}));else if(cs.display!=='inline-block')o.vspill.push(rec)}}
+    if(el.clientWidth>0&&el.clientWidth<90&&txt(el).length>14&&cs.whiteSpace!=='nowrap'&&!/^(code|kbd|b|strong|em|span|small|a|label|button|td|th)$/.test(tag)){const key=path(el);if(!seen.has('q'+key)){seen.add('q'+key);o.squeezed.push({el:key,cw:el.clientWidth,txt:txt(el)})}}
+  }
+  // overlapping text (neither contains the other, same stacking context ignored)
+  const pairs=new Set();
+  for(let i=0;i<texts.length&&o.overlap.length<12;i++){const a=texts[i];for(let j=i+1;j<texts.length;j++){const b=texts[j];if(a.el.contains(b.el)||b.el.contains(a.el))continue;
+    const ix=Math.min(a.r.right,b.r.right)-Math.max(a.r.left,b.r.left),iy=Math.min(a.r.bottom,b.r.bottom)-Math.max(a.r.top,b.r.top);if(ix<=4||iy<=4)continue;
+    const area=ix*iy,small=Math.min(a.r.width*a.r.height,b.r.width*b.r.height);if(area<0.3*small||small===0)continue;
+    const k=[a.key.split('>').pop(),b.key.split('>').pop()].sort().join('|');if(pairs.has(k))continue;pairs.add(k);
+    o.overlap.push({a:a.key,b:b.key,ta:txt(a.el),tb:txt(b.el),pct:Math.round(100*area/small)});if(o.overlap.length>=12)break}}
+  // mobile nav: are primary links hidden with no toggle?
+  if(w<=768){const navs=[...doc.querySelectorAll('header nav, nav, [role="navigation"]')].filter(n=>!n.closest('footer'));if(navs.length){const links=navs.flatMap(n=>[...n.querySelectorAll('a')]);const visibleLinks=links.filter(a=>a.getClientRects().length&&win.getComputedStyle(a).visibility!=='hidden');const toggles=[...doc.querySelectorAll('button,[role="button"]')].filter(b=>b.getClientRects().length&&(/menu|nav/i.test((b.getAttribute('aria-label')||'')+(b.id||'')+(b.className||''))||b.hasAttribute('aria-expanded')));if(links.length&&!visibleLinks.length&&!toggles.length)o.nav='links hidden, no toggle';else if(visibleLinks.length>6&&!toggles.length)o.nav='all '+visibleLinks.length+' links shown, no toggle'}}
+  for(const k of ['overflow','spill','clipped','vspill','squeezed','distorted','touch'])o[k]=o[k].slice(0,25);
+  return o;
+}
+function load(fr,src){return new Promise(r=>{let d=false;fr.onload=()=>{if(!d){d=true;r()}};fr.src=src+(src.includes('?')?'&':'?')+'_='+Date.now();sleep(10000).then(()=>{if(!d){d=true;r()}})})}
+async function sweepScroll(fr){const win=fr.contentWindow,doc=fr.contentDocument;const h=doc.documentElement.scrollHeight;for(let y=0;y<h;y+=700){win.scrollTo(0,y);await sleep(70)}win.scrollTo(0,0);await sleep(250)}
+function sum(res){const bad=[];for(const w of WIDTHS){const r=res.widths[w];if(!r||r.error){bad.push(w+':ERR');continue}const n=(r.scrollW>w+1?'SW'+r.scrollW:'')+(r.overflow.length?' ov'+r.overflow.length:'')+(r.spill.length?' sp'+r.spill.length:'')+(r.clipped.length?' cl'+r.clipped.length:'')+(r.vspill.length?' vs'+r.vspill.length:'')+(r.overlap.length?' lap'+r.overlap.length:'')+(r.squeezed.length?' sq'+r.squeezed.length:'')+(r.distorted.length?' img'+r.distorted.length:'')+(r.touch.length?' tap'+r.touch.length:'')+(r.nav?' NAV':'')+(r.sticky.length?' sticky':'')+(r.bigH1.length?' h1':'');if(n.trim())bad.push(w+':'+n.trim())}return bad.length?bad.join(' | '):'clean at all widths'}
+window.runPage=async function(p,settle){const fr=$('f');fr.style.width='1280px';const res={page:p,widths:{}};log('▶ '+p);await load(fr,p);await sleep(settle||1200);try{await sweepScroll(fr)}catch(e){}
+  for(const w of WIDTHS){fr.style.width=w+'px';await sleep(w===WIDTHS[0]?900:650);try{fr.contentWindow.dispatchEvent(new Event('resize'))}catch(e){}await sleep(250);try{res.widths[w]=probe(fr,w)}catch(e){res.widths[w]={error:String(e)}}}
+  RESULTS[p]=res;log('   '+sum(res));return res};
+window.runAll=async function(pages,settleMap){$('status').textContent='running';window.RUNNING=true;for(const p of pages){const s=(settleMap&&settleMap(p))||1200;try{await window.runPage(p,s)}catch(e){log('ERR '+p+' '+e)}}window.RUNNING=false;$('status').textContent='done ('+Object.keys(RESULTS).length+')'};
+window.SLOW=p=>/accelerator|beginners|builders|working-professionals|ui_kits|design-system/.test(p)?7000:1200;
+// Auto-run from the URL: rwd-sweep.html?run=school,app (groups) or ?run=all
+const qs=new URLSearchParams(location.search).get('run');if(qs)addEventListener('load',()=>{const g=qs==='all'?Object.keys(PAGES):qs.split(',');runAll(g.flatMap(k=>PAGES[k]||[]),SLOW)});
+window.PAGES={
+  root:['../index.html','../design-system.html','../AI-Architect-Accelerator-Brochure.html','../Colaberry Social Media Kit.html'],
+  school:['accelerator','beginners-career-switchers','builders-founders','working-professionals','blog','events','faq','contact','our-story','podcasts','shorts','student-projects','thank-you'].map(s=>'../Colaberry School/'+s+'.html'),
+  training:['index','home-classic','data-analytics','data-science','job-readiness','how-it-works','pricing','mentorship','hire-our-grads','success-stories','blog','contact','events','faq','our-story','reviews'].map(s=>'../training-site/'+s+'.html'),
+  app:['index','login','register','dashboard','legal','thank-you'].map(s=>'../app/'+s+'.html'),
+  kits:['../ui_kits/marketing-website/index.html'],
+  ads:['../ads/Meta Ads Review.html']
+};
+window.detail=function(p,w,keys){const r=RESULTS[p];if(!r)return null;const x=r.widths[w];if(!x)return null;const o={};for(const k of (keys||['overflow','spill','clipped','vspill','overlap','squeezed','distorted','touch','nav','sticky','bigH1','scrollW']))o[k]=x[k];return o};
+window.worst=function(p){const r=RESULTS[p];if(!r)return null;const out={};for(const w of WIDTHS){const x=r.widths[w];if(!x||x.error)continue;for(const k of ['overflow','spill','clipped','vspill','overlap','squeezed','distorted'])for(const it of x[k]){const id=k+'|'+(it.el||it.a+'+'+it.b);if(!out[id])out[id]={k,at:[],it};out[id].at.push(w)}if(x.nav)(out['nav|'+x.nav]=out['nav|'+x.nav]||{k:'nav',at:[],it:x.nav}).at.push(w);for(const s of x.sticky)(out['sticky|'+s.el]=out['sticky|'+s.el]||{k:'sticky',at:[],it:s}).at.push(w);for(const s of x.bigH1)(out['h1|'+s.el]=out['h1|'+s.el]||{k:'h1',at:[],it:s}).at.push(w)}return Object.values(out)};
+</script>
+</body></html>

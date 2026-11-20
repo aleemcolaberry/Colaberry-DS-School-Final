@@ -4,24 +4,31 @@ const CSS = `
 .cb-avatar {
   display: inline-flex; align-items: center; justify-content: center;
   border-radius: 50%; overflow: hidden; flex: none;
-  font-family: var(--font-body); font-weight: var(--fw-bold); color: #fff;
+  font-family: var(--font-body); font-weight: var(--fw-bold); color: var(--neutral-900);
   background: var(--green-500); user-select: none;
 }
 .cb-avatar { position: relative; }
 .cb-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background: inherit; }
 .cb-avatar__txt { line-height: 1; white-space: nowrap; }
-.cb-avatar--xs { width: 28px; height: 28px; font-size: 11px; }
+.cb-avatar--xs { width: 28px; height: 28px; font-size: 12px; }
 .cb-avatar--sm { width: 36px; height: 36px; font-size: 13px; }
 .cb-avatar--md { width: 48px; height: 48px; font-size: 16px; }
 .cb-avatar--lg { width: 64px; height: 64px; font-size: 22px; }
 .cb-avatar--xl { width: 88px; height: 88px; font-size: 30px; }
-.cb-avatar--ring { box-shadow: 0 0 0 3px var(--surface-card), 0 0 0 5px var(--red-500); }
+.cb-avatar--ring { box-shadow: 0 0 0 3px var(--surface-card), 0 0 0 5px var(--brand-primary); }
 .cb-avatar-group { display: inline-flex; }
 .cb-avatar-group > .cb-avatar { box-shadow: 0 0 0 3px var(--surface-card); }
 .cb-avatar-group > .cb-avatar + .cb-avatar { margin-left: -12px; }
 `;
 
-const TONES = ['var(--green-500)', 'var(--blue-500)', 'var(--red-500)', 'var(--green-600)', 'var(--blue-600)'];
+// Each tone pairs a fill with an ink that clears WCAG AA (≥4.5:1) for the initials.
+const TONES = [
+  { bg: 'var(--green-500)', fg: 'var(--neutral-900)' },
+  { bg: 'var(--blue-500)',  fg: 'var(--neutral-0)' },
+  { bg: 'var(--red-600)',   fg: 'var(--neutral-0)' },
+  { bg: 'var(--green-600)', fg: 'var(--neutral-900)' },
+  { bg: 'var(--blue-700)',  fg: 'var(--neutral-0)' },
+];
 
 function inject() {
   if (typeof document === 'undefined') return;
@@ -49,10 +56,10 @@ export function Avatar({ src, name = '', size = 'md', ring = false, className = 
   if (ring) classes.push('cb-avatar--ring');
   if (className) classes.push(className);
   const hash = name.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
-  const bg = TONES[hash % TONES.length];
+  const tone = TONES[hash % TONES.length];
   const showImg = src && !failed;
   return (
-    <span className={classes.join(' ')} style={{ background: bg, ...style }} role="img" aria-label={name || undefined} {...rest}>
+    <span className={classes.join(' ')} style={{ background: tone.bg, color: tone.fg, ...style }} role="img" aria-label={name || undefined} {...rest}>
       <span className="cb-avatar__txt" aria-hidden="true">{initials(name)}</span>
       {showImg && <img src={src} alt="" onError={() => setFailed(true)} />}
     </span>

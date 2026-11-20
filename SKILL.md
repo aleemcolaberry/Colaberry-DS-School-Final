@@ -1,10 +1,10 @@
 ---
 name: colaberry-design
-description: Use this skill to generate well-branded interfaces and assets for Colaberry (the School of Data Science & Analytics), either for production or throwaway prototypes/mocks/etc. Contains essential design guidelines, colors, type, fonts, assets, and UI kit components for prototyping.
+description: Use this skill to generate well-branded interfaces and assets for Colaberry (the School of Data and AI), either for production or throwaway prototypes/mocks/etc. Contains essential design guidelines, colors, type, fonts, assets, and UI kit components for prototyping.
 user-invocable: true
 ---
 
-Read the `readme.md` file within this skill, and explore the other available files (`BRAND.md`,
+Read the `README.md` file within this skill, and explore the other available files (`BRAND.md`,
 `IMPLEMENTATION.md`, `design-system.html`, `tokens/`, `components/core/`, `assets/logo/`, `ui_kits/`).
 
 **For developers installing/implementing the system in a real project, follow `IMPLEMENTATION.md`** —

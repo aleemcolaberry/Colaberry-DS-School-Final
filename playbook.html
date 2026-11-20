@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build &amp; Critique Playbook — Colaberry Design System</title>
+<meta name="description" content="Nine Claude Code prompts for Colaberry developers: a Build track that takes a brief to an on-system product, and a Critique track that scores any project against the Colaberry Scorecard.">
+<link rel="icon" href="assets/logo/export/favicon-32.png">
+<script src="theme.js?v=ab2e4cf4"></script>
+<link rel="stylesheet" href="landing.css?v=fff82fee">
+<link rel="stylesheet" href="playbook.css?v=2d3a0a43">
+<script src="motion.js?v=216f9290"></script>
+</head>
+<body data-screen-label="Playbook">
+<a class="skip" href="#main">Skip to content</a>
+<nav class="lnav" aria-label="Main">
+<div class="lnav__in">
+<a class="lnav__logo" href="index.html" aria-label="Colaberry design system home"><img class="lg-l" src="assets/logo/colaberry-horizontal.webp" alt="Colaberry"><img class="lg-d" src="assets/logo/colaberry-horizontal-white.webp" alt="Colaberry"></a>
+<div class="lnav__links">
+<a href="#overview">How it works</a>
+<a href="#build">Build track</a>
+<a href="#scorecard">Scorecard</a>
+<a href="#critique">Critique track</a>
+<a href="#utilities">Utilities</a>
+</div>
+<div class="lnav__end">
+<button class="icobtn" data-theme-toggle aria-pressed="false" aria-label="Toggle dark mode"><i class="ri-moon-line"></i></button>
+<a class="btn btn--primary lnav__cta" href="https://github.com/aleemcolaberry/Colaberry-DS-School-Final" target="_blank" rel="noopener">Clone the system</a>
+<button class="icobtn burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Menu"><i></i><i></i></button>
+</div>
+</div>
+</nav>
+<div class="menu" id="menu" data-screen-label="Menu overlay">
+<div class="menu__in">
+<div class="menu__links">
+<a href="#overview"><small>01</small>How it works</a>
+<a href="#build"><small>02</small>Build track</a>
+<a href="#scorecard"><small>03</small>Scorecard</a>
+<a href="#critique"><small>04</small>Critique track</a>
+<a href="#utilities"><small>05</small>Utilities</a>
+<a href="index.html"><small>←</small>System home</a>
+</div>
+<div class="menu__foot">
+<a class="btn btn--primary" href="https://github.com/aleemcolaberry/Colaberry-DS-School-Final" target="_blank" rel="noopener">Clone the system</a>
+<button class="btn btn--ghost" data-theme-toggle aria-pressed="false"><span class="cb-i"><i class="ri-moon-line"></i></span>Theme</button>
+</div>
+</div>
+</div>
+
+<main id="main">
+<header class="pbh" data-screen-label="Hero">
+<div class="wrap pbh__grid">
+<div>
+<span class="pbh__pill"><span class="dot"></span>Build &amp; Critique Playbook · for Claude Code</span>
+<h1 class="pbh__h1">Build on the system<span class="cherry">.</span><br>Then make it prove it<span class="berry">.</span></h1>
+<p class="pbh__sub">Nine prompts for Colaberry developers. The Build track takes a brief to a product that is on-system from the first commit. The Critique track scores any project against the Colaberry Scorecard, fixes what you approve and verifies it with fresh eyes. Project specifics live in one file — the prompts never change.</p>
+<div class="pbh__cta">
+<a class="btn btn--primary" href="#build">Start at Step 0</a>
+<a class="btn btn--ghost" href="#scorecard">See the Scorecard</a>
+<a class="pbh__repo" href="https://github.com/aleemcolaberry/Colaberry-DS-School-Final" target="_blank" rel="noopener"><span class="cb-i"><i class="ri-github-line"></i></span>aleemcolaberry/Colaberry-DS-School-Final</a>
+</div>
+<p class="pbh__note">2 tracks · 9 steps · 6 utilities · 1 scorecard · one session per step</p>
+</div>
+<aside class="map" aria-label="Playbook map">
+<p class="map__k">The map</p>
+<div class="map__track">
+<p class="map__t"><i></i>Build · brief → plan → build</p>
+<a class="map__s" href="#step-0"><b>00</b><span>Project brief</span><small>you</small></a>
+<a class="map__s" href="#step-1"><b>01</b><span>Install the system, set the rules</span><small>setup</small></a>
+<a class="map__s" href="#step-2"><b>02</b><span>Map the system to the brief</span><small>read-only</small></a>
+<a class="map__s" href="#step-3"><b>03</b><span>Plan</span><small>no code</small></a>
+<a class="map__s" href="#step-4"><b>04</b><span>Build one feature</span><small>repeat</small></a>
+</div>
+<div class="map__track map__track--b">
+<p class="map__t"><i></i>Critique · audit → fix → verify</p>
+<a class="map__s" href="#step-5"><b>05</b><span>Audit against the Scorecard</span><small>read-only</small></a>
+<a class="map__s" href="#step-6"><b>06</b><span>Fix approved findings</span><small>fix</small></a>
+<a class="map__s" href="#step-7"><b>07</b><span>Independent verification</span><small>fresh session</small></a>
+<a class="map__s" href="#step-8"><b>08</b><span>Hand-off and ship</span><small>ship</small></a>
+</div>
+<p class="map__foot"><span class="cb-i"><i class="ri-file-text-line"></i></span>Same prompts, plain markdown: <a href="PLAYBOOK.md">PLAYBOOK.md</a></p>
+</aside>
+</div>
+</header>
+
+<section class="sec" id="overview" data-screen-label="How it works">
+<div class="wrap shead">
+<p class="kicker"><span class="idx">01</span>How it works</p>
+<h2 class="h2">One step per session.<br>Two files carry the rest.</h2>
+<p class="lead">Claude Code forgets details when a session fills up and quietly declares things done. These rules, and the files every prompt reads, are what turn "mostly built" into built.</p>
+</div>
+<div class="wrap ov">
+<ol class="rules" aria-label="Golden rules">
+<li class="rule"><b>One step per session.</b> Run <code>/clear</code> before each new step; <code>CLAUDE.md</code> and <code>docs/PROGRESS.md</code> carry the context forward.</li>
+<li class="rule"><b>Start in plan mode</b> (Shift+Tab) so Claude Code shows its plan before it edits anything.</li>
+<li class="rule"><b>Gap Check after every step.</b> Move on only when it reports zero open items for that step.</li>
+<li class="rule"><b>Stopped partway? Use Resume</b>, never the original prompt again — it would restart the step.</li>
+<li class="rule"><b>Review the report and the diff</b> before you approve. Rejecting early is cheaper than fixing later.</li>
+<li class="rule"><b>Steps 3 and 5 need your decisions</b> written into a file before the next step runs. Don't skip them.</li>
+</ol>
+<div class="carry">
+<h3>What travels between sessions</h3>
+<p>You never edit the prompts. Everything about your project lives in these files, and every prompt starts by reading them.</p>
+<div class="files">
+<div class="file"><span class="cb-i"><i class="ri-file-list-3-line"></i></span><code>docs/PROJECT_BRIEF.md</code><span>What you're building, for whom, with IDs for every must-have. You write it at Step 0.</span></div>
+<div class="file"><span class="cb-i"><i class="ri-checkbox-multiple-line"></i></span><code>docs/PROGRESS.md</code><span>One row per ID and finding: step, status, evidence. Read at the start of every session.</span></div>
+<div class="file"><span class="cb-i"><i class="ri-shield-check-line"></i></span><code>CLAUDE.md</code><span>The system lock and the Scorecard, written by Step 1. Claude Code reads it automatically.</span></div>
+<div class="file"><span class="cb-i"><i class="ri-git-repository-line"></i></span><code>../colaberry-ds/</code><span>A read-only clone of the design system — BRAND.md, tokens, components, templates. The source of truth.</span></div>
+</div>
+<div class="prompt prompt--clone">
+<div class="prompt__bar"><span class="prompt__name">terminal</span><button class="prompt__copy" data-copy type="button"><span class="cb-i"><i class="ri-file-copy-line"></i></span><span>Copy</span></button></div>
+<pre>git clone https://github.com/aleemcolaberry/Colaberry-DS-School-Final.git ../colaberry-ds</pre>
+</div>
+</div>
+</div>
+</section>
+
+<section class="sec" id="build" data-screen-label="Build track">
+<div class="wrap shead">
+<p class="kicker"><span class="idx">02</span>Build track</p>
+<h2 class="h2">From brief to on-system,<br>one feature at a time.</h2>
+<p class="lead">Steps 0 to 4. The first four understand and plan without touching code; Step 4 is the only one you repeat — once per must-have ID.</p>
+</div>
+<div class="wrap">
+<div class="track">
+<span class="track__badge" aria-hidden="true">A</span>
+<div><h3>Build</h3><p>Brief → install the system → map it to the brief → plan → build one ID per run. Works for Path A (plain HTML + <code>components.css</code>) and Path B (React + <code>components/core</code>).</p></div>
+<div class="track__chips"><span class="chip chip--r">Steps 0–4</span><span class="chip">HTML or React</span><span class="chip">Gap Check after each</span></div>
+</div>
+<div class="steps">
+
+<article class="step" id="step-0">
+<header class="step__head"><span class="step__num">00</span><div class="step__t"><h3>Project brief — you fill this in</h3><p class="step__meta"><span><b>Output</b> <code>docs/PROJECT_BRIEF.md</code></span><span><b>Your move</b> fill it in before Step 1</span></p></div></header>
+<p class="step__p">Give every must-have an ID (F1, F2 … or C1, C2 … for components the system doesn't have yet) — those IDs are how nothing gets lost later. Leave a line blank rather than guessing; Claude Code will ask.</p>
+<div class="prompt prompt--tall">
+<div class="prompt__bar"><span class="prompt__name">template · docs/PROJECT_BRIEF.md</span><button class="prompt__copy" data-copy type="button"><span class="cb-i"><i class="ri-file-copy-line"></i></span><span>Copy template</span></button></div>
+<pre># Project brief
+
+## Basics
+- Project name:
+- Type: Marketing page | Learner-facing app | Internal tool | Template / asset kit
+- One-line purpose:
+- Owner (name, team, contact):
+- Audience segment: prospective learners | enrolled learners | employers and partners | staff
+
+## Users
+- Primary users and their top 3 tasks:
+- Secondary users:
+- Devices that matter most: phone-first | desktop-first | both
+
+## Must-haves (each gets an ID)
+- F1:
+- F2:
+- F3:
+(Components the system doesn't ship yet: C1, C2 … — each needs designer approval)
+
+## Nice-to-haves
+- N1:
+
+## Out of scope
+-
+
+## Stack and constraints
+- Path: A — plain HTML + components.css (no build) | B — React / Vite / Next + components/core | recommend
+- Hosting: GitHub Pages | Netlify | Vercel | Cloudflare Pages | internal
+- Content source: hard-coded | CMS | API (name it)
+- Integrations: forms, analytics, auth (name them; none are added without approval)
+
+## Content
+- Real content available now:
+- Content that must stay [PLACEHOLDER: ...]:
+
+## Success criteria
+- Every Scorecard row Pass at ship (PLAYBOOK.md)
+- (product-specific, e.g. the enrollment form completes on a 390px phone in under 60 seconds)</pre>
+<div class="prompt__more"><button type="button" aria-expanded="false"><span class="a">Show the whole template</span><span class="b">Collapse</span></button></div>
+</div>
+</article>
+
+<article class="step" id="step-1">
+<header class="step__head"><span class="step__num">01</span><div class="step__t"><h3>Install the system and set the rules</h3><p class="step__meta"><span><b>Output</b> <code>CLAUDE.md</code> · <code>docs/PROGRESS.md</code> · <code>colaberry/</code> runtime · baseline commit</span><span><b>Your move</b> read <code>CLAUDE.md</code></span></p></div></header>
+<p class="step__acc"><span class="cb-i"><i class="ri-checkbox-circle-line"></i></span><span><b>Accepted when</b> both files exist, the runtime files are copied untouched from the repo, and every brief item has a row.</span></p>
+<div class="prompt prompt--tall">
+<div class="prompt__bar"><span class="prompt__name">prompt · step 1</span><button class="prompt__copy" data-copy type="button"><span class="cb-i"><i class="ri-file-copy-line"></i></span><span>Copy prompt</span></button></div>
+<pre>Step 1: Project setup. Do not change any design or code of mine.
+
+1. Read docs/PROJECT_BRIEF.md completely. List anything unclear or missing and ask me before continuing.
+2. Initialize git if needed. Commit the folder untouched: "baseline: before Colaberry DS".
+3. Install the Colaberry design system:
+   - Clone the system next to this project as a read-only reference:
+     git clone https://github.com/aleemcolaberry/Colaberry-DS-School-Final.git ../colaberry-ds
+   - Follow ../colaberry-ds/IMPLEMENTATION.md section 2 for the path chosen in the brief:
+     Path A (plain HTML): copy styles.css, components.css, motion.js, tokens/, assets/ and _ds_bundle.js into ./colaberry/
+     Path B (React): copy styles.css, tokens/, assets/ and components/core/ into ./src/colaberry/
+   - Do not modify any copied file. Record the system version (git rev-parse HEAD in ../colaberry-ds) in CLAUDE.md.
+4. Create CLAUDE.md at the project root with exactly the content below.
+5. Create docs/PROGRESS.md: one row per brief item (every F, C, N ID) with columns ID | Requirement | Step | Status (Not started / In progress / Done / Blocked) | Evidence.
+6. Show me both files and STOP.
+
+---
+
+# CLAUDE.md
+
+## 0. Start of every session
+1. Read docs/PROJECT_BRIEF.md and docs/PROGRESS.md before doing anything.
+2. The Colaberry design system is the source of truth. It lives in ../colaberry-ds — read BRAND.md and IMPLEMENTATION.md there at the start of every session, and CLAUDE.md there for the ten responsive ground rules.
+3. Work only on the current step. If it is too big for one session, finish a coherent part, record the rest in PROGRESS.md as In progress, and tell me. Never skip items to finish.
+
+## 1. System lock
+- Colors, type, spacing, radii, shadows, motion and voice come from the Colaberry design system. No new tokens, fonts, icon sets or component styles without my approval.
+- Every value is a semantic token: var(--surface-card), var(--text-body), var(--brand-accent), var(--space-6), var(--radius-xl), var(--dur-fast). Raw hex, rgb() or off-grid pixel values in project code are defects.
+- UI is composed from the system's components: components/core/* (React) or the cb-* classes in components.css (HTML). Never re-implement Button, Input, Card, Badge, Dialog, Table, Toast or any primitive the system already ships. Use their built-in states (Button loading, Table loading/empty/error, Input error/success, EmptyState kinds, Alert variants).
+- Type: Roboto for display and body, Roboto Mono for numbers and code. Quicksand only inside the logo. Icons: RemixIcon -line style inside .cb-i.
+- Logo and favicons come from colaberry/assets/logo/. Never recolor, stretch or redraw the mark. Minimum 120px wide (lockup), 24px (mark).
+- Dark mode is free: data-theme="dark" on the html element. Every screen must look right in both themes.
+- Never invent content: no fake metrics, names, quotes or outcomes. Real proof points only (5,000+ careers, since 2012, 49 countries) and [PLACEHOLDER: ...] for the rest.
+- Ask before adding any framework, CMS, hosting, analytics, form service or paid service.
+
+## 2. Quality standards: the Colaberry Scorecard
+Every screen, component and state, in both themes, at 390 / 768 / 1280 px, must Pass every row.
+
+### 2.1 Tokens
+No raw colors, font sizes, radii, shadows or durations in project code; only var(--...) from the system. Spacing on the 4px grid via --space-*.
+
+### 2.2 Components
+No re-invented primitives. Props and class names used as documented in IMPLEMENTATION.md sections 3 to 5 and components/core/*.d.ts. New components need approval first and ship with every state.
+
+### 2.3 Accessibility (WCAG 2.2 AA)
+Body text --neutral-800 or --text-muted; links --blue-600; green text --green-800 or darker (green-700 is large-text only); cherry and leaf never carry small text. Normal text 4.5:1 or better, large text and UI boundaries 3:1 or better. Visible --focus-ring on every interactive element. Semantic landmarks, one h1, no skipped heading levels. Touch targets 44px or larger with 8px spacing. Icon-only controls have accessible names. Red is never the only signal: icon + text accompany every error, and errors announce via role="alert".
+
+### 2.4 Responsive (the ten ground rules in ../colaberry-ds/CLAUDE.md)
+Clean at 390, 768 and 1280 and every width between: no horizontal scroll, no clipped text. No nowrap on sentence-length labels. Flex rows of chips, links and buttons wrap with a row gap. Grid columns use minmax(0, ...) or auto-fit; text children get min-width: 0 (cb-min0). No fixed pixel widths on content containers; clamp() for type. Two-column sections stack under about 900px. overflow: hidden is never used to hide a layout bug. Marquees and drawers are clipped by a parent. Probe with ../colaberry-ds/scraps/rwd-harness.html (loadBoth, then probe) after every layout change: zero offenders at 390 and 768.
+
+### 2.5 States
+Every data-driven or interactive element defines default, loading, empty, error, success and disabled where relevant, using Skeleton, Spinner, EmptyState, Alert, Toast and the components' built-in state props. Loading matches final dimensions (zero layout shift). Empty says why and offers a next action. Errors say what happened and how to recover. Forms: idle, inline validation on blur, error summary, submitting, success, failure that keeps input.
+
+### 2.6 Voice and copy
+Warm and credible. Sentence case. Speak to "you". Lead with proof. Friendly action CTAs ("Apply now", "Enroll today", "Request info"). No emoji. No hype. Public name: Colaberry School of Data and AI; legal entity: Colaberry Inc. Footers and enrollment pages carry verbatim: "Colaberry School of Data and AI is operated by Colaberry Inc."
+
+### 2.7 Motion
+Functional, not decorative: 140 to 360ms, --ease-out in, spring only to confirm. Use the system layer (data-reveal via motion.js, cb-stagger, cb-anim), never hand-rolled entrances. Animate transform and opacity only; hover never shifts layout; no looping motion on content (spinners and skeletons excepted). prefers-reduced-motion respected everywhere.
+
+### 2.8 Brand and theme
+Logo, lockup, clear space and minimum sizes per BRAND.md. Roboto and Roboto Mono only; RemixIcon only. Both themes checked for every screen, state, logo and image. Cherry #FB2832 stays constant across themes.
+
+## 3. Evidence rule
+Never write "done", "fixed" or "no issues" without evidence: a measured value, a passing probe, a screenshot path, a file:line. Say explicitly what was not verified.
+
+## 4. Step finish routine
+1. Lint, type check (Path B) and production build: zero errors.
+2. Responsive probe at 390 and 768 via rwd-harness: zero offenders.
+3. Both themes checked on every changed screen.
+4. Update docs/PROGRESS.md with status and evidence for every item touched.
+5. Commit on the step's branch.
+6. Report: what changed, evidence, what is NOT done and why, what I should review, what's next. Then STOP.</pre>
+<div class="prompt__more"><button type="button" aria-expanded="false"><span class="a">Show the whole prompt</span><span class="b">Collapse</span></button></div>
+</div>
+</article>
+
+<article class="step" id="step-2">
+<header class="step__head"><span class="step__num">02</span><div class="step__t"><h3>Map the system to the brief</h3><p class="step__meta"><span><b>Output</b> <code>docs/SYSTEM_MAP.md</code></span><span><b>Mode</b> read-only</span><span><b>Your move</b> read the requirement map</span></p></div></header>
+<p class="step__acc"><span class="cb-i"><i class="ri-checkbox-circle-line"></i></span><span><b>Accepted when</b> every system file is read and every brief ID is mapped to Covered, Compose or Genuinely new.</span></p>
+<div class="prompt">
+<div class="prompt__bar"><span class="prompt__name">prompt · step 2</span><button class="prompt__copy" data-copy type="button"><span class="cb-i"><i class="ri-file-copy-line"></i></span><span>Copy prompt</span></button></div>
+<pre>Step 2: Map the system to the brief. READ-ONLY. Do not modify any project file.
+
+1. Read, in ../colaberry-ds: README.md, BRAND.md, IMPLEMENTATION.md, CLAUDE.md, SKILL.md, tokens/*.css, tokens.json, components.css, every components/core/*.d.ts and *.prompt.md, and the folder names under templates/ and ui_kits/. Confirm at the end how many files you read.
+2. Serve ../colaberry-ds with any static server and view design-system.html at #colors, #components, #states, #a11y and #handoff in both themes.
+3. Write docs/SYSTEM_MAP.md:
+   - Token cheat-sheet for this project: the 20 to 30 semantic tokens we will actually use, grouped by surface / text / border / action / status / space / radius / motion, with light and dark values.
+   - Component inventory: every system component with the props or cb-* classes we will use, and the built-in states we must rely on instead of writing our own.
+   - Template fit: for every page in the brief, the closest starting point under templates/ or ui_kits/marketing-website/, and what would need to change.
+   - Requirement map: every F / C / N ID -> Covered by the system / Compose from existing components / Genuinely new (needs designer approval).
+4. List the top 5 risks where the brief pulls against the system (a pattern the system doesn't have, a color the brief wants, a layout that will break at 390px).
+5. Update PROGRESS.md with the map status per ID. Summarize and STOP.</pre>
+</div>
+</article>
+
+<article class="step" id="step-3">
+<header class="step__head"><span class="step__num">03</span><div class="step__t"><h3>Plan</h3><p class="step__meta"><span><b>Output</b> <code>docs/IMPLEMENTATION_PLAN.md</code></span><span><b>Mode</b> no code</span><span><b>Your move</b> approve the path, template picks and build order</span></p></div></header>
+<p class="step__acc"><span class="cb-i"><i class="ri-checkbox-circle-line"></i></span><span><b>Accepted when</b> the path is decided, every page is tied to a template and its components, and every ID is assigned to a Step 4 run.</span></p>
+<div class="prompt">
+<div class="prompt__bar"><span class="prompt__name">prompt · step 3</span><button class="prompt__copy" data-copy type="button"><span class="cb-i"><i class="ri-file-copy-line"></i></span><span>Copy prompt</span></button></div>
+<pre>Step 3: Implementation plan. No code changes.
+
+Using docs/PROJECT_BRIEF.md and docs/SYSTEM_MAP.md, write docs/IMPLEMENTATION_PLAN.md:
+
+1. Path decision, honoring the brief: A (plain HTML + components.css, no build) or B (React with components/core via Vite or Next). Compare on hosting cost, editing ease for a marketer, the state handling the project needs, and whether a build step is justified. If the brief says "recommend", recommend one and say why in 5 lines.
+2. Page and route list. For each: the template or ui_kit page it forks from, the system components it is composed of, the data it shows, and which Scorecard 2.5 states apply.
+3. Folder structure: colaberry/ (or src/colaberry/) untouched; project code in src/ or at the root; one shared shell (header, footer with the legal line, theme toggle, skip link).
+4. Shared shell spec: navigation from the brief, one primary CTA, accessible mobile menu (focus trap, Esc closes, aria-expanded, scroll lock), theme applied before first paint, a 404 page in the system.
+5. Ordered build list for Step 4: every F and C ID, one per run, dependencies first, each with its branch name feat/F__.
+6. Anything marked Genuinely new in SYSTEM_MAP.md: the proposal (anatomy, tokens it will use, states) that I must approve before it is built.
+7. Risks and open questions.
+
+Update PROGRESS.md with the planned step for every ID. Then STOP for my approval.</pre>
+</div>
+<p class="step__you"><b>Your action:</b> approve the plan or request changes. Nothing is built until you do.</p>
+</article>
+
+<article class="step" id="step-4">
+<header class="step__head"><span class="step__num">04</span><div class="step__t"><h3>Build one feature — repeat per ID</h3><p class="step__meta"><span><b>Output</b> one F or C ID per run, on <code>feat/F__</code></span><span><b>Your move</b> Gap Check after each run</span></p></div></header>
+<p class="step__p">Run once per ID, in the order from the plan. Replace only <code>F__</code>. Foundations first (the shell before the pages that use it).</p>
+<div class="prompt">
+<div class="prompt__bar"><span class="prompt__name">prompt · step 4</span><button class="prompt__copy" data-copy type="button"><span class="cb-i"><i class="ri-file-copy-line"></i></span><span>Copy prompt</span></button></div>
+<pre>Step 4: Build F__ from docs/PROJECT_BRIEF.md. Branch feat/F__.
+
+1. Read the F__ requirement, its row in PROGRESS.md, its section in IMPLEMENTATION_PLAN.md and the matching starting point in ../colaberry-ds/templates/ or ui_kits/. If anything is ambiguous, ask me one focused question before building.
+2. Write docs/features/F__.md: user goal, screens, content fields, every Scorecard 2.5 state that applies, copy in brand voice (2.6), acceptance criteria. Show it to me and wait for OK.
+3. Build it from system tokens and components only (CLAUDE.md section 1). Fork the template rather than starting blank. If you need something the system doesn't have, stop and propose it.
+4. Wire both themes and the shared shell. Content stays visible without JavaScript.
+5. Verify before reporting:
+   - Scorecard Pass per row with evidence: grep for raw hex = 0 hits outside colaberry/; probe at 390 and 768 = 0 offenders; measured contrast of every new text/background pair; keyboard walkthrough.
+   - Both themes, screenshots saved under docs/evidence/F__/.
+   - Every state in docs/features/F__.md shown, with a screenshot each.
+6. Check every acceptance criterion as Pass / Fail with evidence.
+
+Follow the Step finish routine in CLAUDE.md.</pre>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<section class="sec" id="scorecard" data-screen-label="Scorecard">
+<div class="wrap shead">
+<p class="kicker"><span class="idx">03</span>The Colaberry Scorecard</p>
+<h2 class="h2">Eight rows.<br>Every one measured.</h2>
+<p class="lead">Both critique prompts score against these. Each row is Pass, Partial or Fail with evidence — a grep count, a contrast ratio, a probe output, a quoted line — never an opinion. Every rule points at the file in the repo that defines it.</p>
+</div>
+<div class="wrap">
+<div class="sc">
+<div class="sc__head" aria-hidden="true"><span>Row</span><span>Pass means</span><span>Measure it</span><span>Source in the repo</span></div>
+<div class="sc__row"><div class="sc__name"><small>2.1</small><b>Tokens</b></div><div><p class="sc__lbl">Pass means</p>Only <code>var(--…)</code> from the system in project code; spacing on the 4px grid.</div><div><p class="sc__lbl">Measure it</p>grep outside <code>colaberry/</code> for <code>#hex</code>, <code>rgb(</code>, <code>hsl(</code>, raw <code>font-size</code>, <code>border-radius</code>, <code>box-shadow</code>, <code>ms</code> → 0 hits.</div><div class="sc__src"><p class="sc__lbl">Source</p><a href="IMPLEMENTATION.md">IMPLEMENTATION.md §6</a> · <a href="design-system.html#colors">tokens/*.css</a> · tokens.json</div></div>
+<div class="sc__row"><div class="sc__name"><small>2.2</small><b>Components</b></div><div><p class="sc__lbl">Pass means</p>Every primitive is a system component or <code>cb-*</code> class; states come from built-in props, not hand-rolled markup.</div><div><p class="sc__lbl">Measure it</p>Inventory every button, input, card, badge, dialog, table and toast; list strays with file:line and the component that replaces each.</div><div class="sc__src"><p class="sc__lbl">Source</p><a href="IMPLEMENTATION.md">IMPLEMENTATION.md §3–5</a> · <a href="design-system.html#components">components/core/*.d.ts</a></div></div>
+<div class="sc__row"><div class="sc__name"><small>2.3</small><b>Accessibility</b></div><div><p class="sc__lbl">Pass means</p>axe WCAG 2.2 AA clean; text ≥ 4.5:1, large and UI ≥ 3:1; <code>--focus-ring</code> on everything; 44px targets; red never the only signal.</div><div><p class="sc__lbl">Measure it</p>axe per route; a measured ratio for every text/background pair; keyboard walkthrough; target sizes at 390.</div><div class="sc__src"><p class="sc__lbl">Source</p><a href="BRAND.md">BRAND.md</a> Accessibility · <a href="design-system.html#a11y">design-system.html#a11y</a></div></div>
+<div class="sc__row"><div class="sc__name"><small>2.4</small><b>Responsive</b></div><div><p class="sc__lbl">Pass means</p>Zero probe offenders at 390 and 768; no horizontal scroll or clipped text anywhere through 1280 and beyond.</div><div><p class="sc__lbl">Measure it</p><code>scraps/rwd-harness.html</code> → <code>loadBoth</code>, then <code>probe</code> for each pane. Paste the output.</div><div class="sc__src"><p class="sc__lbl">Source</p><a href="CLAUDE.md">CLAUDE.md</a> rules 1–10</div></div>
+<div class="sc__row"><div class="sc__name"><small>2.5</small><b>States</b></div><div><p class="sc__lbl">Pass means</p>Default, loading, empty, error, success and disabled designed wherever data or input exists; loading matches final size (zero layout shift).</div><div><p class="sc__lbl">Measure it</p>A per-element state matrix; the <code>/_states</code> gallery shows every one in both themes.</div><div class="sc__src"><p class="sc__lbl">Source</p><a href="BRAND.md">BRAND.md</a> Writing states · <a href="design-system.html#states">design-system.html#states</a></div></div>
+<div class="sc__row"><div class="sc__name"><small>2.6</small><b>Voice</b></div><div><p class="sc__lbl">Pass means</p>Sentence case, "you", proof-led, friendly CTAs, no emoji or hype; the right brand name and the legal line where it belongs.</div><div><p class="sc__lbl">Measure it</p>Copy read-through with every violation quoted.</div><div class="sc__src"><p class="sc__lbl">Source</p><a href="BRAND.md">BRAND.md</a> Voice · Brand name usage</div></div>
+<div class="sc__row"><div class="sc__name"><small>2.7</small><b>Motion</b></div><div><p class="sc__lbl">Pass means</p>140–360ms ease-out, transform and opacity only, the system's reveal layer, reduced-motion honored, no loops on content.</div><div><p class="sc__lbl">Measure it</p>Animation inventory — element, trigger, property, duration, easing, file:line — plus a reduced-motion run.</div><div class="sc__src"><p class="sc__lbl">Source</p><a href="BRAND.md">BRAND.md</a> Motion · tokens/motion.css · motion.js</div></div>
+<div class="sc__row"><div class="sc__name"><small>2.8</small><b>Brand &amp; theme</b></div><div><p class="sc__lbl">Pass means</p>Logo from <code>assets/logo/</code> at ≥ 120 / 24px with clear space; Roboto, Roboto Mono and RemixIcon only; every screen right in both themes.</div><div><p class="sc__lbl">Measure it</p>Asset and font audit; dual-theme screenshots per screen.</div><div class="sc__src"><p class="sc__lbl">Source</p><a href="BRAND.md">BRAND.md</a> Logo, Typography, Iconography · <a href="IMPLEMENTATION.md">IMPLEMENTATION.md §7</a></div></div>
+</div>
+<div class="gate">
+<p><b>Ship gate: eight Pass.</b> Partial ships only with a named owner and a date in <code>PROGRESS.md</code>. Fail never ships. Partial means the row holds on most screens with listed exceptions; Fail means any Critical finding or a systemic miss.</p>
+<div class="verdicts" aria-label="Verdict scale"><span class="v v--pass">Pass</span><span class="v v--part">Partial</span><span class="v v--fail">Fail</span></div>
+</div>
+</div>
+</section>
+
+<section class="sec track-b" id="critique" data-screen-label="Critique track">
+<div class="wrap shead">
+<p class="kicker"><span class="idx">04</span>Critique track</p>
+<h2 class="h2">Audit it, fix what you approve,<br>verify with fresh eyes.</h2>
+<p class="lead">Steps 5 to 8. Works on any project — one that ran the Build track, a teammate's repo, or something built before the system existed. Step 5 only reads; you decide what gets fixed.</p>
+</div>
+<div class="wrap">
+<div class="track track--b">
+<span class="track__badge" aria-hidden="true">B</span>
+<div><h3>Critique</h3><p>Audit against the Scorecard → fix approved findings → independent verification in a fresh session → hand-off. Every claim carries evidence.</p></div>
+<div class="track__chips"><span class="chip chip--b">Steps 5–8</span><span class="chip">Any project</span><span class="chip chip--g">Evidence required</span></div>
+</div>
+<div class="steps">
+
+<article class="step" id="step-5">
+<header class="step__head"><span class="step__num">05</span><div class="step__t"><h3>Audit against the Scorecard</h3><p class="step__meta"><span><b>Output</b> <code>docs/AUDIT_FINDINGS.md</code> with the Scorecard</span><span><b>Mode</b> read-only</span><span><b>Your move</b> Approve or Reject every finding</span></p></div></header>
+<p class="step__acc"><span class="cb-i"><i class="ri-checkbox-circle-line"></i></span><span><b>Accepted when</b> every finding has measured evidence and a Scorecard row, and the Decision column is empty for you to fill.</span></p>
+<div class="prompt prompt--tall">
+<div class="prompt__bar"><span class="prompt__name">prompt · step 5</span><button class="prompt__copy" data-copy type="button"><span class="cb-i"><i class="ri-file-copy-line"></i></span><span>Copy prompt</span></button></div>
+<pre>Step 5: Critique against the Colaberry Scorecard. READ-ONLY. Do not fix anything.
+
+The project under review is at [path or URL]. The design system is at ../colaberry-ds (clone it from https://github.com/aleemcolaberry/Colaberry-DS-School-Final if it is missing). Read BRAND.md, IMPLEMENTATION.md and CLAUDE.md there before you start. Audit tools (axe, Lighthouse, Playwright) may run from a temp folder; do not modify project files.
+
+Audit every screen and state, in both themes, at 390, 768 and 1280 px:
+
+1. Scorecard rows 2.1 to 2.8 (CLAUDE.md section 2, or PLAYBOOK.md in ../colaberry-ds if this project has no CLAUDE.md). Measure, don't guess:
+   - 2.1 Tokens: grep the project (excluding colaberry/) for #[0-9a-fA-F]{3,8}, rgb(, hsl(, font-size with a raw px value, border-radius with a raw value, box-shadow with raw values, and raw ms durations. List every hit with file:line.
+   - 2.2 Components: find every button, input, card, badge, dialog, table and toast that is not a system component or cb-* class. List file:line and the system component that should replace it.
+   - 2.3 Accessibility: axe WCAG 2.2 AA on every route; the contrast ratio of every text/background pair (report the number); focus visibility on every interactive element; heading outline; touch-target sizes at 390.
+   - 2.4 Responsive: run ../colaberry-ds/scraps/rwd-harness.html on every page at 390 and 768 and paste the probe output; list any horizontal scroll, clipped text, nowrap in flexible containers, bare 1fr grids and fixed widths.
+   - 2.5 States: for every data-driven or interactive element list which of default / loading / empty / error / success / disabled exist and which are missing.
+   - 2.6 Voice: flag title case, emoji, hype, second-person misses, wrong brand name and a missing legal line; quote the line.
+   - 2.7 Motion: list every animation (element, trigger, property, duration, easing, file:line); flag layout-affecting properties, anything over 360ms, loops on content, hand-rolled reveals and missing reduced-motion handling.
+   - 2.8 Brand: logo source, size and clear space; fonts and icon sets loaded; both-theme check per screen.
+2. Usability pass: Nielsen's 10 heuristics screen by screen, plus a 5-second first-impression test as the primary user from PROJECT_BRIEF.md (or the obvious primary user if there is no brief).
+3. Write docs/AUDIT_FINDINGS.md:
+   - The Scorecard: one row per 2.1 to 2.8 with Pass / Partial / Fail, the headline evidence and the finding IDs behind it.
+   - The findings table: ID | Screen | Issue | Scorecard row | Evidence (file:line, ratio, width, screenshot) | Severity (Critical / High / Medium / Low) | Type (Defect / Enhancement) | Proposed fix (the exact token, component or rule) | Visual impact (None / Minimal / Noticeable) | Decision
+   Leave Decision empty. Put Enhancements in their own section with before/after descriptions.
+4. Add each finding ID to PROGRESS.md (create it if missing). Summarize by severity, show the Scorecard, and STOP.</pre>
+<div class="prompt__more"><button type="button" aria-expanded="false"><span class="a">Show the whole prompt</span><span class="b">Collapse</span></button></div>
+</div>
+<p class="step__you"><b>Your action:</b> open <code>docs/AUDIT_FINDINGS.md</code> and type Approved or Rejected in every Decision cell. Step 6 fixes only what you approved.</p>
+</article>
+
+<article class="step" id="step-6">
+<header class="step__head"><span class="step__num">06</span><div class="step__t"><h3>Fix approved findings</h3><p class="step__meta"><span><b>Output</b> fixed findings · <code>/_states</code> gallery · re-measured Scorecard</span><span><b>Your move</b> review the changed screens</span></p></div></header>
+<p class="step__acc"><span class="cb-i"><i class="ri-checkbox-circle-line"></i></span><span><b>Accepted when</b> every Approved finding is Fixed with evidence and the Scorecard is re-measured on the screens that changed.</span></p>
+<div class="prompt">
+<div class="prompt__bar"><span class="prompt__name">prompt · step 6</span><button class="prompt__copy" data-copy type="button"><span class="cb-i"><i class="ri-file-copy-line"></i></span><span>Copy prompt</span></button></div>
+<pre>Step 6: Fix approved findings. Branch fix/audit-findings.
+
+1. Fix ONLY items marked Approved in docs/AUDIT_FINDINGS.md, Critical first.
+2. Smallest change per defect. Token fixes replace the raw value with the right semantic token, never a new token. Contrast fixes move to the next step of the same ramp (red-500 -> red-600, green-700 -> green-800) and report before/after ratios. Component fixes swap the hand-rolled element for the system component or cb-* class with the same behavior.
+3. Implement approved Enhancements exactly as described, nothing more.
+4. Build the states gallery: a dev-only /_states page (excluded from production) showing every component the project uses in every Scorecard 2.5 state, both themes, with the stress content: a 120-character title, an unbroken 60-character string, a one-word title, all optional fields missing, 8 or more tags.
+5. Re-run the Scorecard measurements from Step 5 on the changed screens and update the Scorecard table in AUDIT_FINDINGS.md.
+6. Set Decision to "Fixed" with evidence, and update PROGRESS.md.
+
+If the list is too long for one session, fix by severity, record the rest as In progress, and stop cleanly.
+
+Follow the Step finish routine in CLAUDE.md.</pre>
+</div>
+</article>
+
+<article class="step" id="step-7">
+<header class="step__head"><span class="step__num">07</span><div class="step__t"><h3>Independent verification</h3><p class="step__meta"><span><b>Output</b> <code>docs/VERIFICATION_REPORT.md</code></span><span><b>Mode</b> always after <code>/clear</code></span><span><b>Your move</b> run the manual checklist on your own devices</span></p></div></header>
+<p class="step__p">This replaces "are you sure you did a good job?". A fresh session has no stake in the earlier work.</p>
+<div class="prompt">
+<div class="prompt__bar"><span class="prompt__name">prompt · step 7</span><button class="prompt__copy" data-copy type="button"><span class="cb-i"><i class="ri-file-copy-line"></i></span><span>Copy prompt</span></button></div>
+<pre>Step 7: Independent verification. Branch qa/verification.
+
+You did not build this project. Act as an independent senior reviewer whose job is to find problems, not confirm success. Trust no earlier report; verify everything yourself against ../colaberry-ds.
+
+1. Re-run every Scorecard measurement from Step 5 yourself. Report raw results and a fresh Scorecard.
+2. Requirement audit: for every row in PROGRESS.md marked Done, open the actual screen and confirm it meets the brief. Mark anything that doesn't as Reopened.
+3. Manual checks on every screen:
+   - Keyboard-only walkthrough: everything reachable, focus visible, order logical, menu and dialogs trap and release focus correctly
+   - Screen reader pass (VoiceOver or NVDA): landmarks, headings, names, errors, live regions
+   - 200% zoom and a text-spacing override
+   - Reduced motion on and off; JavaScript disabled
+   - Theme switch on every screen, including hover and focus states and the /_states gallery
+   - 5-second first-impression test as the primary user from the brief
+4. Spot-check at least 10 claims from earlier reports and AUDIT_FINDINGS.md.
+5. Drift check: any value in project code not from the system's tokens, any component not from the system, any font or icon set not from the system.
+
+Write docs/VERIFICATION_REPORT.md: each check, result, evidence, and what you could NOT verify. Fix only clear defects with no visual impact; list everything else for my decision. End with a checklist for me to test on my own phone and laptop.
+
+Follow the Step finish routine in CLAUDE.md.</pre>
+</div>
+</article>
+
+<article class="step" id="step-8">
+<header class="step__head"><span class="step__num">08</span><div class="step__t"><h3>Hand-off and ship</h3><p class="step__meta"><span><b>Output</b> <code>docs/HANDOFF.md</code> · deployment · final <code>PROGRESS.md</code></span><span><b>Your move</b> ship</span></p></div></header>
+<div class="prompt">
+<div class="prompt__bar"><span class="prompt__name">prompt · step 8</span><button class="prompt__copy" data-copy type="button"><span class="cb-i"><i class="ri-file-copy-line"></i></span><span>Copy prompt</span></button></div>
+<pre>Step 8: Hand-off. Branch docs/handoff.
+
+1. Update CLAUDE.md with the final stack, commands and folder structure. Keep sections 0 to 4 unchanged.
+2. Write docs/HANDOFF.md for the next person, a marketer or a developer who has never seen this repo: what the project is, how to run it, how to edit copy and images, how to add a page using Step 4, how to update the design system (pull ../colaberry-ds, re-copy per IMPLEMENTATION.md section 2, re-run Step 5), and the Scorecard as a pre-merge checklist.
+3. Release per ../colaberry-ds/DEPLOY.md for the host in the brief (GitHub Pages workflow, Netlify, Vercel or Cloudflare Pages). Preview deploys per branch where the host supports it. Ask me before adding analytics.
+4. Final PROGRESS.md: every ID Done with evidence, or listed with the reason it isn't.
+
+Follow the Step finish routine in CLAUDE.md, then give me a one-page summary of the whole project with the final Scorecard.</pre>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<section class="sec" id="utilities" data-screen-label="Utilities">
+<div class="wrap shead">
+<p class="kicker"><span class="idx">05</span>Utilities</p>
+<h2 class="h2">Between the steps.</h2>
+<p class="lead">These are what turn "good but not everything" into complete. Use them as often as you need.</p>
+</div>
+<div class="wrap utils">
+<article class="util">
+<p class="util__k">After every step</p><h3>Gap Check</h3><p>Compares what the step asked for against what actually exists — not against Claude's own report.</p>
+<div class="prompt"><div class="prompt__bar"><span class="prompt__name">prompt · gap check</span><button class="prompt__copy" data-copy type="button"><span class="cb-i"><i class="ri-file-copy-line"></i></span><span>Copy</span></button></div>
+<pre>Gap Check for Step __. Do not build anything new yet.
+
+1. Re-read the Step __ prompt from this session's history (or I will paste it again), PROJECT_BRIEF.md, PROGRESS.md and any spec files for this step.
+2. Make a checklist of EVERY instruction and acceptance criterion in that step, one line each.
+3. For each line, check the actual code, screens or files (not your earlier report) and mark Done (with evidence), Partial or Missing.
+4. Run the build and the responsive probe at 390 and 768.
+5. Show me the checklist with only Partial and Missing items at the top.
+6. Ask whether to complete them now. When I say yes, complete them, then repeat this check until nothing is Partial or Missing.</pre></div>
+</article>
+<article class="util">
+<p class="util__k">When a step stopped partway</p><h3>Resume</h3><p>Picks up from the first unfinished item without redoing finished work.</p>
+<div class="prompt"><div class="prompt__bar"><span class="prompt__name">prompt · resume</span><button class="prompt__copy" data-copy type="button"><span class="cb-i"><i class="ri-file-copy-line"></i></span><span>Copy</span></button></div>
+<pre>Resume Step __.
+
+1. Read CLAUDE.md, PROGRESS.md and git log / git status on the current branch.
+2. Tell me in 5 lines or fewer: what is finished, what is half-done, what hasn't started.
+3. Continue from the first unfinished item. Do not redo finished work or restart the step.
+4. Follow the Step finish routine when done.</pre></div>
+</article>
+<article class="util">
+<p class="util__k">Anytime</p><h3>Fix one issue</h3><p>Root cause, smallest system-conformant change, and the Scorecard row that should have caught it.</p>
+<div class="prompt"><div class="prompt__bar"><span class="prompt__name">prompt · fix one issue</span><button class="prompt__copy" data-copy type="button"><span class="cb-i"><i class="ri-file-copy-line"></i></span><span>Copy</span></button></div>
+<pre>Fix this specific issue: [what you see, where, at what width and theme; attach a screenshot if you can].
+
+1. Reproduce it first and show me the evidence (screenshot or measured value).
+2. Find the root cause. If the same cause affects other screens or components, list them.
+3. Fix the cause, not the symptom, with the smallest change, using only system tokens and components. If the fix needs a value or component the system doesn't have, stop and propose it.
+4. Name the Scorecard row that would have caught it and add the check to the Step finish routine if it isn't there.
+5. Follow the Step finish routine in CLAUDE.md.</pre></div>
+</article>
+<article class="util">
+<p class="util__k">One screen, no files changed</p><h3>Quick critique</h3><p>A five-minute Scorecard for a single screen, URL or screenshot — the fastest way to review a teammate's work.</p>
+<div class="prompt"><div class="prompt__bar"><span class="prompt__name">prompt · quick critique</span><button class="prompt__copy" data-copy type="button"><span class="cb-i"><i class="ri-file-copy-line"></i></span><span>Copy</span></button></div>
+<pre>Quick critique: [screen, URL, file or screenshot] at [width] in [theme].
+
+Score it against the Colaberry Scorecard (CLAUDE.md section 2, or ../colaberry-ds/PLAYBOOK.md if this project has no CLAUDE.md). For each of the eight rows give Pass / Partial / Fail with one line of evidence (file:line, ratio, width or quote). Then list the three changes that would move the most rows to Pass, each with the exact system token, component or rule to use. Do not change any file.</pre></div>
+</article>
+<article class="util">
+<p class="util__k">After the project is live</p><h3>Add a page or component</h3><p>New work enters through the brief and runs Step 4, so it meets the standards automatically.</p>
+<div class="prompt"><div class="prompt__bar"><span class="prompt__name">prompt · add later</span><button class="prompt__copy" data-copy type="button"><span class="cb-i"><i class="ri-file-copy-line"></i></span><span>Copy</span></button></div>
+<pre>Add [new page / new component]: [one-line description].
+
+Treat it as a new brief item: add it to PROJECT_BRIEF.md with the next ID and to PROGRESS.md, then follow Step 4 exactly: fork the closest template in ../colaberry-ds/templates/, compose from system components, design every Scorecard 2.5 state, check both themes, probe at 390 and 768. Run the Gap Check at the end.</pre></div>
+</article>
+<article class="util">
+<p class="util__k">When the system changes</p><h3>Update the design system</h3><p>Pull the repo, re-copy the runtime, and account for every visual change before touching project code.</p>
+<div class="prompt"><div class="prompt__bar"><span class="prompt__name">prompt · update the system</span><button class="prompt__copy" data-copy type="button"><span class="cb-i"><i class="ri-file-copy-line"></i></span><span>Copy</span></button></div>
+<pre>Update the design system. Branch chore/ds-update.
+
+1. In ../colaberry-ds run git pull and record the old and new commit. Read the diff of BRAND.md, IMPLEMENTATION.md, CLAUDE.md, tokens/ and components.css.
+2. Re-copy the runtime files per IMPLEMENTATION.md section 2. Do not touch project code yet.
+3. Run the build, the probe at 390 and 768, and screenshots of every screen in both themes; compare with docs/evidence/. List every visual change with its cause (token change, component change).
+4. For breaking changes (renamed token, changed prop), propose the smallest project edit and wait for my OK.
+5. Update the system version in CLAUDE.md and PROGRESS.md.</pre></div>
+</article>
+</div>
+</section>
+
+<div class="cta" data-screen-label="CTA">
+<div class="cta__in">
+<i class="cta__glow" aria-hidden="true"></i>
+<h2>Clone the system. Write the brief. Run Step 1.</h2>
+<p>Everything the prompts reference — tokens, components, templates, brand rules and the responsive harness — is in one public repo.</p>
+<div class="cta__btns">
+<a class="btn btn--onred" href="https://github.com/aleemcolaberry/Colaberry-DS-School-Final" target="_blank" rel="noopener">Open the GitHub repo</a>
+<a class="btn btn--outred" href="PLAYBOOK.md">Get PLAYBOOK.md</a>
+</div>
+<p class="cta__meta">one step per session · evidence, not opinions · eight Pass to ship</p>
+</div>
+</div>
+</main>
+
+<footer class="foot" data-screen-label="Footer">
+<div class="foot__in">
+<div class="foot__brand">
+<img src="assets/logo/colaberry-horizontal-white.webp" alt="Colaberry">
+<p>The School of Data and AI — helping people future-proof their careers since 2012. 5,000+ careers changed across 49 countries.</p>
+</div>
+<div class="foot__cols">
+<div class="foot__col">
+<b>System</b>
+<a href="index.html">Landing</a>
+<a href="design-system.html">Documentation</a>
+<a href="design-system.html#components">Components</a>
+<a href="design-system.html#a11y">Accessibility</a>
+<a href="https://github.com/aleemcolaberry/Colaberry-DS-School-Final" target="_blank" rel="noopener">GitHub</a>
+</div>
+<div class="foot__col">
+<b>This page</b>
+<a href="#overview">How it works</a>
+<a href="#build">Build track</a>
+<a href="#scorecard">Scorecard</a>
+<a href="#critique">Critique track</a>
+<a href="#utilities">Utilities</a>
+</div>
+</div>
+</div>
+<div class="foot__bar"><div><span>© <span id="yr">2026</span> · Colaberry School of Data and AI is operated by Colaberry Inc.</span><span>Plano, TX &amp; Boston, MA</span></div></div>
+</footer>
+<div class="l-toast" id="ltoast" role="status" aria-live="polite"></div>
+<script src="playbook.js?v=8b484d2f"></script>
+</body>
+</html>

@@ -12,6 +12,10 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   padded?: boolean;
   /** Image URL (renders a 16:9 media header) or a custom node. */
   media?: string | React.ReactNode;
+  /** Alt text for a string `media` image. Leave empty for decorative images. @default "" */
+  mediaAlt?: string;
+  /** Shown in the media slot if the image fails to load (default: neutral placeholder). */
+  mediaFallback?: React.ReactNode;
   children?: React.ReactNode;
 }
 

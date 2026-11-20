@@ -8,6 +8,11 @@ open **`design-system.html`**.
 ## The brand in one line
 Colaberry helps people **future-proof their careers in data & AI** — warm, inclusive, and proven since 2012.
 
+## Brand name usage
+- **Public-facing name:** **Colaberry School of Data and AI** — use on the website, social media, ads, brochures, and all marketing materials. (Replaces "School of Data Science & Analytics".)
+- **Legal entity:** **Colaberry Inc.** — use in official/regulatory documents: TWC Certificate of Approval (COA), catalog, enrollment agreements, refund policies, ETPL records, TWC forms.
+- Where appropriate (website footer, admissions/enrollment pages, contact page), include verbatim: *"Colaberry School of Data and AI is operated by Colaberry Inc."*
+
 ## Design principles
 Five beliefs that break ties when a decision is ambiguous:
 1. **Inclusive by default** — accessibility, plain language, and generous touch targets are requirements, not extras.
@@ -76,7 +81,7 @@ Claude can scaffold **production-ready, on-brand UI** because the tokens and com
 - "**Use the design-system components**" — `Button, Badge, Card, Input, Checkbox, Avatar`, loaded from
   `_ds_bundle.js` and read off `window.ColaberryDesignSystem_098454`.
 - "**Reference semantic tokens**, never raw hex" — `--surface-page`, `--text-strong`, `--brand-accent`, etc.
-- "**Honor the accessibility rules** in BRAND.md" (red-600+/green-700+ for body text, visible focus rings).
+- "**Honor the accessibility rules** in BRAND.md" (`--text-brand` / green-800+ for body text, visible focus rings).
 
 **Generic starter template** (fill in the brackets):
 
@@ -114,11 +119,6 @@ Claude can scaffold **production-ready, on-brand UI** because the tokens and com
 **The golden rule for any prompt:** start with *"Using the Colaberry design system, …"* and describe the
 outcome. The system supplies the rest.
 
-**See it applied:** the [worked example in the README](README.md#in-production--a-worked-example) walks
-a real product redesign on this system — a portal course card rebuilt as a bento layout — and lays out
-the repeatable **critique-led method** (anchor → information architecture → layout system → decide →
-accessibility → polish → approve) you can run on any page.
-
 ---
 
 ## Logo
@@ -142,7 +142,7 @@ each with `-white` / `-black` mono variants, plus a full `export/` set (favicons
 | Role | Token | Hex | Notes |
 |---|---|---|---|
 | Primary / accent | `--red-500` | `#FB2832` | Cherry. The constant. Accent + large text; use `--red-600/700` for body text. |
-| Secondary | `--green-500` | `#77BB4A` | Leaf. Growth. Fill/accent; use `--green-700+` for text, white text only on `--green-600+`. |
+| Secondary | `--green-500` | `#77BB4A` | Leaf. Growth. Fill/accent; use `--green-800+` for body text (green-700 is large-text only), white text only on `--green-800+`. |
 | Tertiary | `--blue-500` | `#367895` | Berry. Trust, links, wordmark. AA for white text. |
 | Neutrals | `--neutral-0…1000` | `#FFF…#000` | Brand grays `#D8D8D8`, `#4A4A4A`, black. |
 
@@ -213,7 +213,7 @@ Never `linear` or hard bounces.
 
 | Interaction | What changes | Token |
 |---|---|---|
-| Hover — solid button | Fill steps one shade darker (red-600 → 700) | 140ms · ease-out |
+| Hover — solid button | Fill steps one shade darker (red-500 → 600) | 140ms · ease-out |
 | Hover — ghost / outline | Soft sunken background fills in | 140ms · ease-out |
 | Hover — card (clickable) | Lifts 6px, shadow deepens (sm → lg) | 220ms · ease-out |
 | Hover — link | Underline wipes in from the left | 220ms · ease-out |
@@ -224,22 +224,70 @@ Never `linear` or hard bounces.
 **Always** wrap non-essential motion so it collapses under `@media (prefers-reduced-motion: reduce)`.
 No infinite/looping animation on real content. See the live **Motion** section of `design-system.html`.
 
+### Motion utility layer (`tokens/motion.css` + `motion.js`)
+
+Ships in `styles.css` — don't hand-roll entrances or scroll reveals; they're the #1 source of
+content stranded at `opacity:0`. The layer is **fail-safe: content is always visible without JS**,
+and every utility collapses under reduced motion.
+
+- **Entrance (no JS):** `cb-anim cb-anim--rise` (also `--fade / --scale / --slide-l/-r / --pop`),
+  tune with `--fast/--slow/--emph`, sequence with `cb-delay-1…6`, or wrap a group in `cb-stagger`.
+- **Reveal on scroll:** add `data-reveal` (or `="scale|left|right|fade"`) and include
+  `<script src="motion.js"></script>` once in `<head>`. It sets `html.cb-js`, reveals each element
+  on intersection, watches for injected nodes, and has a timeout safety net. **Without the script
+  every `[data-reveal]` element simply stays visible** — nothing is ever lost. Stagger a group by
+  setting `--i: 0,1,2…` per child.
+- **Hover (pointer-gated, reduced-motion safe):** `cb-hover-lift`, `cb-hover-grow`, `cb-hover-glow`,
+  `cb-press`.
+- **Loading (only allowed looping motion):** `cb-spin`, `cb-pulse`, `cb-bar` (indeterminate).
+
+### App utilities (`tokens/utilities.css`)
+Layout/interaction primitives for building detailed apps: `cb-container`, `cb-stack`, `cb-cluster`,
+`cb-row`/`cb-grow`, `cb-grid` (auto-fit, set `--min`), `cb-shell` (sidebar app shell), `cb-sticky`,
+`cb-scroll`, `cb-divider`, `cb-panel`, plus `cb-sr-only` / `cb-skip-link`. Use **`cb-interactive`**
+for any clickable row/cell/nav-item — its hover uses `--surface-hover` (guaranteed visible in light
+**and** dark; `surface-card→surface-page` can be a no-op).
+
 ## Voice
 Warm + credible. Sentence case. Speak to **"you."** Lead with proof (5,000+ careers, since 2012).
 Friendly action CTAs ("Apply now", "Enroll today"). **No emoji** in product/web. Reinforce inclusivity
 (no degree/tests required, scholarships, veterans support).
 
+### Writing states — errors, empty, loading
+A screen isn't done until **empty, loading, error, success and disabled** are designed. See the live
+**States & feedback** section of `design-system.html` for which component carries each state.
+- **Errors are fixable.** Line 1: what happened, plainly ("Couldn't save your draft"). Line 2: what to
+  do ("Check your connection and try again"). Reassure about their work ("Your answers are still here").
+  Put the message where the fix is — on the field (`Input error`), in the panel (`Alert`) — never only
+  in a toast. Never blame ("Invalid input", "You entered…"); describe the fix ("Enter a 10-digit number").
+- **Empty states are invitations.** Title names the gap in the learner's words ("No assignments yet");
+  one sentence of why/what's next; **one** clear action ("View schedule", "Clear filters"). Never a blank panel.
+- **Loading is honest.** Under 300 ms nothing; up to ~5 s a `Skeleton` (content) or `Spinner`/`Button loading`
+  (actions); longer or known → `Progress` plus a sentence ("This can take a minute"). One indicator per wait.
+- **Destructive confirms** name the action on the button ("Delete draft", not "OK") and give a specific
+  cancel ("Keep draft"). Say what's lost and whether it's reversible.
+- **Success is brief.** A `Toast` for confirmations ("Changes saved"), with Undo where possible; an inline
+  `Alert success` only when the user must read it.
+- Red is never alone: icon + text accompany every danger/warning; errors announce via `role=alert`.
+
 ## Accessibility (WCAG 2.2)
-- Body text on white: `--neutral-800` (13.6:1) or `--text-muted` (5.3:1).
-- Links: `--blue-600` (6.0:1). Green text: `--green-800+` (6.5:1; green-700 is 4.3:1 and fails for body text).
+- Body text on white: `--neutral-800` (14.2:1) or `--text-muted` (5.3:1).
+- Links: `--blue-600` (6.0:1). Green text: `--green-800+` (6.5:1; green-700 is 4.3:1 — large text only).
 - Cherry red and leaf green are **accent / large-text** colors — don't use raw red-500/green-500 for small body text.
-- Filled buttons use `--action-bg` (red-600, white text 4.7:1) and `--action-green-bg` (green-800, 6.5:1). Button labels are 14–18px bold, below the 18.66px bold large-text size, so they need 4.5:1: white on brand cherry red-500 (3.9:1) or green-600 (3.0:1) fails for a button label. Keep cherry for the mark, borders, large display text and brand surfaces.
+- Interactive brand-colored text (links, breadcrumb hover) uses `--text-brand` / `--text-brand-hover`
+  (red-600/700, ≥4.5:1) — never raw red-500 (~3.9:1, fails AA for normal text).
+- Hover **must not lower** contrast: solid fills step darker, hover surfaces use `--surface-hover`
+  (visible in both themes), and control borders use green-600+ on hover (green-500 is only ~2.2:1).
+- White button text passes on cherry (3.9:1) and green-600 (3.0:1) at large/bold sizes (our buttons are 20px bold).
 - Focus: visible 3px berry-blue ring on every interactive element.
 
 ## Don'ts
 - No emoji in the system. · No bluish-purple gradients. · No recoloring the mark. · No Inter/Arial substitutes
   for Roboto in final work. · No small body text in raw cherry/leaf.
 
+## Platform theme payload (multi-brand ecosystem)
+On the Refactored.ai multi-brand platform this brand is **`colaberry-training`** (the school / open-enrollment segment). The machine-loadable theme for `brands.metadata` lives at **`brand-profile/colaberry-training.brand.json`** — the full bg/fg/accent/line/status contract in light **and** dark with measured WCAG ratios (all gates pass: fg 14.2/15.1, fg-muted 5.3/9.2, button label 4.7, accent-on-bg 4.7/4.0). The table-based email sender identity (header / button / footer + legal block for `sender_profiles`) is `brand-profile/email-sender-profile.html`; support address `admissions@colaberry.com`. Rules that survive translation: platform `accent` = red-600 `#E5121D`, never raw cherry; dark-mode red *text* uses red-300; fonts are all open-license ($0 typeface budget).
+
 ## Fonts & licensing
-Roboto, Roboto Mono — Apache-2.0. Quicksand — SIL OFL-1.1. Currently loaded via Google Fonts CDN;
-self-host for production (see `assets/fonts/LICENSES.md`).
+Roboto, Roboto Mono — Apache-2.0. Quicksand — SIL OFL-1.1. **Self-hosted** in `assets/fonts/`
+(no CDN, works offline); see `assets/fonts/LICENSES.md`.

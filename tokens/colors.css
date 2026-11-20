@@ -5,7 +5,14 @@
      Berry Blue  #367895   White      #FFFFFF
      Black #000000  Gray #4A4A4A  Light Gray #D8D8D8
    Base ramps + semantic aliases. OKLCH noted for reference.
+   All semantic TEXT pairings below are tuned to pass WCAG AA
+   (4.5:1 normal text, 3:1 large text/graphics) in BOTH themes.
    ============================================================ */
+/* Native UI (form controls, scrollbars, <select> popups) follows the
+   theme — without this they render as light islands in dark mode. */
+html { color-scheme: light; }
+[data-theme="dark"] { color-scheme: dark; }
+
 :root {
   /* ---- Cherry Red (primary) ---- */
   --red-50:  #FFF0F1;
@@ -59,7 +66,10 @@
   --neutral-1000: #000000;  /* brand black */
 
   /* ---- Functional only (NOT brand palette) ---- */
-  --amber-500: #E8920C;   /* warning — UI feedback only */
+  --amber-300: #F5C878;   /* warning text on dark surfaces */
+  --amber-500: #E8920C;   /* warning FILL only (2.5:1 on white — never an icon or text on light) */
+  --amber-600: #B86F08;   /* warning icon / chart-4 on light surfaces — 3.9:1 on white, 3.5:1 on sunken */
+  --amber-700: #96590A;   /* warning text on light surfaces (AA on amber-50) */
   --amber-50:  #FCF1DD;
   --purple-500: #7A5AF0;  /* data-viz extension only */
   --teal-500:   #2BA39A;  /* data-viz extension only */
@@ -74,7 +84,7 @@
   --chart-1: #367895;  /* berry blue */
   --chart-2: #FB2832;  /* cherry red */
   --chart-3: #5BA63C;  /* leaf green */
-  --chart-4: #E8920C;  /* amber */
+  --chart-4: #B86F08;  /* amber — amber-600, 3.9:1 on white (amber-500 was 2.5:1, under the 3:1 chart-mark floor) */
   --chart-5: #7A5AF0;  /* violet */
   --chart-6: #2BA39A;  /* teal */
   --chart-7: #C2185B;  /* magenta */
@@ -104,102 +114,177 @@
   --surface-subtle:  var(--neutral-50);
   --surface-card:    var(--neutral-0);
   --surface-sunken:  var(--neutral-100);
+  /* A dark "spotlight" surface. Kept DARK in both themes (it deepens
+     rather than flips in dark mode) so no panel ever renders as a
+     light island inside the dark theme. Pair with --text-on-inverse. */
   --surface-inverse: var(--neutral-900);
-  --surface-brand:   var(--red-500);
+  /* Guaranteed-visible hover surfaces (directionally correct in BOTH
+     themes — use these for interactive rows/cells/nav, never
+     surface-card→surface-page which can render as a no-op).
+     hover-strong is a PRESSED / SELECTED surface: it carries
+     --text-strong or --text-body only — muted, link and brand text
+     fall under 4.5:1 on it in both themes. */
+  --surface-hover:        var(--neutral-100);
+  --surface-hover-strong: var(--neutral-200);
+  /* Brand-colored surface. red-600 (not 500) so --text-on-accent
+     passes AA at ANY size on it; identical in both themes. */
+  --surface-brand:   var(--red-600);
   --surface-brand-subtle: var(--red-50);
   --surface-green-subtle: var(--green-50);
   --surface-blue-subtle:  var(--blue-50);
+  /* Glass panels/blobs layered ON brand or inverse surfaces. */
+  --surface-on-accent: color-mix(in srgb, var(--neutral-0) 10%, transparent);
+  --border-on-accent:  color-mix(in srgb, var(--neutral-0) 24%, transparent);
+  /* Modal/drawer backdrop. */
+  --overlay-scrim: color-mix(in srgb, var(--neutral-950) 50%, transparent);
 
   /* Text */
   --text-strong:    var(--neutral-900);
   --text-body:      var(--neutral-800);
   --text-muted:     var(--neutral-600);
-  --text-subtle:    var(--neutral-500);
+  /* neutral-500 is only 3.4:1 on white — fails AA even for captions,
+     so "subtle" text sits on neutral-600 too; de-emphasis comes from
+     size/weight, never from an illegible gray. */
+  --text-subtle:    var(--neutral-600);
   --text-on-accent: var(--neutral-0);
   --text-on-inverse:var(--neutral-0);
   --text-link:      var(--blue-600);
   --text-link-hover:var(--blue-700);
+  /* Brand-colored TEXT. red-700 clears 4.5:1 on white AND on the
+     red-50 brand-subtle surface (red-600 fails there at 4.3:1). */
+  --text-brand:       var(--red-700);
+  --text-brand-hover: var(--red-800);
+  --text-on-light-green: var(--green-800);
 
-  /* Borders */
+  /* Borders. subtle/default/strong are DECORATIVE separators and card
+     edges (1.3–2.1:1 — fine for a surface that is identified by its
+     fill). Anything a user must find by its outline alone — inputs,
+     selects, textareas, checkbox / radio / switch tracks — uses
+     --border-control (neutral-500: 3.4:1 on white, 5.2:1 on the dark
+     card), the WCAG 1.4.11 non-text floor. */
   --border-subtle:  var(--neutral-200);
   --border-default: var(--neutral-300);
   --border-strong:  var(--neutral-400);
+  --border-control: var(--neutral-500);
   --border-brand:   var(--red-500);
   --border-focus:   var(--blue-500);
 
-  /* Interactive — primary (cherry). Filled buttons carry white text at
-     body size, so the fill sits one step darker than the brand cherry:
-     white on red-600 4.73:1, red-700 6.22:1, red-800 8.50:1 (WCAG AA 4.5:1).
-     Brand cherry red-500 is 3.85:1 under white and stays for marks,
-     borders, large display text and --surface-brand. */
+  /* Interactive — primary/brand (cherry). red-600 fill keeps white
+     labels at >=4.5:1 (red-500 is only 3.9:1 — brand cherry stays for
+     accents/logo, not for button fills carrying normal-size text). */
   --action-bg:        var(--red-600);
   --action-bg-hover:  var(--red-700);
   --action-bg-press:  var(--red-800);
   --action-fg:        var(--neutral-0);
 
-  /* Interactive — secondary (leaf). White text on green-800 6.48:1 and
-     green-900 9.04:1. green-600 (3.02:1) and green-700 (4.26:1) fail AA
-     for body-size labels. */
-  --action-green-bg:       var(--green-800);
-  --action-green-bg-hover: var(--green-900);
-  --action-green-fg:       var(--neutral-0);
+  /* Interactive — CONFIRM / positive (leaf green). Ink label on the
+     true brand leaf: 7.4:1. Hover brightens, press deepens one step —
+     every state ≥5.7:1, identical in both themes. */
+  --action-confirm-bg:       var(--green-500);
+  --action-confirm-bg-hover: var(--green-400);
+  --action-confirm-bg-press: var(--green-600);
+  --action-confirm-fg:       var(--neutral-900);
 
-  /* Status */
-  --status-success:    var(--green-600);
+  /* Interactive — DESTRUCTIVE (cherry, same optics as primary:
+     red is reserved for danger + brand). */
+  --action-danger-bg:       var(--red-600);
+  --action-danger-bg-hover: var(--red-700);
+  --action-danger-bg-press: var(--red-800);
+  --action-danger-fg:       var(--neutral-0);
+
+  /* DEPRECATED — legacy green action names. White on green-600 was only
+     3.0:1, so they now alias the CONFIRM recipe (ink on leaf, 7.4:1).
+     New code uses --action-confirm-*. */
+  --action-green-bg:       var(--action-confirm-bg);
+  --action-green-bg-hover: var(--action-confirm-bg-hover);
+  --action-green-fg:       var(--action-confirm-fg);
+
+  /* Form controls. The off track must read as a control on its own
+     (3:1, WCAG 1.4.11) — neutral-300 was 1.4:1. */
+  --control-track:   var(--neutral-500);  /* switch/track off state — 3.4:1 on white, white knob 3.4:1 on it */
+  --control-checked: var(--green-600);    /* switch on (white knob >=3:1) */
+
+  /* Status. Base tone = icons/large indicators on page surfaces (>=3:1
+     on page, subtle AND sunken); -fg = TEXT on the matching -bg chip
+     (all pairs >=4.5:1). green-600 fell to 2.7:1 on sunken, amber-500
+     to 2.5:1 on white — hence green-700 / amber-600. */
+  --status-success:    var(--green-700);
+  --status-success-fg: var(--green-800);
   --status-success-bg: var(--green-50);
   --status-danger:     var(--red-600);
+  --status-danger-fg:  var(--red-700);
   --status-danger-bg:  var(--red-50);
   --status-info:       var(--blue-500);
+  --status-info-fg:    var(--blue-700);
   --status-info-bg:    var(--blue-50);
-  --status-warning:    var(--amber-500);
+  --status-warning:    var(--amber-600);
+  --status-warning-fg: var(--amber-700);
   --status-warning-bg: var(--amber-50);
 
-  /* Focus ring */
-  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--blue-500) 45%, transparent);
+  /* Focus ring — strong enough to clear 3:1 against white/near-black so keyboard focus is unmistakable */
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--blue-500) 80%, transparent);
 }
 
 /* ============================================================
    DARK THEME
-   Foreground inverts with background; the cherry accent stays
-   constant. Green & blue are nudged lighter for contrast.
+   Every neutral surface goes dark — nothing stays light. Brand
+   fills (cherry/leaf) are constant across themes; foreground
+   ramps lighten for contrast. All text pairs re-verified >=AA.
    ============================================================ */
 [data-theme="dark"] {
   --surface-page:    var(--neutral-950);
   --surface-subtle:  #161616;
   --surface-card:    var(--neutral-900);
   --surface-sunken:  var(--neutral-1000);
-  --surface-inverse: var(--neutral-50);
-  --surface-brand:   var(--red-500);
+  /* Stays dark (elevated, not flipped) — a light panel inside the
+     dark theme is exactly the bug this token used to cause. */
+  --surface-inverse: var(--neutral-800);
+  --surface-hover:        var(--neutral-800);
+  --surface-hover-strong: var(--neutral-700);
   --surface-brand-subtle: color-mix(in srgb, var(--red-500) 16%, var(--neutral-950));
   --surface-green-subtle: color-mix(in srgb, var(--green-500) 14%, var(--neutral-950));
   --surface-blue-subtle:  color-mix(in srgb, var(--blue-400) 16%, var(--neutral-950));
+  --overlay-scrim: color-mix(in srgb, var(--neutral-1000) 68%, transparent);
 
   --text-strong:    var(--neutral-0);
   --text-body:      var(--neutral-200);
   --text-muted:     var(--neutral-400);
-  --text-subtle:    var(--neutral-500);
+  /* neutral-500 fell to 4.2:1 on the hover and inverse surfaces, so
+     subtle sits on neutral-400 too (mirrors the light theme). */
+  --text-subtle:    var(--neutral-400);
   --text-on-accent: var(--neutral-0);
   --text-on-inverse:var(--neutral-0);
   --text-link:      var(--blue-300);
   --text-link-hover:var(--blue-200);
+  /* On dark surfaces the cherry lightens to stay legible — red-300
+     also clears AA on the tinted brand-subtle surface. */
+  --text-brand:       var(--red-300);
+  --text-brand-hover: var(--red-200);
+  --text-on-light-green: var(--green-400);
 
   --border-subtle:  rgba(255,255,255,0.08);
   --border-default: rgba(255,255,255,0.14);
   --border-strong:  rgba(255,255,255,0.24);
+  --border-control: var(--neutral-500);  /* 5.7:1 on page, 5.2:1 on card, 4.2:1 on inverse */
+  --border-focus:   var(--blue-300);     /* blue-500 was 2.9:1 on the inverse surface; matches the dark ring */
 
-  /* Buttons keep white text in dark, so fills keep the light theme's
-     AA steps; lighter fills (red-400 3.13:1, green-500 2.34:1) fail. */
-  --action-bg:        var(--red-600);
-  --action-bg-hover:  var(--red-700);
-  --action-bg-press:  var(--red-800);
+  /* action / action-confirm / action-danger inherit — brand fills are
+     constant across themes and pass AA on any surface. */
 
-  --action-green-bg:       var(--green-800);
-  --action-green-bg-hover: var(--green-900);
+  --control-track: var(--neutral-500);
 
   --status-success:    var(--green-400);
+  --status-success-fg: var(--green-300);
+  --status-success-bg: color-mix(in srgb, var(--green-500) 16%, var(--neutral-950));
   --status-danger:     var(--red-400);
+  --status-danger-fg:  var(--red-300);
+  --status-danger-bg:  color-mix(in srgb, var(--red-500) 18%, var(--neutral-950));
   --status-info:       var(--blue-300);
+  --status-info-fg:    var(--blue-200);
+  --status-info-bg:    color-mix(in srgb, var(--blue-400) 20%, var(--neutral-950));
   --status-warning:    var(--amber-500);
+  --status-warning-fg: var(--amber-300);
+  --status-warning-bg: color-mix(in srgb, var(--amber-500) 15%, var(--neutral-950));
 
   /* Data-viz — brighter series for dark surfaces */
   --chart-1: #5AA8C4; --chart-2: #FF6B72; --chart-3: #8AC759; --chart-4: #F0A93A;
@@ -207,5 +292,63 @@
   --seq-1: #1A3947; --seq-2: #244F62; --seq-3: #367895;
   --seq-4: #5A97B4; --seq-5: #8FBBCF; --seq-6: #C2DAE6;
 
-  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--blue-300) 50%, transparent);
+  /* 90% (not 50%) — at half opacity the ring only reached 2.5:1 on the
+     dark page, under the 3:1 non-text minimum (WCAG 1.4.11). */
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--blue-300) 90%, transparent);
+}
+
+/* ============================================================
+   Nested LIGHT scope. A pane marked data-theme="light" inside a dark
+   page (or vice-versa) re-asserts every token the dark theme touches,
+   so a themed specimen can sit on any page without inheriting the
+   wrong surface. Mirrors :root exactly — edit :root, not this list.
+   ============================================================ */
+[data-theme="light"] {
+  color-scheme: light;
+  --surface-page: var(--neutral-0);
+  --surface-subtle: var(--neutral-50);
+  --surface-card: var(--neutral-0);
+  --surface-sunken: var(--neutral-100);
+  --surface-inverse: var(--neutral-900);
+  --surface-hover: var(--neutral-100);
+  --surface-hover-strong: var(--neutral-200);
+  --surface-brand-subtle: var(--red-50);
+  --surface-green-subtle: var(--green-50);
+  --surface-blue-subtle: var(--blue-50);
+  --overlay-scrim: color-mix(in srgb, var(--neutral-950) 50%, transparent);
+  --text-strong: var(--neutral-900);
+  --text-body: var(--neutral-800);
+  --text-muted: var(--neutral-600);
+  --text-subtle: var(--neutral-600);
+  --text-on-accent: var(--neutral-0);
+  --text-on-inverse: var(--neutral-0);
+  --text-link: var(--blue-600);
+  --text-link-hover: var(--blue-700);
+  --text-brand: var(--red-700);
+  --text-brand-hover: var(--red-800);
+  --text-on-light-green: var(--green-800);
+  --border-subtle: var(--neutral-200);
+  --border-default: var(--neutral-300);
+  --border-strong: var(--neutral-400);
+  --border-control: var(--neutral-500);
+  --border-focus: var(--blue-500);
+  --control-track: var(--neutral-500);
+  --status-success: var(--green-700);
+  --status-success-fg: var(--green-800);
+  --status-success-bg: var(--green-50);
+  --status-danger: var(--red-600);
+  --status-danger-fg: var(--red-700);
+  --status-danger-bg: var(--red-50);
+  --status-info: var(--blue-500);
+  --status-info-fg: var(--blue-700);
+  --status-info-bg: var(--blue-50);
+  --status-warning: var(--amber-600);
+  --status-warning-fg: var(--amber-700);
+  --status-warning-bg: var(--amber-50);
+  --chart-1: #367895;
+  --chart-4: #B86F08;
+  --chart-5: #7A5AF0;
+  --seq-1: #EAF2F6;
+  --seq-4: #5A97B4;
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--blue-500) 80%, transparent);
 }

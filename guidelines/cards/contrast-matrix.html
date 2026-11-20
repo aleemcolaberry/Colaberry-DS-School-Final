@@ -1,0 +1,61 @@
+<!-- @dsCard group="Colors" viewport="760x440" name="Contrast matrix" subtitle="Every allowed text × surface pair, live-computed from the tokens in both themes — green ≥ 4.5:1, amber = large text only, red = not a pair" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contrast matrix — Colaberry DS</title>
+<link rel="stylesheet" href="../../styles.css?v=3be3c64e">
+<style>
+body{margin:0;padding:18px 22px;background:var(--surface-page);font-family:var(--font-body);color:var(--text-body)}
+.hd{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 12px}
+.hd b{font-family:var(--font-display);font-weight:var(--fw-bold);font-size:15px;color:var(--text-strong)}
+.hd span{font-size:12px;color:var(--text-muted)}
+.g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.th{display:flex;flex-direction:column;gap:6px;min-width:0;padding:8px;border-radius:var(--radius-md);background:var(--surface-page);color:var(--text-body)}
+.th > b{font-size:13px;font-weight:var(--fw-medium);color:var(--text-muted)}
+table{border-collapse:collapse;width:100%;table-layout:fixed;font-family:var(--font-mono);font-size:12px}
+th,td{padding:0;height:28px;text-align:center;border:1px solid var(--border-subtle)}
+th{font-weight:var(--fw-medium);color:var(--text-muted);font-family:var(--font-body);font-size:12px}
+th.r{text-align:left;padding-left:6px;width:62px}
+td{font-variant-numeric:tabular-nums}
+td.ok{background:var(--status-success-bg);color:var(--status-success-fg)}
+td.lg{background:var(--status-warning-bg);color:var(--status-warning-fg)}
+td.no{background:var(--status-danger-bg);color:var(--status-danger-fg);font-weight:var(--fw-bold)}
+.nt{display:flex;flex-wrap:wrap;gap:6px 10px;margin:12px 0 0;font-size:12px;font-family:var(--font-mono)}
+.nt span{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:999px;border:1px solid var(--border-subtle)}
+.nt i{width:9px;height:9px;border-radius:50%;flex:none}
+.nt .ok i{background:var(--status-success)}.nt .no i{background:var(--status-danger)}
+.hd b{text-wrap:nowrap}
+</style>
+</head>
+<body>
+<div class="hd"><b>Text × surface, both themes</b><span>WCAG 2.2 AA · 4.5:1 text · 3:1 large text, icons, control borders · computed from the live tokens</span></div>
+<div class="g">
+  <div class="th" data-theme="light" id="sl"><b>Light</b><table id="tl"></table></div>
+  <div class="th" data-theme="dark" id="sd"><b>Dark</b><table id="td"></table></div>
+</div>
+<div class="nt" id="nt"></div>
+<script>
+(function(){
+const TEXT=['text-strong','text-body','text-muted','text-link','text-brand','text-on-light-green'];
+const SURF=['surface-page','surface-subtle','surface-card','surface-sunken','surface-hover-strong','surface-brand-subtle'];
+const NONTEXT=[['border-control','surface-card',3,'control border'],['focus-ring','surface-page',3,'focus ring'],['status-success','surface-sunken',3,'success icon'],['status-warning','surface-page',3,'warning icon'],['status-info','surface-page',3,'info icon'],['status-danger','surface-page',3,'danger icon'],['chart-4','surface-page',3,'chart-4'],['control-track','surface-page',3,'switch off'],['text-on-accent','action-bg',4.5,'button label'],['action-confirm-fg','action-confirm-bg',4.5,'confirm label'],['status-warning-fg','status-warning-bg',4.5,'warning chip'],['text-on-inverse','surface-inverse',4.5,'inverse panel']];
+const lum=c=>{const f=x=>{x/=255;return x<=0.03928?x/12.92:Math.pow((x+0.055)/1.055,2.4)};return .2126*f(c[0])+.7152*f(c[1])+.0722*f(c[2])};
+const ratio=(a,b)=>{const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+.05)/(Math.min(l1,l2)+.05)};
+const under=(t,b)=>{const a=t[3];return [t[0]*a+b[0]*(1-a),t[1]*a+b[1]*(1-a),t[2]*a+b[2]*(1-a),1]};
+function col(scope,token){const s=document.createElement('span');s.textContent='.';scope.appendChild(s);let out;if(/focus-ring/.test(token)){s.style.boxShadow='var(--focus-ring)';const bs=getComputedStyle(s).boxShadow;const m=bs.match(/^(rgba?\([^)]*\)|oklab\([^)]*\)|color\([^)]*\)|#[0-9a-f]+)/i);out=parse(m?m[0]:'rgb(0,0,0)')}else{s.style.color='var(--'+token+')';out=parse(getComputedStyle(s).color)}s.remove();return out}
+const cctx=document.createElement('canvas').getContext('2d',{willReadFrequently:true});
+function parse(s){cctx.clearRect(0,0,1,1);cctx.fillStyle='#000';cctx.fillStyle=s;cctx.fillRect(0,0,1,1);const d=cctx.getImageData(0,0,1,1).data;return [d[0],d[1],d[2],d[3]/255]}
+function build(table,probe,short){const page=col(probe,'surface-page');let h='<tr><th class="r"></th>'+SURF.map(s=>'<th title="--'+s+'">'+s.replace('surface-','').replace('hover-strong','pressed').replace('brand-subtle','brand')+'</th>').join('')+'</tr>';
+  for(const t of TEXT){h+='<tr><th class="r" title="--'+t+'">'+t.replace('text-','').replace('on-light-green','on-lt-green')+'</th>';for(const s of SURF){let bg=col(probe,s);if(bg[3]<1)bg=under(bg,page);let fg=col(probe,t);if(fg[3]<1)fg=under(fg,bg);const r=ratio(fg,bg);const cls=r>=4.5?'ok':r>=3?'lg':'no';h+='<td class="'+cls+'" title="--'+t+' on --'+s+' · '+r.toFixed(2)+':1'+(cls==='lg'?' · large text only':cls==='no'?' · not a pair':'')+'">'+r.toFixed(1)+'</td>'}h+='</tr>'}
+  table.innerHTML=h}
+build(document.getElementById('tl'),document.getElementById('sl'));
+build(document.getElementById('td'),document.getElementById('sd'));
+const nt=document.getElementById('nt');let out='';
+for(const [fg,bg,need,label] of NONTEXT){for(const [th,pid] of [['L','sl'],['D','sd']]){const p=document.getElementById(pid);const page=col(p,'surface-page');let b=col(p,bg);if(b[3]<1)b=under(b,page);let f=col(p,fg);if(f[3]<1)f=under(f,b);const r=ratio(f,b);out+='<span class="'+(r>=need?'ok':'no')+'" title="--'+fg+' on --'+bg+' ('+th+')"><i></i>'+label+' '+th+' '+r.toFixed(1)+'</span>'}}
+nt.innerHTML=out;
+})();
+</script>
+</body>
+</html>

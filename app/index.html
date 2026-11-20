@@ -1,14 +1,17 @@
 <!-- @dsCard group="Application" viewport="1280x860" name="Landing page" subtitle="Marketing hero, programs, pricing, CTA — built on components.css" -->
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Colaberry Learn — Become an AI Systems Architect</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css">
-<link rel="stylesheet" href="../components.css">
-<link rel="stylesheet" href="app.css">
-<script src="../motion.js"></script>
+<link rel="stylesheet" href="../components.css?v=4e65bfe9">
+<link rel="stylesheet" href="app.css?v=8655f1fb">
+<script src="../theme.js?v=ab2e4cf4"></script>
+<script src="icons.js?v=c57b0605"></script>
+<script src="toast.js?v=006ae98e"></script>
+<script src="guard.js?v=a79bd031"></script>
+<script src="../motion.js?v=216f9290"></script>
 </head>
 <body>
 <a href="#main" class="cb-skip-link">Skip to content</a>
@@ -17,16 +20,18 @@
   <!-- NAV -->
   <header class="nav">
     <div class="cb-container cb-container--xl nav__inner">
-      <a href="index.html" class="brand"><img class="brand__logo" src="../assets/logo/colaberry-horizontal-black.png" alt="Colaberry"></a>
-      <nav class="nav__links" aria-label="Primary">
+      <a href="index.html" class="brand"><img class="brand__logo" src="../assets/logo/colaberry-horizontal-black.webp" alt="Colaberry" data-logo-swap></a>
+      <nav class="nav__links" id="navLinks" aria-label="Primary">
         <a class="nav__link" href="#programs">Programs</a>
         <a class="nav__link" href="#outcomes">Outcomes</a>
         <a class="nav__link" href="#how">How it works</a>
         <a class="nav__link" href="#pricing">Pricing</a>
       </nav>
       <div class="nav__actions">
-        <a class="cb-btn cb-btn--ghost cb-btn--sm" href="login.html">Log in</a>
-        <a class="cb-btn cb-btn--primary cb-btn--sm" href="register.html">Apply now</a>
+        <button class="iconbtn" data-theme-toggle aria-label="Toggle theme" title="Toggle theme"><span class="cb-i"><i class="ri-moon-line"></i></span></button>
+        <a class="cb-btn cb-btn--ghost cb-btn--sm" href="login.html"><span class="cb-i"><i class="ri-login-box-line"></i></span> Log in</a>
+        <a class="cb-btn cb-btn--confirm cb-btn--sm" href="register.html"><span class="cb-i"><i class="ri-edit-box-line"></i></span> Apply now</a>
+        <button class="iconbtn nav__burger" id="navBurger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span class="cb-i"><i class="ri-menu-line"></i></span></button>
       </div>
     </div>
   </header>
@@ -35,16 +40,16 @@
 
     <!-- HERO -->
     <section class="hero">
-      <span class="hero__blob" style="width:420px;height:420px;background:var(--red-200);top:-120px;right:-80px"></span>
-      <span class="hero__blob" style="width:340px;height:340px;background:var(--blue-100);bottom:-140px;left:-100px"></span>
+      <span class="hero__blob hero__blob--brand" style="width:420px;height:420px;top:-120px;right:-80px"></span>
+      <span class="hero__blob hero__blob--blue" style="width:340px;height:340px;bottom:-140px;left:-100px"></span>
       <div class="cb-container cb-container--xl hero__grid">
         <div>
-          <span class="eyebrow cb-anim cb-anim--rise"><span class="cb-i"><i class="ri-sparkling-2-fill"></i></span> New · AI Systems Architect Accelerator</span>
+          <span class="eyebrow cb-anim cb-anim--rise"><span class="cb-i"><i class="ri-sparkling-2-line"></i></span> New · AI Systems Architect Accelerator</span>
           <h1 class="cb-anim cb-anim--rise cb-delay-1">Launch a <span class="hl">data &amp; AI</span> career — no degree required.</h1>
           <p class="lead maxw-prose cb-anim cb-anim--rise cb-delay-2">Project-based cohorts, real mentors, and an outcomes guarantee. Join 5,000+ graduates who switched into data science, analytics, and AI engineering since 2012.</p>
           <div class="hero__cta cb-anim cb-anim--rise cb-delay-3">
-            <a class="cb-btn cb-btn--primary cb-btn--lg" href="register.html">Start your application</a>
-            <a class="cb-btn cb-btn--outline cb-btn--lg" href="#how">See how it works</a>
+            <a class="cb-btn cb-btn--confirm cb-btn--lg" href="register.html"><span class="cb-i"><i class="ri-edit-box-line"></i></span> Start your application</a>
+            <a class="cb-btn cb-btn--outline cb-btn--lg" href="#how"><span class="cb-i"><i class="ri-arrow-down-line"></i></span> See how it works</a>
           </div>
           <div class="hero__trust cb-anim cb-anim--fade cb-delay-4">
             <div><b>5,000+</b><br>careers launched</div>
@@ -57,7 +62,7 @@
         <div class="preview cb-anim cb-anim--scale cb-delay-2" aria-hidden="true">
           <div class="preview__bar">
             <span class="preview__dot"></span><span class="preview__dot"></span><span class="preview__dot"></span>
-            <span class="cb-badge cb-badge--green" style="margin-left:auto">Live cohort</span>
+            <span class="cb-badge cb-badge--green" data-status="live" style="margin-left:auto">Live cohort</span>
           </div>
           <div class="cb-cluster cb-cluster--between" style="margin-bottom:16px">
             <div><div class="muted" style="font-size:13px">Your progress</div><div style="font-family:var(--font-display);font-weight:900;font-size:30px;color:var(--text-strong)">68%</div></div>
@@ -126,7 +131,7 @@
           <p class="muted" style="max-width:38ch">All tracks are part-time, mentor-led, and built around your schedule.</p>
         </div>
         <div class="cb-grid" style="--min:300px" id="pricing">
-          <article class="cb-card cb-card--pad cb-card--accent-blue" data-reveal>
+          <article id="track-analytics" class="cb-card cb-card--pad cb-card--accent-blue" data-reveal>
             <span class="cb-badge cb-badge--blue">Foundations</span>
             <h3 style="margin:16px 0 6px">Data Analytics</h3>
             <p class="muted" style="margin-bottom:20px">Start from zero. Become job-ready in analytics and BI.</p>
@@ -136,12 +141,11 @@
               <li><span class="cb-i"><i class="ri-check-line"></i></span> 4 portfolio projects</li>
               <li><span class="cb-i"><i class="ri-check-line"></i></span> 1:1 career coaching</li>
             </ul>
-            <a class="cb-btn cb-btn--outline cb-btn--full" href="register.html">Apply</a>
+            <a class="cb-btn cb-btn--outline cb-btn--full" href="register.html?track=analytics"><span class="cb-i"><i class="ri-edit-box-line"></i></span> Apply</a>
           </article>
 
-          <article class="cb-card cb-card--pad cb-card--accent" style="box-shadow:var(--shadow-xl);position:relative" data-reveal style="--i:1">
-            <span class="cb-badge cb-badge--solid" style="position:absolute;top:18px;right:18px">Most popular</span>
-            <span class="cb-badge cb-badge--red">Accelerator</span>
+          <article id="track-ai" class="cb-card cb-card--pad cb-card--accent" style="box-shadow:var(--shadow-xl);position:relative;--i:1" data-reveal>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span class="cb-badge cb-badge--red">Accelerator</span><span class="cb-badge cb-badge--solid">Most popular</span></div>
             <h3 style="margin:16px 0 6px">AI Systems Architect</h3>
             <p class="muted" style="margin-bottom:20px">Advanced track for builders. ML, LLMs, and production systems.</p>
             <div class="price"><span class="price__amt">$9,400</span><span class="price__per">/ 24 weeks</span></div>
@@ -151,10 +155,10 @@
               <li><span class="cb-i"><i class="ri-check-line"></i></span> AI capstone with industry mentor</li>
               <li><span class="cb-i"><i class="ri-check-line"></i></span> Outcomes guarantee</li>
             </ul>
-            <a class="cb-btn cb-btn--primary cb-btn--full" href="register.html">Apply now</a>
+            <a class="cb-btn cb-btn--confirm cb-btn--full" href="register.html?track=ai"><span class="cb-i"><i class="ri-edit-box-line"></i></span> Apply now</a>
           </article>
 
-          <article class="cb-card cb-card--pad cb-card--accent-green" data-reveal style="--i:2">
+          <article id="track-enterprise" class="cb-card cb-card--pad cb-card--accent-green" data-reveal style="--i:2">
             <span class="cb-badge cb-badge--green">For teams</span>
             <h3 style="margin:16px 0 6px">Enterprise upskilling</h3>
             <p class="muted" style="margin-bottom:20px">Train your whole data team with a custom cohort.</p>
@@ -164,7 +168,7 @@
               <li><span class="cb-i"><i class="ri-check-line"></i></span> Cohort analytics dashboard</li>
               <li><span class="cb-i"><i class="ri-check-line"></i></span> Dedicated success manager</li>
             </ul>
-            <a class="cb-btn cb-btn--outline cb-btn--full" href="register.html">Talk to us</a>
+            <a class="cb-btn cb-btn--outline cb-btn--full" href="register.html?track=enterprise"><span class="cb-i"><i class="ri-chat-1-line"></i></span> Talk to us</a>
           </article>
         </div>
       </div>
@@ -189,8 +193,8 @@
           <h2>Your next chapter starts with one application.</h2>
           <p>No degree, no GRE, no risk. Apply in 5 minutes and talk to an admissions advisor this week.</p>
           <div class="cb-cluster" style="justify-content:center">
-            <a class="cb-btn cb-btn--primary cb-btn--lg" href="register.html">Apply now — it's free</a>
-            <a class="cb-btn cb-btn--ghost cb-btn--lg" href="login.html" style="color:#fff">I already have an account</a>
+            <a class="cb-btn cb-btn--confirm cb-btn--lg" href="register.html"><span class="cb-i"><i class="ri-edit-box-line"></i></span> Apply now — it's free</a>
+            <a class="cb-btn cb-btn--ghost cb-btn--lg" href="login.html"><span class="cb-i"><i class="ri-login-box-line"></i></span> I already have an account</a>
           </div>
         </div>
       </div>
@@ -202,16 +206,38 @@
     <div class="cb-container cb-container--xl">
       <div class="footer__grid">
         <div>
-          <a href="index.html" class="brand"><img class="brand__logo" src="../assets/logo/colaberry-horizontal-black.png" alt="Colaberry"></a>
-          <p class="muted" style="margin-top:16px;max-width:32ch;font-size:14px">The School of Data Science &amp; Analytics. Reskilling careers since 2012.</p>
+          <a href="index.html" class="brand"><img class="brand__logo" src="../assets/logo/colaberry-horizontal-black.webp" alt="Colaberry" data-logo-swap></a>
+          <p class="muted" style="margin-top:16px;max-width:32ch;font-size:14px">Colaberry School of Data and AI. Reskilling careers since 2012.</p>
         </div>
-        <div><h5>Programs</h5><a href="#">Data Analytics</a><a href="#">AI Architect</a><a href="#">Enterprise</a></div>
-        <div><h5>Company</h5><a href="#">About</a><a href="#">Outcomes</a><a href="#">Careers</a></div>
-        <div><h5>Support</h5><a href="login.html">Log in</a><a href="register.html">Apply</a><a href="#">Contact</a></div>
+        <div><h3 class="footer__h">Programs</h3><a href="#track-analytics">Data Analytics</a><a href="#track-ai">AI Systems Architect</a><a href="#track-enterprise">Enterprise upskilling</a></div>
+        <div><h3 class="footer__h">Explore</h3><a href="#outcomes">Outcomes</a><a href="#how">How it works</a><a href="#pricing">Pricing</a></div>
+        <div><h3 class="footer__h">Support</h3><a href="login.html">Log in</a><a href="register.html">Apply</a><a href="mailto:admissions@colaberry.com">Contact admissions</a></div>
       </div>
-      <p class="muted" style="margin-top:40px;font-size:13px">© 2026 Colaberry, Inc. All rights reserved.</p>
+      <p class="muted" style="margin-top:40px;font-size:13px">Colaberry School of Data and AI is operated by Colaberry Inc. · © 2026. All rights reserved.</p>
     </div>
   </footer>
 </div>
+<script>
+(function () {
+  /* Scrollspy: highlight the nav item for the section in view. */
+  var burger = document.getElementById('navBurger'), navEl = document.getElementById('navLinks');
+  if (burger && navEl) {
+    var setNav = function (open) { navEl.classList.toggle('is-open', open); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); burger.querySelector('i').className = open ? 'ri-close-line' : 'ri-menu-line'; };
+    burger.addEventListener('click', function () { setNav(!navEl.classList.contains('is-open')); });
+    navEl.addEventListener('click', function (e) { if (e.target.closest('a')) setNav(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setNav(false); });
+  }
+  var links = [].slice.call(document.querySelectorAll('.nav__links a[href^="#"]'));
+  function spy() {
+    var y = window.scrollY + 130, cur = null;
+    links.forEach(function (a) {
+      var el = document.getElementById(a.getAttribute('href').slice(1));
+      if (el && el.getBoundingClientRect().top + window.scrollY <= y) cur = a;
+    });
+    links.forEach(function (a) { a.classList.toggle('is-active', a === cur); });
+  }
+  addEventListener('scroll', spy, { passive: true }); spy();
+})();
+</script>
 </body>
 </html>

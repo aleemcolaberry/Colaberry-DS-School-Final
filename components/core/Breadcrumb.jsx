@@ -3,8 +3,10 @@ import React from 'react';
 const CSS = `
 .cb-bc { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-family: var(--font-body); font-size: var(--fs-body-sm); }
 .cb-bc a, .cb-bc span { color: var(--text-muted); text-decoration: none; }
-.cb-bc a { transition: color var(--dur-fast) var(--ease-out); }
-.cb-bc a:hover { color: var(--red-500); }
+.cb-bc a, .cb-bc__btn { transition: color var(--dur-fast) var(--ease-out); }
+.cb-bc__btn { background: none; border: 0; padding: 0; font: inherit; color: var(--text-muted); cursor: pointer; }
+.cb-bc__btn:hover { color: var(--text-brand-hover); }
+.cb-bc a:hover { color: var(--text-brand-hover); }
 .cb-bc__sep { color: var(--border-strong); display: inline-flex; }
 .cb-bc__cur { color: var(--text-strong); font-weight: var(--fw-medium); }
 `;
@@ -27,7 +29,11 @@ export function Breadcrumb({ items = [], className = '', ...rest }) {
           <React.Fragment key={i}>
             {last
               ? <span className="cb-bc__cur" aria-current="page">{it.label}</span>
-              : <a href={it.href || '#'} onClick={it.onClick}>{it.label}</a>}
+              : it.href
+                ? <a href={it.href} onClick={it.onClick}>{it.label}</a>
+                : it.onClick
+                  ? <button type="button" className="cb-bc__btn" onClick={it.onClick}>{it.label}</button>
+                  : <span>{it.label}</span>}
             {!last && <span className="cb-bc__sep" aria-hidden="true">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </span>}

@@ -13,10 +13,12 @@ voice) and the live `design-system.html` (token reference + WCAG audit).
 
 | Path | What it is | Required? |
 |---|---|---|
-| `styles.css` | Entry point — `@import`s all tokens + fonts | **Yes** |
+| `styles.css` | Foundation entry — tokens, fonts, icons, base, motion + utility layers (link for React apps) | **Yes** |
+| `components.css` | One-link superset — imports `styles.css` + a CSS-only build of all 25 components (link for no-build / non-tech) | for no-build |
+| `motion.js` | Fail-safe reveal-on-scroll bootstrap (`data-reveal`) | optional |
 | `tokens/` | The CSS custom properties (color, type, spacing, motion) | yes (via styles.css) |
 | `assets/logo/` | Logo lockups, marks, favicons, OG cards | as needed |
-| `components/core/` | 20 React primitives (`.jsx` + `.d.ts`) | for React builds |
+| `components/core/` | 25 React primitives (`.jsx` + `.d.ts`) | for React builds |
 | `_ds_bundle.js` | Auto-generated UMD bundle of all components | for plain-HTML use |
 | `BRAND.md` | Brand rules, voice, motion, accessibility | reference |
 
@@ -69,8 +71,20 @@ cp _ds_bundle.js  your-project/public/colaberry/
 </html>
 ```
 
-No React at all? You can still use just the **tokens + CSS classes** — link `styles.css`
-and style your own markup with the custom properties (see §6).
+No React at all? **Every component also ships as plain CSS.** Link `components.css` — a single
+file that pulls in the whole foundation plus a CSS-only build of all 25 components — and write
+semantic markup with the `cb-*` classes. **No build step, no React:**
+
+```html
+<link rel="stylesheet" href="colaberry/components.css">
+<button class="cb-btn cb-btn--primary">Apply now</button>
+<span class="cb-badge cb-badge--solid">New</span>
+<div class="cb-card cb-card--pad">…</div>
+```
+
+This is the path for non-technical users, static sites, or any no-build context. The React
+components (Path B) inject the identical CSS at runtime, so the look is the same whether you
+use classes or components.
 
 ---
 
@@ -106,9 +120,14 @@ export function Enroll() {
 
 ## 5 · Available components
 
-`Button` · `Badge` · `Card` · `Avatar` · `Input` · `Textarea` · `Checkbox` · `Switch` ·
-`Accordion` · `Breadcrumb` · `Pagination` · `Tooltip` · `Popover` · `Progress` ·
-`Skeleton` · `Toast` · `Table` · `Dialog` · `Drawer` · `Carousel`
+`Button` · `Badge` · `Card` · `Avatar` · `Input` · `Textarea` · `Select` · `Checkbox` · `Radio` / `RadioGroup` · `Switch` ·
+`Accordion` · `Breadcrumb` · `Pagination` · `Tooltip` · `Popover` · `Progress` · `Spinner` ·
+`Skeleton` · `EmptyState` · `Alert` · `Toast` · `Table` · `Dialog` · `Drawer` · `Carousel`
+
+**States are built in** — don't hand-roll them: `<Button loading>`, `<Table loading | error onRetry | emptyState>`,
+`<Input error | success>`, `<Select error>`, `<Checkbox error | indeterminate>`, `<Dialog destructive>`,
+`<EmptyState kind="default|search|error|offline">`, `<Alert variant>`, `<Toast duration action>`.
+Card images and Avatars fall back automatically when the image fails.
 
 Props for each are in its `components/core/<Name>.d.ts`; live demos are in the
 **Components** section of `design-system.html`.
@@ -154,7 +173,7 @@ The cherry accent stays constant; foreground/surfaces invert. No component chang
 - Use the motion tokens for transitions: `transition: background var(--dur-fast) var(--ease-out);`
   Components already do this and respect `@media (prefers-reduced-motion: reduce)`.
 - **Body text:** use `--neutral-800` / `--text-muted` on light. Cherry and leaf are
-  **accent / large-text** colors — for small text use `--red-600+` / `--green-700+`, or
+  **accent / large-text** colors — for small text use `--red-600+` / `--green-800+`, or
   dark text on a tint. (See the WCAG audit in `design-system.html`.)
 - Keep the visible focus ring (`--focus-ring`) — it's on by default via `:focus-visible`.
 
@@ -197,9 +216,10 @@ Opt-in helper classes for the cases the defaults don't cover:
 
 ## 10 · Fonts
 
-Roboto + Roboto Mono + Quicksand load from Google Fonts via `tokens/fonts.css`. To
-**self-host** (recommended for production): drop the `.woff2` files into `assets/fonts/`
-and replace the `@import` in `tokens/fonts.css` with local `@font-face` rules. Licenses:
+Roboto + Roboto Mono + Quicksand are **self-hosted**: the `.woff2` files live in
+`assets/fonts/files/`, declared in `assets/fonts/fonts.css`, imported by `tokens/fonts.css`.
+RemixIcon is self-hosted the same way (`assets/fonts/remixicon.css`). No CDN requests —
+the whole system works offline. Licenses:
 `assets/fonts/LICENSES.md` (Apache-2.0 / OFL-1.1).
 
 ---
@@ -218,7 +238,9 @@ Claude reads the tokens, components, and `BRAND.md` and scaffolds on-brand UI.
 
 ## Install checklist
 
-- [ ] `styles.css` linked once at the app root (tokens + fonts load)
+- [ ] Foundation linked once — `styles.css` (React apps) **or** `components.css` (no-build: also gives CSS components)
+- [ ] No build / non-tech? Link `components.css` and use `cb-*` classes directly (`cb-btn`, `cb-card`, `cb-badge`…)
+- [ ] `motion.js` added once in `<head>` if you use `data-reveal` scroll reveals (optional — content stays visible without it)
 - [ ] Components available — `_ds_bundle.js` (HTML) **or** imported from `components/core/` (React)
 - [ ] UI references **semantic tokens**, not raw ramp values
 - [ ] `data-theme="dark"` wired to your theme toggle

@@ -1,0 +1,85 @@
+/* beginners-career-switchers.html — page App (was the inline <script type="text/babel"> block; JSX already expanded to React.createElement). Compiled by _build.mjs → dist/beginners-career-switchers.app.js */
+const {
+  BgHero,
+  BgMarquee,
+  BgStats,
+  BgGap,
+  BgWho,
+  BgPillars,
+  BgCareer,
+  BgExplore,
+  BgTransformation,
+  BgDifferent,
+  BgPricing,
+  BgFinal,
+  BgPartner,
+  BgCertificate,
+  AnthropicGlyph,
+  AwFooter,
+  BG_DATE
+} = window;
+function App() {
+  React.useEffect(() => {
+    const draw = () => {
+      if (window.lucide && window.lucide.createIcons) window.lucide.createIcons();
+    };
+    draw();
+    const t = setInterval(draw, 400);
+    const stop = setTimeout(() => clearInterval(t), 3000);
+    let ctx = null,
+      cancelVis = () => {};
+    if (window.gsap && window.ScrollTrigger) {
+      cancelVis = awWhenVisible(() => {
+        ctx = gsap.context(() => {
+          document.querySelectorAll('[data-rv-group]').forEach(group => {
+            const els = group.querySelectorAll('[data-rv]');
+            if (!els.length) return;
+            // Cards cascade in one by one — bigger rise + clear per-item beat.
+            gsap.from(els, {
+              y: 44,
+              opacity: 0,
+              duration: .9,
+              ease: 'power3.out',
+              stagger: {
+                each: .22
+              },
+              clearProps: 'transform,opacity',
+              // hand style control back to CSS so :hover transforms keep working
+              scrollTrigger: {
+                trigger: group,
+                start: 'top 88%',
+                once: true
+              }
+            });
+          });
+          ScrollTrigger.refresh();
+        });
+      });
+    }
+    return () => {
+      clearInterval(t);
+      clearTimeout(stop);
+      cancelVis();
+      if (ctx) ctx.revert();
+    };
+  }, []);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("a", {
+    className: "aw-skip",
+    href: "#main"
+  }, "Skip to content"), /*#__PURE__*/React.createElement(SiteNav, {
+    campaign: true
+  }), /*#__PURE__*/React.createElement("main", {
+    id: "main"
+  }, /*#__PURE__*/React.createElement(BgHero, null), /*#__PURE__*/React.createElement(BgMarquee, null), /*#__PURE__*/React.createElement(BgPartner, null), /*#__PURE__*/React.createElement(BgCertificate, null), /*#__PURE__*/React.createElement(BgGap, null), /*#__PURE__*/React.createElement(BgStats, null), /*#__PURE__*/React.createElement(BgWho, null), /*#__PURE__*/React.createElement(BgPillars, null), /*#__PURE__*/React.createElement(BgCareer, null), /*#__PURE__*/React.createElement(BgExplore, null), /*#__PURE__*/React.createElement(BgTransformation, null), /*#__PURE__*/React.createElement(BgDifferent, null), /*#__PURE__*/React.createElement(BgFinal, null)), /*#__PURE__*/React.createElement(AwFooter, {
+    campaign: true,
+    tagline: "Learn with Claude. Build through Colaberry. Deploy in the real world. Helping beginners and career switchers start learning AI from the ground up since 2012.",
+    dateLabel: 'Free Open House \u00b7 live online'
+  }));
+}
+  // Mount only when every part has registered, from whichever copy runs first, and never twice:
+  // the design-system compiler inlines this file into _ds_bundle.js too, which loads before the parts.
+  var __cbParts = ["SiteNav","BgHero","BgMarquee","BgPartner","BgCertificate","BgGap","BgStats","BgWho","BgPillars","BgCareer","BgExplore","BgTransformation","BgDifferent","BgFinal","AwFooter"];
+  if (typeof __ds_ns === 'undefined' && document.getElementById('root') && document.getElementById('root').getAttribute('data-page') === 'beginners-career-switchers' && !window.__cbPageMounted && __cbParts.every(function (n) { return typeof window[n] === 'function'; })) {
+    window.__cbPageMounted = 'beginners-career-switchers';
+    ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
+  }

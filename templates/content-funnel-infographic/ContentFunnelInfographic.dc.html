@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Marketing · Content Funnel Infographic" description="Weekly top-of-funnel content plan — five content blocks, one video a day, feeding a funnel: algorithm push → more views → some go viral. Funnel or label layout." -->
+<helmet>
+<script src="./ds-base.js"></script>
+</helmet>
+<div style="background:var(--surface-subtle);min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:32px 16px;font-family:var(--font-body);overflow:hidden">
+<div data-theme="light" data-screen-label="Content funnel infographic" ref="{{ boardRef }}" style="width:1080px;flex:none;background:var(--surface-card);color:var(--text-body);box-shadow:var(--shadow-lg);padding:48px 64px 44px;display:flex;flex-direction:column;gap:36px">
+
+<div style="display:flex;align-items:center;justify-content:space-between;gap:24px">
+<img src="../../assets/logo/colaberry-horizontal.webp" alt="Colaberry" width="800" height="188" style="height:36px;width:auto;flex:none">
+<span style="font-family:var(--font-mono);font-size:14px;color:var(--text-muted);text-align:right">Proposal · Top-of-funnel content</span>
+</div>
+
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 296px;gap:40px;align-items:end">
+<div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+<span style="font-size:14px;font-weight:500;color:var(--text-brand)">Top-of-funnel content strategy</span>
+<h1 style="margin:0;font-family:var(--font-display);font-weight:900;font-size:56px;line-height:1.02;letter-spacing:-.02em;color:var(--text-strong);text-wrap:balance;max-width:22ch">One video a day. Five ways to make it.</h1>
+<p style="margin:0;font-size:18px;line-height:1.55;color:var(--text-muted);max-width:50ch;text-wrap:pretty">We split the week into five content blocks. One video ships every day, so our channels keep getting pushed by the algorithm — and some of those videos get the chance to go viral.</p>
+</div>
+<div style="display:flex;flex-direction:column;border:1px solid var(--border-default);border-radius:var(--radius-lg);padding:4px 20px;background:var(--surface-card)">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:13px 0;border-bottom:1px solid var(--border-subtle)"><span style="flex:none;font-size:13px;font-weight:500;color:var(--text-muted)">Cadence</span><span style="font-size:14px;font-weight:700;color:var(--text-strong);text-align:right">One video, every weekday</span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:13px 0;border-bottom:1px solid var(--border-subtle)"><span style="flex:none;font-size:13px;font-weight:500;color:var(--text-muted)">Blocks</span><span style="font-size:14px;font-weight:700;color:var(--text-strong);text-align:right">Five formats, one per day</span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:13px 0"><span style="flex:none;font-size:13px;font-weight:500;color:var(--text-muted)">Goal</span><span style="font-size:14px;font-weight:700;color:var(--text-strong);text-align:right">Reach that compounds</span></div>
+</div>
+</div>
+
+<sc-if value="{{ isFunnel }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:18px">
+<h2 style="margin:0;display:flex;align-items:center;gap:12px;font-size:14px;font-weight:500;line-height:1.3;color:var(--text-muted);text-wrap:wrap"><span style="flex:none;font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--text-strong)">01</span><span style="flex:none">The week — five content blocks, one per day</span><span aria-hidden="true" style="flex:1;height:1px;background:var(--border-subtle)"></span></h2>
+<div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;align-items:stretch">
+<div style="min-width:0;display:flex;flex-direction:column;gap:12px;padding:16px 16px 20px;background:var(--surface-card);border:1px solid var(--border-default);border-top:4px solid var(--chart-1);border-radius:var(--radius-lg)">
+<span style="display:inline-flex;align-items:center;gap:8px;align-self:flex-start;padding:4px 10px 4px 8px;border-radius:var(--radius-pill);background:var(--surface-sunken);font-size:13px;font-weight:500;color:var(--text-strong)"><span style="font-family:var(--font-mono);font-size:12px;font-weight:700">01</span><sc-if value="{{ weekdays }}" hint-placeholder-val="{{ true }}">Monday</sc-if><sc-if value="{{ numbered }}" hint-placeholder-val="{{ false }}">Day 1</sc-if></span>
+<span class="cb-icon-tile" style="background:var(--surface-sunken);color:var(--text-strong);border-radius:12px;font-size:22px"><span class="cb-i"><i class="ri-magic-line"></i></span></span>
+<h3 style="margin:0;font-size:19px;font-weight:700;line-height:1.2;letter-spacing:-.01em;color:var(--text-strong);text-wrap:balance">Scripts to video</h3>
+<sc-if value="{{ showDescriptions }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.5;color:var(--text-muted);text-wrap:pretty">Colaberry scripts become finished videos in Google Flow — skits, talking animals, anything we can write.</p></sc-if>
+</div>
+<div style="min-width:0;display:flex;flex-direction:column;gap:12px;padding:16px 16px 20px;background:var(--surface-card);border:1px solid var(--border-default);border-top:4px solid var(--chart-2);border-radius:var(--radius-lg)">
+<span style="display:inline-flex;align-items:center;gap:8px;align-self:flex-start;padding:4px 10px 4px 8px;border-radius:var(--radius-pill);background:var(--surface-sunken);font-size:13px;font-weight:500;color:var(--text-strong)"><span style="font-family:var(--font-mono);font-size:12px;font-weight:700">02</span><sc-if value="{{ weekdays }}" hint-placeholder-val="{{ true }}">Tuesday</sc-if><sc-if value="{{ numbered }}" hint-placeholder-val="{{ false }}">Day 2</sc-if></span>
+<span class="cb-icon-tile" style="background:var(--surface-sunken);color:var(--text-strong);border-radius:12px;font-size:22px"><span class="cb-i"><i class="ri-movie-2-line"></i></span></span>
+<h3 style="margin:0;font-size:19px;font-weight:700;line-height:1.2;letter-spacing:-.01em;color:var(--text-strong);text-wrap:balance">Micro-dramas</h3>
+<sc-if value="{{ showDescriptions }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.5;color:var(--text-muted);text-wrap:pretty">Short scripted episodes built for the scroll — a hook, a twist and a reason to watch the next one.</p></sc-if>
+</div>
+<div style="min-width:0;display:flex;flex-direction:column;gap:12px;padding:16px 16px 20px;background:var(--surface-card);border:1px solid var(--border-default);border-top:4px solid var(--chart-3);border-radius:var(--radius-lg)">
+<span style="display:inline-flex;align-items:center;gap:8px;align-self:flex-start;padding:4px 10px 4px 8px;border-radius:var(--radius-pill);background:var(--surface-sunken);font-size:13px;font-weight:500;color:var(--text-strong)"><span style="font-family:var(--font-mono);font-size:12px;font-weight:700">03</span><sc-if value="{{ weekdays }}" hint-placeholder-val="{{ true }}">Wednesday</sc-if><sc-if value="{{ numbered }}" hint-placeholder-val="{{ false }}">Day 3</sc-if></span>
+<span class="cb-icon-tile" style="background:var(--surface-sunken);color:var(--text-strong);border-radius:12px;font-size:22px"><span class="cb-i"><i class="ri-robot-2-line"></i></span></span>
+<h3 style="margin:0;font-size:19px;font-weight:700;line-height:1.2;letter-spacing:-.01em;color:var(--text-strong);text-wrap:balance">AI with Ali</h3>
+<sc-if value="{{ showDescriptions }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.5;color:var(--text-muted);text-wrap:pretty">Ali's avatar covers what's happening in AI — the latest news, tutorials and breakdowns.</p></sc-if>
+</div>
+<div style="min-width:0;display:flex;flex-direction:column;gap:12px;padding:16px 16px 20px;background:var(--surface-card);border:1px solid var(--border-default);border-top:4px solid var(--chart-4);border-radius:var(--radius-lg)">
+<span style="display:inline-flex;align-items:center;gap:8px;align-self:flex-start;padding:4px 10px 4px 8px;border-radius:var(--radius-pill);background:var(--surface-sunken);font-size:13px;font-weight:500;color:var(--text-strong)"><span style="font-family:var(--font-mono);font-size:12px;font-weight:700">04</span><sc-if value="{{ weekdays }}" hint-placeholder-val="{{ true }}">Thursday</sc-if><sc-if value="{{ numbered }}" hint-placeholder-val="{{ false }}">Day 4</sc-if></span>
+<span class="cb-icon-tile" style="background:var(--surface-sunken);color:var(--text-strong);border-radius:12px;font-size:22px"><span class="cb-i"><i class="ri-user-star-line"></i></span></span>
+<h3 style="margin:0;font-size:19px;font-weight:700;line-height:1.2;letter-spacing:-.01em;color:var(--text-strong);text-wrap:balance">AI actor videos</h3>
+<sc-if value="{{ showDescriptions }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.5;color:var(--text-muted);text-wrap:pretty">AI actors deliver our scripts on camera — new faces every week, no shoot days.</p></sc-if>
+</div>
+<div style="min-width:0;display:flex;flex-direction:column;gap:12px;padding:16px 16px 20px;background:var(--surface-card);border:1px solid var(--border-default);border-top:4px solid var(--chart-5);border-radius:var(--radius-lg)">
+<span style="display:inline-flex;align-items:center;gap:8px;align-self:flex-start;padding:4px 10px 4px 8px;border-radius:var(--radius-pill);background:var(--surface-sunken);font-size:13px;font-weight:500;color:var(--text-strong)"><span style="font-family:var(--font-mono);font-size:12px;font-weight:700">05</span><sc-if value="{{ weekdays }}" hint-placeholder-val="{{ true }}">Friday</sc-if><sc-if value="{{ numbered }}" hint-placeholder-val="{{ false }}">Day 5</sc-if></span>
+<span class="cb-icon-tile" style="background:var(--surface-sunken);color:var(--text-strong);border-radius:12px;font-size:22px"><span class="cb-i"><i class="ri-scissors-cut-line"></i></span></span>
+<h3 style="margin:0;font-size:19px;font-weight:700;line-height:1.2;letter-spacing:-.01em;color:var(--text-strong);text-wrap:balance">Ali on camera</h3>
+<sc-if value="{{ showDescriptions }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.5;color:var(--text-muted);text-wrap:pretty">Ali's recorded videos, re-cut into reels and long-form episodes.</p></sc-if>
+</div>
+</div>
+<div aria-hidden="true" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;height:34px">
+<span style="display:block;width:3px;height:100%;margin:0 auto;background:var(--chart-1);border-radius:2px"></span>
+<span style="display:block;width:3px;height:100%;margin:0 auto;background:var(--chart-2);border-radius:2px"></span>
+<span style="display:block;width:3px;height:100%;margin:0 auto;background:var(--chart-3);border-radius:2px"></span>
+<span style="display:block;width:3px;height:100%;margin:0 auto;background:var(--chart-4);border-radius:2px"></span>
+<span style="display:block;width:3px;height:100%;margin:0 auto;background:var(--chart-5);border-radius:2px"></span>
+</div>
+<h2 style="margin:0;display:flex;align-items:center;gap:12px;font-size:14px;font-weight:500;line-height:1.3;color:var(--text-muted);text-wrap:wrap"><span style="flex:none;font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--text-strong)">02</span><span style="flex:none">What a video a day does</span><span aria-hidden="true" style="flex:1;height:1px;background:var(--border-subtle)"></span></h2>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+<div style="width:952px;max-width:100%;clip-path:polygon(0 0,100% 0,calc(100% - 96px) 100%,96px 100%);background:var(--surface-sunken);padding:18px 120px 20px;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center">
+<p style="margin:0;font-size:22px;font-weight:700;line-height:1.2;letter-spacing:-.01em;color:var(--text-strong);text-wrap:balance">Five videos a week — one every day</p>
+<p style="margin:0;font-size:15px;line-height:1.5;color:var(--text-muted)">Monday to Friday, a new video on every channel.</p>
+</div>
+<div style="width:760px;max-width:100%;clip-path:polygon(0 0,100% 0,calc(100% - 90px) 100%,90px 100%);background:var(--surface-hover-strong);padding:18px 112px 20px;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center">
+<p style="margin:0;font-size:22px;font-weight:700;line-height:1.2;letter-spacing:-.01em;color:var(--text-strong);text-wrap:balance">Channels get pushed into the algorithm</p>
+<p style="margin:0;font-size:15px;line-height:1.5;color:var(--text-body)">Daily posting keeps every channel in the recommendation feed.</p>
+</div>
+<div style="width:580px;max-width:100%;clip-path:polygon(0 0,100% 0,calc(100% - 80px) 100%,80px 100%);background:var(--surface-inverse);padding:18px 100px 20px;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center">
+<p style="margin:0;font-size:22px;font-weight:700;line-height:1.2;letter-spacing:-.01em;color:var(--text-on-inverse);text-wrap:balance">More views</p>
+<p style="margin:0;font-size:15px;line-height:1.5;color:var(--text-on-inverse)">Reach compounds week over week.</p>
+</div>
+<div style="width:420px;max-width:100%;clip-path:polygon(0 0,100% 0,calc(100% - 70px) 100%,70px 100%);background:var(--surface-brand);padding:20px 84px 26px;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center">
+<p style="margin:0;font-size:22px;font-weight:700;line-height:1.2;letter-spacing:-.01em;color:var(--text-on-accent);text-wrap:balance">Some go viral</p>
+<p style="margin:0;font-size:15px;line-height:1.5;color:var(--text-on-accent)">Five shots a week at a breakout.</p>
+</div>
+<span aria-hidden="true" style="display:block;width:3px;height:26px;margin-top:2px;background:var(--border-strong);border-radius:2px"></span>
+<p style="margin:0;font-size:15px;line-height:1.5;color:var(--text-muted);text-align:center;max-width:46ch;text-wrap:pretty">Top of the funnel: more people discover Colaberry School of Data and AI every week.</p>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isLabel }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:18px">
+<h2 style="margin:0;display:flex;align-items:center;gap:12px;font-size:14px;font-weight:500;line-height:1.3;color:var(--text-muted);text-wrap:wrap"><span style="flex:none;font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--text-strong)">01</span><span style="flex:none">The week — five content blocks, one per day</span><span aria-hidden="true" style="flex:1;height:1px;background:var(--border-subtle)"></span></h2>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="display:grid;grid-template-columns:132px 44px minmax(0,1fr);gap:0 20px;align-items:center;border:1px solid var(--border-default);border-radius:var(--radius-lg);padding-right:24px;min-width:0">
+<div style="align-self:stretch;background:var(--surface-inverse);color:var(--text-on-inverse);border-radius:15px 0 0 15px;border-left:6px solid var(--chart-1);padding:14px 18px;display:flex;flex-direction:column;justify-content:center;gap:4px"><span style="font-family:var(--font-mono);font-size:26px;font-weight:700;line-height:1">01</span><span style="font-size:13px;font-weight:500"><sc-if value="{{ weekdays }}" hint-placeholder-val="{{ true }}">Monday</sc-if><sc-if value="{{ numbered }}" hint-placeholder-val="{{ false }}">Day 1</sc-if></span></div>
+<span class="cb-icon-tile" style="background:var(--surface-sunken);color:var(--text-strong);border-radius:12px;font-size:22px"><span class="cb-i"><i class="ri-magic-line"></i></span></span>
+<div style="min-width:0;display:flex;flex-direction:column;gap:4px;padding:16px 0"><h3 style="margin:0;font-size:20px;font-weight:700;line-height:1.2;letter-spacing:-.01em;color:var(--text-strong);text-wrap:balance">Scripts to video</h3><sc-if value="{{ showDescriptions }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.5;color:var(--text-muted);text-wrap:pretty">Colaberry scripts become finished videos in Google Flow — skits, talking animals, anything we can write.</p></sc-if></div>
+</div>
+<div style="display:grid;grid-template-columns:132px 44px minmax(0,1fr);gap:0 20px;align-items:center;border:1px solid var(--border-default);border-radius:var(--radius-lg);padding-right:24px;min-width:0">
+<div style="align-self:stretch;background:var(--surface-inverse);color:var(--text-on-inverse);border-radius:15px 0 0 15px;border-left:6px solid var(--chart-2);padding:14px 18px;display:flex;flex-direction:column;justify-content:center;gap:4px"><span style="font-family:var(--font-mono);font-size:26px;font-weight:700;line-height:1">02</span><span style="font-size:13px;font-weight:500"><sc-if value="{{ weekdays }}" hint-placeholder-val="{{ true }}">Tuesday</sc-if><sc-if value="{{ numbered }}" hint-placeholder-val="{{ false }}">Day 2</sc-if></span></div>
+<span class="cb-icon-tile" style="background:var(--surface-sunken);color:var(--text-strong);border-radius:12px;font-size:22px"><span class="cb-i"><i class="ri-movie-2-line"></i></span></span>
+<div style="min-width:0;display:flex;flex-direction:column;gap:4px;padding:16px 0"><h3 style="margin:0;font-size:20px;font-weight:700;line-height:1.2;letter-spacing:-.01em;color:var(--text-strong);text-wrap:balance">Micro-dramas</h3><sc-if value="{{ showDescriptions }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.5;color:var(--text-muted);text-wrap:pretty">Short scripted episodes built for the scroll — a hook, a twist and a reason to watch the next one.</p></sc-if></div>
+</div>
+<div style="display:grid;grid-template-columns:132px 44px minmax(0,1fr);gap:0 20px;align-items:center;border:1px solid var(--border-default);border-radius:var(--radius-lg);padding-right:24px;min-width:0">
+<div style="align-self:stretch;background:var(--surface-inverse);color:var(--text-on-inverse);border-radius:15px 0 0 15px;border-left:6px solid var(--chart-3);padding:14px 18px;display:flex;flex-direction:column;justify-content:center;gap:4px"><span style="font-family:var(--font-mono);font-size:26px;font-weight:700;line-height:1">03</span><span style="font-size:13px;font-weight:500"><sc-if value="{{ weekdays }}" hint-placeholder-val="{{ true }}">Wednesday</sc-if><sc-if value="{{ numbered }}" hint-placeholder-val="{{ false }}">Day 3</sc-if></span></div>
+<span class="cb-icon-tile" style="background:var(--surface-sunken);color:var(--text-strong);border-radius:12px;font-size:22px"><span class="cb-i"><i class="ri-robot-2-line"></i></span></span>
+<div style="min-width:0;display:flex;flex-direction:column;gap:4px;padding:16px 0"><h3 style="margin:0;font-size:20px;font-weight:700;line-height:1.2;letter-spacing:-.01em;color:var(--text-strong);text-wrap:balance">AI with Ali</h3><sc-if value="{{ showDescriptions }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.5;color:var(--text-muted);text-wrap:pretty">Ali's avatar covers what's happening in AI — the latest news, tutorials and breakdowns.</p></sc-if></div>
+</div>
+<div style="display:grid;grid-template-columns:132px 44px minmax(0,1fr);gap:0 20px;align-items:center;border:1px solid var(--border-default);border-radius:var(--radius-lg);padding-right:24px;min-width:0">
+<div style="align-self:stretch;background:var(--surface-inverse);color:var(--text-on-inverse);border-radius:15px 0 0 15px;border-left:6px solid var(--chart-4);padding:14px 18px;display:flex;flex-direction:column;justify-content:center;gap:4px"><span style="font-family:var(--font-mono);font-size:26px;font-weight:700;line-height:1">04</span><span style="font-size:13px;font-weight:500"><sc-if value="{{ weekdays }}" hint-placeholder-val="{{ true }}">Thursday</sc-if><sc-if value="{{ numbered }}" hint-placeholder-val="{{ false }}">Day 4</sc-if></span></div>
+<span class="cb-icon-tile" style="background:var(--surface-sunken);color:var(--text-strong);border-radius:12px;font-size:22px"><span class="cb-i"><i class="ri-user-star-line"></i></span></span>
+<div style="min-width:0;display:flex;flex-direction:column;gap:4px;padding:16px 0"><h3 style="margin:0;font-size:20px;font-weight:700;line-height:1.2;letter-spacing:-.01em;color:var(--text-strong);text-wrap:balance">AI actor videos</h3><sc-if value="{{ showDescriptions }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.5;color:var(--text-muted);text-wrap:pretty">AI actors deliver our scripts on camera — new faces every week, no shoot days.</p></sc-if></div>
+</div>
+<div style="display:grid;grid-template-columns:132px 44px minmax(0,1fr);gap:0 20px;align-items:center;border:1px solid var(--border-default);border-radius:var(--radius-lg);padding-right:24px;min-width:0">
+<div style="align-self:stretch;background:var(--surface-inverse);color:var(--text-on-inverse);border-radius:15px 0 0 15px;border-left:6px solid var(--chart-5);padding:14px 18px;display:flex;flex-direction:column;justify-content:center;gap:4px"><span style="font-family:var(--font-mono);font-size:26px;font-weight:700;line-height:1">05</span><span style="font-size:13px;font-weight:500"><sc-if value="{{ weekdays }}" hint-placeholder-val="{{ true }}">Friday</sc-if><sc-if value="{{ numbered }}" hint-placeholder-val="{{ false }}">Day 5</sc-if></span></div>
+<span class="cb-icon-tile" style="background:var(--surface-sunken);color:var(--text-strong);border-radius:12px;font-size:22px"><span class="cb-i"><i class="ri-scissors-cut-line"></i></span></span>
+<div style="min-width:0;display:flex;flex-direction:column;gap:4px;padding:16px 0"><h3 style="margin:0;font-size:20px;font-weight:700;line-height:1.2;letter-spacing:-.01em;color:var(--text-strong);text-wrap:balance">Ali on camera</h3><sc-if value="{{ showDescriptions }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.5;color:var(--text-muted);text-wrap:pretty">Ali's recorded videos, re-cut into reels and long-form episodes.</p></sc-if></div>
+</div>
+</div>
+<h2 style="margin:14px 0 0;display:flex;align-items:center;gap:12px;font-size:14px;font-weight:500;line-height:1.3;color:var(--text-muted);text-wrap:wrap"><span style="flex:none;font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--text-strong)">02</span><span style="flex:none">What a video a day does</span><span aria-hidden="true" style="flex:1;height:1px;background:var(--border-subtle)"></span></h2>
+<div style="display:flex;align-items:center;flex-wrap:wrap;gap:10px 8px">
+<span style="padding:14px 22px;border-radius:var(--radius-pill);background:var(--surface-sunken);color:var(--text-strong);font-weight:700;font-size:17px;line-height:1.2">1 video every day</span>
+<span class="cb-i" style="font-size:22px;color:var(--text-muted)"><i class="ri-arrow-right-line"></i></span>
+<span style="padding:14px 22px;border-radius:var(--radius-pill);background:var(--surface-hover-strong);color:var(--text-strong);font-weight:700;font-size:17px;line-height:1.2">Channels pushed into the algorithm</span>
+<span class="cb-i" style="font-size:22px;color:var(--text-muted)"><i class="ri-arrow-right-line"></i></span>
+<span style="padding:14px 22px;border-radius:var(--radius-pill);background:var(--surface-inverse);color:var(--text-on-inverse);font-weight:700;font-size:17px;line-height:1.2">More views</span>
+<span class="cb-i" style="font-size:22px;color:var(--text-muted)"><i class="ri-arrow-right-line"></i></span>
+<span style="padding:14px 22px;border-radius:var(--radius-pill);background:var(--surface-brand);color:var(--text-on-accent);font-weight:700;font-size:17px;line-height:1.2">Some go viral</span>
+</div>
+<p style="margin:0;font-size:15px;line-height:1.5;color:var(--text-muted);max-width:60ch;text-wrap:pretty">Top of the funnel: more people discover Colaberry School of Data and AI every week.</p>
+</div>
+</sc-if>
+
+<div style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid var(--border-subtle);padding-top:18px">
+<span style="font-size:14px;font-weight:500;color:var(--text-muted)">Colaberry School of Data and AI</span>
+<span style="font-family:var(--font-mono);font-size:13px;color:var(--text-muted);text-align:right">5 blocks · 5 days · 1 video a day</span>
+</div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1144},&quot;layout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;funnel&quot;,&quot;options&quot;:[&quot;funnel&quot;,&quot;label&quot;],&quot;tsType&quot;:&quot;'funnel' | 'label'&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;dayLabels&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;weekdays&quot;,&quot;options&quot;:[&quot;weekdays&quot;,&quot;numbered&quot;],&quot;tsType&quot;:&quot;'weekdays' | 'numbered'&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;showDescriptions&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+class Component extends DCLogic {
+  boardRef = React.createRef();
+  componentDidMount() {
+    // Live viewport fit: the 1080px artboard zooms down on narrow screens (§1.11).
+    this.fit = () => {
+      const el = this.boardRef.current; if (!el) return;
+      el.style.zoom = String(Math.min(1, Math.max(0.25, (window.innerWidth - 32) / 1080)));
+    };
+    this.fit();
+    window.addEventListener('resize', this.fit);
+  }
+  componentDidUpdate() { this.fit(); }
+  componentWillUnmount() { window.removeEventListener('resize', this.fit); }
+  renderVals() {
+    const layout = this.props.layout ?? 'funnel';
+    const days = this.props.dayLabels ?? 'weekdays';
+    return {
+      boardRef: this.boardRef,
+      isFunnel: layout !== 'label',
+      isLabel: layout === 'label',
+      weekdays: days === 'weekdays',
+      numbered: days !== 'weekdays',
+      showDescriptions: this.props.showDescriptions ?? true
+    };
+  }
+}
+</script>
+</body>
+</html>

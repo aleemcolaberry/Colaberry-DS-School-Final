@@ -1,0 +1,80 @@
+<!-- @dsCard group="Patterns" viewport="760x440" name="Card anatomy · hover · motion" subtitle="The §7 contract: text decides the height, badges in flow, one hover recipe (3px lift) only on real controls, one reveal engine" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Card anatomy — Colaberry DS</title>
+<link rel="stylesheet" href="../../styles.css?v=3be3c64e">
+<style>
+body{margin:0;padding:22px 24px;background:var(--surface-page);font-family:var(--font-body);color:var(--text-body)}
+.g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px 28px;align-items:start}
+.k{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:var(--fw-medium);color:var(--text-brand);margin:0 0 10px}
+.k i{font-family:var(--font-mono);font-size:12px;color:var(--text-muted);font-style:normal}
+.k::after{content:'';flex:0 1 40px;height:1px;background:var(--border-strong)}
+.col{display:flex;flex-direction:column;gap:18px;min-width:0}
+.card{display:flex;flex-direction:column;gap:12px;min-width:0;padding:18px;border:1px solid var(--border-default);border-radius:var(--radius-xl);background:var(--surface-card);text-decoration:none;color:inherit;position:relative}
+.card > *{min-width:0}
+.card__hd{display:flex;align-items:flex-start;gap:12px}
+.card__hd > div{min-width:0}
+.ico{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:var(--radius-md);font-size:20px;background:var(--status-info-bg);color:var(--status-info-fg)}
+.card__k{font-size:13px;font-weight:var(--fw-medium);color:var(--text-muted);margin:0 0 2px}
+.card h3{font-family:var(--font-display);font-weight:var(--fw-bold);font-size:18px;line-height:1.2;letter-spacing:-.01em;color:var(--text-strong);margin:0;text-wrap:balance}
+.card p{font-size:14px;line-height:1.5;color:var(--text-muted);margin:0;text-wrap:pretty}
+.card .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.card .link{display:inline-flex;align-items:center;gap:6px;margin-top:auto;font-size:14px;font-weight:var(--fw-bold);color:var(--text-brand);min-height:32px}
+.card code{font-family:var(--font-mono);font-size:12px;color:var(--text-body);overflow-wrap:anywhere}
+a.card{transition:transform var(--dur-base) var(--ease-out),box-shadow var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out);box-shadow:var(--shadow-sm)}
+a.card:focus-visible{outline:none;box-shadow:var(--focus-ring),var(--shadow-sm)}
+@media (hover:hover){a.card:hover{box-shadow:var(--shadow-md);border-color:var(--border-strong)}}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){a.card:hover{transform:translateY(calc(-1 * var(--motion-lift)))}a.card:active{transform:scale(var(--motion-press))}}
+.ann{align-self:flex-end;font-family:var(--font-mono);font-size:12px;color:var(--text-muted);background:var(--surface-sunken);border-radius:999px;padding:3px 8px;margin-bottom:-4px}
+.rules{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:13px;line-height:1.45;color:var(--text-body)}
+.rules li{display:flex;gap:8px;align-items:flex-start;min-width:0}
+.rules .cb-i{flex:none;font-size:15px;margin-top:2px}
+.no .cb-i{color:var(--status-danger)}.yes .cb-i{color:var(--status-success)}
+.rules s{color:var(--text-muted)}
+.lbl{font-size:12px;color:var(--text-muted);margin:6px 0 0}
+</style>
+</head>
+<body>
+<div class="g">
+  <div class="col">
+    <div><p class="k"><i>01</i>Anatomy — a static card (no hover)</p>
+      <div class="card">
+        <span class="ann" aria-hidden="true">min-width:0 · gap · no height</span>
+        <div class="card__hd"><span class="ico"><i class="ri-braces-line" aria-hidden="true"></i></span><div><p class="card__k">Label · 13 medium</p><h3>Title 700 · 18–24 · balanced, ≤ 6 words</h3></div></div>
+        <p>Body 15 · lh 1.55 · pretty · ≤ 2 sentences. The longest realistic copy still wraps at 320.</p>
+        <div class="row"><span class="cb-badge cb-badge--green"><span class="cb-badge__dot" aria-hidden="true"></span>In flow</span><code>spring-cohort-post-final-v3.html</code></div>
+        <span class="link">Footer link · margin-top:auto<span class="cb-i"><i class="ri-arrow-right-line"></i></span></span>
+      </div>
+      <p class="lbl">Flex column · padding clamp(20, 2.4vw, 28) · header = icon tile (flex:none) + min-width:0 text · badges in flow · mono strings break anywhere</p>
+    </div>
+    <div><p class="k"><i>02</i>The hover recipe — only when the card IS the link</p>
+      <a class="card" href="#card">
+        <span class="ann" aria-hidden="true">hover · focus · press</span>
+        <h3>Lift 3px · one shadow step · border</h3>
+        <p>220 ms ease-out · named properties · @media (hover: hover) · movement off under reduced motion · :focus-visible ring · :active scale .985</p>
+        <span class="link">Open<span class="cb-i"><i class="ri-arrow-right-line"></i></span></span>
+      </a>
+    </div>
+  </div>
+  <div class="col">
+    <div><p class="k"><i>03</i>Layout rules (§7.1)</p>
+      <ul class="rules">
+        <li class="yes"><span class="cb-i"><i class="ri-check-line"></i></span><span><b>Text decides the height</b> — min-height or aspect-ratio on the media; the only fixed heights are artboard previews</span></li>
+        <li class="yes"><span class="cb-i"><i class="ri-check-line"></i></span><span>Grids: <code>auto-fit, minmax(min(100%, N), 1fr)</code> or <code>minmax(0,1fr)</code> + a stacking breakpoint; <code>align-items: stretch</code></span></li>
+        <li class="no"><span class="cb-i"><i class="ri-close-line"></i></span><span><s>position:absolute badges over text · overflow:hidden on a text card · nowrap labels · vw-sized content</s></span></li>
+      </ul>
+    </div>
+    <div><p class="k"><i>04</i>Hover &amp; motion rules (§7.2–7.3)</p>
+      <ul class="rules">
+        <li class="yes"><span class="cb-i"><i class="ri-check-line"></i></span><span>Hover only on one <code>&lt;a&gt;</code> / <code>&lt;button&gt;</code>; <code>--motion-lift</code> 3px (≤ 4), <code>--dur-fast</code>–<code>--dur-base</code>, properties named</span></li>
+        <li class="yes"><span class="cb-i"><i class="ri-check-line"></i></span><span>One reveal engine per page (<code>data-reveal</code>), IntersectionObserver + 2.6 s safety net, reduce block in every stylesheet</span></li>
+        <li class="no"><span class="cb-i"><i class="ri-close-line"></i></span><span><s>scale / rotate / glow hovers · 8–12px lifts · transition: all · .55s hovers · div onclick · infinite motion on content</s></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>
