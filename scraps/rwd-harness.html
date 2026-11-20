@@ -1,0 +1,49 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>RWD harness</title><style>
+body{margin:0;background:#222;display:flex;gap:16px;padding:12px;align-items:flex-start}
+iframe{border:0;background:#fff;height:3000px;flex:none}
+</style></head><body>
+<iframe id="a" style="width:390px"></iframe>
+<iframe id="b" style="width:768px"></iframe>
+<script>
+// Probe a loaded iframe for horizontal-overflow offenders.
+window.probe = function (id) {
+  const fr = document.getElementById(id);
+  const doc = fr.contentDocument;
+  if (!doc || !doc.body) return { id, error: 'not loaded' };
+  const w = fr.clientWidth;
+  const de = doc.documentElement;
+  const out = { id, w, page: fr.contentWindow.location.pathname.split('/').pop(),
+    scrollW: de.scrollWidth, bodyScrollW: doc.body.scrollWidth, offenders: [], clipped: [] };
+  const seen = new Set();
+  doc.querySelectorAll('body *').forEach(el => {
+    if (el.closest('svg') && el.tagName !== 'svg') return;
+    const r = el.getBoundingClientRect();
+    if (!r.width && !r.height) return;
+    const over = r.right - w, left = -r.left;
+    if (over > 2 || left > 2) {
+      const cs = fr.contentWindow.getComputedStyle(el);
+      if (cs.visibility === 'hidden' || cs.opacity === '0' || el.closest('[aria-hidden="true"]')) return;
+      // skip elements inside clipping ancestors (marquees, canvases, decor)
+      let p = el.parentElement, clippedByAncestor = false;
+      while (p && p !== doc.body) {
+        const pcs = fr.contentWindow.getComputedStyle(p);
+        if (/(hidden|clip|auto|scroll)/.test(pcs.overflowX)) { clippedByAncestor = true; break; }
+        p = p.parentElement;
+      }
+      if (clippedByAncestor) return;
+      const key = (el.tagName + '.' + String(el.className).split(' ')[0]).slice(0, 44);
+      if (seen.has(key)) return; seen.add(key);
+      out.offenders.push({ el: key, right: Math.round(over), left: Math.round(left),
+        pos: cs.position, txt: (el.textContent || '').trim().slice(0, 28) });
+    }
+  });
+  out.offenders = out.offenders.slice(0, 25);
+  return out;
+};
+window.loadBoth = function (src) {
+  document.getElementById('a').src = src;
+  document.getElementById('b').src = src;
+};
+</script>
+</body></html>

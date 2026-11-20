@@ -24,7 +24,9 @@ yarn-error.log*
 # Self-contained standalone exports + intermediate sources
 *-standalone.html
 templates/**/_kit-standalone.html
-Colaberry Social Media Kit.html
+# (Colaberry Social Media Kit.html is a live, swept page — tracked on purpose)
+# byte-identical copy of accelerator-standalone-src.html
+Colaberry School/Colaberry Accelerator (standalone).html
 
 # ── Print-to-PDF intermediates ─────────────────
 *-print-*.html
@@ -33,6 +35,12 @@ Colaberry Social Media Kit.html
 .thumbnail
 
 # ── Scratch / QA working files ─────────────────
-scraps/
+# QA scratch is local-only — EXCEPT the four QA tools the CI gates and
+# CLAUDE.md §4 depend on (_lint.mjs / _sweep.mjs read rwd-lint / rwd-sweep).
+scraps/*
+!scraps/rwd-lint.html
+!scraps/rwd-sweep.html
+!scraps/rwd-harness.html
+!scraps/audit-harness.html
 uploads/
 screenshots/

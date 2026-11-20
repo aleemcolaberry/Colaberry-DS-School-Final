@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>RWD lint — static anti-pattern scan</title>
+<style>
+body{margin:0;background:#1c1c1c;color:#ddd;font:13px/1.5 ui-monospace,Menlo,monospace;padding:16px}
+h1{font-size:15px;margin:0 0 10px}
+#out{white-space:pre-wrap}
+.f{color:#8ac759}.w{color:#f0a93a}.e{color:#ff6b72}.ok{color:#5aa8c4}
+</style></head><body>
+<h1>RWD lint · scans CSS + HTML for responsive anti-patterns (CLAUDE.md §1)</h1>
+<p>Usage: <code>lint(['../landing.css','../index.html'])</code> or <code>lintAll()</code> (the file list below). Each finding is a rule from CLAUDE.md §1 (responsive), §2 (colour · contrast), §3 (a11y), §5 (state coverage), §6 (composition) or §7 (cards · hover · motion) with file:line. Zero <span class="e">E</span> findings is the bar; <span class="w">W</span> needs a breakpoint or a reason in AUDIT.md.</p>
+<div id="out"></div>
+<script>
+const FILES=[
+  '../landing.css','../playbook.css','../design-system.html','../index.html','../playbook.html','../styles.css','../components.css','../tokens/base.css','../tokens/motion.css','../tokens/utilities.css',
+  '../AI-Architect-Accelerator-Brochure.html','../Colaberry School/school.css',
+  ...['aw','home','home-bento','frontier','nav','site-pages','wp','partner','podcasts','shorts','student-projects','register','thank-you','interest-modal'].map(s=>'../Colaberry School/'+s+'.css'),
+  '../training-site/site.css','../training-site/landing.css','../app/app.css','../ui_kits/marketing-website/site.css',
+  ...['index','login','register','dashboard','legal','thank-you'].map(s=>'../app/'+s+'.html'),
+  ...['index','home-classic','data-analytics','data-science','job-readiness','how-it-works','pricing','mentorship','hire-our-grads','success-stories','blog','contact','events','faq','our-story','reviews'].map(s=>'../training-site/'+s+'.html'),
+  ...['accelerator','beginners-career-switchers','builders-founders','working-professionals','blog','events','faq','contact','our-story','podcasts','shorts','student-projects','thank-you','register'].map(s=>'../Colaberry School/'+s+'.html'),
+  '../ui_kits/marketing-website/index.html','../ads/Meta Ad Intro.html','../ads/Meta Ad Outro.html','../ads/Meta Ads Review.html',
+];
+const out=document.getElementById('out');
+function log(s,c){const d=document.createElement('div');if(c)d.className=c;d.textContent=s;out.appendChild(d);console.log('[lint] '+s)}
+// Collapse a stylesheet into (selector, declarations, line, insideMedia) records.
+function parseCSS(text){
+  const recs=[];let i=0,line=1,depth=0,media=null,buf='',selStart=1;
+  while(i<text.length){const ch=text[i];
+    if(ch==='/'&&text[i+1]==='*'){const end=text.indexOf('*/',i+2);const seg=text.slice(i,end<0?text.length:end+2);line+=(seg.match(/\n/g)||[]).length;i+=seg.length;continue}
+    if(ch==='\n')line++;
+    if(ch==='{'){const head=buf.trim();buf='';
+      if(/^@media/i.test(head)){media=head;depth++;i++;continue}
+      if(/^@(keyframes|font-face|supports|layer|container)/i.test(head)){let d=1,j=i+1;while(j<text.length&&d){if(text[j]==='{')d++;else if(text[j]==='}')d--;if(text[j]==='\n')line++;j++}i=j;continue}
+      let d=1,j=i+1,body='';while(j<text.length&&d){if(text[j]==='{')d++;else if(text[j]==='}')d--;if(d)body+=text[j];j++}
+      recs.push({sel:head,body,line:selStart,media});line+=(body.match(/\n/g)||[]).length;i=j;selStart=line;continue}
+    if(ch==='}'){if(depth){depth--;media=null}i++;buf='';selStart=line;continue}
+    buf+=ch;i++;if(!buf.trim())selStart=line;
+  }
+  return recs;
+}
+function extractStyles(html){const out=[];const re=/<style[^>]*>([\s\S]*?)<\/style>/gi;let m;while((m=re.exec(html))){const pre=html.slice(0,m.index);out.push({css:m[1],lineOffset:(pre.match(/\n/g)||[]).length})}return out}
+function checkCSS(recs,file,off=0){
+  const F=[];const byMedia=new Map();
+  for(const r of recs){const k=r.sel.replace(/\s+/g,' ');if(!byMedia.has(k))byMedia.set(k,{base:null,media:[]});const e=byMedia.get(k);if(r.media)e.media.push(r);else e.base=e.base||r}
+  for(const r of recs){const ln=r.line+off,b=r.body;
+    // E1 fixed pixel width on a content container (not an icon/avatar/logo/control)
+    const w=b.match(/(?:^|;)\s*width\s*:\s*(\d{3,})px/);if(w&&+w[1]>=360&&!/max-width/.test(b)&&!/(data-export|artboard|\.page\b|sheet|card--fixed|\.ty-seal|logo|avatar|icon|\.cb-i\b|glow|__mark|blob|orb|ghost|watermark|seal|ring)/i.test(r.sel)&&!/position\s*:\s*absolute/.test(b)&&!r.media)F.push(['E',ln,'§1.4 fixed width:'+w[1]+'px on "'+r.sel+'" — use max-width + width:100%']);
+    // E2 bare 1fr grid with ≥2 columns and no narrower media override anywhere
+    const g=b.match(/grid-template-columns\s*:\s*([^;]+)/);if(g&&!r.media){const v=g[1];const cols=/repeat\(\s*(\d)\s*,\s*(?:minmax\(0,\s*)?1fr/.exec(v)||(v.match(/\b\d*\.?\d*fr\b/g)||[]).length;const n=typeof cols==='object'&&cols?+cols[1]:cols;if(n>=2&&!/auto-fit|auto-fill/.test(v)&&!(n===2&&/minmax\(0/.test(v))&&!/snav__card|__panel|mega|dropdown/.test(r.sel)){const e=byMedia.get(r.sel.replace(/\s+/g,' '));const hasBp=e&&e.media.some(m=>/grid-template-columns/.test(m.body))||recs.some(x=>x.media&&x.sel.split(',').some(s=>r.sel.split(',').some(t=>t.trim()===s.trim()))&&/grid-template-columns|display\s*:\s*none/.test(x.body));if(!hasBp)F.push(['E',ln,'§1.3/1.5 '+n+'-column grid "'+r.sel+'" never stacks (no media override) — add minmax(0,1fr) + a stacking breakpoint or use auto-fit']);else if(!/minmax\(0/.test(v)&&/\b1fr\b/.test(v)&&/\d+(\.\d+)?fr\s+\d/.test(v)===false&&/repeat\(\s*\d\s*,\s*1fr\)/.test(v))F.push(['W',ln,'§1.3 "'+r.sel+'" uses bare 1fr tracks — prefer minmax(0,1fr) so long words cannot widen the track'])}}
+    // E3 nowrap on something that holds sentence-length text (buttons/pills/headings) without a mobile override
+    if(/white-space\s*:\s*nowrap/.test(b)&&!r.media&&/(btn|pill|cta|title|__h\b|__t\b|heading|h[1-6]\b|label|name|p\b)/i.test(r.sel)&&!/(sr|sr-only|truncate|nav__|chip|tag|badge|mono|date|time|kicker|eyebrow|__k\b|__n\b|__wk|stat|price|logo|mq|marquee)/i.test(r.sel)){const e=byMedia.get(r.sel.replace(/\s+/g,' '));const fixed=recs.some(x=>x.media&&x.sel.split(',').some(s=>s.trim()===r.sel.trim())&&/white-space\s*:\s*normal|width\s*:\s*100%/.test(x.body));if(!fixed)F.push(['W',ln,'§1.1 nowrap on "'+r.sel+'" with no ≤640 override — long labels will push past the viewport'])}
+    // E4 100vw (always adds scrollbar width on desktop)
+    if(/\b100vw\b/.test(b)&&!/calc\(100vw\s*-|min\(100vw|clamp/.test(b))F.push(['W',ln,'§1.4 100vw on "'+r.sel+'" — 100vw includes the scrollbar; use 100% or min(100vw, …)']);
+    // E5 overflow:hidden on a section/wrapper that holds text (hides bugs)
+    if(/overflow(-x)?\s*:\s*hidden/.test(b)&&/(section|wrap|__inner|container|main|page|body)\b/i.test(r.sel)&&!/(marquee|mq|carousel|track|hero|photo|media|img|sheet|artboard|drawer|modal|band|card|cover)/i.test(r.sel))F.push(['W',ln,'§1.6 overflow:hidden on "'+r.sel+'" — hides overflow bugs; probe children before shipping']);
+    // E6 user-scalable / maximum-scale handled in HTML check. Sub-12px text:
+    const fs=b.match(/font-size\s*:\s*(\d+(?:\.\d+)?)px/);if(fs&&+fs[1]<12)F.push(['E',ln,'§1.8 font-size '+fs[1]+'px on "'+r.sel+'" — 12px floor']);
+    // E7 positive tabindex can't be in CSS; min-height on tap targets:
+    const h=b.match(/(?:^|;)\s*height\s*:\s*(\d+)px/);if(h&&+h[1]<24&&/(btn|button|\.cb-pag|dot|close|toggle|switch|chip)/i.test(r.sel)&&!/::before|::after|track|knob|thumb|bar|line|ring|__dot|__bar|__i\b|spinner|\.dot\b|-dot\b|pill \.|eyebrow/i.test(r.sel))F.push(['W',ln,'§1.8 '+h[1]+'px tall control "'+r.sel+'" — 24px floor (44px on mobile); grow the hit area with ::before inset']);
+  }
+  return F;
+}
+function checkHTML(html,file){const F=[];const lineOf=i=>(html.slice(0,i).match(/\n/g)||[]).length+1;
+  const vp=/<meta\s+name="viewport"\s+content="([^"]*)"/i.exec(html);
+  if(!vp)F.push(['E',1,'§3.1 missing <meta name="viewport">']);else if(/user-scalable\s*=\s*(no|0)|maximum-scale/i.test(vp[1]))F.push(['E',lineOf(vp.index),'§3.1 viewport blocks zoom ('+vp[1]+')']);else if(!/width=device-width/.test(vp[1])||!/initial-scale=1/.test(vp[1]))F.push(['E',lineOf(vp.index),'§3.1 viewport must be width=device-width, initial-scale=1 (got '+vp[1]+')']);
+  // inline styles: fixed widths & bare multi-col grids
+  const re=/style="([^"]*)"/g;let m;while((m=re.exec(html))){const s=m[1];const w=/(?:^|;)\s*width\s*:\s*(\d{3,})px/.exec(s);if(w&&+w[1]>=360&&!/max-width/.test(s)&&!/data-export|data-art|data-card/.test(html.slice(Math.max(0,m.index-200),m.index)))F.push(['W',lineOf(m.index),'§1.4 inline width:'+w[1]+'px without max-width']);
+    const g=/grid-template-columns\s*:\s*([^;"]+)/.exec(s);if(g&&/\b1fr\b/.test(g[1])&&!/auto-fit|auto-fill|minmax\(0/.test(g[1])&&(g[1].match(/\bfr\b/g)||[]).length>=2){const cls=/class="([^"]*)"/.exec(html.slice(m.index-300,m.index+300));const hasCls=cls&&cls[1].trim();F.push([hasCls?'W':'E',lineOf(m.index),'§1.3 inline multi-column grid ('+g[1].trim()+')'+(hasCls?' — class "'+cls[1]+'" must stack it in a media query':' with no class — cannot be stacked by a media query; use repeat(auto-fit, minmax(min(100%, N), 1fr))')])}
+    if(/white-space\s*:\s*nowrap/.test(s)&&/>[^<]{40,}</.test(html.slice(m.index,m.index+400)))F.push(['W',lineOf(m.index),'§1.1 inline nowrap on long text']);
+  }
+  for(const st of extractStyles(html))F.push(...checkCSS(parseCSS(st.css),file,st.lineOffset),...checkCompose(parseCSS(st.css),file,st.lineOffset),...checkCards(parseCSS(st.css),file,st.lineOffset),...checkColor(parseCSS(st.css),file,st.lineOffset),...checkPerfCSS(parseCSS(st.css),file,st.css,st.lineOffset));
+  F.push(...checkStates(html,file,lineOf));
+  F.push(...checkComposeHTML(html,file,lineOf));
+  F.push(...checkCardsHTML(html,file,lineOf));
+  F.push(...checkColorHTML(html,file,lineOf));
+  F.push(...checkPerfHTML(html,file,lineOf));
+  return F;
+}
+// §6 composition / typography / iconography — CSS side
+function checkCompose(recs,file,off=0){const F=[];let upper=0,upperLn=0;
+  for(const r of recs){const ln=r.line+off,b=r.body,sel=r.sel;
+    if(/background-clip\s*:\s*text/.test(b))F.push(['E',ln,'§6.2 gradient text (background-clip: text) on "'+sel+'" — the cherry never changes; use a solid semantic colour']);
+    if(/animation[^;]*\binfinite\b/.test(b)&&!/(spin|skel|shimmer|indet|pulse|cb-bar|loader|loading|progress|cursor|blink|dot|live|ping)/i.test(sel))F.push(['E',ln,'§6.2 infinite animation on "'+sel+'" — only spinners/skeletons/progress/live-dots may loop (marquees, tickers, floating blobs, scroll cues are banned)']);
+    if(/position\s*:\s*sticky/.test(b)&&/(card|__card|stack|item|row)\b/i.test(sel)&&!/(nav|head|bar|toolbar|aside|toc)/i.test(sel))F.push(['W',ln,'§6.2 sticky-stacking content ("'+sel+'") — banned pattern; lay the items out in flow']);
+    if(/text-transform\s*:\s*uppercase/.test(b)){upper++;if(!upperLn)upperLn=ln;}
+    const ls=b.match(/letter-spacing\s*:\s*(\.|0\.)(\d+)em/);if(ls&&parseFloat('0.'+ls[2])>=0.1)F.push(['W',ln,'§6.4 letter-spacing .'+ls[2]+'em on "'+sel+'" — tracked-out caps read as decoration; max .04em']);
+    const fw=b.match(/font-weight\s*:\s*(900|var\(--fw-black\))/),fs=b.match(/font-size\s*:\s*(\d+(?:\.\d+)?)px/);if(fw&&fs&&+fs[1]<24)F.push(['W',ln,'§6.4 Black (900) at '+fs[1]+'px on "'+sel+'" — use 700 below 24px']);
+    if(fs&&+fs[1]>=12&&+fs[1]<14&&/(^|[\s.>])(p|lead|desc|sub|body|copy|text|__p|__desc|__sub|__body|__copy|__text|__msg)\b/i.test(sel)&&!/(caption|meta|hint|label|tag|chip|badge|toast|foot|small|note|kicker|eyebrow)/i.test(sel))F.push(['W',ln,'§6.4 body copy at '+fs[1]+'px on "'+sel+'" — 15px minimum on marketing pages, 14px in the app']);
+  }
+  if(upper>10)F.push(['W',upperLn,'§6.4 '+upper+' uppercase rules in one stylesheet — mono-caps labels are a slop pattern; labels are 13–14px sans medium, mono is for code/numbers/the section index']);
+  return F;
+}
+// §6 — HTML side
+function checkComposeHTML(html,file,lineOf){const F=[];const pos=re=>{const m=re.exec(html);return m?lineOf(m.index):1};const marketing=!/\/app\/|scraps|design-system|playbook|\.card\.html|guidelines/.test(file);
+  const libs=html.match(/<script[^>]*src="[^"]*(three(\.min)?\.js|lenis|ScrollTrigger|gsap)[^"]*"/i);if(libs&&marketing)F.push(['W',lineOf(libs.index),'§6.2 animation/3D library on a marketing page ('+libs[1]+') — CSS motion only unless the page IS the animation']);
+  const cv=/<canvas\b[^>]*>/i.exec(html);if(cv&&!/data-(chart|art|export)|aria-label/.test(cv[0]))F.push(['W',lineOf(cv.index),'§6.1 decorative <canvas> — the first screen must show the product, not a particle field']);
+  if(/class="[^"]*\bmarq/.test(html))F.push(['E',pos(/class="[^"]*\bmarq/),'§6.2 marquee/ticker — banned pattern']);
+  const h1=/<h1\b[^>]*>([\s\S]*?)<\/h1>/i.exec(html);if(h1){const words=h1[1].replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().split(' ').filter(Boolean).length;if(words>10)F.push(['W',lineOf(h1.index),'§6.1 h1 is '+words+' words — keep it ≤ 8 so it never runs past 3 lines']);}
+  const hs=[...html.matchAll(/<h[1-3]\b([^>]*)>((?:(?!<\/h[1-3]>)[\s\S])*)<\/h[1-3]>/gi)].filter(m=>/data-split/.test(m[1])||/class="[^"]*\b(hl__i|swi|sw)\b/.test(m[2]));if(hs.length)F.push(['E',lineOf(hs[0].index),'§6.1 masked split-text reveal on a heading — a wrapped line is clipped forever; no overflow:hidden on text']);
+  const bare=[...html.matchAll(/<i class="ri-[a-z0-9-]+"[^>]*>/g)].filter(m=>!/aria-hidden/.test(m[0])&&!/cb-i[^>]*>\s*$/.test(html.slice(Math.max(0,m.index-80),m.index)));if(bare.length)F.push(['W',lineOf(bare[0].index),'§6.5 '+bare.length+' icon glyph(s) not wrapped in <span class="cb-i"> (or aria-hidden) — wrapper centres the 1em box and hides it from AT']);
+  const rawTile=/class="[^"]*(icon-tile|\bico\b)[^"]*"[^>]*style="[^"]*background:\s*var\(--(red|green|blue|amber)-\d+\)/.exec(html);if(rawTile)F.push(['W',lineOf(rawTile.index),'§6.5 icon tile filled with a raw ramp (--'+rawTile[2]+'-n) — use a tonal pair: status-*-bg + status-*-fg or surface-sunken + text-strong']);
+  return F;
+}
+// §8 performance & delivery — static half (CLAUDE.md §8). The harness `perf:` line measures the rest.
+function checkPerfCSS(recs,file,text,off=0){const F=[];const generated=/^\.\.\/(styles|components)\.css$|School\/school\.css$/.test(file);const source=/\/tokens\/|components\.src\.css|assets\/fonts\//.test(file);
+  const imps=[...text.matchAll(/@import\s+url\(/g)];if(imps.length&&!source)F.push(['E',1,'§8.1 '+imps.length+' @import in a shipped stylesheet — every @import is a serial round-trip before first paint; the build inlines sources into styles.css / components.css']);
+  if(generated){const h=text.match(/@build-hash ([0-9a-f]{8})/);if(!h)F.push(['E',1,'§8.1 '+file+' has no @build-hash — it must be generated by _build.mjs, not edited']);else if(window.__srcHash&&window.__srcHash[file]&&window.__srcHash[file]!==h[1])F.push(['E',1,'§8.1 '+file+' is STALE — its sources changed after the last build (hash '+h[1]+' vs '+window.__srcHash[file]+'); run node _build.mjs'])}
+  for(const r of recs){const ln=r.line+off,b=r.body;const u=b.match(/url\((['"]?)([^'")]+\.(png|jpe?g))\1\)/i);if(u&&/assets\/(photos|logo)\//.test(u[2])&&!/favicon|app-icon|export\//.test(u[2]))F.push(['W',ln,'§8.4 '+u[2].split('/').pop()+' as a CSS background — a .webp sibling exists; PNG/JPEG only for favicons, OG images and downloads']);
+    if(/font-display\s*:\s*(auto|block)/.test(b))F.push(['W',ln,'§8.3 font-display '+b.match(/font-display\s*:\s*(\w+)/)[1]+' — text must render in the fallback while the font loads (swap, with metric-matched fallback)']);}
+  return F}
+function checkPerfHTML(html,file,lineOf){const F=[];const pos=re=>{const m=re.exec(html);return m?lineOf(m.index):1};const live=!/scraps|\.card\.html|guidelines\/cards|thumbnail|brand-profile/.test(file);
+  const head=html.slice(0,html.search(/<body/i)>0?html.search(/<body/i):html.length);
+  const links=[...head.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)].map(m=>m[1]);
+  if(links.some(l=>/\bstyles\.css/.test(l))&&links.some(l=>/\bcomponents\.css/.test(l)))F.push(['E',pos(/components\.css/),'§8.1 page links styles.css AND components.css — components.css already contains styles.css; link one']);
+  if(links.some(l=>/remixicon\.css/.test(l))&&links.some(l=>/\b(styles|components)\.css/.test(l)))F.push(['E',pos(/remixicon\.css/),'§8.1 direct remixicon.css link next to styles/components.css — the icon font is already inside them (145KB fetched twice)']);
+  if(links.length>3&&live)F.push(['W',pos(/<link rel="stylesheet"/),'§8.1 '+links.length+' render-blocking stylesheets — budget is 3 (system + page + one section file)']);
+  if(/<style[^>]*>[^<]*@import/.test(html))F.push(['E',pos(/@import/),'§8.1 @import inside <style> — serial fetch before paint']);
+  const babel=[...html.matchAll(/<script[^>]*(type="text\/babel"|babel\.min\.js)/g)];if(babel.length&&live)F.push(['E',lineOf(babel[0].index),'§8.2 '+babel.length+' in-browser Babel script(s) — 3MB + transpile before first paint; precompile to dist/ with node _build.mjs']);
+  const heavy=html.match(/<script[^>]*src="[^"]*(three(\.min)?\.js|lenis)[^"]*"/);if(heavy&&live)F.push(['W',lineOf(heavy.index),'§8.2 '+heavy[1]+' on a live page — §6.2 bans it on marketing pages; if it must stay, defer it']);
+  const sync=[...head.matchAll(/<script src="([^"]+)"(?![^>]*\b(defer|async|type="module"))[^>]*>/g)].filter(m=>!/\b(theme|motion)\.js/.test(m[1]));if(sync.length)F.push(['W',lineOf(sync[0].index),'§8.2 '+sync.length+' blocking <script src> in <head> ('+sync.map(m=>m[1].split('/').pop().split('?')[0]).join(', ')+') — only theme.js and motion.js (≤ 3 KB, must run before paint) may block; add defer']);
+  const bodySync=[...html.matchAll(/<script src="([^"]*(?:vendor|_ds_bundle)[^"]*)"(?![^>]*\b(defer|async))[^>]*>/g)];if(bodySync.length&&live)F.push(['W',lineOf(bodySync[0].index),'§8.2 '+bodySync.length+' vendor/bundle script(s) without defer — they block parsing where they sit']);
+  const imgs=[...html.matchAll(/<img\b[^>]*>/gi)];const noDim=imgs.filter(m=>!/\bwidth=/.test(m[0])||!/\bheight=/.test(m[0])).filter(m=>!/\.svg|data:/.test(m[0]));if(noDim.length&&live)F.push(['W',lineOf(noDim[0].index),'§8.4 '+noDim.length+' <img> without width+height — reserve the box (CLS) or set aspect-ratio in CSS']);
+  const bodyStart=html.search(/<body/i);const firstScreen=html.slice(bodyStart,bodyStart+6000);const lazyAbove=[...firstScreen.matchAll(/<img\b[^>]*loading="lazy"[^>]*>/gi)].filter(m=>!/foot|footer/.test(firstScreen.slice(Math.max(0,m.index-400),m.index)));if(lazyAbove.length)F.push(['W',lineOf(bodyStart+lazyAbove[0].index),'§8.4 loading="lazy" on an image in the first screen — the LCP image must be eager (fetchpriority="high")']);
+  const png=imgs.filter(m=>/src="[^"]*assets\/(logo|photos)\/[^"]*\.(png|jpe?g)"/.test(m[0])&&!/favicon|app-icon|export\//.test(m[0]));if(png.length)F.push(['W',lineOf(png[0].index),'§8.4 '+png.length+' PNG/JPEG logo or photo — a .webp sibling exists (assets/logo/*.webp, assets/photos/*.webp)']);
+  if(live&&links.some(l=>/\b(styles|components)\.css/.test(l))&&!/<link rel="preload"[^>]*as="font"/.test(head))F.push(['W',pos(/<link rel="stylesheet"/),'§8.3 no <link rel="preload" as="font"> — preload roboto-400-21.woff2 (+ remixicon.woff2 if icons are above the fold) so text does not wait for the stylesheet to be parsed']);
+  return F}
+const TEXTSEL=/(^|[\s.>:])(p|a|b|i|em|small|span|li|dt|dd|h[1-6]|label|code|figcaption|blockquote|caption|th|td|strong|cite|time)\b|(lead|desc|sub|body|copy|text|title|label|name|meta|cap|hint|note|kicker|eyebrow|tag|chip|badge|pill|__p|__h|__t|__k|__n|__msg|__lbl|__l\b|__num|__val|price|stat|quote|link|btn)/i;
+const RAWCOL=/(?:^|;)\s*color\s*:\s*(#[0-9a-f]{3,8}\b|rgba?\(|hsla?\()/i;
+function checkColor(recs,file,off=0){const F=[];
+  for(const r of recs){const ln=r.line+off,b=r.body,sel=r.sel,art=ARTSEL.test(sel)||/(\.g-|gcard|tpl|artboard|post|slide|deck|cert|poster|print|export|sheet|story)/i.test(sel);
+    // 2.1 raw colour on text
+    const rc=b.match(RAWCOL);if(rc&&!art&&!/(sr-only|::selection|scrollbar|fallback|noscript|\bfb-|boot)/i.test(sel)){const cm=b.match(/(?:^|;)\s*color\s*:\s*([^;]+)/i);const isWhite=/#fff\b|#ffffff\b|rgb\(255,\s*255,\s*255\)|\bwhite\b/i.test(cm?cm[1]:'');F.push([isWhite?'W':'E',ln,'§2.1 raw colour '+rc[1]+'… as text on "'+sel+'" — use a semantic token (--text-*, --status-*-fg, --text-on-accent)'])}
+    // 2.2 raw-ramp text
+    const rr=b.match(/(?:^|;)\s*color\s*:\s*var\(--(neutral-(?:400|500)|red-500|green-(?:500|600|700)|amber-500|blue-(?:300|400))\)/);if(rr&&!art)F.push(['E',ln,'§2.2 --'+rr[1]+' as text on "'+sel+'" — '+({'neutral-500':'3.4:1 on white','neutral-400':'2.1:1 on white','red-500':'3.9:1 under white, 3.9:1 on white','green-500':'2.3:1','green-600':'3.0:1','green-700':'4.3:1','amber-500':'2.5:1','blue-300':'3.4:1 on white','blue-400':'4.2:1 on white'}[rr[1]]||'')+' — use --text-muted / --text-brand / --text-on-light-green / --status-*-fg']);
+    // 2.2 white text on a fill under the floor (solid or gradient)
+    const whiteTxt=/(?:^|;)\s*color\s*:\s*(#fff\b|#ffffff\b|white\b|var\(--neutral-0\)|var\(--text-on-accent\)|var\(--text-on-inverse\)|var\(--action-fg\))/i.test(b);
+    const lowFill=b.match(/background(?:-color|-image)?\s*:[^;]*var\(--(red-500|red-400|green-(?:400|500|600|700)|blue-(?:300|400)|amber-(?:300|500|600)|chart-(?:2|3|4|6)|brand-(?:primary|secondary|accent)|status-(?:success|warning|info|danger)|action-confirm-bg)\)/);
+    if(whiteTxt&&lowFill)F.push(['E',ln,'§2.2 white text on --'+lowFill[1]+' ("'+sel+'") — under 4.5:1; fills carrying white text start at red-600 / green-800 / blue-500 (gradients: every stop)']);
+    // 2.2 alpha-muted type
+    const op=b.match(/(?:^|;)\s*opacity\s*:\s*(0?\.\d+|0)\s*(;|$)/);if(op&&+op[1]>0&&+op[1]<1&&TEXTSEL.test(sel)&&!/(disabled|\[aria-busy|placeholder|skel|ghost|watermark|::before|::after|is-hidden|\.in\b|is-in|aw-in|hero-done|reveal|\[data-rv|anim|enter|fade|\.dot|__dot|logo|img|icon|\bico\b|overlay|scrim|backdrop|blob|orb|ring|glow|bar\b|track|dim|muted-img)/i.test(sel)&&!r.media)F.push(['W',ln,'§2.2 opacity '+op[1]+' on text ("'+sel+'") — alpha-muted type fails at some ground; use --text-muted, size or weight']);
+    const aw=b.match(/(?:^|;)\s*color\s*:\s*rgba\(\s*255\s*,\s*255\s*,\s*255\s*,\s*(0?\.\d+)\s*\)/i);if(aw&&+aw[1]<0.92&&!art)F.push(['E',ln,'§2.2 alpha-white text rgba(255,255,255,'+aw[1]+') on "'+sel+'" — full-opacity ink: --text-on-inverse, or --text-muted inside data-theme="dark"']);
+    // 2.2 form-control boundary on a decorative border token
+    if(/(?:^|;)\s*border(?:-color|-top|-bottom|-left|-right)?\s*:[^;]*var\(--border-(subtle|default|strong)\)/.test(b)&&/(input|select|textarea|\.cb-ta\b|__box|__dot|switch__track|__track|check|radio|field__ctl|\bctl\b)/i.test(sel)&&!/(:focus|:hover|disabled|error|success|wrap|__msg|label|legend|group)/i.test(sel))F.push(['W',ln,'§2.2 control boundary on a decorative border token ("'+sel+'") — inputs/checks/radios/tracks use --border-control (3:1)']);
+    // 2.2 muted / link / brand text on the pressed surface
+    if(/background(?:-color)?\s*:[^;]*var\(--surface-hover-strong\)/.test(b)&&/(?:^|;)\s*color\s*:\s*var\(--text-(muted|subtle|link|brand|on-light-green)\)/.test(b))F.push(['E',ln,'§2.2 --text-'+b.match(/--text-(muted|subtle|link|brand|on-light-green)/)[1]+' on --surface-hover-strong ("'+sel+'") — under 4.5:1 in both themes; pressed/selected surfaces carry --text-strong / --text-body']);
+    // 2.2 raw ramp as an icon/chart fill under 3:1 on light
+    if(/(?:^|;)\s*(background(?:-color)?|fill|stroke|color)\s*:\s*var\(--(amber-500|green-600)\)/.test(b)&&/(ico|icon|__ic|dot|mark|bar|chart|legend|key|swatch|seal|check|tick)/i.test(sel)&&!art)F.push(['W',ln,'§2.2 --'+b.match(/--(amber-500|green-600)/)[1]+' as an icon/mark on "'+sel+'" — under 3:1 on light surfaces; use --status-warning / --status-success (amber-600 / green-700)']);
+  }
+  return F;}
+// §2 — HTML side (inline styles)
+function checkColorHTML(html,file,lineOf){const F=[];const re=/<([a-z0-9]+)\b[^>]*style="([^"]*)"[^>]*>/gi;let m;
+  while((m=re.exec(html))){const s=m[2],tag=m[1];const before=html.slice(Math.max(0,m.index-400),m.index);const art=/data-(export|art|card)|gcard|artboard|class="[^"]*(post|slide|tpl|cert|poster|print|story)/i.test(before+m[0]);
+    const rc=/(?:^|;)\s*color\s*:\s*(#[0-9a-f]{3,8}\b|rgba?\(|hsla?\()/i.exec(s);if(rc&&!art&&!/^(svg|path|i|img)$/.test(tag))F.push([/^#fff\b|^#ffffff\b/i.test(rc[1])?'W':'E',lineOf(m.index),'§2.1 inline raw text colour '+rc[1]+' — use a semantic token']);
+    const rr=/(?:^|;)\s*color\s*:\s*var\(--(neutral-(?:400|500)|red-500|green-(?:500|600|700)|amber-500)\)/.exec(s);if(rr&&!art)F.push(['E',lineOf(m.index),'§2.2 inline --'+rr[1]+' as text — raw ramps are not text colours']);
+    const op=/(?:^|;)\s*opacity\s*:\s*(0?\.\d+)/.exec(s);if(op&&+op[1]<1&&/>[^<]{3,}</.test(html.slice(m.index,m.index+300))&&!/aria-hidden|disabled/.test(m[0]))F.push(['W',lineOf(m.index),'§2.2 inline opacity '+op[1]+' on an element with text']);
+    const wl=/(?:^|;)\s*background(?:-color)?\s*:[^;]*var\(--(red-500|green-(?:400|500|600|700)|amber-500|chart-[2346])\)/.exec(s);if(wl&&/color\s*:\s*(#fff\b|white|var\(--neutral-0\)|var\(--text-on-accent\))/i.test(s))F.push(['E',lineOf(m.index),'§2.2 inline white text on --'+wl[1]+' — under 4.5:1']);
+    if(/\bico\b|icon-tile|__ic\b/.test(m[0])&&/background(?:-color)?\s*:\s*var\(--(red-500|green-\d+|blue-\d+|amber-\d+|chart-\d)\)/.test(s)&&/color\s*:\s*(#fff|white|var\(--neutral-0\)|var\(--text-on-accent\))|cb-i/.test(m[0]+html.slice(m.index,m.index+120)))F.push(['W',lineOf(m.index),'§6.5/§2.2 icon tile on a raw ramp — white glyphs on --red-500 / --green-600 / --amber-500 are under 3:1 (use the tonal pair)']);
+  }
+  return F;}
+// §7 cards · hover · motion — CSS side (CLAUDE.md §7.1–7.3)
+const CARDSEL=/(card|tile|panel|__item|\bstep\b|\bpane\b)/i;
+const ARTSEL=/(gcard|artboard|sheet|\.page\b|slide|poster|story|thumb|media|\bimg\b|cover|preview|\btpl\b|tpl--|post\b|mini|avatar|logo|\bico\b|icon|__media|dot|swatch|\bsw\b|skel|placeholder|stage|canvas|frame|phone|device|mock)/i;
+function checkCards(recs,file,off=0){const F=[];const sels=recs.map(r=>r.sel).join('\n');const hasRM=recs.some(r=>r.media&&/prefers-reduced-motion/.test(r.media));let hoverMotion=0;
+  const hasFocusRule=sel=>recs.some(x=>/:focus-visible/.test(x.sel)&&x.sel.split(',').some(s=>s.trim().replace(/:focus-visible.*$/,'').trim()===sel.trim()));
+  for(const r of recs){const ln=r.line+off,b=r.body,sel=r.sel,hov=/:hover/.test(sel),isCard=CARDSEL.test(sel)&&!ARTSEL.test(sel);
+    // 7.1 text decides a card's height
+    const h=b.match(/(?:^|;)\s*height\s*:\s*(\d+)px/);if(h&&+h[1]>=80&&isCard&&!/aspect-ratio/.test(b)&&!r.media)F.push(['E',ln,'§7.1 fixed height:'+h[1]+'px on card "'+sel+'" — text decides a card\'s height; use min-height (artboard previews only, listed in AUDIT.md)']);
+    // 7.1 overflow:hidden on a text card clips wrapped copy
+    if(/overflow\s*:\s*hidden/.test(b)&&isCard&&sel.trim()!=='.cb-card'&&!/(__body|track|scroller|carousel|mask|clip|rail|__inner|__visual|__fig)/i.test(sel))F.push(['W',ln,'§7.1 overflow:hidden on card "'+sel+'" — clips wrapped text at some width; clip the media element instead']);
+    // 7.1 badges live in flow
+    if(/position\s*:\s*absolute/.test(b)&&!/::(before|after)/.test(sel)&&/(badge|\btag\b|__tag|chip|\blabel|__label|\bpill|__pill|kicker|__k\b|ribbon)/i.test(sel)&&!/(media|\bimg|thumb|cover|photo|figure|artboard|gcard|tpl|post|story|video|sr-only|hidden|hero|orb|cert|cdoc|ghost)/i.test(sel))F.push(['W',ln,'§7.1/§1.6 absolutely-positioned "'+sel+'" — badges and labels sit in flow (flex + gap), never over text']);
+    // 7.2 the hover recipe
+    if(hov&&/transform\s*:/.test(b)&&!/transform\s*:\s*none/.test(b)){hoverMotion++;
+      const ty=b.match(/translateY\(\s*-\s*(\d+(?:\.\d+)?)px/);if(ty&&+ty[1]>4)F.push(['E',ln,'§7.2 hover lift of '+ty[1]+'px on "'+sel+'" — the lift is var(--motion-lift) (3px), never more than 4px']);
+      const sc=b.match(/scale\(\s*1\.(\d+)/);if(sc&&parseFloat('1.'+sc[1])>1.02&&!/(icon|\bico\b|__play|thumb|\bimg|seal|swatch|dot|arrow|__ic\b|logo|avatar)/i.test(sel))F.push(['W',ln,'§7.2 hover scale(1.'+sc[1]+') on "'+sel+'" — cards lift, they do not grow; scale ≤ 1.02 is for icons/thumbnails']);
+      if(/rotate\(/.test(b)&&!/(seal|icon|\bico\b|arrow|chev|caret|__i\b|__ic\b|burger|toggle|plus|close)/i.test(sel))F.push(['W',ln,'§7.2 rotate on hover ("'+sel+'") — cards do not tilt']);
+      if(!(r.media&&/hover\s*:\s*hover/.test(r.media))&&!/(tip|tooltip|__pop|dropdown|menu|focus-within)/i.test(sel))F.push(['W',ln,'§7.2/§7.3 hover transform on "'+sel+'" outside @media (hover: hover) — sticks on touch screens']);
+    }
+    if(/transition\s*:\s*all\b/.test(b))F.push(['W',ln,'§7.2 transition: all on "'+sel+'" — name the properties (transform, box-shadow, border-color, background, color)']);
+    const tr=b.match(/transition\s*:[^;]*?(?:^|[\s,:(])(\d*\.?\d+)(m?s)\b/);if(tr&&isCard&&!/(menu|drawer|modal|dialog|overlay|reveal|hero|backdrop|toast|accordion|details|collapse)/i.test(sel)){const ms=tr[2]==='s'?Math.round(+tr[1]*1000):+tr[1];if(ms>400)F.push(['W',ln,'§7.2 '+ms+'ms transition on card "'+sel+'" — hover is 140–220 ms (--dur-fast / --dur-base)'])}
+    const lay=hov&&b.match(/(font-weight|font-size|padding|margin|letter-spacing|border-width|width|height)\s*:/);if(lay&&!/(nav|menu|tab|\ba\b|link|btn|underline|::after|::before|bar|track|knob|__i\b|ico)/i.test(sel))F.push(['W',ln,'§7.2 hover on "'+sel+'" changes layout ('+lay[1]+') — hover never moves a sibling']);
+    // 7.2 a clickable card needs a focus ring
+    if(/cursor\s*:\s*pointer/.test(b)&&isCard&&!hov&&!/:focus|:active|\ba\.|\ba\[|button|\bbtn|\[role/i.test(sel)&&!hasFocusRule(sel))F.push(['W',ln,'§7.2 clickable card "'+sel+'" has no :focus-visible rule — keyboard users need the ring (or make it an <a>/<button> and inherit the base ring)']);
+  }
+  if(hoverMotion&&!hasRM)F.push(['W',off+1,'§7.3 '+hoverMotion+' hover transform rule(s) and no prefers-reduced-motion block — the base net collapses durations, but this file must own its own motion']);
+  if(/\[data-reveal/.test(sels)&&/\[data-rv\]/.test(sels))F.push(['E',off+1,'§7.3 two reveal systems (data-reveal + data-rv) in one stylesheet — one engine per page']);
+  return F;}
+// §7 — HTML side
+function checkCardsHTML(html,file,lineOf){const F=[];let m;
+  const dv=/<div\b[^>]*class="[^"]*(card|tile)[^"]*"[^>]*\bonclick=/gi;while((m=dv.exec(html)))F.push(['E',lineOf(m.index),'§7.2 <div onclick> card — a clickable card is one <a href> or one <button>']);
+  const rb=/<(div|span|li|article)\b[^>]*role="button"[^>]*>/gi;while((m=rb.exec(html))){if(!/tabindex=/.test(m[0]))F.push(['E',lineOf(m.index),'§7.2 role="button" on <'+m[1]+'> without tabindex — not reachable by keyboard; use <button> or add tabindex="0" + key handling'])}
+  const ih=/<[a-z]+\b[^>]*class="[^"]*(card|tile)[^"]*"[^>]*style="[^"]*(?:^|;)\s*height\s*:\s*(\d+)px/gi;while((m=ih.exec(html))){if(+m[2]>=80)F.push(['W',lineOf(m.index),'§7.1 inline height:'+m[2]+'px on a card — text decides the height'])}
+  const engines=['data-reveal','data-rv'].filter(a=>new RegExp('\\s'+a+'(=|\\s|>)').test(html));if(engines.length>1)F.push(['E',1,'§7.3 two reveal engines on one page ('+engines.join(' + ')+') — data-reveal with one script']);
+  const nested=/<a\b[^>]*class="[^"]*(card|tile)[^"]*"[^>]*>(?:(?!<\/a>)[\s\S])*?<(a|button)\b/gi;while((m=nested.exec(html)))F.push(['E',lineOf(m.index),'§7.2 control nested inside a link card — the whole card is the one control']);
+  return F;}
+function checkStates(html,file,lineOf){const F=[];const pos=re=>{const m=re.exec(html);return m?lineOf(m.index):1};
+  const hasForm=/<form\b/i.test(html);
+  const inlineErr=/role="alert"|aria-invalid|data-cb-form|cbSetFieldError|im-fail/.test(html);
+  const busy=/aria-busy|data-cb-form|cbSetBusy|loading=|is-busy|Sending/.test(html);
+  if(hasForm&&!inlineErr)F.push(['E',pos(/<form\b/i),'§5.2 form has no inline error path (no role="alert" / aria-invalid / data-cb-form)']);
+  if(hasForm&&!busy)F.push(['E',pos(/<form\b/i),'§5.3 form has no busy state on submit (aria-busy / data-cb-form)']);
+  if(hasForm&&!/role="status"|data-cb-success|thank-you|aria-live|location\.(href|replace|assign)/.test(html))F.push(['W',pos(/<form\b/i),'§5.4 form has no success confirmation (role="status" / data-cb-success / redirect to thank-you)']);
+  // required said in words or marked, never only colour
+  const reqNoNative=/<form\b[^>]*novalidate/i.test(html)&&/\brequired\b/.test(html)&&!inlineErr;if(reqNoNative)F.push(['E',pos(/novalidate/),'§5.2 novalidate with required fields but no custom validation — empty submits will "succeed"']);
+  // images
+  const imgs=/<img\b[^>]*>/gi;let im;while((im=imgs.exec(html))){const t=im[0];const remote=/src="https?:\/\//i.test(t);const fb=/onerror=/i.test(t);
+    if(remote&&!fb)F.push(['E',lineOf(im.index),'§5.5 remote <img> without onerror fallback (../assets/img-fallback.svg or hide)']);
+    if(!/\balt=/.test(t))F.push(['E',lineOf(im.index),'§3.4 <img> without alt']);}
+  // JS-rendered pages
+  if(/id="root"/.test(html)){if(!/<noscript/i.test(html))F.push(['E',pos(/id="root"/),'§5.6 JS-rendered page without <noscript> fallback']);
+    if(!/boot-fallback|data-fb-|__awFallbackShown/.test(html)&&!/\/ads\/|ui_kits|design-system|playbook|index\.html$/.test(file))F.push(['W',pos(/id="root"/),'§5.6 React page without boot-fallback.js watchdog (blank page if the bundle fails)']);}
+  // filtered / searched lists need an empty result
+  if(/data-filter=/.test(html)&&!/role="status"/.test(html))F.push(['E',pos(/data-filter=/),'§5.1 filter chips with no empty-result message (role="status")']);
+  const sIn=/<input\b[^>]*type="search"[^>]*>/i.exec(html);if(sIn&&!/aria-controls=/.test(sIn[0])&&!/No (matches|results)|role="status"/.test(html))F.push(['W',lineOf(sIn.index),'§5.1 search box with no "no results" state (render one, or point aria-controls at the results region a script fills)']);
+  // network calls need a failure branch
+  const fetches=(html.match(/\bfetch\(/g)||[]).length;if(fetches&&!/\.catch\(|catch\s*\(|\.finally\(/.test(html))F.push(['E',pos(/\bfetch\(/),'§5.2 fetch() without a catch/finally branch']);
+  // media
+  const ifr=/<iframe\b[^>]*>/gi;let fr;while((fr=ifr.exec(html))){if(!/\btitle=/.test(fr[0]))F.push(['E',lineOf(fr.index),'§3.4 <iframe> without title']);}
+  const vid=/<video\b[^>]*>/gi;let v;while((v=vid.exec(html))){if(/autoplay/.test(v[0])&&!/\bmuted\b/.test(v[0]))F.push(['E',lineOf(v.index),'§3.8 autoplaying <video> must be muted']);if(!/controls|aria-label|data-pause/.test(v[0]))F.push(['W',lineOf(v.index),'§3.8 <video> without controls or a pause button']);}
+  // wrap-safe state copy: nowrap chips/badges/tags with long labels overflow at 320 (opt out with data-wrap when the class wraps)
+  const chip=/<(?:span|a|button)\b[^>]*class="[^"]*\b(?:cb-badge|badge|tag|chip|pill)[^"]*"[^>]*>([^<]{26,})</gi;let c;while((c=chip.exec(html))){if(/data-wrap/.test(c[0]))continue;F.push(['W',lineOf(c.index),'§5.7 chip/badge label is '+c[1].trim().length+' chars ("'+c[1].trim().slice(0,30)+'…") — badges are nowrap; keep ≤ 25 chars, or add data-wrap if this class wraps']);}
+  // status/error copy must be real sentences the user can act on (only in state slots: role=alert/status or *err*/*alert*/*toast*/*empty*/*fail* classes)
+  const vague=/<[a-z0-9]+\b[^>]*(?:role="(?:alert|status)"|class="[^"]*(?:err|alert|toast|empty|fail|status)[^"]*")[^>]*>(\s*(Error|Oops!?|Something went wrong\.?|Failed\.?|Invalid\.?|Loading\.{0,3}|No data\.?)\s*)</gi;let vg;while((vg=vague.exec(html))){F.push(['W',lineOf(vg.index),'§5.8 vague state copy "'+vg[1].trim()+'" — say what happened and what to do next']);}
+  return F;
+}
+// Pages built before §6/§7 (and the §2 static rules) existed: their §2/§6/§7 errors report as warnings ("legacy") until the page is next touched. This list may only shrink.
+const LEGACY=['../Colaberry School/school.css','../Colaberry School/aw.css','../Colaberry School/home.css','../Colaberry School/home-bento.css','../Colaberry School/nav.css','../Colaberry School/wp.css','../Colaberry School/partner.css','../Colaberry School/podcasts.css','../Colaberry School/site-pages.css','../Colaberry School/shorts.css','../Colaberry School/student-projects.css','../Colaberry School/register.css','../Colaberry School/thank-you.css','../Colaberry School/interest-modal.css','../Colaberry School/accelerator.html','../Colaberry School/beginners-career-switchers.html','../Colaberry School/builders-founders.html','../Colaberry School/working-professionals.html','../Colaberry School/blog.html','../Colaberry School/events.html','../Colaberry School/faq.html','../Colaberry School/contact.html','../Colaberry School/our-story.html','../Colaberry School/podcasts.html','../Colaberry School/shorts.html','../Colaberry School/student-projects.html','../Colaberry School/thank-you.html','../Colaberry School/register.html','../training-site/landing.css','../training-site/site.css','../training-site/index.html','../training-site/home-classic.html','../training-site/data-analytics.html','../training-site/data-science.html','../training-site/job-readiness.html','../training-site/how-it-works.html','../training-site/pricing.html','../training-site/mentorship.html','../training-site/hire-our-grads.html','../training-site/success-stories.html','../training-site/blog.html','../training-site/contact.html','../training-site/events.html','../training-site/faq.html','../training-site/our-story.html','../training-site/reviews.html','../ui_kits/marketing-website/site.css','../ui_kits/marketing-website/index.html','../design-system.html','../playbook.html','../playbook.css','../app/app.css','../app/index.html','../app/login.html','../app/register.html','../app/dashboard.html','../app/legal.html','../app/thank-you.html','../AI-Architect-Accelerator-Brochure.html','../ads/Meta Ad Intro.html','../ads/Meta Ad Outro.html','../ads/Meta Ads Review.html'];
+const LEGACY6=LEGACY;
+async function lint(files){let E=0,W=0;
+  // §8.1 stale-build check: recompute the source hash _build.mjs stamps into the generated files
+  try{const h32=s=>{let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return (h>>>0).toString(16).padStart(8,'0')};const SRC=['assets/fonts/fonts.css','assets/fonts/remixicon.css','tokens/fonts.css','tokens/colors.css','tokens/typography.css','tokens/spacing.css','tokens/base.css','tokens/motion.css','tokens/utilities.css'];const tx=await Promise.all(SRC.map(p=>fetch('../'+p+'?_='+Date.now()).then(r=>r.text())));const sh=h32(tx.join('\n'));const styles=await fetch('../styles.css?_='+Date.now()).then(r=>r.text());const csrc=await fetch('../components.src.css?_='+Date.now()).then(r=>r.text());const SCH=['aw','partner','home','home-bento','frontier','wp','site-pages','podcasts','shorts','student-projects','register','thank-you','nav','interest-modal'];const sch=await Promise.all(SCH.map(c=>fetch('../Colaberry School/'+c+'.css?_='+Date.now()).then(r=>r.text())));const schBody=SCH.map((c,i)=>'/* ==== '+c+'.css ==== */\n'+sch[i].replace(/^\s*@import[^;]+;\s*$/gm,'').trim()+'\n').join('\n');window.__srcHash={'../styles.css':sh,'../components.css':h32(styles+csrc),'../Colaberry School/school.css':h32(schBody)}}catch(e){log('(stale check skipped: '+e+')','w')}
+  for(const f of files){let t;try{const r=await fetch(f+'?_='+Date.now());if(!r.ok)throw 0;t=await r.text()}catch(e){log('✗ '+f+' (fetch failed)','e');continue}
+  let F=/\.css$/.test(f)?[...checkCSS(parseCSS(t),f),...checkCompose(parseCSS(t),f),...checkCards(parseCSS(t),f),...checkColor(parseCSS(t),f),...checkPerfCSS(parseCSS(t),f,t)]:checkHTML(t,f);
+  if(LEGACY.indexOf(f)!==-1)F=F.map(x=>x[0]==='E'&&/^§[2678]/.test(x[2])&&!/STALE|@build-hash|Babel/.test(x[2])?['W',x[1],'(legacy) '+x[2]]:x);
+  F.sort((a,b)=>a[1]-b[1]);const e=F.filter(x=>x[0]==='E').length,w=F.length-e;E+=e;W+=w;
+  log((F.length?'▶ ':'✓ ')+f+(F.length?'  E'+e+' W'+w:'  clean'),F.length?'f':'ok');
+  for(const [k,ln,msg] of F)log('   '+k+' :'+ln+'  '+msg,k==='E'?'e':'w')}
+  log('\n= '+E+' errors · '+W+' warnings across '+files.length+' files','f');return{E,W}}
+window.lint=lint;window.FILES=FILES;window.lintAll=()=>lint(FILES);
+if(new URLSearchParams(location.search).has('run'))addEventListener('load',lintAll);
+</script>
+</body></html>
