@@ -4,7 +4,7 @@
    so a page loads ONE site stylesheet (cached across all School pages)
    instead of 4–7. Edit the per-section sources (aw, partner, home, home-bento, frontier, wp, site-pages, podcasts, shorts, student-projects, register, thank-you, nav, interest-modal),
    then run:  node _build.mjs
-   @build-hash 6626c8d9
+   @build-hash 3014bf47
    ============================================================ */
 /* ==== aw.css ==== */
 /* ============================================================
@@ -41,7 +41,7 @@ html { scroll-behavior: smooth; }
 /* ---------- grain ---------- */
 .aw-grain { position: relative; }
 .aw-grain::after { content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: .05; mix-blend-mode: multiply;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url%28%23n%29'/%3E%3C/svg%3E"); }
 .aw-grain--light::after { mix-blend-mode: screen; opacity: .07; }
 
 /* ============================================================

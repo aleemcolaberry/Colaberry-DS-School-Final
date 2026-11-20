@@ -24,7 +24,8 @@ yarn-error.log*
 # Self-contained standalone exports + intermediate sources
 *-standalone.html
 templates/**/_kit-standalone.html
-# (Colaberry Social Media Kit.html is a live, swept page — tracked on purpose)
+Colaberry Social Media Kit.html
+Colaberry School/Colaberry Accelerator (offline bundle).html
 # byte-identical copy of accelerator-standalone-src.html
 Colaberry School/Colaberry Accelerator (standalone).html
 

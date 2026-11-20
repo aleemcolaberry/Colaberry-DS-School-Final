@@ -23,6 +23,11 @@ npm run build          # node _build.mjs: regenerate styles.css, components.css,
 node _lint.mjs --all   # static quality gate (same rules as CI, warnings too)
 ```
 
+CI runs the lint **before** the build, so commit generated files fully built.
+After editing a source, run `npm run build` until `git status` shows no new
+changes. The stamping step rewrites `components.src.css`, so the first pass
+can leave `components.css` one step behind; the second pass settles it.
+
 Responsive gate (needs Playwright, installed outside the repo):
 
 ```bash
@@ -59,9 +64,13 @@ the deploy. Work on a branch and merge through a PR.
 
 Not in git on purpose (see `.gitignore`): `uploads/`, `screenshots/`, the rest
 of `scraps/`, `.bundles/`, print intermediates (`*-print-*.html`),
-standalone exports (`*-standalone.html`, `_kit-standalone.html`), and
+standalone exports (`*-standalone.html`, `_kit-standalone.html`,
+`Colaberry Social Media Kit.html`,
+`Colaberry School/Colaberry Accelerator (offline bundle).html`), and
 `Colaberry School/Colaberry Accelerator (standalone).html`, which is a
-byte-identical copy of `accelerator-standalone-src.html`.
+byte-identical copy of `accelerator-standalone-src.html`. The exports are
+single-file bundles for sharing. They fail the page lint by design, and
+Claude Design regenerates them.
 
 ## Intentional duplicates (do not dedupe)
 
@@ -76,6 +85,14 @@ byte-identical copy of `accelerator-standalone-src.html`.
   referenced (pages, `BRAND.md`, templates, the favicon export set).
 
 ## Known follow-ups
+
+- `app/community-profile.html` (member profile, leaderboard and level-badge
+  proposal) was removed from the tree. It is not in the Claude Design source
+  and fails the lint gate (11px text, raw colours). It is still in history;
+  restore it with `git checkout cb43315 -- app/community-profile.html`, then
+  fix it to CLAUDE.md §1.8 / §2.1 before it ships.
+- The responsive gate (`_sweep.mjs`) runs in CI but was not run locally for
+  this sync. Watch the first deploy run.
 
 - `package.json` `repository` / `homepage` still point at
   `colaberry/colaberry-design-system`; update them if this repo becomes the

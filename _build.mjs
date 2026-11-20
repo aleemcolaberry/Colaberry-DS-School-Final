@@ -10,6 +10,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { execFileSync } from 'node:child_process';
+import { pathToFileURL } from 'node:url';
 
 const read = (p) => readFileSync(p, 'utf8');
 function h32(s) { let h = 5381; for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) | 0; return (h >>> 0).toString(16).padStart(8, '0'); }
@@ -90,7 +91,8 @@ export function distTargets(html) {
   return [...html.matchAll(/<script src="dist\/([^"?]+)\.js(?:\?[^"]*)?" defer><\/script>/g)].map((m) => m[1]);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+/* pathToFileURL: a plain `file://${argv[1]}` never matches on Windows (C:\… vs file:///C:/…), so the build silently did nothing there. */
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const styles = buildStyles();
   writeFileSync('styles.css', styles);
   writeFileSync('components.css', buildComponents(styles));
